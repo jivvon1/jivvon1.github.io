@@ -1,0 +1,61 @@
+---
+layout: page
+---
+
+{% include lang.html %}
+
+
+<div id="post-list" class="flex-grow-1 px-xl-1" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+  {% assign posts = site.posts %}
+
+  {% for post in posts %}
+    <!-- Wrapper -->
+    <div class="wrapper" style="width: 100%; max-width: 100%; height: 150px; overflow: hidden; border: 1px solid #eaeaea; border-radius: 8px; margin: 0 auto; display: flex; align-items: center; position: relative;">
+      <!-- Card -->
+      <article class="card-wrapper card" style="width: 100%; height: 105%; display: flex; margin: 0; padding: 0;">
+        <a href="{{ post.url | relative_url }}" class="post-preview d-flex w-100 text-decoration-none" style="flex-direction: row-reverse; height: 100%; margin: 0; padding: 0;">
+          <!-- Post Thumbnail -->
+          {% if post.image %}
+            <div class="thumbnail" style="flex: 40%; height: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+              {% assign src = post.image.path | default: post.image %}
+              {% unless src contains '//' %}
+                {% assign src = post.media_subpath | append: '/' | append: src | replace: '//', '/' %}
+              {% endunless %}
+              <img src="{{ src }}" alt="{{ post.title }}" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+            </div>
+          {% endif %}
+
+          <!-- Post Content -->
+          <div class="content" style="flex: 50%; display: flex; flex-direction: column; justify-content: space-between; padding: 1px 25px; box-sizing: border-box;">
+            <!-- Post Title -->
+            <h5 class="card-title text-truncate" style="font-size: 1.2rem; color: #000; font-weight: bold; margin: 0;">{{ post.title }}</h5>
+
+            <!-- Post Excerpt -->
+            <div class="card-text" style="font-size: 1.1rem; line-height: 1.2; color: #6c757d; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+              {% if post.excerpt %}
+                {{ post.excerpt | strip_html }}
+              {% else %}
+                No description available.
+              {% endif %}
+            </div>
+
+            <!-- Post Metadata -->
+            <div class="post-meta mt-1" style="font-size: 0.85rem; color: #6c757d; margin-top: 10px; margin-bottom: 15px;">
+              <i class="far fa-calendar fa-fw me-1"></i>
+              {% include datetime.html date=post.date lang=lang %}
+
+              {% if post.categories.size > 0 %}
+                <i class="far fa-folder-open fa-fw ms-3 me-1"></i>
+                <span class="categories">
+                  {% for category in post.categories %}
+                    {{ category }}{% unless forloop.last %}, {% endunless %}
+                  {% endfor %}
+                </span>
+              {% endif %}
+            </div>
+          </div>
+        </a>
+      </article>
+    </div>
+  {% endfor %}
+</div>
