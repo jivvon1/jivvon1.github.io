@@ -1,9 +1,9 @@
-- year: "2024/01"
+- year: 2024/01
   name: "Study on Efficient Multi-floor Navigation Using a Visual Marker and Floor Plan Map"
   conference: "ICROS Journal"
   authors: "Jiwon Choi, Taehu Sim, Gihyeon Lee, Jaeyong Lee, Gilhwan Kang, Hogyun Kim, Young Gun Cho"
 
-- year: "2024/08"
+- year: 2024/08
   name: "Narrowing your FOV with SOLiD: Spatially Organized and Lightweight Global Descriptor for FOV-constrained LiDAR Place Recognition"
   conference: "RA-L"
   authors: "Hogyun Kim, Jiwon Choi, Taehu Sim, Giseop Kim, Younggun Cho"
