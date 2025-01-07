@@ -52,7 +52,7 @@ layout: page
 
 <div id="publication" class="pl-xl-4">
   {% assign publication_data = site.data.publication %}
-  <h3 style="font-size: 20px; margin-bottom: 10px; margin-top: 60px; font-weight: bold;">Publication</h3>
+  <h3 style="font-size: 20px; margin-bottom: 10px; margin-top: 60px; font-weight: bold;">Publications</h3>
   <ul>
     {% assign sorted_publications = publication_data | sort: 'year' | reverse %}
     {% for item in sorted_publications %}
@@ -62,8 +62,16 @@ layout: page
         </span>
         <span class="text-muted">
           <span style="display: block; padding-left: 10px;">
-            [{{ item.conference }}] 
-            {{ item.name }}
+            <strong>
+              {% if item.conference_link %}
+                <a href="{{ item.conference_link }}" target="_blank" style="color: #0073e6; text-decoration: none;">
+                  [{{ item.conference }}]
+                </a>
+              {% else %}
+                [{{ item.conference }}]
+              {% endif %}
+            </strong>
+            {{ item.title }}
             {% if item.github %}
                 <a href="{{ item.github }}" target="_blank" style="color: #0073e6; font-size: 0.8rem;">(Github)</a>
             {% endif %}
@@ -83,7 +91,6 @@ layout: page
             {% endfor %}
           </span>
         </span>
-        
       </li>
     {% endfor %}
   </ul>
@@ -91,5 +98,51 @@ layout: page
 
 
 
+<div id="patents" class="pl-xl-4">
+  {% assign patents_data = site.data.patents | sort: 'status' %}
+  <h3 style="font-size: 20px; margin-bottom: 10px; margin-top: 60px; font-weight: bold;">Patents</h3>
+  <ul>
+    {% assign granted_patents = patents_data | where: 'status', 'Patent' %}
+    {% assign application_patents = patents_data | where: 'status', 'Application' %}
+    
+    <!-- Granted Patents -->
+    {% for item in granted_patents %}
+      <li style="margin-bottom: 10px; font-size: 1rem;">
+        <span>
+          <strong style="color: green;">[Granted]</strong>
+          {% assign inventors = item.people | split: ',' %}
+          {% for inventor in inventors %}
+            {% if inventor contains 'Jiwon Choi' %}
+              <span style="font-weight: bold; font-style: italic; text-decoration: underline;">{{ inventor | strip }}</span>
+            {% else %}
+              {{ inventor | strip }}
+            {% endif %}
+            {% if forloop.last == false %}, {% endif %}
+          {% endfor %},
+          "{{ item.title }}",
+          <em>KR-Patent No. {{ item.number }}</em>
+        </span>
+      </li>
+    {% endfor %}
 
-
+    <!-- Application Patents -->
+    {% for item in application_patents %}
+      <li style="margin-bottom: 10px; font-size: 1rem;">
+        <span>
+          <strong style="color: orange;">[Application]</strong>
+          {% assign inventors = item.people | split: ',' %}
+          {% for inventor in inventors %}
+            {% if inventor contains 'Jiwon Choi' %}
+              <span style="font-weight: bold; font-style: italic; text-decoration: underline;">{{ inventor | strip }}</span>
+            {% else %}
+              {{ inventor | strip }}
+            {% endif %}
+            {% if forloop.last == false %}, {% endif %}
+          {% endfor %},
+          "{{ item.title }}",
+          <em>KR-Application No. {{ item.number }}</em>
+        </span>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

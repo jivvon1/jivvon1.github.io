@@ -1,0 +1,23 @@
+- status: Application
+  country: KR
+  title: "Method and System for Self-Driving Car-based Road Management System"
+  number: "10-2022-0042047"
+  people: "Jonghun Won, Jaeun Lee, Seungchan Lee, Seorin Park, Seunggyu Yang, Sungjin Park, Jiwon Choi, Dongyoung Kim, Seoyeon Bae, Hojun Lee, Hanbin Song"
+
+- status: Patent
+  country: KR
+  title: "Method and system for fire response based on smart unmanned self-driving platformMethod and System for Fire Response based on Smart Unmanned Self-Driving Platform"
+  number: "10-2654951"
+  people: "Jonghun Won, Jaeun Lee, Seungchan Lee, Seorin Park, Seunggyu Yang, Sungjin Park, Jiwon Choi, Dongyoung Kim, Seoyeon Bae, Hojun Lee, Hanbin Song"
+
+- status: Application
+  country: KR
+  title: "MULTI-FLOOR BUILDING NAVIGATION SYSTEM FOR AUTONOMOUS ROBOTS"
+  number: "10-2023-0192202"
+  people: "Younggun Cho, Jiwon Choi, Taehu Sim, Gihyeon Lee, Jaeyong Lee, Gilhwan Kang, Hogyun Kim"
+
+- status: Application
+  country: KR
+  title: "APPARATUS AND METHOD FOR PLACE RECOGNITION WITH FOV-CONSTRAINED LIDAR SENSOR"
+  number: "10-2024-0188156"
+  people: "Younggun Cho, Hogyun Kim, Jiwon Choi"
