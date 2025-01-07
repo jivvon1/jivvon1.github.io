@@ -3,6 +3,7 @@
   conference: "ICROS Journal"
   conference_link: "http://journal.icros.org/"
   authors: "Jiwon Choi, Taehu Sim, Gihyeon Lee, Jaeyong Lee, Gilhwan Kang, Hogyun Kim, Young Gun Cho"
+  paper_link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11654195&language=en_US&hasTopBanner=true"
 
 - year: 2024/08
   title: "Narrowing your FOV with SOLiD: Spatially Organized and Lightweight Global Descriptor for FOV-constrained LiDAR Place Recognition"
