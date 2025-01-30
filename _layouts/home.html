@@ -84,7 +84,6 @@ layout: page
             {% assign authors = item.authors | split: ',' %}
             {% assign has_equal_contributor = false %}
             
-            <!-- 저자 출력 -->
             {% for author in authors %}
               {% assign stripped_author = author | strip %}
               {% assign clean_author = stripped_author | replace: '*', '' %}
@@ -109,7 +108,8 @@ layout: page
             {% endfor %}
 
             {% if has_equal_contributor %}
-              <span style="margin-left: 10px; font-size: 0.8rem; font-style: italic;">(*: Equal Contribution)</span>
+              <br>
+              <span style="font-size: 0.8rem; font-style: italic;">(*: Equal Contribution)</span>
             {% endif %}
           </span>
         </span>
@@ -117,6 +117,7 @@ layout: page
     {% endfor %}
   </ul>
 </div>
+
 
 
 
