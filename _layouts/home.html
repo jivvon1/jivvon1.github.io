@@ -55,6 +55,7 @@ layout: page
   <h3 style="font-size: 20px; margin-bottom: 10px; margin-top: 60px; font-weight: bold;">Publications</h3>
   <ul>
     {% assign sorted_publications = publication_data | sort: 'year' | reverse %}
+    {% assign has_equal_contribution = false %}
     {% for item in sorted_publications %}
       <li>
         <span class="date year" style="font-weight: bold;">
@@ -82,10 +83,16 @@ layout: page
           <span style="display: block; padding-left: 10px; font-style: italic; font-size: 0.8rem;">
             {% assign authors = item.authors | split: ',' %}
             {% for author in authors %}
-              {% if author contains 'Jiwon Choi' %}
-                <span style="font-weight: bold; text-decoration: underline;">{{ author | strip }}</span>
+              {% assign clean_author = author | strip %}
+              {% if clean_author contains 'Jiwon Choi' %}
+                <span style="font-weight: bold; text-decoration: underline;">
+                  {{ clean_author | replace: '*', '' }}
+                </span>
+                {% if clean_author contains '*' %}
+                  {% assign has_equal_contribution = true %}
+                {% endif %}
               {% else %}
-                <span>{{ author | strip }}</span>
+                <span>{{ clean_author }}</span>
               {% endif %}
               {% if forloop.last == false %}, {% endif %}
             {% endfor %}
@@ -94,7 +101,11 @@ layout: page
       </li>
     {% endfor %}
   </ul>
+  {% if has_equal_contribution %}
+    <p style="font-size: 0.8rem; font-style: italic; margin-top: 10px;">(*: Equal Contribution)</p>
+  {% endif %}
 </div>
+
 
 
 <div id="patents" class="pl-xl-4">
