@@ -83,16 +83,22 @@ layout: page
           <span style="display: block; padding-left: 10px; font-style: italic; font-size: 0.8rem;">
             {% assign authors = item.authors | split: ',' %}
             {% for author in authors %}
-              {% assign clean_author = author | strip %}
-              {% if clean_author contains 'Jiwon Choi' %}
+              {% assign stripped_author = author | strip %}
+              {% assign clean_author = stripped_author | replace: '*', '' %}
+              
+              {% if stripped_author contains '*' %}
+                {% assign has_equal_contribution = true %}
+              {% endif %}
+              
+              {% if clean_author == 'Jiwon Choi' %}
                 <span style="font-weight: bold; text-decoration: underline;">
-                  {{ clean_author | replace: '*', '' }}
+                  {{ clean_author }}
                 </span>
-                {% if clean_author contains '*' %}
-                  {% assign has_equal_contribution = true %}
+                {% if stripped_author contains '*' %}
+                  *  <!-- '*'을 강조 표시한 후 유지 -->
                 {% endif %}
               {% else %}
-                <span>{{ clean_author }}</span>
+                <span>{{ stripped_author }}</span>
               {% endif %}
               {% if forloop.last == false %}, {% endif %}
             {% endfor %}
@@ -105,6 +111,7 @@ layout: page
     <p style="font-size: 0.8rem; font-style: italic; margin-top: 10px;">(*: Equal Contribution)</p>
   {% endif %}
 </div>
+
 
 
 
