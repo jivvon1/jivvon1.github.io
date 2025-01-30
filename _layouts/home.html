@@ -80,20 +80,20 @@ layout: page
             {% endif %}
           </span>
 
+          <!-- 저자 리스트 -->
           <span style="display: block; padding-left: 10px; font-style: italic; font-size: 0.8rem;">
             {% assign authors = item.authors | split: ',' %}
-            {% assign equal_contributors = "" %}
             {% assign last_equal_author = "" %}
             
-            <!-- 먼저 '*'이 포함된 저자 목록을 따로 저장 -->
+            <!-- '*'이 포함된 마지막 저자 찾기 -->
             {% for author in authors %}
               {% assign stripped_author = author | strip %}
               {% if stripped_author contains '*' %}
-                {% assign equal_contributors = equal_contributors | append: stripped_author | append: "," %}
                 {% assign last_equal_author = stripped_author %}
               {% endif %}
             {% endfor %}
             
+            <!-- 저자 출력 -->
             {% for author in authors %}
               {% assign stripped_author = author | strip %}
               {% assign clean_author = stripped_author | replace: '*', '' %}
@@ -111,7 +111,7 @@ layout: page
               {% endif %}
 
               {% if stripped_author == last_equal_author %}
-                (*: Equal Contribution)
+                <span style="font-size: 0.8rem; font-style: italic;"> (*: Equal Contribution)</span>
               {% endif %}
 
               {% if forloop.last == false %}, {% endif %}
@@ -122,6 +122,7 @@ layout: page
     {% endfor %}
   </ul>
 </div>
+
 
 
 
