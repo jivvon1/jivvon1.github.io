@@ -7,7 +7,7 @@
 
 - year: 2024/08
   title: "Narrowing your FOV with SOLiD: Spatially Organized and Lightweight Global Descriptor for FOV-constrained LiDAR Place Recognition"
-  conference: "RA-L"
+  conference: "IEEE RA-L"
   conference_link: "https://www.ieee-ras.org/publications/ra-l"
   authors: "Hogyun Kim, Jiwon Choi, Taehu Sim, Giseop Kim, Younggun Cho"
   github: "https://github.com/sparolab/SOLiD.git"
