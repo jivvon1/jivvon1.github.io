@@ -84,13 +84,13 @@ layout: page
             {% assign authors = item.authors | split: ',' %}
             {% for author in authors %}
               {% assign clean_author = author | strip %}
-              {% if clean_author contains '*' %}
-                {% assign has_equal_contribution = true %}
-              {% endif %}
               {% if clean_author contains 'Jiwon Choi' %}
                 <span style="font-weight: bold; text-decoration: underline;">
                   {{ clean_author | replace: '*', '' }}
                 </span>
+                {% if clean_author contains '*' %}
+                  {% assign has_equal_contribution = true %}
+                {% endif %}
               {% else %}
                 <span>{{ clean_author }}</span>
               {% endif %}
@@ -101,11 +101,11 @@ layout: page
       </li>
     {% endfor %}
   </ul>
-
-  {% if has_equal_contribution == true %}
+  {% if has_equal_contribution %}
     <p style="font-size: 0.8rem; font-style: italic; margin-top: 10px;">(*: Equal Contribution)</p>
   {% endif %}
 </div>
+
 
 
 
