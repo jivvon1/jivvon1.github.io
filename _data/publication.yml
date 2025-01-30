@@ -15,7 +15,7 @@
 
 - year: 2025/05
   title: "PoLaRIS Dataset: A Maritime Object Detection and Tracking Dataset in Pohang Canal"
-  conference: "IEEE ICRA 25"
+  conference: "IEEE ICRA"
   conference_link: "https://2025.ieee-icra.org/"
   authors: "Jiwon Choi*, Dongjin Cho*, Gihyeon Lee, Hogyun Kim, Geonmo Yang, Joowan Kim, Younggun Cho"
   github: "https://github.com/sparolab/PoLaRIS"
