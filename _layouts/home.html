@@ -55,7 +55,6 @@ layout: page
   <h3 style="font-size: 20px; margin-bottom: 10px; margin-top: 60px; font-weight: bold;">Publications</h3>
   <ul>
     {% assign sorted_publications = publication_data | sort: 'year' | reverse %}
-    {% assign has_equal_contribution = false %}
     {% for item in sorted_publications %}
       <li>
         <span class="date year" style="font-weight: bold;">
@@ -80,26 +79,41 @@ layout: page
                 <a href="{{ item.paper_link }}" target="_blank" style="color: #0073e6; font-size: 0.8rem;">(Paper)</a>
             {% endif %}
           </span>
+
           <span style="display: block; padding-left: 10px; font-style: italic; font-size: 0.8rem;">
             {% assign authors = item.authors | split: ',' %}
+            {% assign equal_contributors = "" %}
+            {% assign last_equal_author = "" %}
+            
+            <!-- 먼저 '*'이 포함된 저자 목록을 따로 저장 -->
+            {% for author in authors %}
+              {% assign stripped_author = author | strip %}
+              {% if stripped_author contains '*' %}
+                {% assign equal_contributors = equal_contributors | append: stripped_author | append: "," %}
+                {% assign last_equal_author = stripped_author %}
+              {% endif %}
+            {% endfor %}
+            
             {% for author in authors %}
               {% assign stripped_author = author | strip %}
               {% assign clean_author = stripped_author | replace: '*', '' %}
-              
-              {% if stripped_author contains '*' %}
-                {% assign has_equal_contribution = true %}
-              {% endif %}
               
               {% if clean_author == 'Jiwon Choi' %}
                 <span style="font-weight: bold; text-decoration: underline;">
                   {{ clean_author }}
                 </span>
-                {% if stripped_author contains '*' %}
-                  *  <!-- '*'을 강조 표시한 후 유지 -->
-                {% endif %}
               {% else %}
-                <span>{{ stripped_author }}</span>
+                <span>{{ clean_author }}</span>
               {% endif %}
+
+              {% if stripped_author contains '*' %}
+                <sup>*</sup>
+              {% endif %}
+
+              {% if stripped_author == last_equal_author %}
+                (*: Equal Contribution)
+              {% endif %}
+
               {% if forloop.last == false %}, {% endif %}
             {% endfor %}
           </span>
@@ -107,12 +121,7 @@ layout: page
       </li>
     {% endfor %}
   </ul>
-  {% if has_equal_contribution %}
-    <p style="font-size: 0.8rem; font-style: italic; margin-top: 10px;">(*: Equal Contribution)</p>
-  {% endif %}
 </div>
-
-
 
 
 
