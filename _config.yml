@@ -1,8 +1,8 @@
 # Site Configuration
 title: Jiwon Choi
-tagline: Studying LiDAR SLAM
+tagline: Studying Robust State Estimation
 description: >-
-  Personal academic portfolio of Jiwon Choi — LiDAR SLAM researcher.
+  Personal academic portfolio of Jiwon Choi — Robust state estimation researcher.
 
 url: "https://jivvon1.github.io"
 baseurl: ""

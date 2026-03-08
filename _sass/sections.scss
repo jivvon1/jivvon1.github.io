@@ -167,6 +167,12 @@
   padding: $card-padding;
   box-shadow: 0 2px 12px var(--shadow-card);
   transition: all $transition-normal;
+  overflow: hidden;
+  word-break: break-word;
+
+  @media (max-width: 768px) {
+    padding: 20px 16px;
+  }
 
   &:hover {
     background: var(--bg-card-hover);
@@ -314,6 +320,7 @@
       display: flex;
       gap: 10px;
       margin-left: auto;
+      flex-wrap: wrap;
 
       a {
         font-size: 0.82rem;
