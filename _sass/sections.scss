@@ -56,6 +56,30 @@
     line-height: 1.6;
   }
 
+  .hero-info {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) { justify-content: center; }
+
+    span, a {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color $transition-fast;
+
+      &:hover { color: var(--accent); }
+
+      i {
+        color: var(--accent);
+        margin-right: 6px;
+        font-size: 0.85rem;
+      }
+    }
+  }
+
   .hero-links {
     display: flex;
     gap: 12px;
