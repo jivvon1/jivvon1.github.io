@@ -1,0 +1,53 @@
+- year: 2026/06
+  title: "KISS-IMU: Self-supervised Inertial Odometry with Motion-balanced Learning and Uncertainty-aware Inference"
+  conference: "ICRA, 2026"
+  conference_link: "https://2026.ieee-icra.org/"
+  authors: "Jiwon Choi, Hogyun Kim, Geonmo Yang, Juhui Lee, Younggun Cho"
+  github: ""
+  paper_link: ""
+  arxiv_link: ""
+  project_link: "https://sparolab.github.io/research/kiss_imu/"
+  tldr: "Self-Supervised Inertial Odometry (IO)"
+
+- year: 2025/05
+  title: "SKiD-SLAM: Robust, Lightweight, and Distributed Multi-Robot LiDAR SLAM in Resource-Constrained Field Environments"
+  conference: "ICRA workshop on Field Robotics (spotlight talk), 2025"
+  conference_link: "https://2025.ieee-icra.org/event/workshop-on-field-robotics/"
+  authors: "Hogyun Kim, Jiwon Choi, Juwon Kim, Geonmo Yang, Dongjin Cho, Hyungtae Lim, Younggun Cho"
+  github: "https://github.com/sparolab/SKiD-SLAM"
+  paper_link: ""
+  arxiv_link: "https://arxiv.org/abs/2505.08230"
+  project_link: "https://sparolab.github.io/research/skid_slam/"
+  tldr: "Multi-Robot and Distributed LiDAR SLAM Framework"
+
+- year: 2025/05
+  title: "PoLaRIS Dataset: A Maritime Object Detection and Tracking Dataset in Pohang Canal"
+  conference: "ICRA, 2025"
+  conference_link: "https://2025.ieee-icra.org/"
+  authors: "Jiwon Choi*, Dongjin Cho*, Giheyon Lee, Hogyun Kim, Geonmo Yang, Joowan Kim, Younggun Cho"
+  github: "https://github.com/sparolab/PoLaRIS"
+  paper_link: "https://ieeexplore.ieee.org/document/11128583"
+  arxiv_link: "https://arxiv.org/abs/2412.05839"
+  project_link: "https://sparolab.github.io/research/polaris/"
+  tldr: "Object Detection and Tracking Dataset in Maritime"
+
+- year: 2024/08
+  title: "Narrowing your FOV with SOLiD: Spatially Organized and Lightweight Global Descriptor for FOV-constrained LiDAR Place Recognition"
+  conference: "RA-L"
+  conference_link: "https://www.ieee-ras.org/publications/ra-l"
+  authors: "Hogyun Kim, Jiwon Choi, Taehu Sim, Giseop Kim, Younggun Cho"
+  github: "https://github.com/sparolab/SOLiD"
+  paper_link: "http://ieeexplore.ieee.org/abstract/document/10629042"
+  arxiv_link: "https://arxiv.org/abs/2408.07330"
+  project_link: "https://sparolab.github.io/research/solid/"
+  tldr: "Lightweight LiDAR Place Recognition"
+
+- year: 2024/01
+  title: "Study on Efficient Multi-floor Navigation Using a Visual Marker and Floor Plan Map"
+  conference: "ICROS Journal"
+  conference_link: "http://journal.icros.org/"
+  authors: "Jiwon Choi, Taehu Sim, Gihyeon Lee, Jaeyong Lee, Gilhwan Kang, Hogyun Kim, Young Gun Cho"
+  paper_link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11654195&language=en_US&hasTopBanner=true"
+  arxiv_link: ""
+  project_link: ""
+  tldr: ""

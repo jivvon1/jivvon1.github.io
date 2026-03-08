@@ -1,0 +1,42 @@
+# Site Configuration
+title: Jiwon Choi
+tagline: Studying LiDAR SLAM
+description: >-
+  Personal academic portfolio of Jiwon Choi — LiDAR SLAM researcher.
+
+url: "https://jivvon1.github.io"
+baseurl: ""
+lang: en
+timezone: Asia/Seoul
+
+# Personal Info
+author:
+  name: Jiwon Choi
+  email: jivvon2@gmail.com
+  github: jivvon1
+  linkedin: jivvon2
+  scholar: "https://scholar.google.com/citations?user=wL8VdUMAAAAJ&hl=ko"
+
+avatar: /assets/img/new_profile.JPG
+
+# Build
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+
+sass:
+  style: compressed
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
+  - backup
+  - node_modules
+  - vendor
+  - "*.gemspec"
+  - "package*.json"
+
+plugins:
+  - jekyll-seo-tag

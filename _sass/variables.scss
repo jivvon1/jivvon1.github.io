@@ -1,0 +1,53 @@
+// Spacing (compile-time constants)
+$section-gap: 100px;
+$card-radius: 16px;
+$card-padding: 28px;
+
+// Transitions
+$transition-fast: 0.2s ease;
+$transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+// Theme colors via CSS custom properties
+:root {
+  // Light mode (default)
+  --bg-primary: #fafafa;
+  --bg-secondary: #f0f0f0;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8f8f8;
+  --bg-nav: rgba(250, 250, 250, 0.85);
+  --bg-nav-mobile: rgba(250, 250, 250, 0.95);
+  --text-primary: #1a1a1a;
+  --text-secondary: #555555;
+  --text-muted: #999999;
+  --accent: #d4a017;
+  --accent-hover: #e6b422;
+  --accent-rgb: 212, 160, 23;
+  --border: #e0e0e0;
+  --border-hover: #cccccc;
+  --shadow-card: rgba(0, 0, 0, 0.08);
+  --shadow-heavy: rgba(0, 0, 0, 0.12);
+  --nav-link-hover-bg: rgba(0, 0, 0, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #111111;
+    --bg-card: #1a1a1a;
+    --bg-card-hover: #222222;
+    --bg-nav: rgba(10, 10, 10, 0.85);
+    --bg-nav-mobile: rgba(10, 10, 10, 0.95);
+    --text-primary: #f0f0f0;
+    --text-secondary: #a0a0a0;
+    --text-muted: #666666;
+    --accent: #f0c640;
+    --accent-hover: #f5d566;
+    --accent-rgb: 240, 198, 64;
+    --border: #2a2a2a;
+    --border-hover: #3a3a3a;
+    --shadow-card: rgba(0, 0, 0, 0.4);
+    --shadow-heavy: rgba(0, 0, 0, 0.5);
+    --nav-link-hover-bg: rgba(255, 255, 255, 0.06);
+  }
+}

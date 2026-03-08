@@ -1,0 +1,188 @@
+---
+layout: default
+title: Jiwon Choi
+---
+
+<!-- Hero -->
+<section class="hero" id="about">
+  <div class="container">
+    <div class="card hero-card">
+      <div class="hero-content">
+        <div class="hero-text">
+          <p class="greeting">Hello, I'm</p>
+          <h1>Jiwon Choi</h1>
+          <p class="tagline">
+            M.S. & Ph.D. Integrated Student at Inha University,<br>
+            researching <strong>Robust State Estimation</strong> and <strong>Learned Inertial Odometry</strong>.
+          </p>
+          <div class="hero-links">
+            <a href="https://github.com/{{ site.author.github }}" target="_blank">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/{{ site.author.linkedin }}" target="_blank">
+              <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="{{ site.author.scholar }}" target="_blank">
+              <i class="fa-brands fa-google-scholar"></i> Scholar
+            </a>
+            <a href="mailto:{{ site.author.email }}">
+              <i class="fas fa-envelope"></i> Email
+            </a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="avatar-wrapper">
+            <img src="{{ site.avatar }}" alt="{{ site.author.name }}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section class="section" id="education">
+  <div class="container">
+    <div class="section-header">
+      <h2>Education</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="card-grid edu-cards">
+      {% for edu in site.data.education %}
+      <div class="card">
+        <div class="edu-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="edu-info">
+          <h3>{{ edu.degree }} &mdash; {{ edu.university }}</h3>
+          <p class="edu-dept">{{ edu.department }}</p>
+          <p class="edu-date">{{ edu.start_date }} &mdash; {{ edu.end_date | default: "Present" }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Research -->
+<section class="section" id="research">
+  <div class="container">
+    <div class="section-header">
+      <h2>Research</h2>
+      <div class="section-line"></div>
+    </div>
+    <p class="section-desc">* Highlighted papers indicate first-author contributions.</p>
+    <div class="card-grid pub-cards">
+      {% assign sorted_pubs = site.data.research | sort: "year" | reverse %}
+      {% for pub in sorted_pubs %}
+      {% assign first_author = pub.authors | split: "," | first %}
+      <div class="card{% if first_author contains 'Jiwon Choi' %} card-highlight{% endif %}">
+        <h3>{{ pub.title }}</h3>
+        {% if pub.tldr != "" %}
+        <p class="pub-tldr">[TL;DR] {{ pub.tldr }}</p>
+        {% endif %}
+        <p class="pub-authors">{{ pub.authors | replace: "Jiwon Choi", '<span class="pub-me">Jiwon Choi</span>' }}</p>
+        {% if pub.authors contains "*" %}
+        <p class="pub-equal">* Equal contribution</p>
+        {% endif %}
+        <div class="pub-meta">
+          {% if pub.conference_link %}
+          <a href="{{ pub.conference_link }}" target="_blank" class="pub-venue">{{ pub.conference }}</a>
+          {% else %}
+          <span class="pub-venue">{{ pub.conference }}</span>
+          {% endif %}
+          <span class="pub-year">{{ pub.year }}</span>
+          <div class="pub-links">
+            {% if pub.paper_link != "" %}
+            <a href="{{ pub.paper_link }}" target="_blank"><i class="fas fa-file-alt"></i> Paper</a>
+            {% endif %}
+            {% if pub.arxiv_link != "" %}
+            <a href="{{ pub.arxiv_link }}" target="_blank"><i class="fas fa-book-open"></i> arXiv</a>
+            {% endif %}
+            {% if pub.project_link != "" %}
+            <a href="{{ pub.project_link }}" target="_blank"><i class="fas fa-globe"></i> Project Page</a>
+            {% endif %}
+            {% if pub.github %}
+            <a href="{{ pub.github }}" target="_blank"><i class="fab fa-github"></i> Code</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ETC -->
+<section class="section" id="etc">
+  <div class="container">
+    <div class="section-header">
+      <h2>ETC</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="etc-grid">
+      <div class="etc-column">
+        <h3 class="etc-subtitle"><i class="fas fa-chalkboard-teacher"></i> Presentation</h3>
+        <ul class="etc-list">
+          {% for item in site.data.etc.presentation %}
+          <li>
+            <span class="etc-title">{{ item.title }}</span>
+            <span class="etc-detail">{{ item.venue }}, {{ item.year }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="etc-column">
+        <h3 class="etc-subtitle"><i class="fas fa-users"></i> Academic Service</h3>
+        <ul class="etc-list">
+          {% for item in site.data.etc.service %}
+          <li>
+            <span class="etc-title">{{ item.role }}</span>
+            {% for sub in item.items %}
+            <span class="etc-detail">{{ sub.venue }}, {{ sub.year }}</span>
+            {% endfor %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <h2>Contact</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="card contact-card">
+        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+        <p class="contact-label">Email</p>
+        <a class="contact-value" href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>
+      </div>
+      <div class="card contact-card">
+        <div class="contact-icon"><i class="fab fa-github"></i></div>
+        <p class="contact-label">GitHub</p>
+        <a class="contact-value" href="https://github.com/{{ site.author.github }}" target="_blank">{{ site.author.github }}</a>
+      </div>
+      <div class="card contact-card">
+        <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+        <p class="contact-label">LinkedIn</p>
+        <a class="contact-value" href="https://www.linkedin.com/in/{{ site.author.linkedin }}" target="_blank">{{ site.author.linkedin }}</a>
+      </div>
+      <div class="card contact-card">
+        <div class="contact-icon"><i class="fa-brands fa-google-scholar"></i></div>
+        <p class="contact-label">Google Scholar</p>
+        <a class="contact-value" href="{{ site.author.scholar }}" target="_blank">Profile</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; {{ "now" | date: "%Y" }} {{ site.author.name }}. All rights reserved.</p>
+  </div>
+</footer>
