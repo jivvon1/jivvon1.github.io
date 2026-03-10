@@ -5,7 +5,7 @@
   authors: "Jiwon Choi, Hogyun Kim, Geonmo Yang, Juhui Lee, Younggun Cho"
   github: ""
   paper_link: ""
-  arxiv_link: ""
+  arxiv_link: "https://arxiv.org/abs/2603.06205"
   project_link: "https://sparolab.github.io/research/kiss_imu/"
   tldr: "Self-Supervised Inertial Odometry (IO)"
 
