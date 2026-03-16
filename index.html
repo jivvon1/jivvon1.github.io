@@ -164,26 +164,26 @@ title: Jiwon Choi
       <div class="section-line"></div>
     </div>
     <div class="contact-grid">
-      <div class="card contact-card">
+      <a class="card contact-card" href="mailto:{{ site.author.email }}">
         <div class="contact-icon"><i class="fas fa-envelope"></i></div>
         <p class="contact-label">Email</p>
-        <a class="contact-value" href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>
-      </div>
-      <div class="card contact-card">
+        <span class="contact-value">{{ site.author.email }}</span>
+      </a>
+      <a class="card contact-card" href="https://www.linkedin.com/in/{{ site.author.linkedin }}" target="_blank">
         <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
         <p class="contact-label">LinkedIn</p>
-        <a class="contact-value" href="https://www.linkedin.com/in/{{ site.author.linkedin }}" target="_blank">{{ site.author.linkedin }}</a>
-      </div>
-      <div class="card contact-card">
+        <span class="contact-value">{{ site.author.linkedin }}</span>
+      </a>
+      <a class="card contact-card" href="{{ site.author.scholar }}" target="_blank">
         <div class="contact-icon"><i class="fa-brands fa-google-scholar"></i></div>
         <p class="contact-label">Google Scholar</p>
-        <a class="contact-value" href="{{ site.author.scholar }}" target="_blank">Profile</a>
-      </div>
-      <div class="card contact-card">
+        <span class="contact-value">Profile</span>
+      </a>
+      <a class="card contact-card" href="https://github.com/{{ site.author.github }}" target="_blank">
         <div class="contact-icon"><i class="fab fa-github"></i></div>
         <p class="contact-label">GitHub</p>
-        <a class="contact-value" href="https://github.com/{{ site.author.github }}" target="_blank">{{ site.author.github }}</a>
-      </div>
+        <span class="contact-value">{{ site.author.github }}</span>
+      </a>
     </div>
   </div>
 </section>
