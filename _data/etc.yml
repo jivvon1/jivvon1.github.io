@@ -10,3 +10,5 @@ service:
         year: "2025, 2026"
       - venue: "ICRA"
         year: "2026"
+      - venue: "IROS"
+        year: "2026"
