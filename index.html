@@ -43,9 +43,65 @@ title: Jiwon Choi
           </div>
         </div>
       </div>
+      {% if site.data.news and site.data.news.size > 0 %}
+      <div class="hero-news">
+        <h3 class="hero-news-title"><i class="fas fa-bullhorn"></i> News</h3>
+        <ul class="hero-news-list">
+          {% for item in site.data.news limit: 5 %}
+          <li>
+            <span class="hero-news-date">{{ item.date }}</span>
+            <span class="hero-news-text">
+              {% if item.link != "" %}
+              <a href="{{ item.link }}" target="_blank">{{ item.text }}</a>
+              {% else %}
+              {{ item.text }}
+              {% endif %}
+              {% if item.role %}
+              <span class="hero-news-role hero-news-role--{% if item.role contains '1st' %}first{% else %}co{% endif %}">{{ item.role }}</span>
+              {% endif %}
+            </span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% if site.data.news.size > 5 %}
+        <a href="#news" class="hero-news-more">View all news <i class="fas fa-arrow-down"></i></a>
+        {% endif %}
+      </div>
+      {% endif %}
     </div>
   </div>
 </section>
+
+<!-- News -->
+{% if site.data.news and site.data.news.size > 0 %}
+<section class="section" id="news">
+  <div class="container">
+    <div class="section-header">
+      <h2>News</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="card news-card">
+      <ul class="news-list">
+        {% for item in site.data.news %}
+        <li>
+          <span class="news-date">{{ item.date }}</span>
+          <span class="news-text">
+            {% if item.link != "" %}
+            <a href="{{ item.link }}" target="_blank">{{ item.text }}</a>
+            {% else %}
+            {{ item.text }}
+            {% endif %}
+            {% if item.role %}
+            <span class="hero-news-role hero-news-role--{% if item.role contains '1st' %}first{% else %}co{% endif %}">{{ item.role }}</span>
+            {% endif %}
+          </span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+{% endif %}
 
 <!-- Education -->
 <section class="section" id="education">
@@ -97,6 +153,9 @@ title: Jiwon Choi
           <a href="{{ pub.conference_link }}" target="_blank" class="pub-venue">{{ pub.conference }}</a>
           {% else %}
           <span class="pub-venue">{{ pub.conference }}</span>
+          {% endif %}
+          {% if pub.award %}
+          <span class="pub-award">{{ pub.award }}</span>
           {% endif %}
           <span class="pub-year">{{ pub.year }}</span>
           <div class="pub-links">

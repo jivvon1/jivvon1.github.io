@@ -8,6 +8,7 @@
   arxiv_link: "https://arxiv.org/abs/2603.06205"
   project_link: "https://sparolab.github.io/research/kiss_imu/"
   tldr: "Self-Supervised Inertial Odometry (IO)"
+  award: "Award Finalist"
 
 - year: 2025/05
   title: "SKiD-SLAM: Robust, Lightweight, and Distributed Multi-Robot LiDAR SLAM in Resource-Constrained Field Environments"

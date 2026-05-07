@@ -1,0 +1,36 @@
+- date: "2026.05"
+  text: "<strong>KISS-IMU</strong> selected as an <strong>ICRA 2026 Award Finalist</strong>!"
+  role: "1st Author"
+  link: "https://sparolab.github.io/research/kiss_imu/"
+
+- date: "2026.02"
+  text: "Received the <strong>Samsung HumanTech Paper Award (Silver Prize)</strong> from Samsung Electronics."
+  link: ""
+
+- date: "2026.02"
+  text: "Received the <strong>Graduate Research Award</strong> from Inha University."
+  link: ""
+
+- date: "2026.01"
+  text: "<strong>KISS-IMU</strong> accepted to ICRA 2026."
+  role: "1st Author"
+  link: "https://sparolab.github.io/research/kiss_imu/"
+
+- date: "2025.05"
+  text: "<strong>SKiD-SLAM</strong> selected as a spotlight talk at ICRA 2025 Workshop on Field Robotics."
+  role: "Co-author"
+  link: "https://sparolab.github.io/research/skid_slam/"
+
+- date: "2025.01"
+  text: "<strong>PoLaRIS Dataset</strong> accepted to ICRA 2025."
+  role: "1st Author"
+  link: "https://sparolab.github.io/research/polaris/"
+
+- date: "2025.04"
+  text: "Received the <strong>Excellent Research Award</strong> at the Korea Institute of ITS Conference."
+  link: ""
+
+- date: "2024.07"
+  text: "<strong>SOLiD</strong> accepted to RA-L."
+  role: "Co-author"
+  link: "https://sparolab.github.io/research/solid/"
