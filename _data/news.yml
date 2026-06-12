@@ -1,5 +1,14 @@
+- date: "2026.06"
+  text: "Won <strong>2nd place</strong> in the SLAM category of the <strong>Hilti-Trimble SLAM Challenge @ ICRA 2026</strong>!"
+  link: "https://hilti-trimble-challenge.com/"
+
+- date: "2026.06"
+  text: "<strong>KISS-IMU</strong> won the <strong>Outstanding WiRA Student Paper Award</strong> at ICRA 2026!"
+  role: "1st Author"
+  link: "https://sparolab.github.io/research/kiss_imu/"
+
 - date: "2026.05"
-  text: "<strong>KISS-IMU</strong> selected as an <strong>ICRA 2026 Award Finalist</strong>!"
+  text: "<strong>KISS-IMU</strong> selected as an <strong>ICRA 2026 Award Finalist</strong> (Best Paper Award on Robot Perception, Outstanding WiRA Student Paper Award)!"
   role: "1st Author"
   link: "https://sparolab.github.io/research/kiss_imu/"
 
