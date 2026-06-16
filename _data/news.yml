@@ -1,14 +1,14 @@
 - date: "2026.06"
-  text: "Won <strong>2nd place</strong> in the SLAM category of the <strong>Hilti-Trimble SLAM Challenge @ ICRA 2026</strong>!"
+  text: "Placed <strong>2nd</strong> in the SLAM category of the <strong>Hilti-Trimble SLAM Challenge</strong> at ICRA 2026."
   link: "https://hilti-trimble-challenge.com/"
 
 - date: "2026.06"
-  text: "<strong>KISS-IMU</strong> won the <strong>Outstanding WiRA Student Paper Award</strong> at ICRA 2026!"
+  text: "<strong>KISS-IMU</strong> received the <strong>Outstanding WiRA Student Paper Award</strong> at ICRA 2026."
   role: "1st Author"
   link: "https://sparolab.github.io/research/kiss_imu/"
 
 - date: "2026.05"
-  text: "<strong>KISS-IMU</strong> selected as an <strong>ICRA 2026 Award Finalist</strong> (Best Paper Award on Robot Perception, Outstanding WiRA Student Paper Award)!"
+  text: "<strong>KISS-IMU</strong> selected as a finalist for the <strong>Best Paper Award on Robot Perception</strong> at ICRA 2026."
   role: "1st Author"
   link: "https://sparolab.github.io/research/kiss_imu/"
 
@@ -17,11 +17,11 @@
   link: ""
 
 - date: "2026.02"
-  text: "Received the <strong>Samsung HumanTech Paper Award (Silver Prize)</strong> from Samsung Electronics."
+  text: "Received the <strong>Samsung HumanTech Paper Award (Silver Prize)</strong>, Samsung Electronics."
   link: ""
 
 - date: "2026.02"
-  text: "Received the <strong>Graduate Research Award</strong> from Inha University."
+  text: "Received the <strong>Graduate Research Award</strong>, Inha University."
   link: ""
 
 - date: "2026.01"
@@ -30,18 +30,18 @@
   link: "https://sparolab.github.io/research/kiss_imu/"
 
 - date: "2025.05"
-  text: "<strong>SKiD-SLAM</strong> selected as a spotlight talk at ICRA 2025 Workshop on Field Robotics."
+  text: "<strong>SKiD-SLAM</strong> selected as a spotlight talk at the ICRA 2025 Workshop on Field Robotics."
   role: "Co-author"
   link: "https://sparolab.github.io/research/skid_slam/"
+
+- date: "2025.04"
+  text: "Received the <strong>Excellent Research Award</strong> at the Korea Institute of ITS Conference."
+  link: ""
 
 - date: "2025.01"
   text: "<strong>PoLaRIS Dataset</strong> accepted to ICRA 2025."
   role: "1st Author"
   link: "https://sparolab.github.io/research/polaris/"
-
-- date: "2025.04"
-  text: "Received the <strong>Excellent Research Award</strong> at the Korea Institute of ITS Conference."
-  link: ""
 
 - date: "2024.07"
   text: "<strong>SOLiD</strong> accepted to RA-L."

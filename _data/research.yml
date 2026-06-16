@@ -8,7 +8,8 @@
   arxiv_link: "https://arxiv.org/abs/2603.06205"
   project_link: "https://sparolab.github.io/research/kiss_imu/"
   tldr: "Self-Supervised Inertial Odometry (IO)"
-  award: "Award Finalist"
+  award: "Best Paper on Robot Perception Finalist"
+  thumbnail: "/assets/img/research/kiss_imu.gif"
 
 - year: 2025/05
   title: "SKiD-SLAM: Robust, Lightweight, and Distributed Multi-Robot LiDAR SLAM in Resource-Constrained Field Environments"
@@ -20,6 +21,7 @@
   arxiv_link: "https://arxiv.org/abs/2505.08230"
   project_link: "https://sparolab.github.io/research/skid_slam/"
   tldr: "Multi-Robot and Distributed LiDAR SLAM Framework"
+  thumbnail: "/assets/img/research/skid_slam.gif"
 
 - year: 2025/05
   title: "PoLaRIS Dataset: A Maritime Object Detection and Tracking Dataset in Pohang Canal"
@@ -31,6 +33,7 @@
   arxiv_link: "https://arxiv.org/abs/2412.05839"
   project_link: "https://sparolab.github.io/research/polaris/"
   tldr: "Object Detection and Tracking Dataset in Maritime"
+  thumbnail: "/assets/img/research/polaris.gif"
 
 - year: 2024/08
   title: "Narrowing your FOV with SOLiD: Spatially Organized and Lightweight Global Descriptor for FOV-constrained LiDAR Place Recognition"
@@ -42,6 +45,7 @@
   arxiv_link: "https://arxiv.org/abs/2408.07330"
   project_link: "https://sparolab.github.io/research/solid/"
   tldr: "Lightweight LiDAR Place Recognition"
+  thumbnail: "/assets/img/research/solid.png"
 
 - year: 2024/01
   title: "Study on Efficient Multi-floor Navigation Using a Visual Marker and Floor Plan Map"
@@ -49,6 +53,48 @@
   conference_link: "http://journal.icros.org/"
   authors: "Jiwon Choi, Taehu Sim, Gihyeon Lee, Jaeyong Lee, Gilhwan Kang, Hogyun Kim, Young Gun Cho"
   paper_link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11654195&language=en_US&hasTopBanner=true"
+  arxiv_link: ""
+  project_link: ""
+  tldr: ""
+
+- year: 2025/04
+  title: "IML-SLAM: 주행 차량 모션을 고려한 LiDAR-Inertial SLAM 시스템"
+  conference: "Korea Institute of ITS Conference"
+  conference_link: ""
+  authors: "Jiwon Choi, Hogyun Kim, Geonmo Yang, Younggun Cho"
+  paper_link: ""
+  arxiv_link: ""
+  project_link: ""
+  tldr: ""
+  award: "Excellent Paper Award"
+
+- year: 2022/06
+  title: "거리 기반 Sampling Algorithm을 이용한 LiDAR의 객체 인식 성능 개선에 관한 연구"
+  conference: "Korea Institute of ITS Conference"
+  conference_link: ""
+  authors: "Jiwon Choi, Younggun Cho"
+  paper_link: ""
+  arxiv_link: ""
+  project_link: ""
+  tldr: ""
+  award: "Excellent Paper Award"
+
+- year: 2024/06
+  title: "가벼운 전역 설명자로 이루어진 위치 인식 기술을 이용한 강인한 슬램 기술"
+  conference: "ICROS Annual Conference"
+  conference_link: ""
+  authors: "Jiwon Choi, Hogyun Kim, Younggun Cho"
+  paper_link: ""
+  arxiv_link: ""
+  project_link: ""
+  tldr: ""
+
+- year: 2023/06
+  title: "Visual marker 및 설계도면을 활용한 효율적인 다층 내비게이션에 관한 연구"
+  conference: "ICROS Annual Conference"
+  conference_link: ""
+  authors: "Gihyeon Lee, Sangwook Han, Taehu Sim, Jiwon Choi, Changhee Kim, Jaeyong Lee, Younggun Cho"
+  paper_link: ""
   arxiv_link: ""
   project_link: ""
   tldr: ""

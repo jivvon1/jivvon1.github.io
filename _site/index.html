@@ -34,74 +34,96 @@
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
-  <nav class="topnav" id="topnav">
-  <div class="nav-inner">
-    <a href="/" class="nav-logo">Jiwon Choi</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#news">News</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#research">Research</a></li>
-      <li><a href="#etc">ETC</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-      <i class="fas fa-bars"></i>
-    </button>
+  <nav class="topnav-v2">
+  <div class="topnav-v2-inner">
+    <a href="/" class="brand">
+      <span class="brand-title">Jiwon Choi</span>
+      <span class="brand-sub">Robust State Estimation · Learned Inertial Odometry</span>
+    </a>
   </div>
 </nav>
 
   <main>
-    <!-- Hero -->
-<section class="hero" id="about">
-  <div class="container">
-    <div class="card hero-card">
-      <div class="hero-content">
-        <div class="hero-text">
-          <p class="greeting">Hello, I'm</p>
-          <h1>Jiwon Choi</h1>
-          <p class="tagline">
-            M.S. & Ph.D. Integrated Student at Inha University,<br>
-            researching <strong>Robust State Estimation</strong> and <strong>Learned Inertial Odometry</strong>.
-          </p>
-          <div class="hero-info">
-            <span><i class="fas fa-map-marker-alt"></i> Incheon, South Korea</span>
-            <a href="https://sparolab.github.io/" target="_blank"><i class="fas fa-building"></i> SPARO Lab, Inha University</a>
-          </div>
-          <div class="hero-links">
-            <a href="mailto:jivvon2@gmail.com">
-              <i class="fas fa-envelope"></i> Email
-            </a>
-            <a href="/assets/img/cv.pdf" target="_blank">
-              <i class="fas fa-file-alt"></i> CV
-            </a>
-            <a href="https://www.linkedin.com/in/jivvon2" target="_blank">
-              <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-            <a href="https://scholar.google.com/citations?user=wL8VdUMAAAAJ&hl=ko" target="_blank">
-              <i class="fa-brands fa-google-scholar"></i> Scholar
-            </a>
-            <a href="https://github.com/jivvon1" target="_blank">
-              <i class="fab fa-github"></i> GitHub
-            </a>
-          </div>
-        </div>
-        <div class="hero-image">
-          <div class="avatar-wrapper">
-            <img src="/assets/img/profile.jpg" alt="Jiwon Choi">
-          </div>
-        </div>
+    <div class="page-wrap">
+  <div class="layout-2col">
+
+  <!-- LEFT: Profile rail -->
+  <aside class="profile-rail">
+    <div class="profile-avatar">
+      <img src="/assets/img/profile.jpg" alt="Jiwon Choi">
+    </div>
+
+    <blockquote class="profile-hello">
+      <span class="wave" aria-hidden="true">👋</span>
+      Hi! I'm Jiwon — I study <strong>Robust State Estimation</strong> and <strong>Learned Inertial Odometry</strong> at SPARO Lab.
+    </blockquote>
+
+    <ul class="profile-info">
+      <li><i class="fas fa-graduation-cap"></i> Integrated M.S.–Ph.D. Student</li>
+      <li><i class="fas fa-map-marker-alt"></i> Incheon, South Korea</li>
+      <li><i class="fas fa-building"></i> <a href="https://sparolab.github.io/" target="_blank">SPARO Lab, Inha University</a></li>
+      <li><i class="fas fa-envelope"></i> <a href="mailto:jivvon2@gmail.com">jivvon2@gmail.com</a></li>
+    </ul>
+
+    <div class="profile-links">
+      <a href="mailto:jivvon2@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="/assets/img/cv.pdf" target="_blank" title="CV"><i class="fas fa-file-alt"></i></a>
+      <a href="https://www.linkedin.com/in/jivvon2" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://scholar.google.com/citations?user=wL8VdUMAAAAJ&hl=ko" target="_blank" title="Google Scholar"><i class="fa-brands fa-google-scholar"></i></a>
+      <a href="https://github.com/jivvon1" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+    </div>
+  </aside>
+
+  <!-- RIGHT: Tabbed content -->
+  <main class="content-main">
+    <nav class="tabs" role="tablist">
+      <button class="tab is-active" data-tab="home" role="tab">Home</button>
+      <button class="tab" data-tab="publications" role="tab">Publications</button>
+      <button class="tab" data-tab="research" role="tab">Research</button>
+      <button class="tab" data-tab="notes" role="tab">Notes</button>
+      <button class="tab" data-tab="news" role="tab">News</button>
+      <button class="tab" data-tab="etc" role="tab">ETC</button>
+    </nav>
+
+    <!-- Home -->
+    <section class="tab-panel is-active" data-panel="home">
+      <div class="home-section">
+        <h2 class="panel-title">Profile</h2>
+        <p class="profile-bio">
+          I'm an integrated M.S.–Ph.D. student in the Department of Electrical and Computer Engineering at Inha University,
+          advised by <strong>Younggun Cho</strong> in
+          <a href="https://sparolab.github.io/" target="_blank" rel="noopener">SPARO Lab</a>.
+          I also received my B.S. in Electrical Engineering from Inha University.
+          During my M.S., I worked on <strong>robust state estimation</strong> through <strong>learned inertial odometry</strong>,
+          and I'm now studying <strong>motion generation</strong> for robust and adaptive robot behavior.
+          For my personal thoughts and research experiences, please check out my
+          <button class="inline-link" data-goto="notes" type="button">Notes</button> :)
+        </p>
       </div>
-      
-      <div class="hero-news">
-        <h3 class="hero-news-title"><i class="fas fa-bullhorn"></i> News</h3>
-        <ul class="hero-news-list">
+
+      <div class="home-section is-latest">
+        <div class="home-section-header">
+          <h2 class="panel-title">Latest News</h2>
+          <button class="see-more" data-goto="news">See all <i class="fas fa-arrow-right"></i></button>
+        </div>
+        
+        <ul class="news-list">
           
           <li>
-            <span class="hero-news-date">2026.05</span>
-            <span class="hero-news-text">
+            <span class="news-date">2026.06</span>
+            <span class="news-text">
               
-              <a href="https://sparolab.github.io/research/kiss_imu/" target="_blank"><strong>KISS-IMU</strong> selected as an <strong>ICRA 2026 Award Finalist</strong>!</a>
+              <a href="https://hilti-trimble-challenge.com/" target="_blank">Placed <strong>2nd</strong> in the SLAM category of the <strong>Hilti-Trimble SLAM Challenge</strong> at ICRA 2026.</a>
+              
+              
+            </span>
+          </li>
+          
+          <li>
+            <span class="news-date">2026.06</span>
+            <span class="news-text">
+              
+              <a href="https://sparolab.github.io/research/kiss_imu/" target="_blank"><strong>KISS-IMU</strong> received the <strong>Outstanding WiRA Student Paper Award</strong> at ICRA 2026.</a>
               
               
               <span class="hero-news-role hero-news-role--first">1st Author</span>
@@ -110,30 +132,10 @@
           </li>
           
           <li>
-            <span class="hero-news-date">2026.02</span>
-            <span class="hero-news-text">
+            <span class="news-date">2026.05</span>
+            <span class="news-text">
               
-              Received the <strong>Samsung HumanTech Paper Award (Silver Prize)</strong> from Samsung Electronics.
-              
-              
-            </span>
-          </li>
-          
-          <li>
-            <span class="hero-news-date">2026.02</span>
-            <span class="hero-news-text">
-              
-              Received the <strong>Graduate Research Award</strong> from Inha University.
-              
-              
-            </span>
-          </li>
-          
-          <li>
-            <span class="hero-news-date">2026.01</span>
-            <span class="hero-news-text">
-              
-              <a href="https://sparolab.github.io/research/kiss_imu/" target="_blank"><strong>KISS-IMU</strong> accepted to ICRA 2026.</a>
+              <a href="https://sparolab.github.io/research/kiss_imu/" target="_blank"><strong>KISS-IMU</strong> selected as a finalist for the <strong>Best Paper Award on Robot Perception</strong> at ICRA 2026.</a>
               
               
               <span class="hero-news-role hero-news-role--first">1st Author</span>
@@ -142,43 +144,142 @@
           </li>
           
           <li>
-            <span class="hero-news-date">2025.05</span>
-            <span class="hero-news-text">
+            <span class="news-date">2026.03</span>
+            <span class="news-text">
               
-              <a href="https://sparolab.github.io/research/skid_slam/" target="_blank"><strong>SKiD-SLAM</strong> selected as a spotlight talk at ICRA 2025 Workshop on Field Robotics.</a>
+              Selected for the <strong>ICRA 2026 RAS Travel Support</strong>.
               
-              
-              <span class="hero-news-role hero-news-role--co">Co-author</span>
               
             </span>
           </li>
           
         </ul>
         
-        <a href="#news" class="hero-news-more">View all news <i class="fas fa-arrow-down"></i></a>
-        
       </div>
+
+      <div class="home-section is-latest">
+        <div class="home-section-header">
+          <h2 class="panel-title">Latest Researches</h2>
+          <button class="see-more" data-goto="publications">See all <i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div class="research-thumb-grid">
+          
+          
+          
+            
+            
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              <article class="research-thumb is-mine">
+                
+                <a class="research-thumb-cover" href="https://sparolab.github.io/research/kiss_imu/" target="_blank" aria-label="KISS-IMU: Self-supervised Inertial Odometry with Motion-balanced Learning and Uncertainty-aware Inference"></a>
+                
+                <div class="research-thumb-img">
+                  
+                  <img src="/assets/img/research/kiss_imu.gif" alt="KISS-IMU: Self-supervised Inertial Odometry with Motion-balanced Learning and Uncertainty-aware Inference">
+                  
+                </div>
+                <div class="research-thumb-body">
+                  <div class="research-thumb-pills">
+                    <span class="pill pill--year">2026</span>
+                    <span class="pill pill--role pill--role-first">1st Author</span>
+                    <span class="pill pill--type pill--type-conference">Conference</span>
+                  </div>
+                  <h3 class="research-thumb-title">KISS-IMU: Self-supervised Inertial Odometry with Motion-balanced Learning and Uncertainty-aware Inference</h3>
+                  <span class="research-thumb-venue">IEEE International Conference on Robotics and Automation</span>
+                </div>
+              </article>
+            
+          
+            
+            
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              <article class="research-thumb is-mine">
+                
+                <a class="research-thumb-cover" href="https://sparolab.github.io/research/polaris/" target="_blank" aria-label="PoLaRIS Dataset: A Maritime Object Detection and Tracking Dataset in Pohang Canal"></a>
+                
+                <div class="research-thumb-img">
+                  
+                  <img src="/assets/img/research/polaris.gif" alt="PoLaRIS Dataset: A Maritime Object Detection and Tracking Dataset in Pohang Canal">
+                  
+                </div>
+                <div class="research-thumb-body">
+                  <div class="research-thumb-pills">
+                    <span class="pill pill--year">2025</span>
+                    <span class="pill pill--role pill--role-first">1st Author</span>
+                    <span class="pill pill--type pill--type-conference">Conference</span>
+                  </div>
+                  <h3 class="research-thumb-title">PoLaRIS Dataset: A Maritime Object Detection and Tracking Dataset in Pohang Canal</h3>
+                  <span class="research-thumb-venue">IEEE International Conference on Robotics and Automation</span>
+                </div>
+              </article>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- News -->
+    <section class="tab-panel" data-panel="news">
+      <h2 class="panel-title">News</h2>
       
-    </div>
-  </div>
-</section>
-
-<!-- News -->
-
-<section class="section" id="news">
-  <div class="container">
-    <div class="section-header">
-      <h2>News</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="card news-card">
       <ul class="news-list">
         
         <li>
-          <span class="news-date">2026.05</span>
+          <span class="news-date">2026.06</span>
           <span class="news-text">
             
-            <a href="https://sparolab.github.io/research/kiss_imu/" target="_blank"><strong>KISS-IMU</strong> selected as an <strong>ICRA 2026 Award Finalist</strong>!</a>
+            <a href="https://hilti-trimble-challenge.com/" target="_blank">Placed <strong>2nd</strong> in the SLAM category of the <strong>Hilti-Trimble SLAM Challenge</strong> at ICRA 2026.</a>
+            
+            
+          </span>
+        </li>
+        
+        <li>
+          <span class="news-date">2026.06</span>
+          <span class="news-text">
+            
+            <a href="https://sparolab.github.io/research/kiss_imu/" target="_blank"><strong>KISS-IMU</strong> received the <strong>Outstanding WiRA Student Paper Award</strong> at ICRA 2026.</a>
             
             
             <span class="hero-news-role hero-news-role--first">1st Author</span>
@@ -187,10 +288,22 @@
         </li>
         
         <li>
-          <span class="news-date">2026.02</span>
+          <span class="news-date">2026.05</span>
           <span class="news-text">
             
-            Received the <strong>Samsung HumanTech Paper Award (Silver Prize)</strong> from Samsung Electronics.
+            <a href="https://sparolab.github.io/research/kiss_imu/" target="_blank"><strong>KISS-IMU</strong> selected as a finalist for the <strong>Best Paper Award on Robot Perception</strong> at ICRA 2026.</a>
+            
+            
+            <span class="hero-news-role hero-news-role--first">1st Author</span>
+            
+          </span>
+        </li>
+        
+        <li>
+          <span class="news-date">2026.03</span>
+          <span class="news-text">
+            
+            Selected for the <strong>ICRA 2026 RAS Travel Support</strong>.
             
             
           </span>
@@ -200,7 +313,17 @@
           <span class="news-date">2026.02</span>
           <span class="news-text">
             
-            Received the <strong>Graduate Research Award</strong> from Inha University.
+            Received the <strong>Samsung HumanTech Paper Award (Silver Prize)</strong>, Samsung Electronics.
+            
+            
+          </span>
+        </li>
+        
+        <li>
+          <span class="news-date">2026.02</span>
+          <span class="news-text">
+            
+            Received the <strong>Graduate Research Award</strong>, Inha University.
             
             
           </span>
@@ -222,10 +345,20 @@
           <span class="news-date">2025.05</span>
           <span class="news-text">
             
-            <a href="https://sparolab.github.io/research/skid_slam/" target="_blank"><strong>SKiD-SLAM</strong> selected as a spotlight talk at ICRA 2025 Workshop on Field Robotics.</a>
+            <a href="https://sparolab.github.io/research/skid_slam/" target="_blank"><strong>SKiD-SLAM</strong> selected as a spotlight talk at the ICRA 2025 Workshop on Field Robotics.</a>
             
             
             <span class="hero-news-role hero-news-role--co">Co-author</span>
+            
+          </span>
+        </li>
+        
+        <li>
+          <span class="news-date">2025.04</span>
+          <span class="news-text">
+            
+            Received the <strong>Excellent Research Award</strong> at the Korea Institute of ITS Conference.
+            
             
           </span>
         </li>
@@ -243,16 +376,6 @@
         </li>
         
         <li>
-          <span class="news-date">2025.04</span>
-          <span class="news-text">
-            
-            Received the <strong>Excellent Research Award</strong> at the Korea Institute of ITS Conference.
-            
-            
-          </span>
-        </li>
-        
-        <li>
           <span class="news-date">2024.07</span>
           <span class="news-text">
             
@@ -265,285 +388,580 @@
         </li>
         
       </ul>
-    </div>
-  </div>
-</section>
-
-
-<!-- Education -->
-<section class="section" id="education">
-  <div class="container">
-    <div class="section-header">
-      <h2>Education</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="card-grid edu-cards">
       
-      <div class="card">
-        <div class="edu-icon">
-          <i class="fas fa-graduation-cap"></i>
-        </div>
-        <div class="edu-info">
-          <h3>M.S. & Ph.D. Integrated &mdash; Inha University</h3>
-          <p class="edu-dept">Department of Electrical and Computer Engineering</p>
-          <p class="edu-date">2024/03 &mdash; Present</p>
-        </div>
+    </section>
+
+    <!-- Publications (text list, grouped by year) -->
+    <section class="tab-panel" data-panel="publications">
+      <h2 class="panel-title">Publications</h2>
+
+      
+      
+      
+
+      
+      <div class="pub-year-group">
+        <h3 class="pub-year-heading">2026</h3>
+        <ol class="pub-textlist">
+          
+          
+            
+            <li data-idx="1">
+              <div class="pub-textlist-title">KISS-IMU: Self-supervised Inertial Odometry with Motion-balanced Learning and Uncertainty-aware Inference</div>
+              <div class="pub-textlist-authors"><span class="pub-me">Jiwon Choi</span>, Hogyun Kim, Geonmo Yang, Juhui Lee, Younggun Cho</div>
+              <div class="pub-textlist-meta">
+                
+                <a href="https://2026.ieee-icra.org/" target="_blank"><em>ICRA, 2026</em></a>
+                
+                , 2026/06
+                 · <span class="pub-textlist-award">Best Paper on Robot Perception Finalist</span>
+              </div>
+              <div class="pub-textlist-links">
+                
+                
+                <a href="https://arxiv.org/abs/2603.06205" target="_blank"><i class="fas fa-book-open"></i> arXiv</a>
+                
+                
+                <a href="https://sparolab.github.io/research/kiss_imu/" target="_blank"><i class="fas fa-globe"></i> Project</a>
+                
+                
+                <a href="" target="_blank"><i class="fab fa-github"></i> Code</a>
+                
+              </div>
+            </li>
+          
+        </ol>
       </div>
       
-      <div class="card">
-        <div class="edu-icon">
-          <i class="fas fa-graduation-cap"></i>
-        </div>
-        <div class="edu-info">
-          <h3>B.S. &mdash; Inha University</h3>
-          <p class="edu-dept">Department of Electrical Engineering</p>
-          <p class="edu-date">2020/03 &mdash; 2024/02</p>
-        </div>
+      <div class="pub-year-group">
+        <h3 class="pub-year-heading">2025</h3>
+        <ol class="pub-textlist">
+          
+          
+            
+            <li data-idx="1">
+              <div class="pub-textlist-title">PoLaRIS Dataset: A Maritime Object Detection and Tracking Dataset in Pohang Canal</div>
+              <div class="pub-textlist-authors"><span class="pub-me">Jiwon Choi</span>*, Dongjin Cho*, Giheyon Lee, Hogyun Kim, Geonmo Yang, Joowan Kim, Younggun Cho</div>
+              <div class="pub-textlist-meta">
+                
+                <a href="https://2025.ieee-icra.org/" target="_blank"><em>ICRA, 2025</em></a>
+                
+                , 2025/05
+                
+              </div>
+              <div class="pub-textlist-links">
+                
+                <a href="https://ieeexplore.ieee.org/document/11128583" target="_blank"><i class="fas fa-file-alt"></i> Paper</a>
+                
+                
+                <a href="https://arxiv.org/abs/2412.05839" target="_blank"><i class="fas fa-book-open"></i> arXiv</a>
+                
+                
+                <a href="https://sparolab.github.io/research/polaris/" target="_blank"><i class="fas fa-globe"></i> Project</a>
+                
+                
+                <a href="https://github.com/sparolab/PoLaRIS" target="_blank"><i class="fab fa-github"></i> Code</a>
+                
+              </div>
+            </li>
+          
+            
+            <li data-idx="2">
+              <div class="pub-textlist-title">SKiD-SLAM: Robust, Lightweight, and Distributed Multi-Robot LiDAR SLAM in Resource-Constrained Field Environments</div>
+              <div class="pub-textlist-authors">Hogyun Kim, <span class="pub-me">Jiwon Choi</span>, Juwon Kim, Geonmo Yang, Dongjin Cho, Hyungtae Lim, Younggun Cho</div>
+              <div class="pub-textlist-meta">
+                
+                <a href="https://2025.ieee-icra.org/event/workshop-on-field-robotics/" target="_blank"><em>ICRA workshop on Field Robotics (spotlight talk), 2025</em></a>
+                
+                , 2025/05
+                
+              </div>
+              <div class="pub-textlist-links">
+                
+                
+                <a href="https://arxiv.org/abs/2505.08230" target="_blank"><i class="fas fa-book-open"></i> arXiv</a>
+                
+                
+                <a href="https://sparolab.github.io/research/skid_slam/" target="_blank"><i class="fas fa-globe"></i> Project</a>
+                
+                
+                <a href="https://github.com/sparolab/SKiD-SLAM" target="_blank"><i class="fab fa-github"></i> Code</a>
+                
+              </div>
+            </li>
+          
+            
+            <li data-idx="3">
+              <div class="pub-textlist-title">IML-SLAM: 주행 차량 모션을 고려한 LiDAR-Inertial SLAM 시스템</div>
+              <div class="pub-textlist-authors"><span class="pub-me">Jiwon Choi</span>, Hogyun Kim, Geonmo Yang, Younggun Cho</div>
+              <div class="pub-textlist-meta">
+                
+                <a href="" target="_blank"><em>Korea Institute of ITS Conference</em></a>
+                
+                , 2025/04
+                 · <span class="pub-textlist-award">Excellent Paper Award</span>
+              </div>
+              <div class="pub-textlist-links">
+                
+                
+                
+                
+              </div>
+            </li>
+          
+        </ol>
       </div>
       
-    </div>
-  </div>
-</section>
+      <div class="pub-year-group">
+        <h3 class="pub-year-heading">2024</h3>
+        <ol class="pub-textlist">
+          
+          
+            
+            <li data-idx="1">
+              <div class="pub-textlist-title">Narrowing your FOV with SOLiD: Spatially Organized and Lightweight Global Descriptor for FOV-constrained LiDAR Place Recognition</div>
+              <div class="pub-textlist-authors">Hogyun Kim, <span class="pub-me">Jiwon Choi</span>, Taehu Sim, Giseop Kim, Younggun Cho</div>
+              <div class="pub-textlist-meta">
+                
+                <a href="https://www.ieee-ras.org/publications/ra-l" target="_blank"><em>RA-L</em></a>
+                
+                , 2024/08
+                
+              </div>
+              <div class="pub-textlist-links">
+                
+                <a href="http://ieeexplore.ieee.org/abstract/document/10629042" target="_blank"><i class="fas fa-file-alt"></i> Paper</a>
+                
+                
+                <a href="https://arxiv.org/abs/2408.07330" target="_blank"><i class="fas fa-book-open"></i> arXiv</a>
+                
+                
+                <a href="https://sparolab.github.io/research/solid/" target="_blank"><i class="fas fa-globe"></i> Project</a>
+                
+                
+                <a href="https://github.com/sparolab/SOLiD" target="_blank"><i class="fab fa-github"></i> Code</a>
+                
+              </div>
+            </li>
+          
+            
+            <li data-idx="2">
+              <div class="pub-textlist-title">가벼운 전역 설명자로 이루어진 위치 인식 기술을 이용한 강인한 슬램 기술</div>
+              <div class="pub-textlist-authors"><span class="pub-me">Jiwon Choi</span>, Hogyun Kim, Younggun Cho</div>
+              <div class="pub-textlist-meta">
+                
+                <a href="" target="_blank"><em>ICROS Annual Conference</em></a>
+                
+                , 2024/06
+                
+              </div>
+              <div class="pub-textlist-links">
+                
+                
+                
+                
+              </div>
+            </li>
+          
+            
+            <li data-idx="3">
+              <div class="pub-textlist-title">Study on Efficient Multi-floor Navigation Using a Visual Marker and Floor Plan Map</div>
+              <div class="pub-textlist-authors"><span class="pub-me">Jiwon Choi</span>, Taehu Sim, Gihyeon Lee, Jaeyong Lee, Gilhwan Kang, Hogyun Kim, Young Gun Cho</div>
+              <div class="pub-textlist-meta">
+                
+                <a href="http://journal.icros.org/" target="_blank"><em>ICROS Journal</em></a>
+                
+                , 2024/01
+                
+              </div>
+              <div class="pub-textlist-links">
+                
+                <a href="https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11654195&language=en_US&hasTopBanner=true" target="_blank"><i class="fas fa-file-alt"></i> Paper</a>
+                
+                
+                
+                
+              </div>
+            </li>
+          
+        </ol>
+      </div>
+      
+      <div class="pub-year-group">
+        <h3 class="pub-year-heading">2023</h3>
+        <ol class="pub-textlist">
+          
+          
+            
+            <li data-idx="1">
+              <div class="pub-textlist-title">Visual marker 및 설계도면을 활용한 효율적인 다층 내비게이션에 관한 연구</div>
+              <div class="pub-textlist-authors">Gihyeon Lee, Sangwook Han, Taehu Sim, <span class="pub-me">Jiwon Choi</span>, Changhee Kim, Jaeyong Lee, Younggun Cho</div>
+              <div class="pub-textlist-meta">
+                
+                <a href="" target="_blank"><em>ICROS Annual Conference</em></a>
+                
+                , 2023/06
+                
+              </div>
+              <div class="pub-textlist-links">
+                
+                
+                
+                
+              </div>
+            </li>
+          
+        </ol>
+      </div>
+      
+      <div class="pub-year-group">
+        <h3 class="pub-year-heading">2022</h3>
+        <ol class="pub-textlist">
+          
+          
+            
+            <li data-idx="1">
+              <div class="pub-textlist-title">거리 기반 Sampling Algorithm을 이용한 LiDAR의 객체 인식 성능 개선에 관한 연구</div>
+              <div class="pub-textlist-authors"><span class="pub-me">Jiwon Choi</span>, Younggun Cho</div>
+              <div class="pub-textlist-meta">
+                
+                <a href="" target="_blank"><em>Korea Institute of ITS Conference</em></a>
+                
+                , 2022/06
+                 · <span class="pub-textlist-award">Excellent Paper Award</span>
+              </div>
+              <div class="pub-textlist-links">
+                
+                
+                
+                
+              </div>
+            </li>
+          
+        </ol>
+      </div>
+      
+    </section>
 
-<!-- Research -->
-<section class="section" id="research">
-  <div class="container">
-    <div class="section-header">
-      <h2>Research</h2>
-      <div class="section-line"></div>
-    </div>
-    <p class="section-desc">* Highlighted papers indicate first-author contributions.</p>
-    <div class="card-grid pub-cards">
-      
-      
-      
-      <div class="card card-highlight">
-        <h3>KISS-IMU: Self-supervised Inertial Odometry with Motion-balanced Learning and Uncertainty-aware Inference</h3>
-        
-        <p class="pub-tldr">[TL;DR] Self-Supervised Inertial Odometry (IO)</p>
-        
-        <p class="pub-authors"><span class="pub-me">Jiwon Choi</span>, Hogyun Kim, Geonmo Yang, Juhui Lee, Younggun Cho</p>
-        
-        <div class="pub-meta">
-          
-          <a href="https://2026.ieee-icra.org/" target="_blank" class="pub-venue">ICRA, 2026</a>
-          
-          
-          <span class="pub-award">Award Finalist</span>
-          
-          <span class="pub-year">2026/06</span>
-          <div class="pub-links">
-            
-            
-            <a href="https://arxiv.org/abs/2603.06205" target="_blank"><i class="fas fa-book-open"></i> arXiv</a>
-            
-            
-            <a href="https://sparolab.github.io/research/kiss_imu/" target="_blank"><i class="fas fa-globe"></i> Project Page</a>
-            
-            
-            <a href="" target="_blank"><i class="fab fa-github"></i> Code</a>
-            
+    <!-- Research (filterable cards) -->
+    <section class="tab-panel" data-panel="research">
+      <h2 class="panel-title">Research</h2>
+
+      <div class="filter-bar">
+        <div class="filter-row">
+          <span class="filter-label">Type</span>
+          <div class="filter-chips" data-filter-group="type">
+            <button class="chip is-active" data-value="all">All</button>
+            <button class="chip" data-value="conference">Conference</button>
+            <button class="chip" data-value="journal">Journal</button>
+          </div>
+        </div>
+        <div class="filter-row">
+          <span class="filter-label">Role</span>
+          <div class="filter-chips" data-filter-group="role">
+            <button class="chip is-active" data-value="all">All</button>
+            <button class="chip" data-value="first">1st Author</button>
+            <button class="chip" data-value="co">Co-author</button>
           </div>
         </div>
       </div>
-      
-      
-      <div class="card card-highlight">
-        <h3>PoLaRIS Dataset: A Maritime Object Detection and Tracking Dataset in Pohang Canal</h3>
-        
-        <p class="pub-tldr">[TL;DR] Object Detection and Tracking Dataset in Maritime</p>
-        
-        <p class="pub-authors"><span class="pub-me">Jiwon Choi</span>*, Dongjin Cho*, Giheyon Lee, Hogyun Kim, Geonmo Yang, Joowan Kim, Younggun Cho</p>
-        
-        <p class="pub-equal">* Equal contribution</p>
-        
-        <div class="pub-meta">
-          
-          <a href="https://2025.ieee-icra.org/" target="_blank" class="pub-venue">ICRA, 2025</a>
-          
-          
-          <span class="pub-year">2025/05</span>
-          <div class="pub-links">
-            
-            <a href="https://ieeexplore.ieee.org/document/11128583" target="_blank"><i class="fas fa-file-alt"></i> Paper</a>
-            
-            
-            <a href="https://arxiv.org/abs/2412.05839" target="_blank"><i class="fas fa-book-open"></i> arXiv</a>
-            
-            
-            <a href="https://sparolab.github.io/research/polaris/" target="_blank"><i class="fas fa-globe"></i> Project Page</a>
-            
-            
-            <a href="https://github.com/sparolab/PoLaRIS" target="_blank"><i class="fab fa-github"></i> Code</a>
-            
-          </div>
-        </div>
-      </div>
-      
-      
-      <div class="card">
-        <h3>SKiD-SLAM: Robust, Lightweight, and Distributed Multi-Robot LiDAR SLAM in Resource-Constrained Field Environments</h3>
-        
-        <p class="pub-tldr">[TL;DR] Multi-Robot and Distributed LiDAR SLAM Framework</p>
-        
-        <p class="pub-authors">Hogyun Kim, <span class="pub-me">Jiwon Choi</span>, Juwon Kim, Geonmo Yang, Dongjin Cho, Hyungtae Lim, Younggun Cho</p>
-        
-        <div class="pub-meta">
-          
-          <a href="https://2025.ieee-icra.org/event/workshop-on-field-robotics/" target="_blank" class="pub-venue">ICRA workshop on Field Robotics (spotlight talk), 2025</a>
-          
-          
-          <span class="pub-year">2025/05</span>
-          <div class="pub-links">
-            
-            
-            <a href="https://arxiv.org/abs/2505.08230" target="_blank"><i class="fas fa-book-open"></i> arXiv</a>
-            
-            
-            <a href="https://sparolab.github.io/research/skid_slam/" target="_blank"><i class="fas fa-globe"></i> Project Page</a>
-            
-            
-            <a href="https://github.com/sparolab/SKiD-SLAM" target="_blank"><i class="fab fa-github"></i> Code</a>
-            
-          </div>
-        </div>
-      </div>
-      
-      
-      <div class="card">
-        <h3>Narrowing your FOV with SOLiD: Spatially Organized and Lightweight Global Descriptor for FOV-constrained LiDAR Place Recognition</h3>
-        
-        <p class="pub-tldr">[TL;DR] Lightweight LiDAR Place Recognition</p>
-        
-        <p class="pub-authors">Hogyun Kim, <span class="pub-me">Jiwon Choi</span>, Taehu Sim, Giseop Kim, Younggun Cho</p>
-        
-        <div class="pub-meta">
-          
-          <a href="https://www.ieee-ras.org/publications/ra-l" target="_blank" class="pub-venue">RA-L</a>
-          
-          
-          <span class="pub-year">2024/08</span>
-          <div class="pub-links">
-            
-            <a href="http://ieeexplore.ieee.org/abstract/document/10629042" target="_blank"><i class="fas fa-file-alt"></i> Paper</a>
-            
-            
-            <a href="https://arxiv.org/abs/2408.07330" target="_blank"><i class="fas fa-book-open"></i> arXiv</a>
-            
-            
-            <a href="https://sparolab.github.io/research/solid/" target="_blank"><i class="fas fa-globe"></i> Project Page</a>
-            
-            
-            <a href="https://github.com/sparolab/SOLiD" target="_blank"><i class="fab fa-github"></i> Code</a>
-            
-          </div>
-        </div>
-      </div>
-      
-      
-      <div class="card card-highlight">
-        <h3>Study on Efficient Multi-floor Navigation Using a Visual Marker and Floor Plan Map</h3>
-        
-        <p class="pub-authors"><span class="pub-me">Jiwon Choi</span>, Taehu Sim, Gihyeon Lee, Jaeyong Lee, Gilhwan Kang, Hogyun Kim, Young Gun Cho</p>
-        
-        <div class="pub-meta">
-          
-          <a href="http://journal.icros.org/" target="_blank" class="pub-venue">ICROS Journal</a>
-          
-          
-          <span class="pub-year">2024/01</span>
-          <div class="pub-links">
-            
-            <a href="https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11654195&language=en_US&hasTopBanner=true" target="_blank"><i class="fas fa-file-alt"></i> Paper</a>
-            
-            
-            
-            
-          </div>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-</section>
 
-<!-- ETC -->
-<section class="section" id="etc">
-  <div class="container">
-    <div class="section-header">
-      <h2>ETC</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="etc-grid">
-      <div class="etc-column">
-        <h3 class="etc-subtitle"><i class="fas fa-chalkboard-teacher"></i> Presentation</h3>
-        <ul class="etc-list">
+      <div class="research-thumb-grid" data-research-grid>
+        
+        
           
-          <li>
-            <span class="etc-title"></span>
-            <span class="etc-detail">, </span>
-          </li>
           
-        </ul>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <article class="research-thumb is-mine"
+             data-role="first"
+             data-type="conference">
+            
+            <a class="research-thumb-cover" href="https://sparolab.github.io/research/kiss_imu/" target="_blank" aria-label="KISS-IMU: Self-supervised Inertial Odometry with Motion-balanced Learning and Uncertainty-aware Inference"></a>
+            
+            <div class="research-thumb-img">
+              
+              <img src="/assets/img/research/kiss_imu.gif" alt="KISS-IMU: Self-supervised Inertial Odometry with Motion-balanced Learning and Uncertainty-aware Inference">
+              
+            </div>
+            <div class="research-thumb-body">
+              <div class="research-thumb-pills">
+                <span class="pill pill--year">2026</span>
+                <span class="pill pill--role pill--role-first">1st Author</span>
+                <span class="pill pill--type pill--type-conference">Conference</span>
+              </div>
+              <h3 class="research-thumb-title">KISS-IMU: Self-supervised Inertial Odometry with Motion-balanced Learning and Uncertainty-aware Inference</h3>
+              
+              <span class="research-thumb-venue">IEEE International Conference on Robotics and Automation</span>
+            </div>
+          </article>
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <article class="research-thumb is-mine"
+             data-role="first"
+             data-type="conference">
+            
+            <a class="research-thumb-cover" href="https://sparolab.github.io/research/polaris/" target="_blank" aria-label="PoLaRIS Dataset: A Maritime Object Detection and Tracking Dataset in Pohang Canal"></a>
+            
+            <div class="research-thumb-img">
+              
+              <img src="/assets/img/research/polaris.gif" alt="PoLaRIS Dataset: A Maritime Object Detection and Tracking Dataset in Pohang Canal">
+              
+            </div>
+            <div class="research-thumb-body">
+              <div class="research-thumb-pills">
+                <span class="pill pill--year">2025</span>
+                <span class="pill pill--role pill--role-first">1st Author</span>
+                <span class="pill pill--type pill--type-conference">Conference</span>
+              </div>
+              <h3 class="research-thumb-title">PoLaRIS Dataset: A Maritime Object Detection and Tracking Dataset in Pohang Canal</h3>
+              
+              <span class="research-thumb-venue">IEEE International Conference on Robotics and Automation</span>
+            </div>
+          </article>
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <article class="research-thumb"
+             data-role="co"
+             data-type="conference">
+            
+            <a class="research-thumb-cover" href="https://sparolab.github.io/research/skid_slam/" target="_blank" aria-label="SKiD-SLAM: Robust, Lightweight, and Distributed Multi-Robot LiDAR SLAM in Resource-Constrained Field Environments"></a>
+            
+            <div class="research-thumb-img">
+              
+              <img src="/assets/img/research/skid_slam.gif" alt="SKiD-SLAM: Robust, Lightweight, and Distributed Multi-Robot LiDAR SLAM in Resource-Constrained Field Environments">
+              
+            </div>
+            <div class="research-thumb-body">
+              <div class="research-thumb-pills">
+                <span class="pill pill--year">2025</span>
+                <span class="pill pill--role pill--role-co">Co-author</span>
+                <span class="pill pill--type pill--type-conference">Conference</span>
+              </div>
+              <h3 class="research-thumb-title">SKiD-SLAM: Robust, Lightweight, and Distributed Multi-Robot LiDAR SLAM in Resource-Constrained Field Environments</h3>
+              
+              <p class="research-thumb-author">
+                1st author —
+                
+                <a href="https://hogyun2.github.io/" target="_blank" rel="noopener">Hogyun Kim</a>
+                
+              </p>
+              
+              <span class="research-thumb-venue">ICRA workshop on Field Robotics (spotlight talk)</span>
+            </div>
+          </article>
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <article class="research-thumb"
+             data-role="co"
+             data-type="journal">
+            
+            <a class="research-thumb-cover" href="https://sparolab.github.io/research/solid/" target="_blank" aria-label="Narrowing your FOV with SOLiD: Spatially Organized and Lightweight Global Descriptor for FOV-constrained LiDAR Place Recognition"></a>
+            
+            <div class="research-thumb-img">
+              
+              <img src="/assets/img/research/solid.png" alt="Narrowing your FOV with SOLiD: Spatially Organized and Lightweight Global Descriptor for FOV-constrained LiDAR Place Recognition">
+              
+            </div>
+            <div class="research-thumb-body">
+              <div class="research-thumb-pills">
+                <span class="pill pill--year">2024</span>
+                <span class="pill pill--role pill--role-co">Co-author</span>
+                <span class="pill pill--type pill--type-journal">Journal</span>
+              </div>
+              <h3 class="research-thumb-title">Narrowing your FOV with SOLiD: Spatially Organized and Lightweight Global Descriptor for FOV-constrained LiDAR Place Recognition</h3>
+              
+              <p class="research-thumb-author">
+                1st author —
+                
+                <a href="https://hogyun2.github.io/" target="_blank" rel="noopener">Hogyun Kim</a>
+                
+              </p>
+              
+              <span class="research-thumb-venue">IEEE Robotics and Automation Letters</span>
+            </div>
+          </article>
+        
+          
+          
+          
+          
       </div>
-      <div class="etc-column">
-        <h3 class="etc-subtitle"><i class="fas fa-users"></i> Academic Service</h3>
-        <ul class="etc-list">
-          
-          <li>
-            <span class="etc-title">Reviewer</span>
-            
-            <span class="etc-detail">RA-L, 2025, 2026</span>
-            
-            <span class="etc-detail">ICRA, 2026</span>
-            
-            <span class="etc-detail">IROS, 2026</span>
-            
-          </li>
-          
-        </ul>
+
+      <div class="empty-state" data-research-empty hidden>
+        <i class="fas fa-mug-hot"></i>
+        <p>Coming Soon..ㅠ</p>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- Contact -->
-<section class="section" id="contact">
-  <div class="container">
-    <div class="section-header">
-      <h2>Contact</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="contact-grid">
-      <a class="card contact-card" href="mailto:jivvon2@gmail.com">
-        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-        <p class="contact-label">Email</p>
-        <span class="contact-value">jivvon2@gmail.com</span>
-      </a>
-      <a class="card contact-card" href="https://www.linkedin.com/in/jivvon2" target="_blank">
-        <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
-        <p class="contact-label">LinkedIn</p>
-        <span class="contact-value">jivvon2</span>
-      </a>
-      <a class="card contact-card" href="https://scholar.google.com/citations?user=wL8VdUMAAAAJ&hl=ko" target="_blank">
-        <div class="contact-icon"><i class="fa-brands fa-google-scholar"></i></div>
-        <p class="contact-label">Google Scholar</p>
-        <span class="contact-value">Profile</span>
-      </a>
-      <a class="card contact-card" href="https://github.com/jivvon1" target="_blank">
-        <div class="contact-icon"><i class="fab fa-github"></i></div>
-        <p class="contact-label">GitHub</p>
-        <span class="contact-value">jivvon1</span>
-      </a>
-    </div>
-  </div>
-</section>
+    <!-- Notes -->
+    <section class="tab-panel" data-panel="notes">
+      <h2 class="panel-title">Notes</h2>
+      <div class="empty-state">
+        <i class="fas fa-pen-nib"></i>
+        <p>Coming soon — notes and study materials will live here.</p>
+      </div>
+    </section>
 
-<footer class="site-footer">
-  <div class="container">
-    <p>&copy; 2026 Jiwon Choi. All rights reserved.</p>
+    <!-- ETC -->
+    <section class="tab-panel" data-panel="etc">
+      <h2 class="panel-title">ETC</h2>
+      <div class="etc-grid">
+        <div class="etc-column">
+          <h3 class="etc-subtitle"><i class="fas fa-chalkboard-teacher"></i> Presentation</h3>
+          <ul class="etc-list">
+            
+            <li>
+              <span class="etc-title"></span>
+              <span class="etc-detail">, </span>
+            </li>
+            
+          </ul>
+        </div>
+        <div class="etc-column">
+          <h3 class="etc-subtitle"><i class="fas fa-users"></i> Academic Service</h3>
+          <ul class="etc-list">
+            
+            <li>
+              <span class="etc-title">Reviewer</span>
+              
+              <span class="etc-detail">RA-L, 2025, 2026</span>
+              
+              <span class="etc-detail">ICRA, 2026</span>
+              
+              <span class="etc-detail">IROS, 2026</span>
+              
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
   </div>
-</footer>
+</div>
+
+<script>
+  (function () {
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.tab-panel');
+    function activate(name) {
+      tabs.forEach(t => t.classList.toggle('is-active', t.dataset.tab === name));
+      panels.forEach(p => p.classList.toggle('is-active', p.dataset.panel === name));
+      if (history.replaceState) history.replaceState(null, '', '#' + name);
+    }
+    tabs.forEach(t => t.addEventListener('click', () => activate(t.dataset.tab)));
+    document.querySelectorAll('[data-goto]').forEach(b =>
+      b.addEventListener('click', () => activate(b.dataset.goto))
+    );
+    const hash = (location.hash || '').replace('#', '');
+    if (hash && document.querySelector('.tab[data-tab="' + hash + '"]')) activate(hash);
+  })();
+
+  // Research filters
+  (function () {
+    const grid = document.querySelector('[data-research-grid]');
+    if (!grid) return;
+    const empty = document.querySelector('[data-research-empty]');
+    const state = { type: 'all', role: 'all' };
+
+    function apply() {
+      const cards = grid.querySelectorAll('.research-thumb');
+      let visible = 0;
+      cards.forEach(card => {
+        const okType = state.type === 'all' || card.dataset.type === state.type;
+        const okRole = state.role === 'all' || card.dataset.role === state.role;
+        const show = okType && okRole;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      if (empty) empty.hidden = visible > 0;
+    }
+
+    document.querySelectorAll('.filter-chips').forEach(group => {
+      const key = group.dataset.filterGroup;
+      group.querySelectorAll('.chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          group.querySelectorAll('.chip').forEach(c => c.classList.remove('is-active'));
+          chip.classList.add('is-active');
+          state[key] = chip.dataset.value;
+          apply();
+        });
+      });
+    });
+  })();
+</script>
 
   </main>
   <script src="/assets/js/main.js"></script>
