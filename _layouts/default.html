@@ -15,6 +15,14 @@
   <link rel="manifest" href="{{ '/assets/img/favicons/site.webmanifest' | relative_url }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <script>
+    (function () {
+      var t = localStorage.getItem('theme');
+      if (t === 'light' || t === 'dark') {
+        document.documentElement.setAttribute('data-theme', t);
+      }
+    })();
+  </script>
 </head>
 <body>
   {% include nav.html %}

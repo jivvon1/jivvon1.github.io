@@ -32,6 +32,14 @@
   <link rel="manifest" href="/assets/img/favicons/site.webmanifest">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="/assets/css/main.css">
+  <script>
+    (function () {
+      var t = localStorage.getItem('theme');
+      if (t === 'light' || t === 'dark') {
+        document.documentElement.setAttribute('data-theme', t);
+      }
+    })();
+  </script>
 </head>
 <body>
   <nav class="topnav-v2">
@@ -40,6 +48,10 @@
       <span class="brand-title">Jiwon Choi</span>
       <span class="brand-sub">Robust State Estimation · Learned Inertial Odometry</span>
     </a>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
+      <i class="fas fa-sun theme-icon theme-icon--sun"></i>
+      <i class="fas fa-moon theme-icon theme-icon--moon"></i>
+    </button>
   </div>
 </nav>
 
@@ -622,7 +634,7 @@
             
             <li data-idx="1">
               <div class="pub-textlist-title">거리 기반 Sampling Algorithm을 이용한 LiDAR의 객체 인식 성능 개선에 관한 연구</div>
-              <div class="pub-textlist-authors"><span class="pub-me">Jiwon Choi</span>, Younggun Cho</div>
+              <div class="pub-textlist-authors">Dongyoung Kim, Hanbin Song, <span class="pub-me">Jiwon Choi</span>, Jaewoon Lee, Jiung Im, Jonghun Won</div>
               <div class="pub-textlist-meta">
                 
                 <a href="" target="_blank"><em>Korea Institute of ITS Conference</em></a>
@@ -860,7 +872,7 @@
 
       <div class="empty-state" data-research-empty hidden>
         <i class="fas fa-mug-hot"></i>
-        <p>Coming Soon..ㅠ</p>
+        <p>Coming Soon..🥲</p>
       </div>
     </section>
 

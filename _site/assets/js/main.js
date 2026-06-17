@@ -1,35 +1,26 @@
-// Nav scroll effect
-const nav = document.getElementById('topnav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 20);
-});
-
-// Mobile menu toggle
-const toggle = document.getElementById('navToggle');
-const links = document.querySelector('.nav-links');
-toggle.addEventListener('click', () => {
-  links.classList.toggle('open');
-});
-
-// Close mobile menu on link click
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => links.classList.remove('open'));
-});
-
-// Scroll reveal animation
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+// Theme toggle (light/dark)
+(function () {
+  function init() {
+    var root = document.documentElement;
+    var stored = localStorage.getItem('theme');
+    if (stored === 'light' || stored === 'dark') {
+      root.setAttribute('data-theme', stored);
+    }
+    var btn = document.getElementById('themeToggle');
+    console.log('[theme] init', { btn: !!btn, stored: stored, current: root.getAttribute('data-theme') });
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var cur = root.getAttribute('data-theme')
+        || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var next = cur === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      console.log('[theme] toggle', cur, '->', next);
     });
-  },
-  { threshold: 0.1 }
-);
-
-document.querySelectorAll('.card, .section-header, .hero-text, .hero-image').forEach(el => {
-  el.classList.add('reveal');
-  observer.observe(el);
-});
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

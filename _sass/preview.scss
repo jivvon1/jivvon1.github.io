@@ -14,6 +14,7 @@
 }
 
 .topnav-v2-inner {
+  position: relative;
   max-width: 1280px;
   margin: 0 auto;
   padding: 14px 32px;
@@ -23,6 +24,76 @@
 
   @media (max-width: 768px) {
     padding: 12px 20px;
+  }
+}
+
+.theme-toggle {
+  position: absolute;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: border-color $transition-fast, color $transition-fast, background $transition-fast;
+
+  @media (max-width: 768px) {
+    right: 20px;
+    width: 36px;
+    height: 36px;
+  }
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .theme-icon {
+    position: absolute;
+    font-size: 0.95rem;
+    transition: transform 0.4s cubic-bezier(0.5, 1.5, 0.5, 1), opacity 0.3s;
+  }
+
+  .theme-icon--sun {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+  .theme-icon--moon {
+    transform: rotate(-90deg) scale(0.4);
+    opacity: 0;
+  }
+}
+
+:root[data-theme="dark"] .theme-toggle {
+  .theme-icon--sun {
+    transform: rotate(90deg) scale(0.4);
+    opacity: 0;
+  }
+  .theme-icon--moon {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
+// Also honor system dark when no explicit choice
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .theme-toggle {
+    .theme-icon--sun {
+      transform: rotate(90deg) scale(0.4);
+      opacity: 0;
+    }
+    .theme-icon--moon {
+      transform: rotate(0) scale(1);
+      opacity: 1;
+    }
   }
 }
 
