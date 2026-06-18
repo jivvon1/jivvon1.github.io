@@ -1,4 +1,14 @@
 - date: "2026.06"
+  text: "<strong>RadLoc</strong> accepted to IROS 2026."
+  role: "Co-author"
+  link: ""
+
+- date: "2026.06"
+  text: "<strong>Commerge</strong> accepted to IJRR."
+  role: "Co-author"
+  link: ""
+
+- date: "2026.06"
   text: "Placed <strong>2nd</strong> in the SLAM category of the <strong>Hilti-Trimble SLAM Challenge</strong> at ICRA 2026."
   link: "https://hilti-trimble-challenge.com/"
 

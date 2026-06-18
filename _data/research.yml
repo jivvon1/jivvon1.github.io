@@ -1,3 +1,27 @@
+- year: 2026/10
+  title: "RadLoc: Radar-based 3-DoF Global Localization via Fast, Robust, and Lightweight Spatial Descriptor Across Diverse Environmental Scenarios"
+  conference: "IROS, 2026"
+  conference_link: "https://2026.ieee-iros.org/"
+  authors: "Hogyun Kim, Jiwon Choi, Jungwoo Lee, Younggun Cho"
+  github: ""
+  paper_link: ""
+  arxiv_link: ""
+  project_link: ""
+  tldr: ""
+  thumbnail: "/assets/img/research/radloc.gif"
+
+- year: 2026/06
+  title: "Commerge: Communication-Efficient, Robust and Fast LiDAR Map Merging Framework for Multi-robot Coordination in Resource-constrained Scenarios"
+  conference: "IJRR"
+  conference_link: "https://journals.sagepub.com/home/IJR"
+  authors: "Hogyun Kim, Jiwon Choi, Juwon Kim, Geonmo Yang, Seokhwan Jeong, Hyungtae Lim, Younggun Cho"
+  github: ""
+  paper_link: ""
+  arxiv_link: ""
+  project_link: ""
+  tldr: ""
+  thumbnail: "/assets/img/research/commerge.jpg"
+
 - year: 2026/06
   title: "KISS-IMU: Self-supervised Inertial Odometry with Motion-balanced Learning and Uncertainty-aware Inference"
   conference: "ICRA, 2026"
@@ -35,6 +59,17 @@
   tldr: "Object Detection and Tracking Dataset in Maritime"
   thumbnail: "/assets/img/research/polaris.gif"
 
+- year: 2025/04
+  title: "IML-SLAM: 주행 차량 모션을 고려한 LiDAR-Inertial SLAM 시스템"
+  conference: "Korea Institute of ITS Conference"
+  conference_link: ""
+  authors: "Jiwon Choi, Hogyun Kim, Geonmo Yang, Younggun Cho"
+  paper_link: ""
+  arxiv_link: ""
+  project_link: ""
+  tldr: ""
+  award: "Excellent Paper Award"
+
 - year: 2024/08
   title: "Narrowing your FOV with SOLiD: Spatially Organized and Lightweight Global Descriptor for FOV-constrained LiDAR Place Recognition"
   conference: "RA-L"
@@ -47,44 +82,22 @@
   tldr: "Lightweight LiDAR Place Recognition"
   thumbnail: "/assets/img/research/solid.png"
 
-- year: 2024/01
-  title: "Study on Efficient Multi-floor Navigation Using a Visual Marker and Floor Plan Map"
-  conference: "ICROS Journal"
-  conference_link: "http://journal.icros.org/"
-  authors: "Jiwon Choi, Taehu Sim, Gihyeon Lee, Jaeyong Lee, Gilhwan Kang, Hogyun Kim, Young Gun Cho"
-  paper_link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11654195&language=en_US&hasTopBanner=true"
-  arxiv_link: ""
-  project_link: ""
-  tldr: ""
-
-- year: 2025/04
-  title: "IML-SLAM: 주행 차량 모션을 고려한 LiDAR-Inertial SLAM 시스템"
-  conference: "Korea Institute of ITS Conference"
-  conference_link: ""
-  authors: "Jiwon Choi, Hogyun Kim, Geonmo Yang, Younggun Cho"
-  paper_link: ""
-  arxiv_link: ""
-  project_link: ""
-  tldr: ""
-  award: "Excellent Paper Award"
-
-- year: 2022/06
-  title: "거리 기반 Sampling Algorithm을 이용한 LiDAR의 객체 인식 성능 개선에 관한 연구"
-  conference: "Korea Institute of ITS Conference"
-  conference_link: ""
-  authors: "Dongyoung Kim, Hanbin Song, Jiwon Choi, Jaewoon Lee, Jiung Im, Jonghun Won"
-  paper_link: ""
-  arxiv_link: ""
-  project_link: ""
-  tldr: ""
-  award: "Excellent Paper Award"
-
 - year: 2024/06
   title: "가벼운 전역 설명자로 이루어진 위치 인식 기술을 이용한 강인한 슬램 기술"
   conference: "ICROS Annual Conference"
   conference_link: ""
   authors: "Jiwon Choi, Hogyun Kim, Younggun Cho"
   paper_link: ""
+  arxiv_link: ""
+  project_link: ""
+  tldr: ""
+
+- year: 2024/01
+  title: "Study on Efficient Multi-floor Navigation Using a Visual Marker and Floor Plan Map"
+  conference: "ICROS Journal"
+  conference_link: "http://journal.icros.org/"
+  authors: "Jiwon Choi, Taehu Sim, Gihyeon Lee, Jaeyong Lee, Gilhwan Kang, Hogyun Kim, Young Gun Cho"
+  paper_link: "https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11654195&language=en_US&hasTopBanner=true"
   arxiv_link: ""
   project_link: ""
   tldr: ""
@@ -98,3 +111,14 @@
   arxiv_link: ""
   project_link: ""
   tldr: ""
+
+- year: 2022/06
+  title: "거리 기반 Sampling Algorithm을 이용한 LiDAR의 객체 인식 성능 개선에 관한 연구"
+  conference: "Korea Institute of ITS Conference"
+  conference_link: ""
+  authors: "Dongyoung Kim, Hanbin Song, Jiwon Choi, Jaewoon Lee, Jiung Im, Jonghun Won"
+  paper_link: ""
+  arxiv_link: ""
+  project_link: ""
+  tldr: ""
+  award: "Excellent Paper Award"

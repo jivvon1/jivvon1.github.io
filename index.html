@@ -89,10 +89,10 @@ title: Jiwon Choi
       <div class="home-section is-latest">
         <div class="home-section-header">
           <h2 class="panel-title">Latest Researches</h2>
-          <button class="see-more" data-goto="publications">See all <i class="fas fa-arrow-right"></i></button>
+          <button class="see-more" data-goto="research">See all <i class="fas fa-arrow-right"></i></button>
         </div>
         <div class="research-thumb-grid">
-          {% assign sorted_pubs = site.data.research | sort: "year" | reverse %}
+          {% assign sorted_pubs = site.data.research %}
           {% assign first_author_count = 0 %}
           {% for pub in sorted_pubs %}
             {% assign first_author = pub.authors | split: "," | first %}
@@ -102,10 +102,21 @@ title: Jiwon Choi
               {% assign pub_year = pub.year | slice: 0, 4 %}
               {% assign venue_short = pub.conference | split: "," | first | strip %}
               {% assign venue_full = venue_short %}
+              {% assign venue_url = "" %}
               {% if venue_short == "ICRA" %}{% assign venue_full = "IEEE International Conference on Robotics and Automation" %}{% endif %}
-              {% if venue_short == "RA-L" %}{% assign venue_full = "IEEE Robotics and Automation Letters" %}{% endif %}
+              {% if venue_short == "RA-L" %}{% assign venue_full = "IEEE Robotics and Automation Letters" %}{% assign venue_url = "https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=7083369" %}{% endif %}
+              {% if venue_short == "IROS" %}{% assign venue_full = "IEEE/RSJ International Conference on Intelligent Robots and Systems" %}{% endif %}
+              {% if venue_short == "IJRR" %}{% assign venue_full = "International Journal of Robotics Research" %}{% assign venue_url = "https://journals.sagepub.com/home/IJR" %}{% endif %}
+              {% if venue_short contains "ICRA workshop" %}
+                {% assign venue_short = "ICRA Workshop" %}
+                {% assign venue_full = "ICRA Workshop on Field Robotics" %}
+                {% assign venue_url = "https://2025.ieee-icra.org/event/workshop-on-field-robotics/" %}
+              {% endif %}
+              {% if venue_short == "ICRA" and pub_year == "2026" %}{% assign venue_url = "https://2026.ieee-icra.org/" %}{% endif %}
+              {% if venue_short == "ICRA" and pub_year == "2025" %}{% assign venue_url = "https://2025.ieee-icra.org/" %}{% endif %}
+              {% if venue_short == "IROS" and pub_year == "2026" %}{% assign venue_url = "https://2026.ieee-iros.org/" %}{% endif %}
               {% assign ptype_h = "conference" %}
-              {% if pub.conference contains 'Journal' or pub.conference contains 'RA-L' %}{% assign ptype_h = "journal" %}{% endif %}
+              {% if pub.conference contains 'Journal' or pub.conference contains 'RA-L' or pub.conference contains 'IJRR' %}{% assign ptype_h = "journal" %}{% endif %}
               {% assign type_label = "Conference" %}
               {% if ptype_h == "journal" %}{% assign type_label = "Journal" %}{% endif %}
               <article class="research-thumb is-mine">
@@ -126,7 +137,14 @@ title: Jiwon Choi
                     <span class="pill pill--type pill--type-{{ ptype_h }}">{{ type_label }}</span>
                   </div>
                   <h3 class="research-thumb-title">{{ pub.title }}</h3>
-                  <span class="research-thumb-venue">{{ venue_full }}</span>
+                  <span class="research-thumb-venue">
+                    <span class="venue-full">{{ venue_full }}</span>
+                    {% if venue_url != "" %}
+                    <a href="{{ venue_url }}" target="_blank" rel="noopener" class="venue-short">({{ venue_short }} {{ pub_year }})</a>
+                    {% else %}
+                    <span class="venue-short">({{ venue_short }} {{ pub_year }})</span>
+                    {% endif %}
+                  </span>
                 </div>
               </article>
             {% endif %}
@@ -159,52 +177,54 @@ title: Jiwon Choi
       {% endif %}
     </section>
 
-    <!-- Publications (text list, grouped by year) -->
+    <!-- Publications (text list, grouped by year, paginated) -->
     <section class="tab-panel" data-panel="publications">
       <h2 class="panel-title">Publications</h2>
 
-      {% assign sorted_pubs = site.data.research | sort: "year" | reverse %}
-      {% assign grouped = sorted_pubs | group_by_exp: "p", "p.year | slice: 0, 4" %}
-      {% assign sorted_groups = grouped | sort: "name" | reverse %}
+      <ol class="pub-textlist" data-pub-list>
+        {% assign idx = 0 %}
+        {% for pub in site.data.research %}
+          {% assign idx = idx | plus: 1 %}
+          {% assign pub_y = pub.year | slice: 0, 4 %}
+          <li data-idx="{{ idx }}" data-year="{{ pub_y }}">
+            <div class="pub-textlist-title">{{ pub.title }}</div>
+            <div class="pub-textlist-authors">{{ pub.authors | replace: "Jiwon Choi", '<span class="pub-me">Jiwon Choi</span>' }}</div>
+            <div class="pub-textlist-meta">
+              {% if pub.conference_link %}
+              <a href="{{ pub.conference_link }}" target="_blank"><em>{{ pub.conference }}</em></a>
+              {% else %}
+              <em>{{ pub.conference }}</em>
+              {% endif %}
+              , {{ pub.year }}
+              {% if pub.award %} · <span class="pub-textlist-award">{{ pub.award }}</span>{% endif %}
+            </div>
+            <div class="pub-textlist-links">
+              {% if pub.paper_link != "" %}
+              <a href="{{ pub.paper_link }}" target="_blank"><i class="fas fa-file-alt"></i> Paper</a>
+              {% endif %}
+              {% if pub.arxiv_link != "" %}
+              <a href="{{ pub.arxiv_link }}" target="_blank"><i class="fas fa-book-open"></i> arXiv</a>
+              {% endif %}
+              {% if pub.project_link != "" %}
+              <a href="{{ pub.project_link }}" target="_blank"><i class="fas fa-globe"></i> Project</a>
+              {% endif %}
+              {% if pub.github %}
+              <a href="{{ pub.github }}" target="_blank"><i class="fab fa-github"></i> Code</a>
+              {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ol>
 
-      {% for group in sorted_groups %}
-      <div class="pub-year-group">
-        <h3 class="pub-year-heading">{{ group.name }}</h3>
-        <ol class="pub-textlist">
-          {% assign idx = 0 %}
-          {% for pub in group.items %}
-            {% assign idx = idx | plus: 1 %}
-            <li data-idx="{{ idx }}">
-              <div class="pub-textlist-title">{{ pub.title }}</div>
-              <div class="pub-textlist-authors">{{ pub.authors | replace: "Jiwon Choi", '<span class="pub-me">Jiwon Choi</span>' }}</div>
-              <div class="pub-textlist-meta">
-                {% if pub.conference_link %}
-                <a href="{{ pub.conference_link }}" target="_blank"><em>{{ pub.conference }}</em></a>
-                {% else %}
-                <em>{{ pub.conference }}</em>
-                {% endif %}
-                , {{ pub.year }}
-                {% if pub.award %} · <span class="pub-textlist-award">{{ pub.award }}</span>{% endif %}
-              </div>
-              <div class="pub-textlist-links">
-                {% if pub.paper_link != "" %}
-                <a href="{{ pub.paper_link }}" target="_blank"><i class="fas fa-file-alt"></i> Paper</a>
-                {% endif %}
-                {% if pub.arxiv_link != "" %}
-                <a href="{{ pub.arxiv_link }}" target="_blank"><i class="fas fa-book-open"></i> arXiv</a>
-                {% endif %}
-                {% if pub.project_link != "" %}
-                <a href="{{ pub.project_link }}" target="_blank"><i class="fas fa-globe"></i> Project</a>
-                {% endif %}
-                {% if pub.github %}
-                <a href="{{ pub.github }}" target="_blank"><i class="fab fa-github"></i> Code</a>
-                {% endif %}
-              </div>
-            </li>
-          {% endfor %}
-        </ol>
-      </div>
-      {% endfor %}
+      <nav class="research-pagination" data-pub-pagination hidden aria-label="Pagination">
+        <button class="pager-btn" data-pub-prev type="button" aria-label="Previous page">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <span class="pager-info" data-pub-info>1 / 1</span>
+        <button class="pager-btn" data-pub-next type="button" aria-label="Next page">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </nav>
     </section>
 
     <!-- Research (filterable cards) -->
@@ -231,20 +251,30 @@ title: Jiwon Choi
       </div>
 
       <div class="research-thumb-grid" data-research-grid>
-        {% assign sorted_pubs = site.data.research | sort: "year" | reverse %}
-        {% for pub in sorted_pubs %}
+        {% for pub in site.data.research %}
           {% if pub.conference contains 'ICROS' or pub.conference contains 'ITS' %}{% continue %}{% endif %}
           {% assign first_author = pub.authors | split: "," | first %}
           {% assign role = "co" %}
           {% if first_author contains 'Jiwon Choi' %}{% assign role = "first" %}{% endif %}
           {% assign ptype = "conference" %}
-          {% if pub.conference contains 'Journal' or pub.conference contains 'RA-L' %}{% assign ptype = "journal" %}{% endif %}
+          {% if pub.conference contains 'Journal' or pub.conference contains 'RA-L' or pub.conference contains 'IJRR' %}{% assign ptype = "journal" %}{% endif %}
           {% assign card_link = pub.project_link | default: pub.paper_link | default: pub.arxiv_link %}
           {% assign pub_year = pub.year | slice: 0, 4 %}
           {% assign venue_short = pub.conference | split: "," | first | strip %}
           {% assign venue_full = venue_short %}
+          {% assign venue_url = "" %}
           {% if venue_short == "ICRA" %}{% assign venue_full = "IEEE International Conference on Robotics and Automation" %}{% endif %}
-          {% if venue_short == "RA-L" %}{% assign venue_full = "IEEE Robotics and Automation Letters" %}{% endif %}
+          {% if venue_short == "RA-L" %}{% assign venue_full = "IEEE Robotics and Automation Letters" %}{% assign venue_url = "https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=7083369" %}{% endif %}
+          {% if venue_short == "IROS" %}{% assign venue_full = "IEEE/RSJ International Conference on Intelligent Robots and Systems" %}{% endif %}
+          {% if venue_short == "IJRR" %}{% assign venue_full = "International Journal of Robotics Research" %}{% assign venue_url = "https://journals.sagepub.com/home/IJR" %}{% endif %}
+          {% if venue_short contains "ICRA workshop" %}
+            {% assign venue_short = "ICRA Workshop" %}
+            {% assign venue_full = "ICRA Workshop on Field Robotics" %}
+            {% assign venue_url = "https://2025.ieee-icra.org/event/workshop-on-field-robotics/" %}
+          {% endif %}
+          {% if venue_short == "ICRA" and pub_year == "2026" %}{% assign venue_url = "https://2026.ieee-icra.org/" %}{% endif %}
+          {% if venue_short == "ICRA" and pub_year == "2025" %}{% assign venue_url = "https://2025.ieee-icra.org/" %}{% endif %}
+          {% if venue_short == "IROS" and pub_year == "2026" %}{% assign venue_url = "https://2026.ieee-iros.org/" %}{% endif %}
           {% assign role_label = "Co-author" %}
           {% if role == "first" %}{% assign role_label = "1st Author" %}{% endif %}
           {% assign type_label = "Conference" %}
@@ -282,7 +312,14 @@ title: Jiwon Choi
                 {% endif %}
               </p>
               {% endif %}
-              <span class="research-thumb-venue">{{ venue_full }}</span>
+              <span class="research-thumb-venue">
+                <span class="venue-full">{{ venue_full }}</span>
+                {% if venue_url != "" %}
+                <a href="{{ venue_url }}" target="_blank" rel="noopener" class="venue-short">({{ venue_short }} {{ pub_year }})</a>
+                {% else %}
+                <span class="venue-short">({{ venue_short }} {{ pub_year }})</span>
+                {% endif %}
+              </span>
             </div>
           </article>
         {% endfor %}
@@ -292,6 +329,16 @@ title: Jiwon Choi
         <i class="fas fa-mug-hot"></i>
         <p>Coming Soon..🥲</p>
       </div>
+
+      <nav class="research-pagination" data-research-pagination hidden aria-label="Pagination">
+        <button class="pager-btn" data-page-prev type="button" aria-label="Previous page">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <span class="pager-info" data-page-info>1 / 1</span>
+        <button class="pager-btn" data-page-next type="button" aria-label="Next page">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </nav>
     </section>
 
     <!-- Notes -->
@@ -355,24 +402,42 @@ title: Jiwon Choi
     if (hash && document.querySelector('.tab[data-tab="' + hash + '"]')) activate(hash);
   })();
 
-  // Research filters
+  // Research filters + pagination (4 per page)
   (function () {
     const grid = document.querySelector('[data-research-grid]');
     if (!grid) return;
     const empty = document.querySelector('[data-research-empty]');
-    const state = { type: 'all', role: 'all' };
+    const pager = document.querySelector('[data-research-pagination]');
+    const info = document.querySelector('[data-page-info]');
+    const prevBtn = document.querySelector('[data-page-prev]');
+    const nextBtn = document.querySelector('[data-page-next]');
+    const PAGE_SIZE = 4;
+    const state = { type: 'all', role: 'all', page: 1 };
+
+    function matchFilters(card) {
+      const okType = state.type === 'all' || card.dataset.type === state.type;
+      const okRole = state.role === 'all' || card.dataset.role === state.role;
+      return okType && okRole;
+    }
 
     function apply() {
-      const cards = grid.querySelectorAll('.research-thumb');
-      let visible = 0;
-      cards.forEach(card => {
-        const okType = state.type === 'all' || card.dataset.type === state.type;
-        const okRole = state.role === 'all' || card.dataset.role === state.role;
-        const show = okType && okRole;
-        card.style.display = show ? '' : 'none';
-        if (show) visible++;
-      });
-      if (empty) empty.hidden = visible > 0;
+      const cards = Array.from(grid.querySelectorAll('.research-thumb'));
+      const matched = cards.filter(matchFilters);
+      const totalPages = Math.max(1, Math.ceil(matched.length / PAGE_SIZE));
+      if (state.page > totalPages) state.page = totalPages;
+      const start = (state.page - 1) * PAGE_SIZE;
+      const end = start + PAGE_SIZE;
+
+      cards.forEach(c => { c.style.display = 'none'; });
+      matched.slice(start, end).forEach(c => { c.style.display = ''; });
+
+      if (empty) empty.hidden = matched.length > 0;
+      if (pager) {
+        pager.hidden = matched.length <= PAGE_SIZE;
+        if (info) info.textContent = state.page + ' / ' + totalPages;
+        if (prevBtn) prevBtn.disabled = state.page <= 1;
+        if (nextBtn) nextBtn.disabled = state.page >= totalPages;
+      }
     }
 
     document.querySelectorAll('.filter-chips').forEach(group => {
@@ -382,9 +447,62 @@ title: Jiwon Choi
           group.querySelectorAll('.chip').forEach(c => c.classList.remove('is-active'));
           chip.classList.add('is-active');
           state[key] = chip.dataset.value;
+          state.page = 1;
           apply();
         });
       });
     });
+
+    if (prevBtn) prevBtn.addEventListener('click', () => { state.page -= 1; apply(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { state.page += 1; apply(); });
+
+    apply();
+  })();
+
+  // Publications pagination (6 per page, group headings injected per page)
+  (function () {
+    const list = document.querySelector('[data-pub-list]');
+    if (!list) return;
+    const pager = document.querySelector('[data-pub-pagination]');
+    const info = document.querySelector('[data-pub-info]');
+    const prevBtn = document.querySelector('[data-pub-prev]');
+    const nextBtn = document.querySelector('[data-pub-next]');
+    const PAGE_SIZE = 6;
+    const items = Array.from(list.querySelectorAll('li'));
+    let page = 1;
+    const totalPages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+
+    function render() {
+      list.querySelectorAll('.pub-year-heading-row').forEach(h => h.remove());
+      items.forEach(li => { li.style.display = 'none'; });
+
+      const start = (page - 1) * PAGE_SIZE;
+      const end = Math.min(start + PAGE_SIZE, items.length);
+      let lastYear = null;
+      for (let i = start; i < end; i++) {
+        const li = items[i];
+        const y = li.dataset.year;
+        if (y !== lastYear) {
+          const h = document.createElement('li');
+          h.className = 'pub-year-heading-row';
+          h.innerHTML = '<h3 class="pub-year-heading">' + y + '</h3>';
+          list.insertBefore(h, li);
+          lastYear = y;
+        }
+        li.style.display = '';
+      }
+
+      if (pager) {
+        pager.hidden = items.length <= PAGE_SIZE;
+        if (info) info.textContent = page + ' / ' + totalPages;
+        if (prevBtn) prevBtn.disabled = page <= 1;
+        if (nextBtn) nextBtn.disabled = page >= totalPages;
+      }
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => { page -= 1; render(); window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { page += 1; render(); window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); });
+
+    render();
   })();
 </script>

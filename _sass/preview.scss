@@ -655,10 +655,32 @@
 
 .research-thumb-venue {
   font-size: 0.74rem;
-  font-style: italic;
   color: var(--text-muted);
   margin-top: auto;
   padding-top: 8px;
+  line-height: 1.4;
+
+  .venue-full {
+    font-style: italic;
+  }
+
+  .venue-short {
+    position: relative;
+    z-index: 2;
+    margin-left: 4px;
+    font-weight: 600;
+    font-style: normal;
+    color: var(--text-secondary);
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 1px dashed transparent;
+    transition: border-bottom-color $transition-fast, color $transition-fast;
+
+    &:hover {
+      color: var(--text-primary);
+      border-bottom-color: var(--text-secondary);
+    }
+  }
 }
 
 // ── Publications text list ──
@@ -676,6 +698,14 @@
   padding-bottom: 8px;
   border-bottom: 1px dashed var(--border);
   letter-spacing: 0.02em;
+}
+
+.pub-year-heading-row {
+  padding: 0 !important;
+  margin-top: 18px;
+
+  &::before { display: none !important; }
+  &:first-child { margin-top: 0; }
 }
 
 .pub-textlist {
@@ -819,6 +849,48 @@
     background: rgba(var(--accent-rgb), 0.08);
     font-weight: 600;
   }
+}
+
+// ── Research pagination ──
+.research-pagination {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.pager-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color $transition-fast, color $transition-fast, opacity $transition-fast;
+
+  &:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+.pager-info {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  min-width: 56px;
+  text-align: center;
 }
 
 // Empty-state for Notes
