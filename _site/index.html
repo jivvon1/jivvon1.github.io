@@ -307,7 +307,7 @@
     <section class="tab-panel" data-panel="news">
       <h2 class="panel-title">News</h2>
       
-      <ul class="news-list">
+      <ul class="news-list" data-news-list>
         
         <li>
           <span class="news-date">2026.06</span>
@@ -456,6 +456,16 @@
         </li>
         
       </ul>
+
+      <nav class="research-pagination" data-news-pagination hidden aria-label="Pagination">
+        <button class="pager-btn" data-news-prev type="button" aria-label="Previous page">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <span class="pager-info" data-news-info>1 / 1</span>
+        <button class="pager-btn" data-news-next type="button" aria-label="Next page">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </nav>
       
     </section>
 
@@ -1284,6 +1294,39 @@
         li.style.display = '';
       }
 
+      if (pager) {
+        pager.hidden = items.length <= PAGE_SIZE;
+        if (info) info.textContent = page + ' / ' + totalPages;
+        if (prevBtn) prevBtn.disabled = page <= 1;
+        if (nextBtn) nextBtn.disabled = page >= totalPages;
+      }
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => { page -= 1; render(); window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { page += 1; render(); window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); });
+
+    render();
+  })();
+
+  // News pagination (15 per page)
+  (function () {
+    const list = document.querySelector('[data-news-list]');
+    if (!list) return;
+    const pager = document.querySelector('[data-news-pagination]');
+    const info = document.querySelector('[data-news-info]');
+    const prevBtn = document.querySelector('[data-news-prev]');
+    const nextBtn = document.querySelector('[data-news-next]');
+    const PAGE_SIZE = 15;
+    const items = Array.from(list.children);
+    let page = 1;
+    const totalPages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+
+    function render() {
+      const start = (page - 1) * PAGE_SIZE;
+      const end = start + PAGE_SIZE;
+      items.forEach((li, i) => {
+        li.style.display = (i >= start && i < end) ? '' : 'none';
+      });
       if (pager) {
         pager.hidden = items.length <= PAGE_SIZE;
         if (info) info.textContent = page + ' / ' + totalPages;
