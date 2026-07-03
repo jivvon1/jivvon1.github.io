@@ -137,6 +137,9 @@ title: Jiwon Choi
                     <span class="pill pill--type pill--type-{{ ptype_h }}">{{ type_label }}</span>
                   </div>
                   <h3 class="research-thumb-title">{{ pub.title }}</h3>
+                  {% if pub.award %}
+                  <p class="research-thumb-award"><i class="fas fa-award"></i> {{ pub.award }}</p>
+                  {% endif %}
                   <span class="research-thumb-venue">
                     <span class="venue-full">{{ venue_full }}</span>
                     {% if venue_url != "" %}
@@ -321,6 +324,8 @@ title: Jiwon Choi
                 <span>{{ first_author_name }}</span>
                 {% endif %}
               </p>
+              {% elsif pub.award %}
+              <p class="research-thumb-award"><i class="fas fa-award"></i> {{ pub.award }}</p>
               {% endif %}
               <span class="research-thumb-venue">
                 <span class="venue-full">{{ venue_full }}</span>

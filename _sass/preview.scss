@@ -530,6 +530,18 @@
   pointer-events: auto;
 }
 
+.research-thumb-award {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  i { font-size: 0.78rem; }
+}
+
 .research-thumb-author {
   font-size: 0.82rem;
   color: var(--text-secondary);
@@ -631,6 +643,18 @@
     color: var(--text-secondary);
     background: var(--bg-secondary);
     border: 1px dashed var(--border-hover);
+  }
+
+  &--award {
+    color: var(--accent);
+    background: rgba(var(--accent-rgb), 0.14);
+    border: 1px solid rgba(var(--accent-rgb), 0.4);
+    font-weight: 700;
+
+    i {
+      margin-right: 4px;
+      font-size: 0.7rem;
+    }
   }
 }
 
