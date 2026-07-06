@@ -218,12 +218,35 @@ title: Jiwon Choi
     <section class="tab-panel" data-panel="publications">
       <h2 class="panel-title">Publications</h2>
 
+      <div class="filter-bar">
+        <div class="filter-row">
+          <span class="filter-label">Region</span>
+          <div class="filter-chips" data-filter-group="region">
+            <button class="chip is-active" data-value="all">All</button>
+            <button class="chip" data-value="international">International</button>
+            <button class="chip" data-value="domestic">Domestic</button>
+          </div>
+        </div>
+        <div class="filter-row">
+          <span class="filter-label">Type</span>
+          <div class="filter-chips" data-filter-group="type">
+            <button class="chip is-active" data-value="all">All</button>
+            <button class="chip" data-value="conference">Conference</button>
+            <button class="chip" data-value="journal">Journal</button>
+          </div>
+        </div>
+      </div>
+
       <ol class="pub-textlist" data-pub-list>
         {% assign idx = 0 %}
         {% for pub in site.data.research %}
           {% assign idx = idx | plus: 1 %}
           {% assign pub_y = pub.year | slice: 0, 4 %}
-          <li data-idx="{{ idx }}" data-year="{{ pub_y }}">
+          {% assign pub_type = "conference" %}
+          {% if pub.conference contains 'Journal' or pub.conference contains 'RA-L' or pub.conference contains 'IJRR' %}{% assign pub_type = "journal" %}{% endif %}
+          {% assign pub_region = "international" %}
+          {% if pub.conference contains 'ICROS' or pub.conference contains 'ITS' %}{% assign pub_region = "domestic" %}{% endif %}
+          <li data-idx="{{ idx }}" data-year="{{ pub_y }}" data-type="{{ pub_type }}" data-region="{{ pub_region }}">
             <div class="pub-textlist-title">{{ pub.title }}</div>
             <div class="pub-textlist-authors">{{ pub.authors | replace: "Jiwon Choi", '<span class="pub-me">Jiwon Choi</span>' }}</div>
             <div class="pub-textlist-meta">
@@ -252,6 +275,11 @@ title: Jiwon Choi
           </li>
         {% endfor %}
       </ol>
+
+      <div class="empty-state" data-pub-empty hidden>
+        <i class="fas fa-mug-hot"></i>
+        <p>No matching publications.</p>
+      </div>
 
       <nav class="research-pagination" data-pub-pagination hidden aria-label="Pagination">
         <button class="pager-btn" data-pub-prev type="button" aria-label="Previous page">
@@ -498,28 +526,39 @@ title: Jiwon Choi
     apply();
   })();
 
-  // Publications pagination (6 per page, group headings injected per page)
+  // Publications filter + pagination (6 per page, group headings injected per page)
   (function () {
     const list = document.querySelector('[data-pub-list]');
     if (!list) return;
+    const pubPanel = list.closest('[data-panel="publications"]');
     const pager = document.querySelector('[data-pub-pagination]');
     const info = document.querySelector('[data-pub-info]');
     const prevBtn = document.querySelector('[data-pub-prev]');
     const nextBtn = document.querySelector('[data-pub-next]');
+    const empty = document.querySelector('[data-pub-empty]');
     const PAGE_SIZE = 6;
     const items = Array.from(list.querySelectorAll('li'));
-    let page = 1;
-    const totalPages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+    const state = { region: 'all', type: 'all', page: 1 };
+
+    function matchFilters(li) {
+      const okR = state.region === 'all' || li.dataset.region === state.region;
+      const okT = state.type   === 'all' || li.dataset.type   === state.type;
+      return okR && okT;
+    }
 
     function render() {
       list.querySelectorAll('.pub-year-heading-row').forEach(h => h.remove());
       items.forEach(li => { li.style.display = 'none'; });
 
-      const start = (page - 1) * PAGE_SIZE;
-      const end = Math.min(start + PAGE_SIZE, items.length);
+      const matched = items.filter(matchFilters);
+      const totalPages = Math.max(1, Math.ceil(matched.length / PAGE_SIZE));
+      if (state.page > totalPages) state.page = totalPages;
+      const start = (state.page - 1) * PAGE_SIZE;
+      const end = Math.min(start + PAGE_SIZE, matched.length);
+
       let lastYear = null;
       for (let i = start; i < end; i++) {
-        const li = items[i];
+        const li = matched[i];
         const y = li.dataset.year;
         if (y !== lastYear) {
           const h = document.createElement('li');
@@ -531,16 +570,33 @@ title: Jiwon Choi
         li.style.display = '';
       }
 
+      if (empty) empty.hidden = matched.length > 0;
       if (pager) {
-        pager.hidden = items.length <= PAGE_SIZE;
-        if (info) info.textContent = page + ' / ' + totalPages;
-        if (prevBtn) prevBtn.disabled = page <= 1;
-        if (nextBtn) nextBtn.disabled = page >= totalPages;
+        pager.hidden = matched.length <= PAGE_SIZE;
+        if (info) info.textContent = state.page + ' / ' + totalPages;
+        if (prevBtn) prevBtn.disabled = state.page <= 1;
+        if (nextBtn) nextBtn.disabled = state.page >= totalPages;
       }
     }
 
-    if (prevBtn) prevBtn.addEventListener('click', () => { page -= 1; render(); window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); });
-    if (nextBtn) nextBtn.addEventListener('click', () => { page += 1; render(); window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); });
+    if (pubPanel) {
+      pubPanel.querySelectorAll('.filter-chips').forEach(group => {
+        const key = group.dataset.filterGroup;
+        if (!key) return;
+        group.querySelectorAll('.chip').forEach(chip => {
+          chip.addEventListener('click', () => {
+            group.querySelectorAll('.chip').forEach(c => c.classList.remove('is-active'));
+            chip.classList.add('is-active');
+            state[key] = chip.dataset.value;
+            state.page = 1;
+            render();
+          });
+        });
+      });
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => { state.page -= 1; render(); window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { state.page += 1; render(); window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); });
 
     render();
   })();
