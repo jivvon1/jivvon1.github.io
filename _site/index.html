@@ -6,20 +6,20 @@
   <title>Jiwon Choi</title>
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Jiwon Choi | Studying Robust State Estimation</title>
-<meta name="generator" content="Jekyll v4.4.1" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="Jiwon Choi" />
 <meta name="author" content="Jiwon Choi" />
 <meta property="og:locale" content="en" />
 <meta name="description" content="Personal academic portfolio of Jiwon Choi — Robust state estimation researcher." />
 <meta property="og:description" content="Personal academic portfolio of Jiwon Choi — Robust state estimation researcher." />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
+<link rel="canonical" href="https://jivvon1.github.io/" />
+<meta property="og:url" content="https://jivvon1.github.io/" />
 <meta property="og:site_name" content="Jiwon Choi" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Jiwon Choi" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"Jiwon Choi"},"description":"Personal academic portfolio of Jiwon Choi — Robust state estimation researcher.","headline":"Jiwon Choi","name":"Jiwon Choi","url":"http://localhost:4000/"}</script>
+{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"Jiwon Choi"},"description":"Personal academic portfolio of Jiwon Choi — Robust state estimation researcher.","headline":"Jiwon Choi","name":"Jiwon Choi","url":"https://jivvon1.github.io/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -116,7 +116,14 @@
       <div class="home-section is-latest">
         <div class="home-section-header">
           <h2 class="panel-title">Latest News</h2>
-          <button class="see-more" data-goto="news">See all <i class="fas fa-arrow-right"></i></button>
+          <div class="home-section-header-right">
+            <div class="news-legend" aria-hidden="true">
+              <span class="news-legend-item"><span class="news-dot news-dot--publication"></span>Publication</span>
+              <span class="news-legend-item"><span class="news-dot news-dot--award"></span>Award</span>
+              <span class="news-legend-item"><span class="news-dot news-dot--talk"></span>Talk</span>
+            </div>
+            <button class="see-more" data-goto="news">See all <i class="fas fa-arrow-right"></i></button>
+          </div>
         </div>
         
         <ul class="news-list">
@@ -125,7 +132,10 @@
             <span class="news-date">2026.06</span>
             <span class="news-text">
               
-              <strong>RadLoc</strong> accepted to IROS 2026.
+              <span class="news-dot news-dot--publication" title="Publication"></span>
+              
+              
+              <strong><a href="https://sparolab.github.io/research/radloc/" target="_blank" rel="noopener">RadLoc</a></strong> accepted to IROS 2026.
               
               
               <span class="hero-news-role hero-news-role--co">Co-author</span>
@@ -137,7 +147,10 @@
             <span class="news-date">2026.06</span>
             <span class="news-text">
               
-              <strong>Commerge</strong> accepted to IJRR.
+              <span class="news-dot news-dot--publication" title="Publication"></span>
+              
+              
+              <strong><a href="https://sparolab.github.io/research/commerge/" target="_blank" rel="noopener">Commerge</a></strong> accepted to IJRR.
               
               
               <span class="hero-news-role hero-news-role--co">Co-author</span>
@@ -149,7 +162,10 @@
             <span class="news-date">2026.06</span>
             <span class="news-text">
               
-              <a href="https://hilti-trimble-challenge.com/" target="_blank">Placed <strong>2nd</strong> in the SLAM category of the <strong>Hilti-Trimble SLAM Challenge</strong> at ICRA 2026.</a>
+              <span class="news-dot news-dot--award" title="Award"></span>
+              
+              
+              Placed <strong>2nd</strong> in the SLAM category of the <strong><a href="https://hilti-trimble-challenge.com/" target="_blank" rel="noopener">Hilti-Trimble SLAM Challenge</a></strong> at ICRA 2026.
               
               
             </span>
@@ -159,7 +175,10 @@
             <span class="news-date">2026.06</span>
             <span class="news-text">
               
-              <a href="https://sparolab.github.io/research/kiss_imu/" target="_blank"><strong>KISS-IMU</strong> received the <strong>Outstanding WiRA Student Paper Award</strong> at ICRA 2026.</a>
+              <span class="news-dot news-dot--award" title="Award"></span>
+              
+              
+              <strong><a href="https://sparolab.github.io/research/kiss_imu/" target="_blank" rel="noopener">KISS-IMU</a></strong> received the <strong><a href="https://www.ieee-ras.org/call-for-nominations-ieee-ras-outstanding-women-in-robotics-automation-wira-paper-awards-icra26/" target="_blank" rel="noopener">Outstanding WiRA Student Paper Award</a></strong> at ICRA 2026.
               
               
               <span class="hero-news-role hero-news-role--first">1st Author</span>
@@ -173,7 +192,7 @@
 
       <div class="home-section is-latest">
         <div class="home-section-header">
-          <h2 class="panel-title">Latest Researches</h2>
+          <h2 class="panel-title">Latest Research</h2>
           <button class="see-more" data-goto="research">See all <i class="fas fa-arrow-right"></i></button>
         </div>
         <div class="research-thumb-grid">
@@ -311,13 +330,27 @@
     <section class="tab-panel" data-panel="news">
       <h2 class="panel-title">News</h2>
       
+      <div class="filter-bar">
+        <div class="filter-row">
+          <span class="filter-label">Category</span>
+          <div class="filter-chips" data-news-filters>
+            <button class="chip is-active" data-value="all" type="button">All</button>
+            <button class="chip" data-value="publication" type="button">Publication</button>
+            <button class="chip" data-value="award" type="button">Award &amp; Honor</button>
+            <button class="chip" data-value="talk" type="button">Talk</button>
+          </div>
+        </div>
+      </div>
       <ul class="news-list" data-news-list>
         
-        <li>
+        <li data-category="publication">
           <span class="news-date">2026.06</span>
           <span class="news-text">
             
-            <strong>RadLoc</strong> accepted to IROS 2026.
+            <span class="pill pill--cat pill--cat-publication">Publication</span>
+            
+            
+            <strong><a href="https://sparolab.github.io/research/radloc/" target="_blank" rel="noopener">RadLoc</a></strong> accepted to IROS 2026.
             
             
             <span class="hero-news-role hero-news-role--co">Co-author</span>
@@ -325,11 +358,14 @@
           </span>
         </li>
         
-        <li>
+        <li data-category="publication">
           <span class="news-date">2026.06</span>
           <span class="news-text">
             
-            <strong>Commerge</strong> accepted to IJRR.
+            <span class="pill pill--cat pill--cat-publication">Publication</span>
+            
+            
+            <strong><a href="https://sparolab.github.io/research/commerge/" target="_blank" rel="noopener">Commerge</a></strong> accepted to IJRR.
             
             
             <span class="hero-news-role hero-news-role--co">Co-author</span>
@@ -337,21 +373,27 @@
           </span>
         </li>
         
-        <li>
+        <li data-category="award">
           <span class="news-date">2026.06</span>
           <span class="news-text">
             
-            <a href="https://hilti-trimble-challenge.com/" target="_blank">Placed <strong>2nd</strong> in the SLAM category of the <strong>Hilti-Trimble SLAM Challenge</strong> at ICRA 2026.</a>
+            <span class="pill pill--cat pill--cat-award">Award</span>
+            
+            
+            Placed <strong>2nd</strong> in the SLAM category of the <strong><a href="https://hilti-trimble-challenge.com/" target="_blank" rel="noopener">Hilti-Trimble SLAM Challenge</a></strong> at ICRA 2026.
             
             
           </span>
         </li>
         
-        <li>
+        <li data-category="award">
           <span class="news-date">2026.06</span>
           <span class="news-text">
             
-            <a href="https://sparolab.github.io/research/kiss_imu/" target="_blank"><strong>KISS-IMU</strong> received the <strong>Outstanding WiRA Student Paper Award</strong> at ICRA 2026.</a>
+            <span class="pill pill--cat pill--cat-award">Award</span>
+            
+            
+            <strong><a href="https://sparolab.github.io/research/kiss_imu/" target="_blank" rel="noopener">KISS-IMU</a></strong> received the <strong><a href="https://www.ieee-ras.org/call-for-nominations-ieee-ras-outstanding-women-in-robotics-automation-wira-paper-awards-icra26/" target="_blank" rel="noopener">Outstanding WiRA Student Paper Award</a></strong> at ICRA 2026.
             
             
             <span class="hero-news-role hero-news-role--first">1st Author</span>
@@ -359,11 +401,14 @@
           </span>
         </li>
         
-        <li>
+        <li data-category="award">
           <span class="news-date">2026.05</span>
           <span class="news-text">
             
-            <a href="https://sparolab.github.io/research/kiss_imu/" target="_blank"><strong>KISS-IMU</strong> selected as a finalist for the <strong>Best Paper Award on Robot Perception</strong> at ICRA 2026.</a>
+            <span class="pill pill--cat pill--cat-award">Award</span>
+            
+            
+            <strong><a href="https://sparolab.github.io/research/kiss_imu/" target="_blank" rel="noopener">KISS-IMU</a></strong> selected as a finalist for the <strong><a href="https://2026.ieee-icra.org/awards/" target="_blank" rel="noopener">Best Paper Award on Robot Perception</a></strong> at ICRA 2026.
             
             
             <span class="hero-news-role hero-news-role--first">1st Author</span>
@@ -371,29 +416,38 @@
           </span>
         </li>
         
-        <li>
+        <li data-category="award">
           <span class="news-date">2026.03</span>
           <span class="news-text">
             
-            Selected for the <strong>ICRA 2026 RAS Travel Support</strong>.
+            <span class="pill pill--cat pill--cat-award">Award</span>
+            
+            
+            Selected for the <strong><a href="https://2026.ieee-icra.org/attend/travel-support/" target="_blank" rel="noopener">ICRA 2026 RAS Travel Support</a></strong>.
             
             
           </span>
         </li>
         
-        <li>
+        <li data-category="award">
           <span class="news-date">2026.02</span>
           <span class="news-text">
             
-            Received the <strong>Samsung HumanTech Paper Award (Silver Prize)</strong>, Samsung Electronics.
+            <span class="pill pill--cat pill--cat-award">Award</span>
+            
+            
+            Received the <strong><a href="https://news.samsung.com/kr/tag/%EC%A0%9C32%ED%9A%8C-%EC%82%BC%EC%84%B1%ED%9C%B4%EB%A8%BC%ED%85%8C%ED%81%AC%EB%85%BC%EB%AC%B8%EB%8C%80%EC%83%81" target="_blank" rel="noopener">Samsung HumanTech Paper Award (Silver Prize)</a></strong>, Samsung Electronics.
             
             
           </span>
         </li>
         
-        <li>
+        <li data-category="award">
           <span class="news-date">2026.02</span>
           <span class="news-text">
+            
+            <span class="pill pill--cat pill--cat-award">Award</span>
+            
             
             Received the <strong>Graduate Research Award</strong>, Inha University.
             
@@ -401,11 +455,14 @@
           </span>
         </li>
         
-        <li>
+        <li data-category="publication">
           <span class="news-date">2026.01</span>
           <span class="news-text">
             
-            <a href="https://sparolab.github.io/research/kiss_imu/" target="_blank"><strong>KISS-IMU</strong> accepted to ICRA 2026.</a>
+            <span class="pill pill--cat pill--cat-publication">Publication</span>
+            
+            
+            <strong><a href="https://sparolab.github.io/research/kiss_imu/" target="_blank" rel="noopener">KISS-IMU</a></strong> accepted to ICRA 2026.
             
             
             <span class="hero-news-role hero-news-role--first">1st Author</span>
@@ -413,11 +470,14 @@
           </span>
         </li>
         
-        <li>
+        <li data-category="talk">
           <span class="news-date">2025.05</span>
           <span class="news-text">
             
-            <a href="https://sparolab.github.io/research/skid_slam/" target="_blank"><strong>SKiD-SLAM</strong> selected as a spotlight talk at the ICRA 2025 Workshop on Field Robotics.</a>
+            <span class="pill pill--cat pill--cat-talk">Talk</span>
+            
+            
+            <strong><a href="https://sparolab.github.io/research/skid_slam/" target="_blank" rel="noopener">SKiD-SLAM</a></strong> selected as a spotlight talk at the ICRA 2025 Workshop on Field Robotics.
             
             
             <span class="hero-news-role hero-news-role--co">Co-author</span>
@@ -425,9 +485,12 @@
           </span>
         </li>
         
-        <li>
+        <li data-category="award">
           <span class="news-date">2025.04</span>
           <span class="news-text">
+            
+            <span class="pill pill--cat pill--cat-award">Award</span>
+            
             
             Received the <strong>Excellent Research Award</strong> at the Korea Institute of ITS Conference.
             
@@ -435,11 +498,14 @@
           </span>
         </li>
         
-        <li>
+        <li data-category="publication">
           <span class="news-date">2025.01</span>
           <span class="news-text">
             
-            <a href="https://sparolab.github.io/research/polaris/" target="_blank"><strong>PoLaRIS Dataset</strong> accepted to ICRA 2025.</a>
+            <span class="pill pill--cat pill--cat-publication">Publication</span>
+            
+            
+            <strong><a href="https://sparolab.github.io/research/polaris/" target="_blank" rel="noopener">PoLaRIS Dataset</a></strong> accepted to ICRA 2025.
             
             
             <span class="hero-news-role hero-news-role--first">1st Author</span>
@@ -447,11 +513,14 @@
           </span>
         </li>
         
-        <li>
+        <li data-category="publication">
           <span class="news-date">2024.07</span>
           <span class="news-text">
             
-            <a href="https://sparolab.github.io/research/solid/" target="_blank"><strong>SOLiD</strong> accepted to RA-L.</a>
+            <span class="pill pill--cat pill--cat-publication">Publication</span>
+            
+            
+            <strong><a href="https://sparolab.github.io/research/solid/" target="_blank" rel="noopener">SOLiD</a></strong> accepted to RA-L.
             
             
             <span class="hero-news-role hero-news-role--co">Co-author</span>
@@ -804,7 +873,7 @@
           
           <article class="research-thumb"
              data-role="co"
-             data-type="conference">
+             data-type="conference">  
             
             <a class="research-thumb-cover" href="https://sparolab.github.io/research/radloc/" target="_blank" aria-label="RadLoc: Radar-based 3-DoF Global Localization via Fast, Robust, and Lightweight Spatial Descriptor Across Diverse Environmental Scenarios"></a>
             
@@ -865,7 +934,7 @@
           
           <article class="research-thumb"
              data-role="co"
-             data-type="journal">
+             data-type="journal">  
             
             <a class="research-thumb-cover" href="https://sparolab.github.io/research/commerge/" target="_blank" aria-label="Commerge: Communication-Efficient, Robust and Fast LiDAR Map Merging Framework for Multi-robot Coordination in Resource-constrained Scenarios"></a>
             
@@ -926,7 +995,7 @@
           
           <article class="research-thumb is-mine"
              data-role="first"
-             data-type="conference">
+             data-type="conference">  
             
             <a class="research-thumb-cover" href="https://sparolab.github.io/research/kiss_imu/" target="_blank" aria-label="KISS-IMU: Self-supervised Inertial Odometry with Motion-balanced Learning and Uncertainty-aware Inference"></a>
             
@@ -982,7 +1051,7 @@
           
           <article class="research-thumb"
              data-role="co"
-             data-type="conference">
+             data-type="conference">  
             
             <a class="research-thumb-cover" href="https://sparolab.github.io/research/skid_slam/" target="_blank" aria-label="SKiD-SLAM: Robust, Lightweight, and Distributed Multi-Robot LiDAR SLAM in Resource-Constrained Field Environments"></a>
             
@@ -1043,7 +1112,7 @@
           
           <article class="research-thumb is-mine"
              data-role="first"
-             data-type="conference">
+             data-type="conference">  
             
             <a class="research-thumb-cover" href="https://sparolab.github.io/research/polaris/" target="_blank" aria-label="PoLaRIS Dataset: A Maritime Object Detection and Tracking Dataset in Pohang Canal"></a>
             
@@ -1098,7 +1167,7 @@
           
           <article class="research-thumb"
              data-role="co"
-             data-type="journal">
+             data-type="journal">  
             
             <a class="research-thumb-cover" href="https://sparolab.github.io/research/solid/" target="_blank" aria-label="Narrowing your FOV with SOLiD: Spatially Organized and Lightweight Global Descriptor for FOV-constrained LiDAR Place Recognition"></a>
             
@@ -1256,7 +1325,7 @@
       }
     }
 
-    document.querySelectorAll('.filter-chips').forEach(group => {
+    grid.closest('.tab-panel').querySelectorAll('.filter-chips[data-filter-group]').forEach(group => {
       const key = group.dataset.filterGroup;
       group.querySelectorAll('.chip').forEach(chip => {
         chip.addEventListener('click', () => {
@@ -1330,24 +1399,45 @@
     const info = document.querySelector('[data-news-info]');
     const prevBtn = document.querySelector('[data-news-prev]');
     const nextBtn = document.querySelector('[data-news-next]');
+    const filterGroup = document.querySelector('[data-news-filters]');
+    const filterBtns = filterGroup ? Array.from(filterGroup.querySelectorAll('.chip')) : [];
     const PAGE_SIZE = 15;
     const items = Array.from(list.children);
     let page = 1;
-    const totalPages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+    let filter = 'all';
+
+    function matches(li) {
+      return filter === 'all' || li.getAttribute('data-category') === filter;
+    }
 
     function render() {
+      const visible = items.filter(matches);
+      const totalPages = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
+      if (page > totalPages) page = totalPages;
       const start = (page - 1) * PAGE_SIZE;
       const end = start + PAGE_SIZE;
-      items.forEach((li, i) => {
-        li.style.display = (i >= start && i < end) ? '' : 'none';
+      let shown = 0;
+      items.forEach((li) => {
+        if (!matches(li)) { li.style.display = 'none'; return; }
+        li.style.display = (shown >= start && shown < end) ? '' : 'none';
+        shown++;
       });
       if (pager) {
-        pager.hidden = items.length <= PAGE_SIZE;
+        pager.hidden = visible.length <= PAGE_SIZE;
         if (info) info.textContent = page + ' / ' + totalPages;
         if (prevBtn) prevBtn.disabled = page <= 1;
         if (nextBtn) nextBtn.disabled = page >= totalPages;
       }
     }
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filter = btn.getAttribute('data-value');
+        page = 1;
+        filterBtns.forEach((b) => b.classList.toggle('is-active', b === btn));
+        render();
+      });
+    });
 
     if (prevBtn) prevBtn.addEventListener('click', () => { page -= 1; render(); window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); });
     if (nextBtn) nextBtn.addEventListener('click', () => { page += 1; render(); window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); });

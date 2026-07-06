@@ -63,7 +63,14 @@ title: Jiwon Choi
       <div class="home-section is-latest">
         <div class="home-section-header">
           <h2 class="panel-title">Latest News</h2>
-          <button class="see-more" data-goto="news">See all <i class="fas fa-arrow-right"></i></button>
+          <div class="home-section-header-right">
+            <div class="news-legend" aria-hidden="true">
+              <span class="news-legend-item"><span class="news-dot news-dot--publication"></span>Publication</span>
+              <span class="news-legend-item"><span class="news-dot news-dot--award"></span>Award</span>
+              <span class="news-legend-item"><span class="news-dot news-dot--talk"></span>Talk</span>
+            </div>
+            <button class="see-more" data-goto="news">See all <i class="fas fa-arrow-right"></i></button>
+          </div>
         </div>
         {% if site.data.news and site.data.news.size > 0 %}
         <ul class="news-list">
@@ -71,6 +78,9 @@ title: Jiwon Choi
           <li>
             <span class="news-date">{{ item.date }}</span>
             <span class="news-text">
+              {% if item.category %}
+              <span class="news-dot news-dot--{{ item.category }}" title="{% case item.category %}{% when 'publication' %}Publication{% when 'award' %}Award{% when 'talk' %}Talk{% else %}{{ item.category }}{% endcase %}"></span>
+              {% endif %}
               {% if item.link != "" %}
               <a href="{{ item.link }}" target="_blank">{{ item.text }}</a>
               {% else %}
@@ -160,11 +170,25 @@ title: Jiwon Choi
     <section class="tab-panel" data-panel="news">
       <h2 class="panel-title">News</h2>
       {% if site.data.news and site.data.news.size > 0 %}
+      <div class="filter-bar">
+        <div class="filter-row">
+          <span class="filter-label">Category</span>
+          <div class="filter-chips" data-news-filters>
+            <button class="chip is-active" data-value="all" type="button">All</button>
+            <button class="chip" data-value="publication" type="button">Publication</button>
+            <button class="chip" data-value="award" type="button">Award &amp; Honor</button>
+            <button class="chip" data-value="talk" type="button">Talk</button>
+          </div>
+        </div>
+      </div>
       <ul class="news-list" data-news-list>
         {% for item in site.data.news %}
-        <li>
+        <li data-category="{{ item.category | default: 'other' }}">
           <span class="news-date">{{ item.date }}</span>
           <span class="news-text">
+            {% if item.category %}
+            <span class="pill pill--cat pill--cat-{{ item.category }}">{% case item.category %}{% when 'publication' %}Publication{% when 'award' %}Award{% when 'talk' %}Talk{% else %}{{ item.category }}{% endcase %}</span>
+            {% endif %}
             {% if item.link != "" %}
             <a href="{{ item.link }}" target="_blank">{{ item.text }}</a>
             {% else %}
@@ -455,7 +479,7 @@ title: Jiwon Choi
       }
     }
 
-    document.querySelectorAll('.filter-chips').forEach(group => {
+    grid.closest('.tab-panel').querySelectorAll('.filter-chips[data-filter-group]').forEach(group => {
       const key = group.dataset.filterGroup;
       group.querySelectorAll('.chip').forEach(chip => {
         chip.addEventListener('click', () => {
@@ -529,24 +553,45 @@ title: Jiwon Choi
     const info = document.querySelector('[data-news-info]');
     const prevBtn = document.querySelector('[data-news-prev]');
     const nextBtn = document.querySelector('[data-news-next]');
+    const filterGroup = document.querySelector('[data-news-filters]');
+    const filterBtns = filterGroup ? Array.from(filterGroup.querySelectorAll('.chip')) : [];
     const PAGE_SIZE = 15;
     const items = Array.from(list.children);
     let page = 1;
-    const totalPages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+    let filter = 'all';
+
+    function matches(li) {
+      return filter === 'all' || li.getAttribute('data-category') === filter;
+    }
 
     function render() {
+      const visible = items.filter(matches);
+      const totalPages = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
+      if (page > totalPages) page = totalPages;
       const start = (page - 1) * PAGE_SIZE;
       const end = start + PAGE_SIZE;
-      items.forEach((li, i) => {
-        li.style.display = (i >= start && i < end) ? '' : 'none';
+      let shown = 0;
+      items.forEach((li) => {
+        if (!matches(li)) { li.style.display = 'none'; return; }
+        li.style.display = (shown >= start && shown < end) ? '' : 'none';
+        shown++;
       });
       if (pager) {
-        pager.hidden = items.length <= PAGE_SIZE;
+        pager.hidden = visible.length <= PAGE_SIZE;
         if (info) info.textContent = page + ' / ' + totalPages;
         if (prevBtn) prevBtn.disabled = page <= 1;
         if (nextBtn) nextBtn.disabled = page >= totalPages;
       }
     }
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filter = btn.getAttribute('data-value');
+        page = 1;
+        filterBtns.forEach((b) => b.classList.toggle('is-active', b === btn));
+        render();
+      });
+    });
 
     if (prevBtn) prevBtn.addEventListener('click', () => { page -= 1; render(); window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); });
     if (nextBtn) nextBtn.addEventListener('click', () => { page += 1; render(); window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' }); });
