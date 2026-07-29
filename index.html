@@ -254,6 +254,7 @@ title: Jiwon Choi
               {% endif %}
               , {{ pub.year }}
               {% if pub.award %} · <span class="pub-textlist-award">{{ pub.award }}</span>{% endif %}
+              {% if pub.spotlight %} · <span class="pub-textlist-award">{{ pub.spotlight }}</span>{% endif %}
             </div>
             <div class="pub-textlist-links">
               {% if pub.paper_link != "" %}
@@ -370,9 +371,12 @@ title: Jiwon Choi
                 {% else %}
                 <span>{{ first_author_name }}</span>
                 {% endif %}
+                {% if pub.spotlight %}<span class="research-thumb-award research-thumb-award--inline"><i class="fas fa-award"></i> {{ pub.spotlight }}</span>{% endif %}
               </p>
               {% elsif pub.award %}
-              <p class="research-thumb-award"><i class="fas fa-award"></i> {{ pub.award }}</p>
+              <p class="research-thumb-award"><i class="fas fa-award"></i> {{ pub.award }}{% if pub.spotlight %}<span class="research-thumb-award--inline"><i class="fas fa-award"></i> {{ pub.spotlight }}</span>{% endif %}</p>
+              {% elsif pub.spotlight %}
+              <p class="research-thumb-award"><i class="fas fa-award"></i> {{ pub.spotlight }}</p>
               {% endif %}
               <span class="research-thumb-venue">
                 <span class="venue-full">{{ venue_full }}</span>

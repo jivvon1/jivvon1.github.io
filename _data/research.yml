@@ -39,6 +39,7 @@
   title: "SKiD-SLAM: Robust, Lightweight, and Distributed Multi-Robot LiDAR SLAM in Resource-Constrained Field Environments"
   conference: "ICRA workshop on Field Robotics (spotlight talk), 2025"
   conference_link: "https://2025.ieee-icra.org/event/workshop-on-field-robotics/"
+  spotlight: "Spotlight Talk"
   authors: "Hogyun Kim, Jiwon Choi, Juwon Kim, Geonmo Yang, Dongjin Cho, Hyungtae Lim, Younggun Cho"
   github: "https://github.com/sparolab/SKiD-SLAM"
   paper_link: ""
