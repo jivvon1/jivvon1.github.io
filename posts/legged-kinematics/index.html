@@ -1,0 +1,187 @@
+---
+layout: default
+title: From Foot Contact to Body Velocity · Jiwon Choi
+---
+
+<article class="kin-page" data-kinematics-app>
+  <header class="kin-hero">
+    <a class="kin-back" href="{{ '/#posts' | relative_url }}"><i class="fas fa-arrow-left"></i> Posts</a>
+    <div class="kin-eyebrow">INTERACTIVE NOTE · LEGGED KINEMATICS</div>
+    <h1>From foot contact<br>to body velocity.</h1>
+    <p>Move the robot. Then follow the same signal through contact selection, joint kinematics, and a stance-foot velocity constraint.</p>
+    <div class="kin-hero-tags"><span>2D sagittal plane</span><span>No dynamics model</span><span>Runs in your browser</span></div>
+  </header>
+
+  <section class="kin-lab" aria-label="Interactive legged kinematics simulator">
+    <div class="kin-lab-bar">
+      <div><span class="kin-live-dot"></span><strong>LIVE LAB</strong><span class="kin-status" data-status>Standing</span></div>
+      <div class="kin-shortcuts"><kbd>↑</kbd><kbd>↓</kbd> drive · <kbd>←</kbd><kbd>→</kbd> steer · <kbd>Space</kbd> pause · <kbd>R</kbd> reset</div>
+    </div>
+    <div class="kin-grid">
+      <div class="kin-sim-panel">
+        <div class="kin-panel-label"><span>01</span> ROBOT + WORLD</div>
+        <div class="kin-world-3d" data-go2-world aria-label="Interactive 3D model of a Unitree GO2 quadruped">
+          <div class="kin-model-loading" data-model-loading><i class="fas fa-circle-notch fa-spin"></i><span>Loading GO2 meshes…</span></div>
+          <div class="kin-view-tools" aria-hidden="true"><span><i class="fas fa-rotate"></i> drag to orbit</span><span><i class="fas fa-magnifying-glass"></i> scroll to zoom</span></div>
+          <span class="kin-model-tag">UNITREE GO2 · <b data-world-pose>X 0.00 · Z 0.00 · YAW 0°</b></span>
+          <canvas data-world hidden></canvas>
+        </div>
+        <div class="kin-controls">
+          <button type="button" data-turn="1" aria-label="Turn left"><i class="fas fa-rotate-left"></i></button>
+          <button type="button" data-drive="-1" aria-label="Move backward"><i class="fas fa-arrow-down"></i></button>
+          <button class="kin-stop" type="button" data-drive="0" aria-label="Stop"><i class="fas fa-stop"></i></button>
+          <button type="button" data-drive="1" aria-label="Move forward"><i class="fas fa-arrow-up"></i></button>
+          <button type="button" data-turn="-1" aria-label="Turn right"><i class="fas fa-rotate-right"></i></button>
+          <label><span>command</span><input data-speed type="range" min="-1.2" max="1.2" step="0.05" value="0"><output data-speed-output>0.00 m/s</output></label>
+        </div>
+        <p class="kin-hint"><i class="fas fa-circle-info"></i> A planted foot is assumed stationary in the world. That single assumption lets joint motion reveal body motion.</p>
+      </div>
+
+      <div class="kin-leg-viz-section">
+        <div class="kin-leg-viz-header">
+          <div><span>02</span><strong>FORWARD KINEMATICS</strong></div>
+          <small><i></i> click a leg to inspect</small>
+        </div>
+        <div class="kin-leg-viz-grid" data-leg-viz aria-label="Four two-dimensional leg kinematics diagrams"></div>
+      </div>
+    </div>
+
+    <div class="kin-estimator-workspace">
+      <nav class="kin-estimator-tabs" aria-label="Estimator visualizations"><button type="button" data-estimator-tab="kinematic" class="is-active" aria-selected="true"><span>03</span> KINEMATIC OBSERVER</button><button type="button" data-estimator-tab="imu" aria-selected="false"><span>04</span> IMU + EKF</button></nav>
+    <div class="kin-observer-panel" data-estimator-page="kinematic">
+        <div class="kin-panel-label"><span>03</span> KINEMATIC OBSERVER · MULTI-CONTACT FUSION</div>
+        <div class="kin-pipeline">
+          <section class="kin-stage kin-stage--contact">
+            <header><span class="kin-stage-num">1</span><div><small>CONTACT</small><strong>Choose a constraint</strong></div><span class="kin-badge" data-contact-badge>DOUBLE</span></header>
+            <div class="kin-feet">
+              <div data-foot-card="fl"><span class="kin-foot-icon"><i class="fas fa-paw"></i></span><div><small>FRONT LEFT</small><strong data-fl-contact>STANCE</strong></div><span class="kin-contact-dot"></span></div>
+              <div data-foot-card="fr"><span class="kin-foot-icon"><i class="fas fa-paw"></i></span><div><small>FRONT RIGHT</small><strong data-fr-contact>STANCE</strong></div><span class="kin-contact-dot"></span></div>
+              <div data-foot-card="rl"><span class="kin-foot-icon"><i class="fas fa-paw"></i></span><div><small>REAR LEFT</small><strong data-rl-contact>STANCE</strong></div><span class="kin-contact-dot"></span></div>
+              <div data-foot-card="rr"><span class="kin-foot-icon"><i class="fas fa-paw"></i></span><div><small>REAR RIGHT</small><strong data-rr-contact>STANCE</strong></div><span class="kin-contact-dot"></span></div>
+            </div>
+          </section>
+          <div class="kin-flow"><i class="fas fa-arrow-right"></i><span>stance only</span></div>
+          <section class="kin-stage">
+            <header><span class="kin-stage-num">2</span><div><small>JOINTS</small><strong>Forward kinematics</strong></div></header>
+            <div class="kin-joint-grid">
+              <div><small>AB/AD <em>q₁</em></small><strong data-abad-angle>0.0°</strong><span class="kin-meter"><i data-abad-meter></i></span><small data-abad-rate>q̇₁ 0.00</small></div>
+              <div><small>HIP <em>q₂</em></small><strong data-hip-angle>0.0°</strong><span class="kin-meter"><i data-hip-meter></i></span><small data-hip-rate>q̇₂ 0.00</small></div>
+              <div><small>KNEE <em>q₃</em></small><strong data-knee-angle>0.0°</strong><span class="kin-meter"><i data-knee-meter></i></span><small data-knee-rate>q̇₃ 0.00</small></div>
+            </div>
+            <code>v<sub>foot</sub> = J(q) q̇ + v<sub>body</sub></code>
+          </section>
+          <div class="kin-flow"><i class="fas fa-arrow-right"></i><span>per contact</span></div>
+          <section class="kin-stage kin-stage--fusion">
+            <header><span class="kin-stage-num">3</span><div><small>CONTACT ESTIMATES</small><strong>Compare constraints</strong></div><span class="kin-badge" data-fusion-count>0 ACTIVE</span></header>
+            <div class="kin-contact-estimates">
+              <div data-contact-estimate="FL"><b>FL</b><span><i></i></span><strong data-contact-value>—</strong><small data-contact-weight>w 0.00</small></div>
+              <div data-contact-estimate="FR"><b>FR</b><span><i></i></span><strong data-contact-value>—</strong><small data-contact-weight>w 0.00</small></div>
+              <div data-contact-estimate="RL"><b>RL</b><span><i></i></span><strong data-contact-value>—</strong><small data-contact-weight>w 0.00</small></div>
+              <div data-contact-estimate="RR"><b>RR</b><span><i></i></span><strong data-contact-value>—</strong><small data-contact-weight>w 0.00</small></div>
+            </div>
+            <code>v̂<sub>B</sub><sup>(i)</sup> = − J<sub>i</sub>(q<sub>i</sub>) q̇<sub>i</sub></code>
+          </section>
+          <div class="kin-flow"><i class="fas fa-arrow-right"></i><span>weighted fusion</span></div>
+          <section class="kin-stage kin-stage--result">
+            <header><span class="kin-stage-num">4</span><div><small>FUSED BODY VELOCITY</small><strong>Robust weighting &amp; fusion</strong></div><span class="kin-confidence"><i></i><i></i><i></i> <b data-confidence>HIGH</b></span></header>
+            <div class="kin-fusion-workbench">
+              <div class="kin-weight-steps">
+                <div><span>① ROBUST CENTER</span><code>m = median(v̂<sub>B</sub><sup>(i)</sup>) = <b data-median>+0.00</b> m/s</code></div>
+                <div><span>② RESIDUAL</span><code>r<sub>i</sub> = |v̂<sub>B</sub><sup>(i)</sup> − m|</code></div>
+                <div><span>③ WEIGHT</span><code>w<sub>i</sub> = 1 / (1 + (r<sub>i</sub> / 0.12)²)</code></div>
+                <p>Median-centered robust weighting is one common choice—not a universal contact-estimation rule.</p>
+              </div>
+              <div class="kin-residuals">
+                <div class="kin-residuals-head"><span>FOOT</span><span>RESIDUAL rᵢ</span><span>WEIGHT wᵢ</span></div>
+                <div data-residual-row="FL"><b>FL</b><span data-residual-value>—</span><strong data-residual-weight>0.00</strong></div>
+                <div data-residual-row="FR"><b>FR</b><span data-residual-value>—</span><strong data-residual-weight>0.00</strong></div>
+                <div data-residual-row="RL"><b>RL</b><span data-residual-value>—</span><strong data-residual-weight>0.00</strong></div>
+                <div data-residual-row="RR"><b>RR</b><span data-residual-value>—</span><strong data-residual-weight>0.00</strong></div>
+              </div>
+            </div>
+            <div class="kin-velocity-readout">
+              <div><small>ESTIMATED</small><strong data-estimate>+0.00</strong><span>m/s</span></div>
+              <div class="kin-velocity-arrow" data-velocity-arrow><i class="fas fa-arrow-right"></i></div>
+              <div><small>COMMAND</small><strong data-command>+0.00</strong><span>m/s</span></div>
+            </div>
+            <code>v̂<sub>B</sub> = Σ w<sub>i</sub> v̂<sub>B</sub><sup>(i)</sup> / Σ w<sub>i</sub></code>
+          </section>
+        </div>
+    </div>
+    <div class="kin-imu-panel" data-estimator-page="imu" hidden>
+      <div class="kin-panel-label"><span>04</span> VIRTUAL IMU · PROPAGATION + CONTACT CORRECTION</div>
+      <div class="kin-imu-pipeline">
+        <section class="kin-imu-card">
+          <header><span>1</span><div><small>SIMULATION TRUTH</small><strong>World pose</strong></div></header>
+          <div class="kin-imu-pose">
+            <div><small>POSITION · Z-UP</small><strong data-imu-position>x +0.00 · y +0.00 · z +0.00 m</strong></div>
+            <div><small>ORIENTATION</small><strong data-imu-orientation>r +0.0° · p +0.0° · y +0.0°</strong></div>
+          </div>
+          <code>p<sub>W</sub>, q<sub>WB</sub> → sensor model</code>
+        </section>
+        <section class="kin-imu-card">
+          <header><span>2</span><div><small>VIRTUAL SENSOR</small><strong>Differentiate + gravity + noise</strong></div></header>
+          <div class="kin-imu-sensors">
+            <div><small>GYROSCOPE · rad/s</small><strong data-imu-gyro>ω [0.00, 0.00, 0.00]</strong></div>
+            <div><small>ACCELEROMETER · XYZ · m/s²</small><strong data-imu-accel>a [0.00, 0.00, 9.81]</strong></div>
+          </div>
+          <code>ω̃ = ω + b<sub>g</sub> + n<sub>g</sub> · ã = Rᵀ(a − g) + b<sub>a</sub> + n<sub>a</sub></code>
+        </section>
+        <section class="kin-imu-card kin-imu-card--wide">
+          <header><span>3</span><div><small>STATE PROPAGATION</small><strong>IMU drift, then contact correction</strong></div><b class="kin-badge" data-imu-contact-state>CONTACT UPDATE</b></header>
+          <div class="kin-imu-observer-grid">
+            <div class="kin-velocity-workbench kin-ekf-workbench">
+              <div class="kin-xy-head"><div><small>EKF UPDATE · 20 Hz</small><strong>From IMU prediction to posterior state</strong></div><span data-ekf-update-state>WAITING</span></div>
+              <div class="kin-ekf-steps">
+                <div><b>1</b><span><small>IMU SE(3) PREDICTION</small><strong data-ekf-prediction>v⁻ [0.00, 0.00, 0.00]</strong><code>x⁻ = f(R,p,v,bg,ba,ω̃,ã)</code><em data-ekf-prior-pose>p⁻ [0.00, 0.00, 0.00]</em></span></div>
+                <i class="fas fa-arrow-down"></i>
+                <div><b>2</b><span><small>CONTACT MEASUREMENT</small><strong data-ekf-measurement>z = v̂contact [—, —, —]</strong><code>z = R(ψ)v̂<sub>contact</sub></code></span></div>
+                <i class="fas fa-arrow-down"></i>
+                <div><b>3</b><span><small>VELOCITY INNOVATION</small><strong data-ekf-innovation-vector>r = z − Hx⁻</strong><code data-ekf-innovation-value>‖r‖ = 0.000 m/s</code></span></div>
+                <i class="fas fa-arrow-down"></i>
+                <div><b>4</b><span><small>KALMAN GAIN</small><strong data-ekf-gain>Kv [0.00, 0.00, 0.00]</strong><code>K = PHᵀ(HPHᵀ + R)⁻¹</code></span></div>
+                <i class="fas fa-arrow-down"></i>
+                <div class="kin-ekf-posterior"><b>5</b><span><small>ERROR-STATE INJECTION</small><strong data-ekf-posterior>v⁺ [0.00, 0.00, 0.00]</strong><code>R⁺=R⁻Exp(δθ) · x⁺=x⁻⊞δx</code><em data-ekf-posterior-state>p⁺ […] · ba⁺ […]</em></span></div>
+              </div>
+            </div>
+            <div class="kin-xy-workbench">
+            <div class="kin-xy-head"><div><small><b data-pose-plane-label>XY</b> TRAJECTORY · INITIAL POSITION = (0, 0, 0)</small><strong>Kinematic odometry vs IMU odometry vs EKF</strong></div><span>drag pan · wheel zoom · double-click reset</span></div>
+            <div class="kin-plane-switch" aria-label="Trajectory projection plane"><button type="button" data-pose-plane="xy" class="is-active">XY</button><button type="button" data-pose-plane="xz">XZ</button><button type="button" data-pose-plane="yz">YZ</button></div>
+            <div class="kin-xy-layout">
+              <canvas class="kin-xy-chart" data-xy-chart aria-label="Live XY trajectories from kinematics, IMU, and EKF"></canvas>
+              <div class="kin-xy-readouts">
+                <button type="button" class="kin-xy-trace-toggle" data-xy-trace-toggle="truth" aria-pressed="true"><i class="kin-trace kin-trace--truth"></i><span><small>GROUND TRUTH · CLICK TO HIDE</small><strong data-xy-truth>x +0.00 · y +0.00 m</strong></span></button>
+                <button type="button" class="kin-xy-trace-toggle" data-xy-trace-toggle="kin" aria-pressed="true"><i class="kin-trace kin-trace--kin"></i><span><small>KINEMATIC ∫v dt · CLICK TO HIDE</small><strong data-xy-kin>x +0.00 · y +0.00 m</strong></span></button>
+                <button type="button" class="kin-xy-trace-toggle" data-xy-trace-toggle="imu" aria-pressed="false"><i class="kin-trace kin-trace--imu"></i><span><small>IMU ∬a dt² · CLICK TO PLOT</small><strong data-xy-imu>x +0.00 · y +0.00 m</strong></span></button>
+                <button type="button" class="kin-xy-trace-toggle" data-xy-trace-toggle="ekf" aria-pressed="true"><i class="kin-trace kin-trace--contact"></i><span><small>EKF FUSION · CLICK TO HIDE</small><strong data-xy-ekf>x +0.00 · y +0.00 m</strong><em data-xy-innovation>velocity innovation 0.000 m/s</em></span></button>
+              </div>
+            </div>
+            <div class="kin-imu-equations"><code>display only: p̂<sub>k</sub> ← p̂<sub>k</sub> + R(ψ)v̂<sub>contact</sub>Δt</code><code>EKF @ 20 Hz: predict(IMU) → update(v̂<sub>contact</sub>)</code></div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <p class="kin-hint"><i class="fas fa-circle-info"></i> The observer never reads world pose directly. World pose generates the virtual sensor; only IMU measurements and the contact estimate enter the observer.</p>
+    </div>
+    </div>
+  </section>
+
+  <section class="kin-explain">
+    <div class="kin-section-index">THE IDEA / 01</div>
+    <h2>One zero unlocks the estimate.</h2>
+    <div class="kin-explain-grid">
+      <p class="kin-lead">When a foot is firmly planted, its world-frame velocity is approximately zero. The encoder-measured joint angles tell us how that foot moves relative to the body—so the body must move the opposite way.</p>
+      <div class="kin-equation"><span>0</span><b>=</b><span>v<sub>body</sub></span><b>+</b><span>J(q)q̇</span><small>planted foot velocity</small><small>what we want</small><small>from encoders</small></div>
+    </div>
+    <div class="kin-caveats">
+      <div><span>01</span><h3>Contact</h3><p>The zero-velocity constraint is valid only while the selected foot is in firm contact.</p></div>
+      <div><span>02</span><h3>Kinematics</h3><p>Link lengths and encoder angles map joint rates into Cartesian foot velocity through the Jacobian.</p></div>
+      <div><span>03</span><h3>Reality</h3><p>Slip, compliance, bad contact detection, and encoder noise all leak directly into the estimate.</p></div>
+    </div>
+    <p class="kin-credit">GO2 geometry: Unitree robot description (Apache-2.0). Motion: Kine2Go <em>solo8_walk</em>, retargeted from cassi/Solo8 (BSD-3-Clause). <a href="https://huggingface.co/datasets/MIMUW-Robotics/kine2go" target="_blank" rel="noopener">Dataset <i class="fas fa-arrow-up-right-from-square"></i></a></p>
+  </section>
+</article>
+
+<script src="{{ '/posts/legged-kinematics/assets/js/legged-kinematics.js' | relative_url }}"></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script>
+<script type="module" src="{{ '/posts/legged-kinematics/assets/js/go2-viewer.js' | relative_url }}"></script>

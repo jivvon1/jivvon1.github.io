@@ -12,14 +12,14 @@
 <meta property="og:locale" content="en" />
 <meta name="description" content="Personal academic portfolio of Jiwon Choi — Robust state estimation researcher." />
 <meta property="og:description" content="Personal academic portfolio of Jiwon Choi — Robust state estimation researcher." />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
+<link rel="canonical" href="https://jivvon1.github.io/" />
+<meta property="og:url" content="https://jivvon1.github.io/" />
 <meta property="og:site_name" content="Jiwon Choi" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Jiwon Choi" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"Jiwon Choi"},"description":"Personal academic portfolio of Jiwon Choi — Robust state estimation researcher.","headline":"Jiwon Choi","name":"Jiwon Choi","url":"http://localhost:4000/"}</script>
+{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"Jiwon Choi"},"description":"Personal academic portfolio of Jiwon Choi — Robust state estimation researcher.","headline":"Jiwon Choi","name":"Jiwon Choi","url":"https://jivvon1.github.io/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1305,9 +1305,42 @@
 
     <!-- Posts -->
     <section class="tab-panel" data-panel="posts">
-      <div class="empty-state">
+      <div class="filter-bar">
+        <div class="filter-row">
+          <span class="filter-label">Category</span>
+          <div class="filter-chips" data-posts-filter>
+            <button class="chip is-active" data-value="all" type="button">All</button>
+            <button class="chip" data-value="study" type="button">Study</button>
+            <button class="chip" data-value="project" type="button">Project</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="posts-list" data-posts-list>
+        <a class="post-feature" data-category="study" href="/posts/legged-kinematics/">
+          <div class="post-feature-visual" aria-hidden="true">
+            <span class="post-bot-scene">
+              <span class="post-ground"></span>
+              <span class="post-bot-body"></span>
+              <span class="post-bot-leg post-bot-leg--left"><span class="post-bot-shank"></span></span>
+              <span class="post-bot-leg post-bot-leg--right"><span class="post-bot-shank"></span></span>
+              <span class="post-contact post-contact--left"></span>
+              <span class="post-contact post-contact--right"></span>
+              <span class="post-velocity"><i class="fas fa-arrow-right"></i></span>
+            </span>
+          </div>
+          <div class="post-feature-copy">
+            <div class="post-meta"><span class="is-wip">🚧 작성중</span><span>Study</span><span>Kinematics</span><span>Interactive</span><span>~10 min</span></div>
+            <h3>From Foot Contact to Body Velocity</h3>
+            <p>Drive a GO2 quadruped and watch stance-foot contact and leg kinematics fuse with an IMU into a body-velocity estimate.</p>
+            <span class="post-open">Open simulator <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </div>
+
+      <div class="empty-state" data-posts-empty hidden>
         <i class="fas fa-pen-nib"></i>
-        <p>Coming soon — posts and study materials will live here.</p>
+        <p>No posts in this category yet.</p>
       </div>
     </section>
 
@@ -1364,6 +1397,28 @@
     );
     const hash = (location.hash || '').replace('#', '');
     if (hash && document.querySelector('.tab[data-tab="' + hash + '"]')) activate(hash);
+  })();
+
+  // Posts category filter
+  (function () {
+    const group = document.querySelector('[data-posts-filter]');
+    const list = document.querySelector('[data-posts-list]');
+    const empty = document.querySelector('[data-posts-empty]');
+    if (!group || !list) return;
+    const cards = Array.from(list.querySelectorAll('[data-category]'));
+    group.addEventListener('click', (e) => {
+      const btn = e.target.closest('.chip');
+      if (!btn) return;
+      group.querySelectorAll('.chip').forEach(c => c.classList.toggle('is-active', c === btn));
+      const value = btn.dataset.value;
+      let shown = 0;
+      cards.forEach(card => {
+        const match = value === 'all' || card.dataset.category === value;
+        card.hidden = !match;
+        if (match) shown++;
+      });
+      if (empty) empty.hidden = shown > 0;
+    });
   })();
 
   // Research filters + pagination (4 per page)
