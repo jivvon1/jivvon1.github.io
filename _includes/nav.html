@@ -9,4 +9,16 @@
       <i class="fas fa-moon theme-icon theme-icon--moon"></i>
     </button>
   </div>
+{% if page.url == '/' %}
+  <div class="tabs" role="tablist">
+    <div class="tabs-scroll">
+      <button class="tab is-active" data-tab="home" role="tab">Home</button>
+      <button class="tab" data-tab="publications" role="tab">Publications</button>
+      <button class="tab" data-tab="research" role="tab">Research</button>
+      <button class="tab" data-tab="posts" role="tab">Posts</button>
+      <button class="tab" data-tab="news" role="tab">News</button>
+      <button class="tab" data-tab="etc" role="tab">ETC</button>
+    </div>
+  </div>
+{% endif %}
 </nav>

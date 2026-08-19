@@ -9,6 +9,11 @@ $transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 $transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
 // Theme colors via CSS custom properties
+// Live height of the fixed top bar. main.js keeps this in sync with the
+// element's real height (it changes when the brand subtitle wraps on mobile);
+// the value here is only the pre-JS fallback.
+:root { --nav-h: 90px; }
+
 :root {
   // Light mode (default)
   --bg-primary: #fafafa;

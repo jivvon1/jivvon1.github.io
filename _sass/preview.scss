@@ -21,13 +21,13 @@
   position: relative;
   max-width: 1344px;
   margin: 0 auto;
-  padding: 14px 32px;
+  padding: 12px 32px 10px;
   display: flex;
   justify-content: center;
   align-items: center;
 
   @media (max-width: 768px) {
-    padding: 12px 20px;
+    padding: 10px 20px 8px;
   }
 }
 
@@ -127,16 +127,24 @@
   }
 
   &:hover .brand-title { color: var(--accent); }
+
+  // Keep clear of the theme toggle and keep the fixed bar short on phones.
+  @media (max-width: 768px) {
+    gap: 4px;
+    padding: 0 44px;
+    .brand-title { font-size: 1.3rem; }
+    .brand-sub { font-size: 0.72rem; }
+  }
 }
 
 // ── Page wrap (2-col body) ──
 .page-wrap {
   max-width: 1344px;
   margin: 0 auto;
-  padding: 140px 32px 80px;
+  padding: calc(var(--nav-h) + 50px) 32px 80px;
 
   @media (max-width: 1120px) {
-    padding: 120px 20px 60px;
+    padding: calc(var(--nav-h) + 30px) 20px 60px;
   }
 }
 
@@ -161,7 +169,7 @@
 // ── Left rail ──
 .profile-rail {
   position: sticky;
-  top: 92px;
+  top: calc(var(--nav-h) + 2px);
   padding: 28px 24px;
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -316,27 +324,23 @@
   min-width: 0;
 }
 
+// Lives inside the fixed top bar, directly under the brand block.
 .tabs {
-  position: sticky;
-  top: 89px;
-  z-index: 20;
-  margin: 0 0 20px;
-  padding: 3px 0;
-  background: var(--bg-primary);
+  position: relative;
+  margin: 0;
+  padding: 4px 0 2px;
 
-  // full-width top/bottom borders (on the non-scrolling bar, so they never clip)
-  // placed at the very top/bottom edges; symmetric padding keeps tabs centered
-  &::before,
-  &::after {
+  // hairline separating the brand block from the tab strip
+  // (the bar's own border-bottom closes it off underneath)
+  &::before {
     content: '';
     position: absolute;
+    top: 0;
     left: 0;
     right: 0;
-    height: 2px;
+    height: 1px;
     background: var(--border);
   }
-  &::before { top: 0; }
-  &::after  { bottom: 0; }
 }
 
 .tabs-scroll {

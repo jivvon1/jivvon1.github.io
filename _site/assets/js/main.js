@@ -24,3 +24,20 @@
     init();
   }
 })();
+
+// Keep --nav-h in sync with the fixed top bar's real height.
+// It is not constant: the brand subtitle wraps to two lines on narrow screens,
+// and everything anchored below the bar (sticky tab strip, sticky profile rail,
+// page top padding, scroll-padding) is positioned from this value.
+(function () {
+  var nav = document.querySelector('.topnav-v2');
+  if (!nav) return;
+  function sync() {
+    document.documentElement.style.setProperty(
+      '--nav-h', Math.round(nav.getBoundingClientRect().height) + 'px');
+  }
+  sync();
+  if (window.ResizeObserver) new ResizeObserver(sync).observe(nav);
+  else window.addEventListener('resize', sync);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
+})();
