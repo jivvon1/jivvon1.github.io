@@ -24,9 +24,20 @@
 .kin-hero h1 { max-width:820px;font-size:clamp(2.3rem,5vw,4.4rem);line-height:1;letter-spacing:-.05em;margin:0 0 30px; }
 .kin-hero>p { max-width:700px;color:var(--text-secondary);font-size:1.03rem;line-height:1.75; }
 .kin-hero-tags { display:flex;gap:9px;flex-wrap:wrap;margin-top:24px; span{padding:6px 11px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:99px;color:var(--text-muted);font:500 .68rem 'JetBrains Mono';} }
-.kin-lab { overflow:hidden;border:1px solid var(--border);border-radius:20px;background:var(--bg-card);box-shadow:0 24px 70px var(--shadow-card); }
+.kin-lab { overflow:hidden;border:1px solid var(--border);border-radius:20px;background:var(--bg-card); }
 .kin-lab-bar { min-height:52px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);font:500 .66rem 'JetBrains Mono';color:var(--text-muted); >div{display:flex;align-items:center;gap:9px} strong{color:var(--text-primary);letter-spacing:.09em}.kin-status{padding-left:10px;border-left:1px solid var(--border)} }
 .kin-live-dot {width:7px;height:7px;border-radius:50%;background:#65c98c;box-shadow:0 0 0 4px rgba(101,201,140,.12);}
+
+/* gait selector + contact-schedule diagram (trajectory lab) */
+.kin-gait { padding:12px 18px 14px;border-bottom:1px solid var(--border);background:var(--bg-secondary); }
+.kin-gait-head { display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-bottom:9px; }
+.kin-gait-title { font:700 .62rem 'JetBrains Mono';letter-spacing:.11em;color:var(--text-muted); }
+.kin-gait-btns { display:inline-flex;gap:6px;flex-wrap:wrap; }
+.kin-gait-btn { padding:5px 12px;border:1px solid var(--border);border-radius:7px;background:var(--bg-card);color:var(--text-secondary);font:600 .68rem 'JetBrains Mono';cursor:pointer;transition:border-color .15s,color .15s,background .15s;
+  &:hover{border-color:var(--accent);color:var(--text-primary)} &.is-active{background:var(--accent);border-color:var(--accent);color:#141414} }
+.kin-gait-state { margin-left:auto;font:600 .68rem 'JetBrains Mono';color:var(--text-primary); }
+.kin-gait-canvas { display:block;width:100%;height:86px;border:1px solid var(--border);border-radius:8px;background:var(--bg-card); }
+.kin-gait-note { margin:8px 0 0;font:500 .68rem 'JetBrains Mono';color:var(--text-muted); }
 .kin-shortcuts kbd {padding:2px 6px;border:1px solid var(--border);border-bottom-width:2px;border-radius:4px;background:var(--bg-secondary);font:inherit;color:var(--text-secondary)}
 .kin-grid { display:grid;grid-template-columns:minmax(0,1.2fr) minmax(430px,.8fr); }
 .kin-sim-panel,.kin-observer-panel { min-width:0;padding:20px; }
@@ -151,7 +162,8 @@
 .kin-estimator-tabs button { font-size:.76rem; }
 
 /* ── Interactive URDF chain explorer ── */
-[data-chain-explorer] { display:block; }
+[data-chain-explorer] { display:block;background:var(--bg-secondary);border:1px solid var(--border);border-radius:16px;padding:16px 18px;
+  @media(max-width:640px){padding:13px 12px} }
 .ce-stages { display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px; }
 .ce-stage-btn { display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border:1px solid var(--border);border-radius:8px;background:var(--bg-card);color:var(--text-secondary);font:600 .72rem 'JetBrains Mono';letter-spacing:.01em;cursor:pointer;transition:border-color .15s,color .15s,background .15s;
   &:hover{border-color:var(--border-hover);color:var(--text-primary)}
@@ -167,7 +179,7 @@
   .ce-note{color:var(--text-muted);line-height:1.55;margin-top:2px}
   .ce-pt{margin-top:4px} }
 .ce-v3 { font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums; }
-.ce-sliders { display:grid;grid-template-columns:repeat(3,1fr);gap:16px 22px;margin-top:16px;
+.ce-sliders { display:grid;grid-template-columns:repeat(3,1fr);gap:16px 22px;margin-top:16px;padding:14px 16px;border:1px solid var(--border);border-radius:12px;background:var(--bg-card);
   @media(max-width:640px){grid-template-columns:1fr} }
 .ce-sgroup { display:flex;flex-direction:column;gap:7px; }
 .ce-sgroup-title { font:600 .64rem 'JetBrains Mono';text-transform:uppercase;letter-spacing:.09em;color:var(--text-muted); }
@@ -181,6 +193,18 @@
 .ce-reset-btn { padding:6px 12px;border:1px solid var(--border);border-radius:8px;background:var(--bg-card);color:var(--text-secondary);font:600 .74rem 'JetBrains Mono';cursor:pointer;
   &:hover{border-color:var(--border-hover);color:var(--text-primary)} }
 .ce-controls-hint { font:500 .68rem 'JetBrains Mono';color:var(--text-muted); @media(max-width:640px){display:none} }
+.ce-cnt-btn { padding:6px 12px;border:1px solid var(--border);border-radius:8px;background:var(--bg-card);color:var(--text-secondary);font:600 .72rem 'JetBrains Mono';cursor:pointer;transition:border-color .15s,color .15s,background .15s;
+  &:hover{border-color:var(--accent);color:var(--text-primary)} &.is-active{background:var(--accent);border-color:var(--accent);color:#141414} }
+
+/* multi-foot + gyro (arithmetic mean) block below ① */
+.kin-subhead { margin:24px 0 4px;padding-top:20px;border-top:1px solid var(--border); h3{font:700 1.02rem 'Montserrat',sans-serif;color:var(--text-primary);margin:0} }
+.imu-bar { display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px; }
+.imu-grid { display:grid;grid-template-columns:1fr 1fr;gap:14px; @media(max-width:820px){grid-template-columns:1fr} }
+.imu-panel { border:1px solid var(--border);border-radius:12px;background:var(--bg-secondary);padding:12px;min-width:0; }
+.imu-plabel { display:flex;align-items:center;gap:8px;margin-bottom:8px;color:var(--text-muted);font:600 .66rem 'JetBrains Mono';letter-spacing:.08em; span{color:var(--accent)} }
+.imu-panel .ce-svg { cursor:default; }
+[data-imu-mean] .ce-eq { margin-top:14px; }
+
 
 /* step player */
 .ce-player { display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px; }
@@ -233,3 +257,44 @@
 .kin-traj-swatch--truth { background:#8b949e; }
 .kin-traj-swatch--kin { background:#4d8bff; }
 .kin-traj-drift { margin-left:auto;color:var(--accent);font-weight:700; }
+
+/* ── path lab: draw panel + 5-gait comparison grid ── */
+.kin-grid--path { grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  @media(max-width:1000px){grid-template-columns:1fr} }
+.kin-draw-panel { min-width:0;padding:20px;display:flex;flex-direction:column;border-right:1px solid var(--border);
+  @media(max-width:1000px){border-right:0;border-bottom:1px solid var(--border)} }
+.kin-draw-canvas { display:block;width:100%;flex:1;min-height:300px;margin-top:2px;border:1px solid var(--border);border-radius:12px;background:var(--bg-secondary);cursor:crosshair;touch-action:none; }
+.kin-draw-controls { display:flex;align-items:center;gap:9px;margin-top:12px; }
+.kin-draw-btn { display:inline-flex;align-items:center;gap:7px;padding:7px 15px;border:1px solid var(--accent);border-radius:8px;background:var(--accent);color:#141414;font:700 .74rem 'JetBrains Mono';cursor:pointer;transition:filter .15s;
+  &:hover{filter:brightness(1.06)} }
+.kin-draw-btn--ghost { border-color:var(--border);background:var(--bg-card);color:var(--text-secondary);
+  &:hover{filter:none;border-color:var(--accent);color:var(--accent)} }
+.kin-draw-hint { font:500 .66rem 'JetBrains Mono';color:var(--text-muted);margin-left:auto; @media(max-width:520px){display:none} }
+.kin-gaitgrid { display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:16px 20px 4px;border-top:1px solid var(--border);
+  @media(max-width:820px){grid-template-columns:repeat(2,1fr)} @media(max-width:480px){grid-template-columns:1fr} }
+.kin-gcell { border:1px solid var(--border);border-radius:10px;background:var(--bg-secondary);padding:8px;cursor:pointer;transition:border-color .15s,box-shadow .15s;
+  &:hover{border-color:var(--border-hover)}
+  &.is-current{border-color:var(--accent)}
+  &.is-worst{border-color:#e5484d;box-shadow:0 0 0 1px rgba(229,72,72,.25)} }
+.kin-gcell-head { display:flex;align-items:baseline;justify-content:space-between;margin-bottom:5px; }
+.kin-gcell-name { font:700 .7rem 'JetBrains Mono'; }
+.kin-gcell-drift { font:600 .64rem 'JetBrains Mono';color:var(--text-muted); }
+.kin-gcell-canvas { display:block;width:100%;height:120px;border-radius:6px;background:var(--bg-card); }
+
+/* keyboard-focus ring: the widget currently receiving arrow keys */
+[data-kin-kb] { scroll-margin-top:120px;transition:box-shadow .18s,outline-color .15s; }
+/* hover: a lift (shadow) hints "click here to capture the arrow keys" */
+[data-kin-kb]:not(.is-kb-active):hover { box-shadow:0 10px 30px var(--shadow-card);cursor:pointer; }
+[data-kin-kb].is-kb-active { outline:2px solid var(--accent);outline-offset:4px; }
+.kin-kb-hint { display:inline-block;margin-left:8px;padding:2px 8px;border:1px dashed var(--border-hover);border-radius:99px;font:600 .62rem 'JetBrains Mono';color:var(--text-muted);vertical-align:middle; }
+
+/* cards are clickable — jump back to a step */
+.ce-card { cursor:pointer; }
+.ce-card:not(.is-active):hover { opacity:.9;border-color:var(--border-hover); }
+.ce-card:focus-visible { outline:2px solid var(--accent);outline-offset:2px; }
+
+/* past cards look clickable; active one doesn't */
+.ce-card.is-active { cursor:default; }
+.ce-card:not(.is-active) { transition:opacity .15s,border-color .15s,transform .15s; }
+.ce-card:not(.is-active):hover { opacity:1;border-color:var(--accent);transform:translateX(2px); }
+

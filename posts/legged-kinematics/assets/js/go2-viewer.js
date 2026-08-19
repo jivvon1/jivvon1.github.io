@@ -69,6 +69,8 @@ if (app && host) {
   let motionFrame = 0;
   let motionBlend = 0;
   let lastTick = performance.now();
+  let supportY = 0.40;   // last on-legs body height (held during a flight phase, then a hop is added)
+  let lastTrailEpoch = 0;   // bumped by trajectory.js to clear the yellow trail on a new/clear walk
   const standQ = [0, 0.82, -1.55];
   const flatContactRotation = new THREE.Quaternion().setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
   const parentWorldRotation = new THREE.Quaternion();
@@ -170,38 +172,47 @@ if (app && host) {
     const playbackScale=moving?(locomotionRate/.78)*Math.sign(s.velocity||1):0;
     if(moving && motion)motionFrame+=dt*motion.fps*playbackScale;
     const frame=sampleFrame(motionFrame);
-    const centerZ=.347;
-    robot.position.y=.385+(frame?(frame.base[2]-centerZ)*motionBlend:0);
-    robot.rotation.z=frame?frame.base[4]*motionBlend:0;
+    // gait drive: trajectory.js publishes per-leg stance/swing progress → procedural walk that
+    // matches the selected gait (trot/pace/bound/pronk). Falls back to the mocap clip if absent.
+    const gaitLeg=(app.go2State && app.go2State.legState) || null;
+    if(gaitLeg){ robot.position.y=.40; robot.rotation.z=0; }
+    else { const centerZ=.347; robot.position.y=.385+(frame?(frame.base[2]-centerZ)*motionBlend:0); robot.rotation.z=frame?frame.base[4]*motionBlend:0; }
     const hipMap=[1,0,3,2], thighMap=[5,4,7,6], calfMap=[9,8,11,10], feetMap=[0,2,1,3];
+    const legQ=(app.go2State && app.go2State.legQ) || null;   // joint angles computed in trajectory.js
     const contacts=[];
     legJoints.forEach((leg,i) => {
-      const raw=frame?[frame.q[hipMap[i]],frame.q[thighMap[i]],frame.q[calfMap[i]]]:standQ;
-      const rawD=frame?[frame.qd[hipMap[i]],frame.qd[thighMap[i]],frame.qd[calfMap[i]]]:[0,0,0];
-      const q=raw.map((v,j)=>lerpAngle(standQ[j],v,motionBlend));
+      let q, stance;
+      if(legQ && legQ[i]){
+        q=legQ[i].map((v,j)=>lerpAngle(standQ[j],v,motionBlend));   // apply the published gait pose
+        stance=(gaitLeg && gaitLeg[i] ? gaitLeg[i].contact : true) && moving;
+      } else {
+        const raw=frame?[frame.q[hipMap[i]],frame.q[thighMap[i]],frame.q[calfMap[i]]]:standQ;
+        q=raw.map((v,j)=>lerpAngle(standQ[j],v,motionBlend));
+        const footZ=frame?frame.feet[feetMap[i]*3+2]:0; stance=!moving||footZ<.04;
+      }
       leg.abad.rotation.x=q[0]; leg.hip.rotation.y=q[1]; leg.knee.rotation.y=q[2];
-      const fi=feetMap[i]*3;
-      const footZ=frame?frame.feet[fi+2]:0;
-      const stance=!moving || footZ<.04;
       contacts.push(stance);
       leg.contact.visible=stance;
       leg.contact.material.opacity=.45+.3*Math.sin(now*.004)**2;
-      leg.currentQ=q;
-      leg.currentQd=rawD.map(v=>v*motionBlend*playbackScale);
-      leg.currentVb=frame?frame.vb[feetMap[i]]*motionBlend*playbackScale:0;
+      leg.currentQ=q; leg.currentQd=[0,0,0];
+      leg.currentVb=(app.go2State && app.go2State.velocity)||0;
     });
     // Ground collision guard: use the lowest sole across all four feet, including swing feet.
     // This prevents a mislabeled contact or interpolated motion frame from entering the floor.
     robot.updateMatrixWorld(true);
-    const soleHeights=[];
-    legJoints.forEach(leg => {
-      leg.contact.getWorldPosition(contactWorldPosition);
-      soleHeights.push(contactWorldPosition.y);
-    });
-    if(soleHeights.length){
-      const lowestSoleHeight=Math.min(...soleHeights);
-      robot.position.y+=.006-lowestSoleHeight;
+    if(gaitLeg){
+      // pin the lowest STANCE foot to the ground; during a flight phase (no stance foot) hold the
+      // last support height so the already-lifted swing feet leave the ground, then add a hop.
+      const stanceSoles=[];
+      legJoints.forEach((leg,i)=>{ if(contacts[i]){ leg.contact.getWorldPosition(contactWorldPosition); stanceSoles.push(contactWorldPosition.y); } });
+      if(stanceSoles.length){ robot.position.y += .006 - Math.min(...stanceSoles); supportY=robot.position.y; }
+      else { robot.position.y = supportY; }
+      robot.position.y += .12 * ((app.go2State && app.go2State.bodyLift) || 0);
       robot.updateMatrixWorld(true);
+    } else {
+      const soleHeights=[];
+      legJoints.forEach(leg => { leg.contact.getWorldPosition(contactWorldPosition); soleHeights.push(contactWorldPosition.y); });
+      if(soleHeights.length){ robot.position.y+=.006-Math.min(...soleHeights); robot.updateMatrixWorld(true); }
     }
     // Markers follow each foot position, but remain parallel to the world ground.
     legJoints.forEach(leg => {
@@ -216,6 +227,12 @@ if (app && host) {
     actor.rotation.y=s.heading||0;
     const poseLabel=app.querySelector('[data-world-pose]');
     if(poseLabel)poseLabel.textContent='X '+(s.worldX||0).toFixed(2)+' · Z '+(s.worldZ||0).toFixed(2)+' · YAW '+Math.round((s.heading||0)*180/Math.PI)+'°';
+    if((s.trailEpoch||0)!==lastTrailEpoch){   // new walk / cleared → wipe the trail
+      lastTrailEpoch=s.trailEpoch||0; trailPoints.length=0;
+      trailPoints.push(new THREE.Vector3(actor.position.x,.007,actor.position.z));
+      lastTrailPoint.copy(actor.position);
+      trail.geometry.dispose(); trail.geometry=new THREE.BufferGeometry().setFromPoints(trailPoints);
+    }
     if(actor.position.distanceTo(lastTrailPoint)>.07){
       trailPoints.push(new THREE.Vector3(actor.position.x,.007,actor.position.z));
       if(trailPoints.length>400)trailPoints.shift();

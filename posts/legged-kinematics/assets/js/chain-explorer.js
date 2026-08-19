@@ -8,6 +8,15 @@
   if (!root) return;
   const SCRIPT_URL = (document.currentScript && document.currentScript.src) || location.href;
 
+  /* shared keyboard-focus coordinator: only the clicked widget receives arrow keys */
+  window.KinKB = window.KinKB || (function () {
+    let active = null;
+    const setActive = (w) => { if (active === w) return; if (active) active.classList.remove('is-kb-active'); active = w || null; if (active) active.classList.add('is-kb-active'); };
+    document.addEventListener('pointerdown', (e) => setActive(e.target.closest('[data-kin-kb]')), true);
+    return { isActive: (w) => active === w, setActive };
+  })();
+  root.setAttribute('data-kin-kb', '');
+
   /* ── GO2-class front-left leg chain (approx. unitree go2_description) ── */
   const CHAIN = [
     { name: 'hip', org: [0.1934, 0.0465, 0], axis: [1, 0, 0] },
@@ -65,25 +74,29 @@
     };
   }
 
-  /* ── step sequence ── */
-  const STEPS = [
-    { mode: 'fk', j: 0, title: 'p₁ · base → hip' },
-    { mode: 'fk', j: 1, title: 'p₂ · p₁ 회전 + 오프셋' },
-    { mode: 'fk', j: 2, title: 'p₃ · p₂ 회전 + 오프셋' },
-    { mode: 'foot', title: '발 s · 체인 완성' },
-    { mode: 'lever', title: 'lever arm s(q)' },
-    { mode: 'jac', j: 2, title: '관절3(calf) 속도 기여' },
-    { mode: 'jac', j: 1, title: '관절2(thigh) 속도 기여' },
-    { mode: 'jac', j: 0, title: '관절1(hip) 속도 기여' },
-    { mode: 'sum', title: 'J q̇ · 합' },
-    { mode: 'transport', title: 'ω × s · transport' },
-    { mode: 'bodyvel', title: 'ᴮv · body velocity' },
-  ];
-
   /* ── state ── */
   // forward-walking stance frame (from go2-walk.json) → ᴮv points forward
   const DEF_Q = [-0.181, 0.989, -1.081], DEF_DQ = [0.272, 0.330, 3.359], DEF_OM = [0, 0, 0];
   const S = { q: DEF_Q.slice(), dq: DEF_DQ.slice(), om: DEF_OM.slice(), step: 0, cam: [0.75, 0.30], zoom: 1, trans: [0, 0] };
+
+  /* ── step sequence ── */
+  function buildSteps() {
+    const s = [
+      { mode: 'fk', j: 0, title: 'p₁ · base → hip' },
+      { mode: 'fk', j: 1, title: 'p₂ · p₁ 회전 + 오프셋' },
+      { mode: 'fk', j: 2, title: 'p₃ · p₂ 회전 + 오프셋' },
+      { mode: 'foot', title: '발 s · 체인 완성' },
+      { mode: 'lever', title: 'lever arm s(q)' },
+      { mode: 'jac', j: 2, title: '관절3(calf) 속도 기여' },
+      { mode: 'jac', j: 1, title: '관절2(thigh) 속도 기여' },
+      { mode: 'jac', j: 0, title: '관절1(hip) 속도 기여' },
+      { mode: 'sum', title: 'J q̇ · 합' },
+    ];
+    s.push({ mode: 'transport', title: 'ω × s · transport' });
+    s.push({ mode: 'bodyvel', title: 'ᴮv · body velocity' });
+    return s;
+  }
+  let STEPS = buildSteps();
   const VIEW = 0.30;
   const inputs = [[], [], []];
 
@@ -121,6 +134,9 @@
   const elPlayer = root.querySelector('[data-ce-player]');
   const svg = root.querySelector('[data-ce-svg]');
   const elCards = root.querySelector('[data-ce-cards]');
+  // click a card to jump back to that step
+  elCards.addEventListener('click', (e) => { const c = e.target.closest('.ce-card'); if (c && c.dataset.cardI != null) goStep(+c.dataset.cardI); });
+  elCards.addEventListener('keydown', (e) => { if (e.key !== 'Enter') return; const c = e.target.closest('.ce-card'); if (c && c.dataset.cardI != null) { e.preventDefault(); goStep(+c.dataset.cardI); } });
   const elSliders = root.querySelector('[data-ce-sliders]');
 
   /* player controls (manual stepping only) */
@@ -132,19 +148,20 @@
   const plCount = elPlayer.querySelector('[data-pl-count]');
   const plDots = elPlayer.querySelector('[data-pl-dots]');
   function goStep(i) { S.step = Math.max(0, Math.min(STEPS.length - 1, i)); update(); }
-  STEPS.forEach((s, i) => {
-    const d = document.createElement('button');
-    d.className = 'ce-pl-dot'; d.type = 'button'; d.title = (i + 1) + '. ' + s.title;
-    d.addEventListener('click', () => goStep(i));
-    plDots.appendChild(d);
-  });
+  function buildDots() {
+    plDots.innerHTML = '';
+    STEPS.forEach((s, i) => {
+      const d = document.createElement('button');
+      d.className = 'ce-pl-dot'; d.type = 'button'; d.title = (i + 1) + '. ' + s.title;
+      d.addEventListener('click', () => goStep(i));
+      plDots.appendChild(d);
+    });
+  }
+  buildDots();
   elPlayer.querySelector('[data-pl="prev"]').addEventListener('click', () => goStep(S.step - 1));
   elPlayer.querySelector('[data-pl="next"]').addEventListener('click', () => goStep(S.step + 1));
-  let hot = false;   // keyboard only acts while the explorer is hovered / focused (avoids clashing with other page widgets)
-  root.addEventListener('pointerenter', () => { hot = true; });
-  root.addEventListener('pointerleave', () => { hot = false; });
   window.addEventListener('keydown', (e) => {
-    if (!hot && !root.contains(document.activeElement)) return;
+    if (!window.KinKB.isActive(root)) return;   // only when this widget is selected
     const el = document.activeElement, tag = el && el.tagName, inRange = tag === 'INPUT' && el.type === 'range';
     if (tag === 'TEXTAREA' || tag === 'SELECT') return;
     if (e.code === 'Space' || e.key === ' ') { if (tag === 'INPUT' && !inRange) return; e.preventDefault(); goStep(S.step + 1); }
@@ -221,7 +238,7 @@
     const parts = [0, 1, 2].map((j) => sc(cols[j], S.dq[j]));
     const Jq = parts.reduce(ad, [0, 0, 0]);
     const tra = cr(S.om, s);
-    const bv = sc(ad(tra, Jq), -1);
+    const bv = sc(ad(tra, Jq), -1);   // ᴮv = −(ω×s + Jq̇)
     const step = STEPS[S.step], mode = step.mode;
 
     const W = 560, H = 360;
@@ -253,7 +270,19 @@
         const jr = curIdx - 1;
         g += arrow(pr(ad(P[jr], sc(A[jr], -0.04))), pr(ad(P[jr], sc(A[jr], 0.07))), C.j[jr], 1.6, 0.9);
       }
-      /* the current offset arrow prev → cur */
+      /* x→y→z component staircase (base frame): shows how the [x y z] value builds up */
+      const A3 = pts[curIdx], off3 = (mode === 'foot') ? footOff : OFF[curIdx];
+      const XC = '#e5484d', YC = '#3fb950', ZC = '#4d8bff';
+      const c1 = ad(A3, [off3[0], 0, 0]), c2 = ad(c1, [0, off3[1], 0]), c3 = ad(c2, [0, 0, off3[2]]);
+      const comp = (p, q, col, lab, val) => {
+        if (Math.abs(val) < 0.003) return;
+        const pp = pr(p), pq = pr(q);
+        g += ln(pp, pq, col, 1.7, '3 3') + tx((pp[0] + pq[0]) / 2 + 4, (pp[1] + pq[1]) / 2 - 3, 8.5, col, lab + ' ' + f(val, 3));
+      };
+      comp(A3, c1, XC, 'x', off3[0]);
+      comp(c1, c2, YC, 'y', off3[1]);
+      comp(c2, c3, ZC, 'z', off3[2]);
+      /* the current offset arrow prev → cur (resultant) */
       const a = pr(pts[curIdx]), b = pr(pts[curIdx + 1]);
       g += arrow(a, b, C.off, 3.4);
       g += tx((a[0] + b[0]) / 2 + 6, (a[1] + b[1]) / 2 - 4, 9.5, C.off, mode === 'foot' ? 'R·FOOT_OFF' : (curIdx === 0 ? 'org₁' : `R·org${curIdx + 1}`));
@@ -291,7 +320,32 @@
         const b = pr(ad(s, sc(Jq, VIEW))); g += arrow(pr(s), b, C.Jq, 3.2) + tx(b[0] + 6, b[1] + 10, 10, C.Jq, 'J q̇');
       } else if (mode === 'transport') {
         g += arrow(pr(s), pr(ad(s, sc(Jq, VIEW))), C.Jq, 3, 0.8);
-        const b = pr(ad(s, sc(tra, VIEW))); g += arrow(pr(s), b, C.om, 2.8) + tx(b[0] + 6, b[1], 10, C.om, 'ω × s');
+        const om = S.om, omN = nrm(om);
+        if (omN > 1e-4) {
+          const oh = sc(om, 1 / omN), AX = 0.19;
+          // ① rotation axis through the body origin (dashed both ways) + the ω vector arrow
+          g += ln(pr(sc(oh, -AX)), pr(sc(oh, AX)), C.om, 1.1, '5 4');
+          const at = pr(sc(oh, AX)), lab = pr(sc(oh, AX * 0.82));
+          g += arrow(p0, at, C.om, 2.4) + tx(lab[0] + 8, lab[1] + 2, 9.5, C.om, 'ω 축');
+          // spin curl (right-hand rule) around the axis
+          let u = Math.abs(oh[2]) < 0.85 ? [0, 0, 1] : [1, 0, 0];
+          u = sb(u, sc(oh, u[0] * oh[0] + u[1] * oh[1] + u[2] * oh[2])); u = sc(u, 1 / (nrm(u) || 1));
+          const w = cr(oh, u), cc = sc(oh, AX * 0.7), R = 0.062, t0 = 0.4, t1 = 5.4, N = 18;
+          let d = '';
+          for (let k = 0; k <= N; k++) { const t = t0 + (t1 - t0) * k / N; const p = pr(ad(cc, ad(sc(u, R * Math.cos(t)), sc(w, R * Math.sin(t))))); d += (k ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1) + ' '; }
+          g += `<path d="${d}" fill="none" stroke="${C.om}" stroke-width="1.8" opacity="0.9"/>`;
+          const pe = pr(ad(cc, ad(sc(u, R * Math.cos(t1)), sc(w, R * Math.sin(t1))))), pdd = pr(ad(cc, ad(sc(u, R * Math.cos(t1 - 0.4)), sc(w, R * Math.sin(t1 - 0.4)))));
+          g += arrow(pdd, pe, C.om, 1.6);
+          // ② radius r: perpendicular from the foot to the axis
+          const proj = sc(oh, s[0] * oh[0] + s[1] * oh[1] + s[2] * oh[2]);
+          g += ln(pr(proj), pr(s), C.sub, 1.2, '3 3') + dot(pr(proj), 2.5, C.om);
+          const rm = pr(ad(proj, sc(sb(s, proj), 0.5)));
+          g += tx(rm[0] + 5, rm[1], 8.5, C.sub, `r=${nrm(sb(s, proj)).toFixed(2)}`);
+        } else {
+          g += tx(p0[0] + 8, p0[1] - 6, 9, C.sub, '아래 ωz 슬라이더를 올려보세요');
+        }
+        // ③ tangential swing ω×s at the foot
+        const b = pr(ad(s, sc(tra, VIEW))); g += arrow(pr(s), b, C.om, 2.8) + tx(b[0] + 6, b[1], 10, C.om, 'ω × s (접선)');
       } else if (mode === 'bodyvel') {
         g += arrow(pr(s), pr(ad(s, sc(Jq, VIEW))), C.Jq, 2.4, 0.55);
         g += arrow(pr(s), pr(ad(s, sc(tra, VIEW))), C.om, 2.2, 0.55);
@@ -323,6 +377,7 @@
     const st = STEPS[i], m = st.mode;
     const cls = 'ce-card' + (i === S.step ? ' is-active' : '');
     let head = `<div class="ce-card-h"><span class="ce-card-n">${i + 1}</span>${st.title}</div>`;
+    // (cardHTML returns wrapper below with data-card-i for click-to-jump)
     let b = '';
     if (m === 'fk' && st.j === 0) {
       b = `<div class="ce-note">hip 앞엔 회전 관절이 없어서 URDF 오프셋이 그대로 위치. 관절각과 무관.</div>` +
@@ -348,17 +403,20 @@
     } else if (m === 'sum') {
       b = `<div>J q̇ = Σ q̇ⱼ·J:,ⱼ</div><div class="ce-pt">= ${V3(G.Jq, C.Jq)}</div>`;
     } else if (m === 'transport') {
+      const spinning = Math.hypot(S.om[0], S.om[1], S.om[2]) > 0.02;
       b = `<div>ω ${V3(S.om, C.om, 2)} × s = ${V3(G.tra, C.om)}</div>` +
-        `<div class="ce-note">q̇=0이어도 몸통이 돌면 발끝은 휩쓸린다.</div>`;
+        (spinning
+          ? `<div class="ce-note">몸통이 <b>ω 축</b> 둘레로 도니 발은 "실에 매단 공"처럼 스윙한다: <b>축까지 수직거리 r</b>에서 <b>접선</b>으로 <code>|ω×s| = |ω|·r = ${nrm(G.tra).toFixed(3)}</code>. 방향은 축(ω)·팔(s) 둘 다에 수직 → 그래서 <b>s 방향엔 성분이 없다</b>.</div>`
+          : `<div class="ce-note">지금은 몸통 회전이 없어(ω=0) 이 항은 0이다. 아래 <b>자이로 ω</b> 슬라이더(예: ωz)를 올리면 <b>ω 축</b>이 서고, 발이 그 둘레로 반지름 r만큼 <b>접선 스윙</b>하는 ω×s가 생긴다.</div>`);
     } else if (m === 'bodyvel') {
       b = `<div>ᴮv = −( ω×s + Jq̇ )</div>` +
         `<div class="ce-pt">= ${V3(G.bv, C.bv)}  ‖·‖=${nrm(G.bv).toFixed(3)} m/s</div>` +
         `<div class="ce-note">우변에 R이 없다 — 자세를 몰라도 body-frame 속도가 나온다.</div>`;
     }
-    return `<div class="${cls}">${head}<div class="ce-card-b">${b}</div></div>`;
+    return `<div class="${cls}" data-card-i="${i}" role="button" tabindex="0" title="${i + 1}. ${st.title} 로 이동">${head}<div class="ce-card-b">${b}</div></div>`;
   }
 
-  /* ── controls: reset (walking playback lives in the trajectory section) ── */
+  /* ── controls: reset ── */
   const resetBtn = document.createElement('button'); resetBtn.className = 'ce-reset-btn'; resetBtn.type = 'button'; resetBtn.textContent = '↺ reset';
   const hint = document.createElement('span'); hint.className = 'ce-controls-hint'; hint.textContent = 'Space·→ 다음 스텝 · ← 이전 · 드래그 회전 · 휠 확대 · 휠클릭 이동 · 더블클릭 리셋';
   elControls.append(resetBtn, hint);

@@ -16,55 +16,48 @@ title: From Foot Contact to Body Velocity · Jiwon Choi
     <div class="kin-block-head"><span class="kin-block-n">①</span>
       <div><h2>관절값에서 body velocity까지 — kinematics</h2><p>자세(R)를 몰라도, 관절값만으로 body-frame 속도가 나온다.</p></div>
     </div>
-    <p class="kin-block-lead">각 관절 각도 <b>q</b>·각속도 <b>q̇</b>와 몸통 각속도 <b>ω</b>로부터 발 속도(= −ᴮv)를 구하는 한 사이클입니다. <b>Space·→</b>로 스텝을 하나씩 넘기고(← 이전), 궁금한 곳에서 멈춰 휠로 확대하거나 슬라이더로 관절을 움직여 보세요.</p>
+    <p class="kin-block-lead">각 관절 각도 <b>q</b>·각속도 <b>q̇</b>와 몸통 각속도 <b>ω</b>로부터 발 속도(= −ᴮv)를 구하는 한 사이클입니다. <b>Space·→</b>로 스텝을 하나씩 넘기고(← 이전), 궁금한 곳에서 멈춰 휠로 확대하거나 슬라이더로 관절을 움직여 보세요. <span class="kin-kb-hint">클릭해서 선택 → 방향키</span></p>
     <div data-chain-explorer></div>
+
+    <div class="kin-subhead"><h3>여러 발일 때 — 자이로(IMU)가 주어지면</h3></div>
+    <p class="kin-block-lead">위 방법은 <b>한 발</b> 기준이었습니다. 외부 센서(IMU)가 <b>ω</b>를 주면, <b>접촉한 발마다 독립적으로</b> <code>ᴮvᵢ = −(ω×sᵢ + Jᵢq̇ᵢ)</code>로 body velocity를 하나씩 구할 수 있어요. 다 같은 ᴮv를 추정하지만 미끄러짐·엔코더 잡음이 조금씩 달라, <b>산술 평균</b>하면 잡음이 상쇄돼 더 안정적입니다. 왼쪽은 다리별 ᴮv를 위 3D 뷰로, 오른쪽은 같은 걸 위에서 본(top-down) 모습으로 보여줍니다. <span class="kin-kb-hint">발을 눌러 접촉 토글</span></p>
+    <div data-imu-mean></div>
   </section>
 
   <section class="kin-block">
     <div class="kin-block-head"><span class="kin-block-n">②</span>
-      <div><h2>실제 적용 — GO2로 trajectory 쌓기</h2><p>위에서 구한 ᴮv를 걸음 내내 적분하면 경로가 된다.</p></div>
+      <div><h2>실제 적용 — 경로를 그리고, gait별로 비교</h2><p>내가 그린 경로를 GO2가 걷고, 각 gait의 관절-추정 경로가 참값에서 얼마나 벌어지는지 나란히 본다.</p></div>
     </div>
-    <p class="kin-block-lead">GO2를 직접 몰아 보세요. 접촉한 발이 세계에서 정지해 있다는 가정으로 관절 움직임이 곧 <b>ᴮv</b>가 되고, 그걸 매 프레임 적분하면 오른쪽에 <b>kinematic 경로(파랑)</b>가 쌓입니다. 절대 기준이 없어 heading이 조금씩 새며 <b>참값(회색)</b>에서 서서히 드리프트합니다.</p>
+    <p class="kin-block-lead">왼쪽 캔버스에 <b>마우스로 경로를 대충 그리면</b> 부드럽게 다듬어 <b>명령 경로(참값)</b>가 됩니다. GO2가 그 길을 걷고, 각 발의 관절 움직임에서 <b>ᴮv를 되읽어 적분</b>한 경로가 쌓여요. 아래에서 <b>5가지 gait</b>가 같은 경로를 걸었을 때 <b>어느 걸음이 참값에서 가장 크게 드리프트하는지</b> 비교하세요. <span class="kin-kb-hint">캔버스를 클릭해서 선택 → Space로 걷기</span></p>
   </section>
 
-  <section class="kin-lab" aria-label="Drive the GO2 and watch the trajectory build">
+  <section class="kin-lab" aria-label="Draw a path and compare per-gait dead-reckoning">
     <div class="kin-lab-bar">
-      <div><span class="kin-live-dot"></span><strong>LIVE LAB</strong><span class="kin-status" data-status>정지</span></div>
-      <div class="kin-shortcuts"><kbd>↑</kbd><kbd>↓</kbd> 전진/후진 · <kbd>←</kbd><kbd>→</kbd> 회전 · <kbd>Space</kbd> 정지 · <kbd>R</kbd> 리셋</div>
+      <div><span class="kin-live-dot"></span><strong>PATH LAB</strong><span class="kin-status" data-status>경로를 그려보세요</span></div>
+      <div class="kin-gait-btns" data-gait-btns aria-label="3D 로봇 gait 선택"></div>
     </div>
-    <div class="kin-grid kin-grid--traj">
+    <div class="kin-grid kin-grid--path">
+      <div class="kin-draw-panel">
+        <div class="kin-panel-label"><span>A</span> 경로 그리기 · 마우스 드래그</div>
+        <canvas class="kin-draw-canvas" data-draw-canvas aria-label="Draw a path with the mouse; it is smoothed into the commanded trajectory"></canvas>
+        <div class="kin-draw-controls">
+          <button type="button" class="kin-draw-btn" data-draw-walk><i class="fas fa-play"></i> 걷기</button>
+          <button type="button" class="kin-draw-btn kin-draw-btn--ghost" data-draw-clear>지우기</button>
+          <span class="kin-draw-hint" data-draw-hint>드래그해서 경로를 그리세요</span>
+        </div>
+      </div>
       <div class="kin-sim-panel">
-        <div class="kin-panel-label"><span>A</span> ROBOT + WORLD</div>
+        <div class="kin-panel-label"><span>B</span> GO2 · <b data-gait-cur>trot</b></div>
         <div class="kin-world-3d" data-go2-world aria-label="Interactive 3D model of a Unitree GO2 quadruped">
           <div class="kin-model-loading" data-model-loading><i class="fas fa-circle-notch fa-spin"></i><span>Loading GO2 meshes…</span></div>
           <div class="kin-view-tools" aria-hidden="true"><span><i class="fas fa-rotate"></i> drag to orbit</span><span><i class="fas fa-magnifying-glass"></i> scroll to zoom</span></div>
           <span class="kin-model-tag">UNITREE GO2 · <b data-world-pose>X 0.00 · Z 0.00 · YAW 0°</b></span>
           <canvas data-world hidden></canvas>
         </div>
-        <div class="kin-controls">
-          <button type="button" data-turn="1" aria-label="Turn left"><i class="fas fa-rotate-left"></i></button>
-          <button type="button" data-drive="-1" aria-label="Move backward"><i class="fas fa-arrow-down"></i></button>
-          <button class="kin-stop" type="button" data-drive="0" aria-label="Stop"><i class="fas fa-stop"></i></button>
-          <button type="button" data-drive="1" aria-label="Move forward"><i class="fas fa-arrow-up"></i></button>
-          <button type="button" data-turn="-1" aria-label="Turn right"><i class="fas fa-rotate-right"></i></button>
-          <label><span>command</span><input data-speed type="range" min="-1.2" max="1.2" step="0.05" value="0"><output data-speed-output>0.00 m/s</output></label>
-        </div>
-      </div>
-
-      <div class="kin-traj-panel">
-        <div class="kin-traj-head">
-          <div class="kin-panel-label"><span>B</span> TRAJECTORY · ∫ ᴮv dt · top-down</div>
-          <button type="button" class="kin-traj-clear" data-traj-clear>경로 지우기</button>
-        </div>
-        <canvas class="kin-traj-canvas" data-traj-canvas aria-label="Top-down trajectory: ground truth vs kinematic dead-reckoning"></canvas>
-        <div class="kin-traj-legend">
-          <span class="kin-traj-item"><i class="kin-traj-swatch kin-traj-swatch--truth"></i>ground truth <b data-traj-truth>x +0.00 · y +0.00</b></span>
-          <span class="kin-traj-item"><i class="kin-traj-swatch kin-traj-swatch--kin"></i>kinematic ∫ᴮv <b data-traj-kin>x +0.00 · y +0.00</b></span>
-          <span class="kin-traj-drift" data-traj-drift>drift 0.00 m</span>
-        </div>
       </div>
     </div>
-    <p class="kin-hint"><i class="fas fa-circle-info"></i> kinematic 경로는 관절에서 나온 ᴮv만 적분한 dead-reckoning입니다 — IMU나 외부 인식이 없어 시간이 지날수록 참값에서 벌어집니다.</p>
+    <div class="kin-gaitgrid" data-gaitgrid aria-label="Per-gait dead-reckoning vs ground truth"></div>
+    <p class="kin-hint"><i class="fas fa-circle-info"></i> 각 칸: 같은 경로를 그 gait로 걸었을 때 <b>관절-추정 경로(색) vs 참값(회색)</b>. 접촉이 적거나 <b>비행(bound·pronk)</b>이 많을수록 heading이 더 새 드리프트가 커집니다.</p>
   </section>
 
   <section class="kin-block">
@@ -91,6 +84,7 @@ title: From Foot Contact to Body Velocity · Jiwon Choi
 </article>
 
 <script src="{{ '/posts/legged-kinematics/assets/js/chain-explorer.js' | relative_url }}"></script>
+<script src="{{ '/posts/legged-kinematics/assets/js/multi-imu.js' | relative_url }}"></script>
 <script src="{{ '/posts/legged-kinematics/assets/js/trajectory.js' | relative_url }}"></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script>
 <script type="module" src="{{ '/posts/legged-kinematics/assets/js/go2-viewer.js' | relative_url }}"></script>

@@ -11,6 +11,10 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
+  // Keep the blurred bar on its own compositor layer so it doesn't
+  // repaint (and visibly jitter) while the page scrolls on mobile.
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .topnav-v2-inner {
@@ -341,6 +345,10 @@
   justify-content: safe center;
   gap: 6px;
   overflow-x: auto;
+  // Horizontal swipes stay in the tab strip: no scroll chaining to the
+  // page, so the fixed nav doesn't get dragged along vertically.
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
   scrollbar-width: none;
   &::-webkit-scrollbar { display: none; }
 }
