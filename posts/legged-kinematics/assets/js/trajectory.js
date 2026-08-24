@@ -10,7 +10,7 @@
 
   const state = {
     velocity: 0, yawRate: 0, heading: 0, worldX: 0, worldZ: 0, phase: 0, paused: false, last: performance.now(),
-    gait: 'trot', gaitPhase: 0, contacts: [true, true, true, true], legState: null, legQ: null, bodyLift: 0,
+    gait: 'trot', gaitPhase: 0, contacts: [true, true, true, true], legState: null, legQ: null, bodyLift: 0, bodyPitch: 0, frozen: false, wasWalking: false,
     walking: false, walkDist: 0,
   };
   app.go2State = state;
@@ -35,6 +35,36 @@
     const p = back / len; return 4 * p * (1 - p);
   };
   const LEG = { L1: 0.213, L2: 0.213, stand: [0, 0.82, -1.55], AK: 0.62, LH: 0.303 };
+
+  /* ── stance-leg length compensation ──
+     A stance leg used to sweep the thigh with the knee frozen, so the hip→sole vertical reach
+     drifted from 0.304 m (mid-stance) to 0.243 m (end of stance). The viewer pins the lowest
+     stance sole to the floor, so that drift became a sawtooth in body height — invisible in
+     trot/pace (duty > 0.5 overlaps the pairs and Math.min() smooths the swap) but a hard pop
+     twice per cycle in bound, which flies with no overlap at all. Solve the knee instead:
+     given a thigh angle, pick the knee that holds the reach at HSTAND. */
+  const HSTAND = 0.288;                      // slightly under the 0.304 stand reach → room to sweep
+  const ATMAX = 0.33;                        // widest thigh sweep the constant-reach knee can serve
+  const kneeFor = (q1, H) => {
+    const c = ((H === undefined ? HSTAND : H) - LEG.L1 * Math.cos(q1)) / LEG.L2;
+    return -Math.acos(Math.max(-1, Math.min(1, c))) - q1;
+  };
+
+  /* ── stance compression (SLIP) ──
+     A perfectly rigid stance leg is the opposite error from the old sawtooth: real legs load like
+     a spring, so the trunk sinks on touchdown and rebounds on push-off. Dip the target reach by a
+     half-sine over stance — it is zero at both ends, so a pair swap is still continuous and the
+     old pop cannot come back. Scales with stride, and with flight time (less duty → harder landing). */
+  const COMPMAX = 0.022;
+  const compOf = (g, AT) => COMPMAX * (AT / ATMAX) * Math.min(1.3, 0.5 / GAITS[g].duty);
+  const stanceH = (comp, prog) => HSTAND - comp * Math.sin(Math.PI * prog);
+
+  /* Trunk pitch: a gait whose front and rear pairs load alternately (bound) rocks the body with
+     them; one whose pairs stay in phase (trot/pace/pronk) cancels to exactly zero. */
+  const pitchOf = (g, ph) => {
+    const s = GAITS[g].offs.map((o) => Math.sin(2 * Math.PI * (ph - o)));
+    return 0.13 * ((s[0] + s[1]) - (s[2] + s[3])) / 2;   // + = nose down over the loaded front pair
+  };
 
   /* ── ①과 동일한 URDF 체인 + Jacobian (각 발 ᴮv를 실제로 계산) ── */
   const v_ad = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -103,15 +133,16 @@
     renderDraw();
     const st = $('[data-status]'); if (st) st.textContent = path.length > 1 ? 'Space로 걷기 · 다시 드래그하면 새 경로' : '경로를 그려보세요';
   }
-  function clearPath() { rawPts = []; path = []; sims = {}; state.walking = false; renderDraw(); renderPlots(); const st = $('[data-status]'); if (st) st.textContent = '경로를 그려보세요'; }
+  function clearPath() { rawPts = []; path = []; sims = {}; state.walking = false; state.frozen = false; renderDraw(); renderPlots(); const st = $('[data-status]'); if (st) st.textContent = '경로를 그려보세요'; }
 
   // leg joint angles for gait g at phase gp (sweep amp AT) — FL,FR,RL,RR → [abad,thigh,knee]
   function legPose(g, gp, AT) {
+    const comp = compOf(g, AT);
     return GAITS[g].offs.map((o) => {
       const ph = (((gp - o) % 1) + 1) % 1;
-      return ph < GAITS[g].duty
-        ? [0, LEG.stand[1] + AT * (2 * (ph / GAITS[g].duty) - 1), LEG.stand[2]]
-        : [0, LEG.stand[1] + AT * (1 - 2 * ((ph - GAITS[g].duty) / (1 - GAITS[g].duty))), LEG.stand[2] - LEG.AK * Math.sin(Math.PI * ((ph - GAITS[g].duty) / (1 - GAITS[g].duty)))];
+      if (ph < GAITS[g].duty) { const pr = ph / GAITS[g].duty, q1 = LEG.stand[1] + AT * (2 * pr - 1); return [0, q1, kneeFor(q1, stanceH(comp, pr))]; }
+      const sw = (ph - GAITS[g].duty) / (1 - GAITS[g].duty), q1 = LEG.stand[1] + AT * (1 - 2 * sw);
+      return [0, q1, kneeFor(q1) - LEG.AK * Math.sin(Math.PI * sw)];   // same base as stance → continuous at touchdown
     });
   }
 
@@ -124,7 +155,7 @@
     const dt = 1 / 60, ds = SPEED * dt, Gd = GAITS[g];
     const T = resample(P, ds);
     const rate = Gd.cad * (0.55 + SPEED);
-    const AT = Math.min(0.6, SPEED * (Gd.duty / Math.max(0.3, rate)) / (2 * LEG.LH));
+    const AT = Math.min(ATMAX, SPEED * (Gd.duty / Math.max(0.3, rate)) / (2 * LEG.LH));
     const h0 = Math.atan2(T[1].y - T[0].y, T[1].x - T[0].x);
     let estX = T[0].x, estY = T[0].y, estYaw = h0, prevH = h0, gp = 0, vb = SPEED;
     let prevQ = legPose(g, 0, AT);
@@ -241,7 +272,7 @@
 
   /* ── gait selector (drives the 3D robot) ── */
   function setGait(g) {
-    state.gait = g; state.gaitPhase = 0;
+    state.gait = g; state.gaitPhase = 0; state.frozen = false;
     Object.values(gaitBtns).forEach((b) => b.classList.toggle('is-active', b.dataset.g === g));
     const cur = $('[data-gait-cur]'); if (cur) cur.textContent = g;
     renderPlots();
@@ -311,16 +342,26 @@
     } else if (!state.walking) {
       state.velocity += (0 - state.velocity) * Math.min(1, dt * 4);
     }
-    const moving = state.velocity > 0.02;
-    if (moving) state.gaitPhase = (state.gaitPhase + dt * GAITS[state.gait].cad * (0.55 + state.velocity)) % 1;
-    state.contacts = contactsOf(state.gait, state.gaitPhase);
-    const Gd = GAITS[state.gait];
-    state.legState = Gd.offs.map((o) => { const ph = (((state.gaitPhase - o) % 1) + 1) % 1; return ph < Gd.duty ? { contact: true, prog: ph / Gd.duty } : { contact: false, prog: (ph - Gd.duty) / (1 - Gd.duty) }; });
-    state.bodyLift = moving ? liftOf(state.gait, state.gaitPhase) : 0;
-    const rate = Gd.cad * (0.55 + state.velocity), AT = Math.min(0.6, state.velocity * (Gd.duty / Math.max(0.3, rate)) / (2 * LEG.LH));
-    state.legQ = state.legState.map((ls) => ls.contact
-      ? [0, LEG.stand[1] + AT * (2 * ls.prog - 1), LEG.stand[2]]
-      : [0, LEG.stand[1] + AT * (1 - 2 * ls.prog), LEG.stand[2] - LEG.AK * Math.sin(Math.PI * ls.prog)]);
+    // Stopping freezes the pose where the gait actually was — mid-swing, mid-flight, whatever.
+    // (Letting it keep running would decay `velocity` → AT → 0 and slide the legs back together.)
+    if (state.walking) state.frozen = false; else if (state.wasWalking) state.frozen = true;
+    state.wasWalking = state.walking;
+    if (!state.frozen) {
+      if (state.velocity > 0.02) state.gaitPhase = (state.gaitPhase + dt * GAITS[state.gait].cad * (0.55 + state.velocity)) % 1;
+      const Gd = GAITS[state.gait];
+      state.contacts = contactsOf(state.gait, state.gaitPhase);
+      state.legState = Gd.offs.map((o) => { const ph = (((state.gaitPhase - o) % 1) + 1) % 1; return ph < Gd.duty ? { contact: true, prog: ph / Gd.duty } : { contact: false, prog: (ph - Gd.duty) / (1 - Gd.duty) }; });
+      state.bodyLift = liftOf(state.gait, state.gaitPhase);
+      state.bodyPitch = pitchOf(state.gait, state.gaitPhase);
+      const rate = Gd.cad * (0.55 + state.velocity), AT = Math.min(ATMAX, state.velocity * (Gd.duty / Math.max(0.3, rate)) / (2 * LEG.LH));
+      const comp = compOf(state.gait, AT);
+      state.legQ = state.legState.map((ls) => {
+        const q1 = LEG.stand[1] + AT * (ls.contact ? 2 * ls.prog - 1 : 1 - 2 * ls.prog);
+        return ls.contact
+          ? [0, q1, kneeFor(q1, stanceH(comp, ls.prog))]
+          : [0, q1, kneeFor(q1) - LEG.AK * Math.sin(Math.PI * ls.prog)];
+      });
+    }
     const st = $('[data-status]'); if (st && path.length > 1) st.textContent = state.walking ? '걷는 중… (Space로 멈춤)' : 'Space로 걷기 · 다시 드래그하면 새 경로';
     if (walkBtn && walkBtn.dataset.w !== String(state.walking)) { walkBtn.dataset.w = String(state.walking); walkBtn.innerHTML = state.walking ? '<i class="fas fa-pause"></i> 멈춤' : '<i class="fas fa-play"></i> 걷기'; }
     if (state.walking || (state.walkDist > 0 && state.velocity > 0.02)) renderDraw();   // stamp the estimate live

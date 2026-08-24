@@ -203,7 +203,6 @@
 .imu-panel { border:1px solid var(--border);border-radius:12px;background:var(--bg-secondary);padding:12px;min-width:0; }
 .imu-plabel { display:flex;align-items:center;gap:8px;margin-bottom:8px;color:var(--text-muted);font:600 .66rem 'JetBrains Mono';letter-spacing:.08em; span{color:var(--accent)} }
 .imu-panel .ce-svg { cursor:default; }
-[data-imu-mean] .ce-eq { margin-top:14px; }
 
 
 /* step player */

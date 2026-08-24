@@ -67,7 +67,7 @@ if (app && host) {
   const legJoints = [];
   let motion = null;
   let motionFrame = 0;
-  let motionBlend = 0;
+  let motionBlend = 0, gaitBlend = 0;   // gaitBlend ramps in and HOLDS, so a stop freezes the pose
   let lastTick = performance.now();
   let supportY = 0.40;   // last on-legs body height (held during a flight phase, then a hop is added)
   let lastTrailEpoch = 0;   // bumped by trajectory.js to clear the yellow trail on a new/clear walk
@@ -175,16 +175,21 @@ if (app && host) {
     // gait drive: trajectory.js publishes per-leg stance/swing progress → procedural walk that
     // matches the selected gait (trot/pace/bound/pronk). Falls back to the mocap clip if absent.
     const gaitLeg=(app.go2State && app.go2State.legState) || null;
-    if(gaitLeg){ robot.position.y=.40; robot.rotation.z=0; }
-    else { const centerZ=.347; robot.position.y=.385+(frame?(frame.base[2]-centerZ)*motionBlend:0); robot.rotation.z=frame?frame.base[4]*motionBlend:0; }
+    // Trunk pitch is rotation about the URDF y-axis (robot's local frame is x-forward / z-up);
+    // + tips the nose down over the loaded front pair. Set before the sole pin so the ground
+    // contact is solved against the pitched pose.
+    if(gaitLeg) gaitBlend+=(1-gaitBlend)*Math.min(1,dt*4.5);
+    const poseBlend=gaitLeg?gaitBlend:motionBlend;
+    if(gaitLeg){ robot.position.y=.40; robot.rotation.z=0; robot.rotation.y=((app.go2State && app.go2State.bodyPitch)||0)*poseBlend; }
+    else { robot.rotation.y=0; const centerZ=.347; robot.position.y=.385+(frame?(frame.base[2]-centerZ)*motionBlend:0); robot.rotation.z=frame?frame.base[4]*motionBlend:0; }
     const hipMap=[1,0,3,2], thighMap=[5,4,7,6], calfMap=[9,8,11,10], feetMap=[0,2,1,3];
     const legQ=(app.go2State && app.go2State.legQ) || null;   // joint angles computed in trajectory.js
     const contacts=[];
     legJoints.forEach((leg,i) => {
       let q, stance;
       if(legQ && legQ[i]){
-        q=legQ[i].map((v,j)=>lerpAngle(standQ[j],v,motionBlend));   // apply the published gait pose
-        stance=(gaitLeg && gaitLeg[i] ? gaitLeg[i].contact : true) && moving;
+        q=legQ[i].map((v,j)=>lerpAngle(standQ[j],v,poseBlend));   // apply the published gait pose
+        stance=(gaitLeg && gaitLeg[i] ? gaitLeg[i].contact : true);   // keep the frozen contact set visible
       } else {
         const raw=frame?[frame.q[hipMap[i]],frame.q[thighMap[i]],frame.q[calfMap[i]]]:standQ;
         q=raw.map((v,j)=>lerpAngle(standQ[j],v,motionBlend));
