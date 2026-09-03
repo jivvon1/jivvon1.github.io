@@ -307,9 +307,9 @@
 /* ── readability: explanatory text was muted (#999 on #fafafa ≈ 2.8:1),
    which is below AA. Move body copy to the secondary tone and give it room. */
 .lio-note { color:var(--text-secondary);font-size:.87rem;line-height:1.8; }
-.lio-fig-note { color:var(--text-secondary);font-size:.87rem;line-height:1.85;max-width:78ch;margin-left:auto;margin-right:auto; }
+.lio-fig-note { color:var(--text-secondary);font-size:.87rem;line-height:1.85; }
 .lio-roles > div ul li, .lio-caveats > div ul li { color:var(--text-secondary);font-size:.85rem;line-height:1.75; }
-.lio-page .kin-block-lead { color:var(--text-secondary);font-size:1rem;line-height:1.85;max-width:82ch; }
+.lio-page .kin-block-lead { color:var(--text-secondary);font-size:1rem;line-height:1.85; }
 .lio-page .kin-block-head > div p { color:var(--text-secondary);font-size:.95rem; }
 .lab-notes li, .loop-notes li { font-size:.9rem;line-height:1.85; }
 .lio-try-copy p { color:var(--text-secondary);font-size:.92rem;line-height:1.85; }
@@ -344,3 +344,18 @@
 
 /* long explanatory prose reads left-aligned, even inside a centred card */
 .lio-fig .lio-fig-note { text-align:left; }
+
+/* text spans the block it lives in — no character-count cap */
+.lio-page .kin-block-lead, .lio-fig-note { max-width:none; }
+
+/* ── one width for the whole post ───────────────────────────────────────────
+   Every block was carrying its own cap (700 / 920 / 1000 / 1100 px), so text
+   broke early while the labs beside it ran to 1280. One rule, one width. */
+.lio-page .kin-hero,
+.lio-page .kin-hero > p,
+.lio-page .kin-hero h1,
+.lio-page .kin-block-lead,
+.lio-figs, .lio-corr, .lio-objective, .lio-roles, .lio-fig--graph,
+.lio-fig-note, .lio-try, .loop-lab, .loop-notes, .lab-notes,
+.lio-page .kin-explain { max-width:none; }
+.lio-page .kin-explain { margin-top:110px; }
