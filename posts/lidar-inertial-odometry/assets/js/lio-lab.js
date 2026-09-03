@@ -442,7 +442,7 @@ function start(root) {
     g.fillStyle = '#54a7ff';
     g.beginPath(); g.arc(X(hist.length - 1), Y(hist.at(-1)), 3, 0, 7); g.fill();
     g.fillStyle = css.getPropertyValue('--text-muted').trim() || '#888';
-    g.font = '500 9px JetBrains Mono, monospace';
+    g.font = '500 12px JetBrains Mono, monospace';
     g.fillText(max.toFixed(2), 2, 14);
     g.fillText('0', 2, h - 21);
     g.fillText('iteration', w - 52, h - 6);

@@ -8,7 +8,7 @@ title: Two Sweeps, One Transform · Jiwon Choi
     <a class="kin-back" href="{{ '/#posts' | relative_url }}"><i class="fas fa-arrow-left"></i> Posts</a>
     <div class="kin-eyebrow">INTERACTIVE NOTE · LIDAR-INERTIAL ODOMETRY</div>
     <h1>Two sweeps,<br>one transform.</h1>
-    <p>LOAM 계열의 LIO는 결국 한 문장입니다 — <b>이번 sweep을 지난 sweep 위로 가장 잘 포개는 6-DoF 변환을 찾는다.</b> 그 "가장 잘"이 무엇인지, 왜 점을 통째로 쓰지 않고 curvature로 edge와 plane을 골라내는지, 그리고 LIO-SAM에서 IMU가 정확히 어디에 끼어드는지를 실제로 돌려보면서 봅니다.</p>
+    <p>LOAM 계열의 LIO는 결국 한 문장입니다<br>— <b>이번 sweep을 지난 sweep 위로 가장 잘 포개는 6-DoF 변환을 찾는다.</b> 그 "가장 잘"이 무엇인지, 왜 점을 통째로 쓰지 않고 curvature로 edge와 plane을 골라내는지, 그리고 LIO-SAM에서 IMU가 정확히 어디에 끼어드는지를 실제로 돌려보면서 봅니다.</p>
     <div class="kin-hero-tags"><span>LOAM · LeGO-LOAM · LIO-SAM</span><span>Real ray-cast sweeps</span><span>Gauss-Newton in your browser</span></div>
   </header>
 
@@ -17,7 +17,7 @@ title: Two Sweeps, One Transform · Jiwon Choi
     <div class="kin-block-head"><span class="kin-block-n">①</span>
       <div><h2>sweep이 쌓이고, 다음 sweep이 쌓인다</h2><p>LiDAR 한 바퀴는 한 순간의 스냅샷이 아니다. 그 사실이 모든 것의 출발점이다.</p></div>
     </div>
-    <p class="kin-block-lead">아래 랩은 16채널 LiDAR가 방 안을 실제로 <b>레이캐스팅</b>해서 만든 데이터로 돌아갑니다. 점 하나하나가 진짜 벽·기둥과의 교점이에요. 다섯 단계를 순서대로 눌러보세요 — 각 단계에서 계산되는 값은 전부 실제 값이고, 화면은 그걸 그리기만 합니다.</p>
+    <p class="kin-block-lead">아래 랩은 16채널 LiDAR가 방 안을 실제로 <b>레이캐스팅</b>해서 만든 데이터로 돌아갑니다. 점 하나하나가 진짜 벽·기둥과의 교점이에요. 다섯 단계를 순서대로 눌러보세요<br>— 각 단계에서 계산되는 값은 전부 실제 값이고, 화면은 그걸 그리기만 합니다.</p>
   </section>
 
   <section class="kin-lab lio-lab" data-lio-lab aria-label="LiDAR-inertial odometry lab">
@@ -46,14 +46,14 @@ title: Two Sweeps, One Transform · Jiwon Choi
             <div><small>Points / sweep</small><strong>4 096</strong></div>
           </div>
           <label class="lio-check"><input type="checkbox" data-act="deskew" checked><span>IMU deskew 적용</span></label>
-          <p class="lio-note lio-note--warn">체크를 풀면 모든 점을 sweep 끝 pose에서 잰 것처럼 쌓습니다 — <b class="is-skew">붉은 점</b>이 그렇게 어긋난 결과이고, 뒤에 옅게 깔린 회색이 제대로 보정된 위치입니다. 이 벌어짐이 <b>motion distortion</b>이에요. LIO-SAM은 IMU 적분으로 각 열의 pose를 알아내 이걸 펴고 시작합니다.</p>
+          <p class="lio-note lio-note--warn">체크를 풀면 모든 점을 sweep 끝 pose에서 잰 것처럼 쌓습니다<br>— <b class="is-skew">붉은 점</b>이 그렇게 어긋난 결과이고, 뒤에 옅게 깔린 회색이 제대로 보정된 위치입니다. 이 벌어짐이 <b>motion distortion</b>이에요. LIO-SAM은 IMU 적분으로 각 열의 pose를 알아내 이걸 펴고 시작합니다.</p>
           <button class="kin-draw-btn" data-act="replay"><i class="fas fa-rotate-right"></i> 다시 재생</button>
         </div>
 
         <!-- ② OVERLAY -->
         <div data-stage-panel="overlay" hidden>
           <div class="lio-panel-title">SWEEP k vs SWEEP k+1</div>
-          <p class="lio-note lio-note--warn">두 점군은 <b>월드 좌표계가 아니라 각자의 센서 local 좌표계</b>에 찍혀 있습니다. 그래서 그냥 겹치면 어긋나요 — 점이 벽에서 떨어져 보이는 건 오류가 아니라 <b>아직 T를 모른다</b>는 뜻입니다. (그래서 이 단계에선 방 구조를 숨겼습니다.)</p>
+          <p class="lio-note lio-note--warn">두 점군은 <b>월드 좌표계가 아니라 각자의 센서 local 좌표계</b>에 찍혀 있습니다. 그래서 그냥 겹치면 어긋나요<br>— 점이 벽에서 떨어져 보이는 건 오류가 아니라 <b>아직 T를 모른다</b>는 뜻입니다. (그래서 이 단계에선 방 구조를 숨겼습니다.)</p>
           <p class="lio-note">회색이 sweep <i>k</i>, 주황이 sweep <i>k+1</i>. <b>이 어긋남이 곧 상대 pose</b>고, 남은 일은 그걸 숫자로 되찾는 것뿐입니다.</p>
           <div class="lio-readouts">
             <div><small>전진</small><strong data-out="motion">—</strong></div>
@@ -64,7 +64,6 @@ title: Two Sweeps, One Transform · Jiwon Choi
           <label class="lio-slider"><span>회전각 <em data-out="turn">—</em></span>
             <input type="range" min="0" max="25" step="0.5" value="8" data-act="turn"></label>
           <label class="lio-check"><input type="checkbox" data-act="applytruth"><span>정답 T 적용해서 겹쳐보기</span></label>
-          <p class="lio-note">켜면 주황 점군이 참값 <b>T</b>만큼 옮겨져 회색 위에 정확히 포개집니다 — 방 구조도 함께 돌아와요. <b>⑤에서 푸는 게 바로 이 T</b>입니다. 전진 거리를 키우면 겹치는 영역이 줄어 정합이 어려워지니, ⑤에서 얼마나 나빠지는지도 확인해 보세요.</p>
         </div>
 
         <!-- ③ FEATURE -->
@@ -109,7 +108,6 @@ title: Two Sweeps, One Transform · Jiwon Choi
             <div><small>rotation error</small><strong data-out="errr">—</strong></div>
           </div>
           <label class="lio-check"><input type="checkbox" data-act="imu" checked><span>IMU pre-integration을 초기값으로</span></label>
-          <p class="lio-note lio-note--warn">체크를 풀면 초기값이 <b>단위행렬</b>(=안 움직였다고 가정)이 됩니다. 같은 데이터인데도 엉뚱한 <b>local minimum</b>으로 굴러떨어져요. 무서운 건 그때 <b>residual이 오히려 더 낮다</b>는 점입니다 — 소수의 점만 억지로 맞춘 해라서요. 유일한 단서는 <b>pairs 수가 3분의 1로 줄었다</b>는 것뿐입니다. LIO-SAM이 IMU를 쓰는 첫 번째 이유가 이겁니다.</p>
           <div class="lio-btns">
             <button class="kin-draw-btn" data-act="step"><i class="fas fa-forward-step"></i> 1 step</button>
             <button class="kin-draw-btn" data-act="run"><i class="fas fa-play"></i> 12 steps</button>
@@ -123,6 +121,11 @@ title: Two Sweeps, One Transform · Jiwon Choi
       </aside>
     </div>
   </section>
+
+  <ul class="lab-notes">
+    <li><b>②</b> “정답 T 적용”을 켜면 주황 점군이 참값 <b>T</b>만큼 옮겨져 회색 위에 정확히 포개집니다<br>— 방 구조도 함께 돌아와요. <b>⑤에서 푸는 게 바로 이 T</b>입니다. 전진 거리를 키우면 겹치는 영역이 줄어 정합이 어려워지니, ⑤에서 얼마나 나빠지는지도 확인해 보세요.</li>
+    <li><b>⑤</b> IMU 초기값 체크를 풀면 초기값이 <b>단위행렬</b>(=안 움직였다고 가정)이 됩니다. 같은 데이터인데도 엉뚱한 <b>local minimum</b>으로 굴러떨어져요. 무서운 건 그때 <b>residual이 오히려 더 낮다</b>는 점입니다<br>— 소수의 점만 억지로 맞춘 해라서요. 유일한 단서는 <b>pairs 수가 3분의 1로 줄었다</b>는 것뿐입니다. LIO-SAM이 IMU를 쓰는 첫 번째 이유가 이겁니다.</li>
+  </ul>
 
   <!-- ═══════════════════════ CURVATURE DEFINITION ═══════════════════════ -->
   <section class="kin-block">
@@ -193,7 +196,7 @@ title: Two Sweeps, One Transform · Jiwon Choi
           <span class="lio-eq-lhs">d<sub>ℰ</sub> =</span>
           <span class="lio-frac"><i>| <span class="vec">ij</span> × <span class="vec">il</span> |</i><b></b><i>| <span class="vec">jl</span> |</i></span>
         </div>
-        <p class="lio-fig-note"><b>j</b>는 <i>i</i>와 가장 가까운 global edge point, <b>l</b>은 <b>다른 scan line</b>에서 가장 가까운 점입니다. 두 점이 직선을 정의하고, 분자의 외적 크기는 그 직선과 <i>i</i>가 만드는 평행사변형의 넓이 — <b>밑변 |<span class="vec">jl</span>|로 나누면 높이, 즉 점-직선 거리</b>가 됩니다.</p>
+        <p class="lio-fig-note"><b>j</b>는 <i>i</i>와 가장 가까운 global edge point, <b>l</b>은 <b>다른 scan line</b>에서 가장 가까운 점입니다. 두 점이 직선을 정의하고, 분자의 외적 크기는 그 직선과 <i>i</i>가 만드는 평행사변형의 넓이<br>— <b>밑변 |<span class="vec">jl</span>|로 나누면 높이, 즉 점-직선 거리</b>가 됩니다.</p>
       </figure>
 
       <figure class="lio-fig lio-fig--corr">
@@ -220,7 +223,7 @@ title: Two Sweeps, One Transform · Jiwon Choi
           <span class="lio-eq-lhs">d<sub>ℋ</sub> =</span>
           <span class="lio-frac"><i>| <span class="vec">ij</span> · ( <span class="vec">jm</span> × <span class="vec">jl</span> ) |</i><b></b><i>| <span class="vec">jm</span> × <span class="vec">jl</span> |</i></span>
         </div>
-        <p class="lio-fig-note"><b>l</b>은 <b>같은 scan line</b>, <b>m</b>은 <b>다른 scan line</b>에서 고릅니다 — 세 점이 한 직선에 놓이지 않아야 평면이 정의되기 때문이에요. <b class="is-nrm">보라색 화살표</b>가 <code><span class="vec">jm</span> × <span class="vec">jl</span></code>, 즉 <b>j에서 세운 그 평면의 법선</b>입니다. <code><span class="vec">ij</span></code>를 이 법선 방향으로 사영한 길이가 곧 <b>점-평면 거리</b>이고, 법선 크기로 나누는 건 단위벡터로 만들기 위해서예요.</p>
+        <p class="lio-fig-note"><b>l</b>은 <b>같은 scan line</b>, <b>m</b>은 <b>다른 scan line</b>에서 고릅니다<br>— 세 점이 한 직선에 놓이지 않아야 평면이 정의되기 때문이에요. <b class="is-nrm">보라색 화살표</b>가 <code><span class="vec">jm</span> × <span class="vec">jl</span></code>, 즉 <b>j에서 세운 그 평면의 법선</b>입니다. <code><span class="vec">ij</span></code>를 이 법선 방향으로 사영한 길이가 곧 <b>점-평면 거리</b>이고, 법선 크기로 나누는 건 단위벡터로 만들기 위해서예요.</p>
       </figure>
     </div>
 
@@ -242,9 +245,27 @@ title: Two Sweeps, One Transform · Jiwon Choi
       </div>
     </div>
     <div class="kin-caveats lio-caveats">
-      <div><span>01</span><h3>비선형이다</h3><p><b>T</b>가 회전을 포함하므로 거리들은 <b>T</b>에 대해 비선형입니다. 현재 추정값 주변에서 선형화해 정규방정식 (JᵀJ + λI)δ = −Jᵀr 을 풀고, 조금 움직이고, 다시 대응을 찾는 걸 반복해요 — 랩 ⑤의 한 step이 정확히 이겁니다.</p></div>
-      <div><span>02</span><h3>대응은 매 반복 갱신된다</h3><p>T가 바뀌면 가장 가까운 j·l·m도 바뀝니다. 그래서 이건 한 번의 최소화가 아니라 <b>ICP 루프</b>예요. 야코비안을 뽑는 동안만 대응을 고정합니다.</p></div>
-      <div><span>03</span><h3>초기값이 전부다</h3><p>목적함수는 볼록하지 않습니다. 랩 ⑤에서 IMU 초기값을 끄면 <b>회전을 거의 찾지 못한 채</b> 얕은 극소점에 주저앉는 걸 볼 수 있어요.</p></div>
+      <div><div class="card-head"><span>01</span><h3>비선형이다</h3></div>
+        <ul>
+          <li><b>T</b>가 회전을 포함하므로 거리들은 <b>T</b>에 대해 비선형</li>
+          <li>현재 추정값 주변에서 선형화<br>→ 정규방정식 (JᵀJ + λI)δ = −Jᵀr 을 풂</li>
+          <li>조금 움직이고 다시 대응을 찾는 걸 반복 — 랩 ⑤의 한 step</li>
+        </ul>
+      </div>
+      <div><div class="card-head"><span>02</span><h3>대응은 매 반복 갱신된다</h3></div>
+        <ul>
+          <li>T가 바뀌면 가장 가까운 j·l·m도 바뀜</li>
+          <li>한 번의 최소화가 아니라 <b>ICP 루프</b></li>
+          <li>야코비안을 뽑는 동안<b>만</b> 대응을 고정</li>
+        </ul>
+      </div>
+      <div><div class="card-head"><span>03</span><h3>초기값이 전부다</h3></div>
+        <ul>
+          <li>목적함수는 <b>볼록하지 않음</b></li>
+          <li>랩 ⑤에서 IMU 초기값을 끄면 <b>회전을 거의 찾지 못한 채</b> 주저앉음</li>
+          <li>그때 residual은 오히려 더 낮게 나옴</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -256,10 +277,66 @@ title: Two Sweeps, One Transform · Jiwon Choi
     <p class="kin-block-lead">지금까지가 LOAM의 scan matching이었습니다. LIO-SAM은 여기에 IMU를 붙이는데, 흔한 오해와 달리 "결과를 필터링"하는 게 아니라 <b>세 지점에서 각각 다른 일</b>을 합니다.</p>
 
     <div class="lio-roles">
-      <div><span>A</span><h4>Deskew</h4><p>sweep이 도는 0.1초 동안의 pose를 적분해 각 점을 sweep 끝 시점으로 보정합니다. 랩 ①의 체크박스가 이거예요.</p></div>
-      <div><span>B</span><h4>Initial guess</h4><p>pre-integration으로 얻은 상대 pose를 scan matching의 시작점으로 넣습니다. 랩 ⑤에서 켜고 끄는 그것.</p></div>
-      <div><span>C</span><h4>Factor graph</h4><p>LiDAR odometry와 IMU pre-integration을 <b>같은 그래프의 factor</b>로 넣고 함께 풉니다. 그 해로 IMU bias까지 갱신돼요.</p></div>
+      <div><div class="card-head"><span>A</span><h4>Deskew</h4></div>
+        <ul>
+          <li>sweep이 도는 <b>0.1초 동안의 pose</b>를 IMU로 적분</li>
+          <li>각 점을 <b>sweep 끝 시점</b>으로 끌어다 보정</li>
+          <li>랩 ①의 체크박스가 이것</li>
+        </ul>
+      </div>
+      <div><div class="card-head"><span>B</span><h4>Initial guess</h4></div>
+        <ul>
+          <li>pre-integration으로 <b>상대 pose를 미리 계산</b></li>
+          <li>그 값을 scan matching의 <b>시작점</b>으로 투입</li>
+          <li>랩 ⑤에서 켜고 끄는 그것</li>
+        </ul>
+      </div>
+      <div><div class="card-head"><span>C</span><h4>Factor graph</h4></div>
+        <ul>
+          <li>LiDAR odometry와 IMU pre-integration을 <b>같은 그래프의 factor</b>로 투입</li>
+          <li>둘을 <b>함께</b> 풀어 하나의 해를 얻음</li>
+          <li>그 해로 <b>IMU bias까지</b> 갱신</li>
+        </ul>
+      </div>
     </div>
+
+    <p class="kin-block-lead">앞의 ⑤에서 구한 <b>T</b>를 계속 이어 붙이면 그게 odometry입니다. 오차가 누적돼 주황 궤적이 참값에서 벌어지죠. 로봇은 참값을 모르니, <b>지금 추정값 위에서</b> 예전 노드를 찾습니다<br>— 현재 위치를 따라다니는 <b>파란 점선 원이 그 탐색 범위</b>이고, 그 안에 들어온 예전 노드가 loop 후보가 됩니다.</p>
+
+    <div class="loop-lab" data-loop-lab>
+      <div class="loop-bar">
+        <div><span class="kin-live-dot"></span><strong>LOOP CLOSURE</strong><span class="loop-phase" data-loop-out="phase">—</span></div>
+        <div class="loop-btns">
+          <button class="kin-draw-btn" data-loop-act="replay"><i class="fas fa-rotate-right"></i> 다시 주행</button>
+          <button class="kin-draw-btn" data-loop-act="optimize"><i class="fas fa-wand-magic-sparkles"></i> 지금 최적화</button>
+        </div>
+      </div>
+      <div class="loop-grid">
+        <canvas class="loop-canvas" data-loop-canvas aria-label="Top-down pose graph: odometry drifts, radius search finds a revisited node, and optimisation pulls the trajectory back onto ground truth"></canvas>
+        <aside class="loop-side">
+          <div class="lio-readouts">
+            <div><small>node</small><strong data-loop-out="nodes">—</strong></div>
+            <div><small class="is-ok">채택된 loop</small><strong data-loop-out="loops">—</strong></div>
+            <div><small>탐색 반경</small><strong data-loop-out="radius">—</strong></div>
+            <div><small class="is-bad">기각된 후보</small><strong data-loop-out="rejects">—</strong></div>
+          </div>
+          <label class="lio-slider"><span>탐색 반경 <em data-loop-out="radius">—</em></span>
+            <input type="range" min="1.5" max="6" step="0.25" value="3" data-loop-act="radius"></label>
+          <label class="lio-slider"><span>odometry 드리프트 <em data-loop-out="drift">—</em></span>
+            <input type="range" min="0.3" max="2.5" step="0.1" value="1" data-loop-act="drift"></label>
+          <label class="lio-check"><input type="checkbox" data-loop-act="useloops" checked><span>loop closure 사용</span></label>
+          <div class="lio-err">
+            <div><small>최적화 전 오차</small><strong data-loop-out="ate0">—</strong></div>
+            <div><small>최적화 후 오차</small><strong data-loop-out="ate1">—</strong></div>
+          </div>
+          <p class="lio-note" data-loop-hint hidden></p>
+        </aside>
+      </div>
+    </div>
+
+    <ul class="loop-notes">
+      <li><b class="is-bad">붉은 점선</b>은 <b>드리프트 때문에 가까워 보였을 뿐</b> 실제로는 다른 장소인 후보입니다. 반경 검색은 이런 걸 걸러내지 못해요<br>— <b>뒤따르는 scan matching이 기각</b>합니다. 반경을 키우면 후보도 늘지만 오탐도 같이 늘어납니다.</li>
+      <li>되돌아온 게 확인되면 그 두 노드 사이에 <b class="is-ok">loop factor</b>가 하나 걸리고, 그래프 전체를 다시 풉니다. 마지막 pose만 고치는 게 아니라 <b>궤적 전체가 한꺼번에 휘어지는</b> 게 핵심이에요<br>— 그래서 pose "graph"입니다.</li>
+    </ul>
 
     <figure class="lio-fig lio-fig--graph">
       <figcaption>LIO-SAM factor graph</figcaption>
@@ -287,25 +364,34 @@ title: Two Sweeps, One Transform · Jiwon Choi
           <rect x="520" y="216" width="11" height="11" class="lio-fg-sw lio-fg-sw--loop"/><text x="538" y="226">loop closure</text>
         </g>
       </svg>
-      <p class="lio-fig-note">노드 <b>x</b>는 pose(+속도+bias), 사각형은 factor입니다. 위쪽 아치가 IMU pre-integration — 두 sweep 사이 수백 개의 IMU 샘플을 <b>하나의 상대 운동 제약으로 미리 적분</b>해 둔 것이라 pose가 갱신돼도 다시 적분할 필요가 없어요. 가운데 직선이 방금 우리가 푼 scan matching 결과 <b>T*</b>이고, 아래 아치는 예전 위치로 돌아왔을 때 누적 드리프트를 한 번에 끌어당기는 loop closure입니다.</p>
+      <p class="lio-fig-note">노드 <b>x</b>는 pose(+속도+bias), 사각형은 factor입니다. 위쪽 아치가 IMU pre-integration<br>— 두 sweep 사이 수백 개의 IMU 샘플을 <b>하나의 상대 운동 제약으로 미리 적분</b>해 둔 것이라 pose가 갱신돼도 다시 적분할 필요가 없어요. 가운데 직선이 방금 우리가 푼 scan matching 결과 <b>T*</b>이고, 아래 아치는 예전 위치로 돌아왔을 때 누적 드리프트를 한 번에 끌어당기는 loop closure입니다.</p>
     </figure>
+  </section>
+
+  <section class="kin-block">
+    <a class="lio-try" href="https://github.com/sparolab/SOLiD-A-LOAM" target="_blank" rel="noopener">
+      <i class="fab fa-github"></i>
+      <span class="lio-try-text">직접 돌려보고 싶다면 — 실제 LiDAR 데이터로 돌려볼 수 있는 <b>sparolab / SOLiD-A-LOAM</b></span>
+      <span class="lio-try-link">GitHub <i class="fas fa-arrow-up-right-from-square"></i></span>
+    </a>
   </section>
 
   <section class="kin-explain">
     <div class="kin-section-index">THE IDEA / 01</div>
     <h2>Geometry first, points second.</h2>
     <div class="kin-explain-grid">
-      <p class="kin-lead">Two sweeps never hit the same physical point. What they do share is structure — the same wall, the same corner. Curvature is the cheapest possible test for which of the two a point belongs to, and once you know that, the residual writes itself: a corner point owes its distance to a <em>line</em>, a wall point to a <em>plane</em>.</p>
+      <p class="kin-lead">Two sweeps never hit the same physical point. What they do share is structure<br>— the same wall, the same corner. Curvature is the cheapest possible test for which of the two a point belongs to, and once you know that, the residual writes itself: a corner point owes its distance to a <em>line</em>, a wall point to a <em>plane</em>.</p>
       <div class="kin-equation"><span>d<sub>ℰ</sub>, d<sub>ℋ</sub></span><b>→</b><span>Σd²</span><b>→</b><span>T*</span><small>geometric residual</small><small>one objective</small><small>relative pose</small></div>
     </div>
     <div class="kin-caveats">
-      <div><span>01</span><h3>Degeneracy</h3><p>A long featureless corridor constrains almost nothing along its axis. The normal equations go rank-deficient and the estimate slides — which is exactly where the IMU factor earns its place.</p></div>
-      <div><span>02</span><h3>Dynamic objects</h3><p>Every residual above assumes the world stood still between the two sweeps. A passing person is a set of features that pulls the solution the wrong way.</p></div>
-      <div><span>03</span><h3>Drift</h3><p>Frame-to-frame matching is dead reckoning. Errors compound; only a map-level constraint or a loop closure removes them.</p></div>
+      <div><div class="card-head"><span>01</span><h3>Degeneracy</h3></div><p>A long featureless corridor constrains almost nothing along its axis. The normal equations go rank-deficient and the estimate slides<br>— which is exactly where the IMU factor earns its place.</p></div>
+      <div><div class="card-head"><span>02</span><h3>Dynamic objects</h3></div><p>Every residual above assumes the world stood still between the two sweeps. A passing person is a set of features that pulls the solution the wrong way.</p></div>
+      <div><div class="card-head"><span>03</span><h3>Drift</h3></div><p>Frame-to-frame matching is dead reckoning. Errors compound; only a map-level constraint or a loop closure removes them.</p></div>
     </div>
     <p class="kin-credit">Zhang &amp; Singh, <em>LOAM: Lidar Odometry and Mapping in Real-time</em> (RSS 2014) · Shan et al., <em>LIO-SAM</em> (IROS 2020). 이 페이지의 모든 점군·곡률·대응·최적화는 브라우저에서 실제로 계산됩니다.</p>
   </section>
 </article>
 
+<script type="module" src="{{ '/posts/lidar-inertial-odometry/assets/js/loop-lab.js' | relative_url }}"></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script>
 <script type="module" src="{{ '/posts/lidar-inertial-odometry/assets/js/lio-lab.js' | relative_url }}"></script>
