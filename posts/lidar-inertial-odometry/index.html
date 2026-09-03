@@ -132,11 +132,12 @@ title: Two Sweeps, One Transform · Jiwon Choi
     <div class="kin-block-head"><span class="kin-block-n">②</span>
       <div><h2>무엇을 비교하는가 — curvature로 고른 두 종류의 점</h2><p>4096개를 전부 쓰지 않는다. 기하학적으로 의미 있는 소수만 남긴다.</p></div>
     </div>
-    <p class="kin-block-lead">두 sweep을 비교한다고 했지만, 실제로 비교하는 건 점 전체가 아닙니다. LOAM은 <b>같은 scan line 위에서의 국소 곡률</b> 하나로 각 점이 모서리인지 평면인지를 판정해요. 정의는 이렇게 생겼습니다.</p>
+    <p class="kin-block-lead">두 sweep을 비교한다고 했지만, 실제로 비교하는 건 점 전체가 아닙니다.<br>LOAM은 <b>같은 scan line 위에서의 국소 곡률</b> 하나로 각 점이 모서리인지 평면인지를 판정해요. 정의는 이렇게 생겼습니다.</p>
 
     <div class="lio-figs">
-      <figure class="lio-fig">
-        <figcaption><b>1.</b> 임의의 점 <i>P<sub>i</sub></i>와 <b>같은 scan line</b> 위에서 가장 가까운 점을 양옆으로 5개씩, 총 10개 뽑는다</figcaption>
+      <div class="lio-step">
+        <p class="lio-step-title"><b>1.</b> 임의의 점 <i>P<sub>i</sub></i>와 <b>같은 scan line</b> 위에서 가장 가까운 점을 양옆으로 5개씩, 총 10개 뽑는다</p>
+        <figure class="lio-fig">
         <svg viewBox="0 0 560 130" class="lio-svg" role="img" aria-label="A scan line with the current point in green and five neighbours highlighted on each side">
           <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
           <path d="M40 92 L470 92" class="lio-ln"/>
@@ -152,9 +153,11 @@ title: Two Sweeps, One Transform · Jiwon Choi
           <text x="280" y="120" class="lio-tx lio-tx--cur" text-anchor="middle">P<tspan dy="3" font-size="9">i</tspan></text>
         </svg>
       </figure>
+      </div>
 
-      <figure class="lio-fig">
-        <figcaption><b>2.</b> 그 이웃 집합 <i>S</i>에 대해 곡률을 계산한다</figcaption>
+      <div class="lio-step">
+        <p class="lio-step-title"><b>2.</b> 그 이웃 집합 <i>S</i>에 대해 곡률을 계산한다</p>
+        <figure class="lio-fig">
         <div class="lio-eq">
           <span class="lio-eq-lhs">c =</span>
           <span class="lio-frac"><i>1</i><b></b><i>|S| · ‖P<sub>i</sub>‖</i></span>
@@ -163,11 +166,14 @@ title: Two Sweeps, One Transform · Jiwon Choi
         </div>
         <p class="lio-fig-note">이웃들과의 차이 벡터를 <b>합친 뒤</b> 크기를 잽니다. 평면 위라면 좌우 차이가 서로 상쇄돼 합이 0에 가까워지고, 모서리에서는 한쪽으로 쏠려 커집니다. <code>‖P<sub>i</sub>‖</code>로 나누는 건 멀리 있는 점일수록 이웃 간격이 벌어지는 걸 보정하기 위해서예요.</p>
       </figure>
+      </div>
 
-      <figure class="lio-fig">
-        <figcaption><b>3.</b> 곡률이 임계값보다 높으면 <b class="is-edge">edge</b>, 낮으면 <b class="is-plane">plane</b></figcaption>
+      <div class="lio-step">
+        <p class="lio-step-title"><b>3.</b> 곡률이 임계값보다 높으면 <b class="is-edge">edge</b>, 낮으면 <b class="is-plane">plane</b></p>
+        <figure class="lio-fig">
         <p class="lio-fig-note">여기까지가 feature extraction입니다. 위 랩의 ③에서 임계값을 움직이면 이 판정이 점 색으로 그대로 반영돼요.</p>
       </figure>
+      </div>
     </div>
   </section>
 

@@ -359,3 +359,11 @@
 .lio-fig-note, .lio-try, .loop-lab, .loop-notes, .lab-notes,
 .lio-page .kin-explain { max-width:none; }
 .lio-page .kin-explain { margin-top:110px; }
+
+/* the numbered step reads as a caption for the card, so it sits above it */
+.lio-figs { gap:26px; }
+.lio-step { display:grid;gap:10px; }
+.lio-step-title { margin:0;color:var(--text-primary);font-size:.98rem;font-weight:600;line-height:1.6;
+  b{margin-right:8px;color:var(--accent);font-family:'JetBrains Mono'}
+  i{color:var(--accent);font-style:italic} }
+.lio-step .lio-fig { margin:0; }
