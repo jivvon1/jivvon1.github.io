@@ -1,35 +1,46 @@
+- date: "2026.10"
+  category: "award"
+  text: "Placed <strong>2nd</strong> among 131 teams in the <strong>IMU Odometry Challenge</strong>, Beyond Exteroception Workshop @IROS 2026."
+  link: ""
+
 - date: "2026.08"
   category: "award"
   text: "Awarded the <strong>Ph.D. Candidate Research Fellowship</strong>, National Research Foundation of Korea (NRF)."
   role: "Principal Investigator"
   link: ""
 
-- date: "2026.06"
+- date: "2026.08"
   category: "publication"
-  text: "<strong><a href=\"https://sparolab.github.io/research/radloc/\" target=\"_blank\" rel=\"noopener\">RadLoc</a></strong> accepted to IROS 2026."
+  text: "<strong><a href=\"https://sparolab.github.io/research/skid_slam/\" target=\"_blank\" rel=\"noopener\">SKiD-SLAM</a></strong> accepted @IEEE T-FR 2026."
   role: "Co-author"
   link: ""
 
 - date: "2026.06"
   category: "publication"
-  text: "<strong><a href=\"https://sparolab.github.io/research/commerge/\" target=\"_blank\" rel=\"noopener\">Commerge</a></strong> accepted to IJRR."
+  text: "<strong><a href=\"https://sparolab.github.io/research/radloc/\" target=\"_blank\" rel=\"noopener\">RadLoc</a></strong> accepted @IROS 2026."
+  role: "Co-author"
+  link: ""
+
+- date: "2026.06"
+  category: "publication"
+  text: "<strong><a href=\"https://sparolab.github.io/research/commerge/\" target=\"_blank\" rel=\"noopener\">Commerge</a></strong> accepted @IJRR 2026."
   role: "Co-author"
   link: ""
 
 - date: "2026.06"
   category: "award"
-  text: "Placed <strong>2nd</strong> in the SLAM category of the <strong><a href=\"https://hilti-trimble-challenge.com/\" target=\"_blank\" rel=\"noopener\">Hilti-Trimble SLAM Challenge</a></strong> at ICRA 2026."
+  text: "Placed <strong>2nd</strong> in the SLAM category of the <strong><a href=\"https://hilti-trimble-challenge.com/\" target=\"_blank\" rel=\"noopener\">Hilti-Trimble SLAM Challenge</a></strong> @ICRA 2026."
   link: ""
 
 - date: "2026.06"
   category: "award"
-  text: "<strong><a href=\"https://sparolab.github.io/research/kiss_imu/\" target=\"_blank\" rel=\"noopener\">KISS-IMU</a></strong> received the <strong><a href=\"https://www.ieee-ras.org/call-for-nominations-ieee-ras-outstanding-women-in-robotics-automation-wira-paper-awards-icra26/\" target=\"_blank\" rel=\"noopener\">Outstanding WiRA Student Paper Award</a></strong> at ICRA 2026."
+  text: "<strong><a href=\"https://sparolab.github.io/research/kiss_imu/\" target=\"_blank\" rel=\"noopener\">KISS-IMU</a></strong> received the <strong><a href=\"https://www.ieee-ras.org/call-for-nominations-ieee-ras-outstanding-women-in-robotics-automation-wira-paper-awards-icra26/\" target=\"_blank\" rel=\"noopener\">Outstanding WiRA Student Paper Award</a></strong> @ICRA 2026."
   role: "1st Author"
   link: ""
 
 - date: "2026.05"
   category: "award"
-  text: "<strong><a href=\"https://sparolab.github.io/research/kiss_imu/\" target=\"_blank\" rel=\"noopener\">KISS-IMU</a></strong> selected as a finalist for the <strong><a href=\"https://2026.ieee-icra.org/awards/\" target=\"_blank\" rel=\"noopener\">Best Paper Award on Robot Perception</a></strong> at ICRA 2026."
+  text: "<strong><a href=\"https://sparolab.github.io/research/kiss_imu/\" target=\"_blank\" rel=\"noopener\">KISS-IMU</a></strong> selected as a finalist for the <strong><a href=\"https://2026.ieee-icra.org/awards/\" target=\"_blank\" rel=\"noopener\">Best Paper Award on Robot Perception</a></strong> @ICRA 2026."
   role: "1st Author"
   link: ""
 
@@ -50,13 +61,13 @@
 
 - date: "2026.01"
   category: "publication"
-  text: "<strong><a href=\"https://sparolab.github.io/research/kiss_imu/\" target=\"_blank\" rel=\"noopener\">KISS-IMU</a></strong> accepted to ICRA 2026."
+  text: "<strong><a href=\"https://sparolab.github.io/research/kiss_imu/\" target=\"_blank\" rel=\"noopener\">KISS-IMU</a></strong> accepted @ICRA 2026."
   role: "1st Author"
   link: ""
 
 - date: "2025.05"
   category: "talk"
-  text: "<strong><a href=\"https://sparolab.github.io/research/skid_slam/\" target=\"_blank\" rel=\"noopener\">SKiD-SLAM</a></strong> selected as a spotlight talk at the ICRA 2025 Workshop on Field Robotics."
+  text: "<strong><a href=\"https://sparolab.github.io/research/skid_slam/\" target=\"_blank\" rel=\"noopener\">SKiD-SLAM</a></strong> selected as a spotlight talk at the Workshop on Field Robotics @ICRA 2025."
   role: "Co-author"
   link: ""
 
@@ -67,12 +78,12 @@
 
 - date: "2025.01"
   category: "publication"
-  text: "<strong><a href=\"https://sparolab.github.io/research/polaris/\" target=\"_blank\" rel=\"noopener\">PoLaRIS Dataset</a></strong> accepted to ICRA 2025."
+  text: "<strong><a href=\"https://sparolab.github.io/research/polaris/\" target=\"_blank\" rel=\"noopener\">PoLaRIS Dataset</a></strong> accepted @ICRA 2025."
   role: "1st Author"
   link: ""
 
 - date: "2024.07"
   category: "publication"
-  text: "<strong><a href=\"https://sparolab.github.io/research/solid/\" target=\"_blank\" rel=\"noopener\">SOLiD</a></strong> accepted to RA-L."
+  text: "<strong><a href=\"https://sparolab.github.io/research/solid/\" target=\"_blank\" rel=\"noopener\">SOLiD</a></strong> accepted @RA-L 2024."
   role: "Co-author"
   link: ""

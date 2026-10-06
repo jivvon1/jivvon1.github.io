@@ -10,6 +10,18 @@
   tldr: ""
   thumbnail: "/assets/img/research/radloc.gif"
 
+- year: 2026/08
+  title: "SKiD-SLAM: Robust, Lightweight, and Distributed Multi-Robot LiDAR SLAM in Resource-Constrained Field Environments"
+  conference: "T-FR"
+  conference_link: "https://www.ieee-ras.org/publications/t-fr"
+  authors: "Hogyun Kim, Jiwon Choi, Juwon Kim, Geonmo Yang, Dongjin Cho, Hyungtae Lim, Younggun Cho"
+  github: "https://github.com/sparolab/SKiD-SLAM"
+  paper_link: ""
+  arxiv_link: "https://arxiv.org/abs/2505.08230"
+  project_link: "https://sparolab.github.io/research/skid_slam/"
+  tldr: "Multi-Robot and Distributed LiDAR SLAM Framework"
+  thumbnail: "/assets/img/research/skid_slam.gif"
+
 - year: 2026/06
   title: "Commerge: Communication-Efficient, Robust and Fast LiDAR Map Merging Framework for Multi-robot Coordination in Resource-constrained Scenarios"
   conference: "IJRR"
