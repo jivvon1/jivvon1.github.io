@@ -690,6 +690,11 @@
     background: var(--bg-secondary);
     border: 1px dashed var(--border-hover);
   }
+  &--type-challenge {
+    color: var(--accent);
+    background: var(--bg-secondary);
+    border: 1px solid rgba(var(--accent-rgb), 0.35);
+  }
 
   &--award {
     color: var(--accent);

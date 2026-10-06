@@ -1,4 +1,18 @@
 - year: 2026/10
+  type: "challenge"
+  title: "Single-Head IMU Velocity Estimation Across Platforms via a Multi-Scale, Embodiment-Aware Encoder"
+  conference: "IROS Workshop, 2026"
+  conference_link: "https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026"
+  award: "2nd Place among 131 teams, TartanIMU Challenge"
+  authors: "Jiwon Choi, Hogyun Kim, Jungwoo Lee, Geonmo Yang, Seunghee Yun, Younggun Cho"
+  github: "https://huggingface.co/jivvon2/tartanimu-sparo"
+  paper_link: ""
+  arxiv_link: ""
+  project_link: "https://sparolab.github.io/research/imu_challenge/"
+  tldr: "Cross-Platform IMU Velocity Estimation"
+  thumbnail: "/assets/img/research/imu_challenge.png"
+
+- year: 2026/10
   title: "RadLoc: Radar-based 3-DoF Global Localization via Fast, Robust, and Lightweight Spatial Descriptor Across Diverse Environmental Scenarios"
   conference: "IROS, 2026"
   conference_link: "https://2026.ieee-iros.org/"

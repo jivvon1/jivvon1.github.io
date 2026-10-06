@@ -109,7 +109,8 @@ title: Jiwon Choi
               {% if venue_short == "RA-L" %}{% assign venue_full = "IEEE Robotics and Automation Letters" %}{% assign venue_url = "https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=7083369" %}{% endif %}
               {% if venue_short == "IROS" %}{% assign venue_full = "IEEE/RSJ International Conference on Intelligent Robots and Systems" %}{% endif %}
               {% if venue_short == "IJRR" %}{% assign venue_full = "International Journal of Robotics Research" %}{% assign venue_url = "https://journals.sagepub.com/home/IJR" %}{% endif %}{% if venue_short == "T-FR" %}{% assign venue_full = "IEEE Transactions on Field Robotics" %}{% assign venue_url = "https://www.ieee-ras.org/publications/t-fr" %}{% endif %}
-              {% if venue_short contains "ICRA workshop" %}
+              {% if venue_short == "IROS Workshop" %}{% assign venue_full = "IROS Workshop on Beyond Exteroception" %}{% assign venue_url = pub.conference_link %}{% endif %}
+{% if venue_short contains "ICRA workshop" %}
                 {% assign venue_short = "ICRA Workshop" %}
                 {% assign venue_full = "ICRA Workshop on Field Robotics" %}
                 {% assign venue_url = "https://2025.ieee-icra.org/event/workshop-on-field-robotics/" %}
@@ -118,9 +119,9 @@ title: Jiwon Choi
               {% if venue_short == "ICRA" and pub_year == "2025" %}{% assign venue_url = "https://2025.ieee-icra.org/" %}{% endif %}
               {% if venue_short == "IROS" and pub_year == "2026" %}{% assign venue_url = "https://2026.ieee-iros.org/" %}{% endif %}
               {% assign ptype_h = "conference" %}
-              {% if pub.conference contains 'Journal' or pub.conference contains 'RA-L' or pub.conference contains 'IJRR' or pub.conference contains 'T-FR' %}{% assign ptype_h = "journal" %}{% endif %}
+              {% if pub.conference contains 'Journal' or pub.conference contains 'RA-L' or pub.conference contains 'IJRR' or pub.conference contains 'T-FR' %}{% assign ptype_h = "journal" %}{% endif %}{% if pub.type == "challenge" %}{% assign ptype_h = "challenge" %}{% endif %}
               {% assign type_label = "Conference" %}
-              {% if ptype_h == "journal" %}{% assign type_label = "Journal" %}{% endif %}
+              {% if ptype_h == "journal" %}{% assign type_label = "Journal" %}{% endif %}{% if ptype_h == "challenge" %}{% assign type_label = "Challenge" %}{% endif %}
               <article class="research-thumb is-mine">
                 {% if card_link != "" %}
                 <a class="research-thumb-cover" href="{{ card_link }}" target="_blank" aria-label="{{ pub.title }}"></a>
@@ -229,6 +230,7 @@ title: Jiwon Choi
       <ol class="pub-textlist" data-pub-list>
         {% assign idx = 0 %}
         {% for pub in site.data.research %}
+          {% if pub.type == "challenge" %}{% continue %}{% endif %}
           {% assign idx = idx | plus: 1 %}
           {% assign pub_y = pub.year | slice: 0, 4 %}
           {% assign pub_type = "conference" %}
@@ -291,6 +293,7 @@ title: Jiwon Choi
             <button class="chip is-active" data-value="all">All</button>
             <button class="chip" data-value="conference">Conference</button>
             <button class="chip" data-value="journal">Journal</button>
+            <button class="chip" data-value="challenge">Challenge</button>
           </div>
         </div>
         <div class="filter-row">
@@ -310,7 +313,7 @@ title: Jiwon Choi
           {% assign role = "co" %}
           {% if first_author contains 'Jiwon Choi' %}{% assign role = "first" %}{% endif %}
           {% assign ptype = "conference" %}
-          {% if pub.conference contains 'Journal' or pub.conference contains 'RA-L' or pub.conference contains 'IJRR' or pub.conference contains 'T-FR' %}{% assign ptype = "journal" %}{% endif %}
+          {% if pub.conference contains 'Journal' or pub.conference contains 'RA-L' or pub.conference contains 'IJRR' or pub.conference contains 'T-FR' %}{% assign ptype = "journal" %}{% endif %}{% if pub.type == "challenge" %}{% assign ptype = "challenge" %}{% endif %}
           {% assign card_link = pub.project_link | default: pub.paper_link | default: pub.arxiv_link %}
           {% assign pub_year = pub.year | slice: 0, 4 %}
           {% assign venue_short = pub.conference | split: "," | first | strip %}
@@ -320,7 +323,8 @@ title: Jiwon Choi
           {% if venue_short == "RA-L" %}{% assign venue_full = "IEEE Robotics and Automation Letters" %}{% assign venue_url = "https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=7083369" %}{% endif %}
           {% if venue_short == "IROS" %}{% assign venue_full = "IEEE/RSJ International Conference on Intelligent Robots and Systems" %}{% endif %}
           {% if venue_short == "IJRR" %}{% assign venue_full = "International Journal of Robotics Research" %}{% assign venue_url = "https://journals.sagepub.com/home/IJR" %}{% endif %}{% if venue_short == "T-FR" %}{% assign venue_full = "IEEE Transactions on Field Robotics" %}{% assign venue_url = "https://www.ieee-ras.org/publications/t-fr" %}{% endif %}
-          {% if venue_short contains "ICRA workshop" %}
+          {% if venue_short == "IROS Workshop" %}{% assign venue_full = "IROS Workshop on Beyond Exteroception" %}{% assign venue_url = pub.conference_link %}{% endif %}
+{% if venue_short contains "ICRA workshop" %}
             {% assign venue_short = "ICRA Workshop" %}
             {% assign venue_full = "ICRA Workshop on Field Robotics" %}
             {% assign venue_url = "https://2025.ieee-icra.org/event/workshop-on-field-robotics/" %}
@@ -331,7 +335,7 @@ title: Jiwon Choi
           {% assign role_label = "Co-author" %}
           {% if role == "first" %}{% assign role_label = "1st Author" %}{% endif %}
           {% assign type_label = "Conference" %}
-          {% if ptype == "journal" %}{% assign type_label = "Journal" %}{% endif %}
+          {% if ptype == "journal" %}{% assign type_label = "Journal" %}{% endif %}{% if ptype == "challenge" %}{% assign type_label = "Challenge" %}{% endif %}
           {% assign first_author_name = first_author | strip %}
           {% assign first_author_url = "" %}
           {% if first_author_name == "Hogyun Kim" %}{% assign first_author_url = "https://hogyun2.github.io/" %}{% endif %}
