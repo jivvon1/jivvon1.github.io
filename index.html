@@ -3,59 +3,41 @@ layout: default
 title: Jiwon Choi
 ---
 
-<div class="page-wrap">
-  <div class="layout-2col">
+<div class="hm">
 
-  <!-- LEFT: Profile rail -->
-  <aside class="profile-rail">
-    <div class="profile-avatar">
-      <img src="{{ site.avatar }}" alt="{{ site.author.name }}">
-    </div>
-
-    <blockquote class="profile-hello">
-      <span class="wave" aria-hidden="true">👋</span>
-      Hi! I'm Jiwon — I study <strong>Learning-based State Estimation</strong> and <strong>Proprioceptive Odometry</strong> at SPARO Lab.
-    </blockquote>
-
-    <ul class="profile-info">
-      <li><i class="fas fa-graduation-cap"></i> Integrated M.S.–Ph.D. Student</li>
-      <li><i class="fas fa-map-marker-alt"></i> Incheon, South Korea</li>
-      <li><i class="fas fa-building"></i> <a href="https://sparolab.github.io/" target="_blank">SPARO Lab, Inha University</a></li>
-      <li><i class="fas fa-envelope"></i> <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></li>
-    </ul>
-
-    <div class="profile-links">
-      <a href="mailto:{{ site.author.email }}" title="Email"><i class="fas fa-envelope"></i></a>
-      <a href="{{ '/assets/img/cv.pdf' | relative_url }}" target="_blank" title="CV"><i class="fas fa-file-alt"></i></a>
-      <a href="https://www.linkedin.com/in/{{ site.author.linkedin }}" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-      <a href="{{ site.author.scholar }}" target="_blank" title="Google Scholar"><i class="fa-brands fa-google-scholar"></i></a>
-      <a href="https://github.com/{{ site.author.github }}" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-    </div>
-  </aside>
-
-  <!-- RIGHT: Tabbed content -->
-  <main class="content-main">
     <!-- Home -->
     <section class="tab-panel is-active" data-panel="home">
-      <div class="home-section">
-        <h2 class="panel-title">Profile</h2>
-        <p class="profile-bio">
-          I'm an integrated M.S.–Ph.D. student in the Department of Electrical and Computer Engineering at Inha University,
-          advised by <strong>Younggun Cho</strong> in
-          <a href="https://sparolab.github.io/" target="_blank" rel="noopener">SPARO Lab</a>.
-          I also received my B.S. in Electrical Engineering from Inha University.
-          During my M.S., I worked on <strong>learning-based state estimation</strong>, focusing on <strong>self-supervised inertial odometry</strong>,
-          and I'm now working on <strong>proprioceptive state estimation</strong> — explicitly modeling and correcting
-          environment-induced error in proprioceptive odometry from inertial, kinematic, and contact signals alone.
-          For my personal thoughts and research experiences, please check out my
-          <button class="inline-link" data-goto="posts" type="button">Posts</button> :)
-        </p>
-      </div>
+      <header class="hm-hero">
+        <div class="hm-hero-copy">
+          <span class="hm-badge">Integrated M.S.–Ph.D. · SPARO Lab</span>
+          <h1>Hi, I'm <em>Jiwon</em>.</h1>
+          <p class="hm-subtitle">Learning-based state estimation &amp; proprioceptive odometry</p>
+          <p class="hm-bio">
+            I'm an integrated M.S.–Ph.D. student in Electrical and Computer Engineering at Inha University,
+            advised by <strong>Younggun Cho</strong> in
+            <a href="https://sparolab.github.io/" target="_blank" rel="noopener">SPARO Lab</a>,
+            where I also received my B.S. in Electrical Engineering.
+            During my M.S. I worked on <strong>self-supervised inertial odometry</strong>; I'm now working on
+            <strong>proprioceptive state estimation</strong> — modeling and correcting environment-induced error
+            from inertial, kinematic, and contact signals alone.
+            For my thoughts and research notes, see the <button class="inline-link" data-goto="posts" type="button">Posts</button>.
+          </p>
+          <ul class="hm-facts">
+            <li><i class="fas fa-location-dot"></i> Incheon, South Korea</li>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></li>
+          </ul>
+        </div>
+        <figure class="hm-photo">
+          <span class="hm-tape" aria-hidden="true"></span>
+          <img src="{{ site.avatar }}" alt="{{ site.author.name }}">
+          <figcaption><span class="wave" aria-hidden="true">👋</span> Hi! I'm Jiwon</figcaption>
+        </figure>
+      </header>
 
-      <div class="home-section is-latest">
-        <div class="home-section-header">
-          <h2 class="panel-title">Latest News</h2>
-          <div class="home-section-header-right">
+      <section class="hm-block">
+        <div class="hm-block-head">
+          <div><p class="hm-eyebrow">News</p><h2>Latest news</h2></div>
+          <div class="hm-block-tools">
             <div class="news-legend" aria-hidden="true">
               <span class="news-legend-item"><span class="news-dot news-dot--publication"></span>Publication</span>
               <span class="news-legend-item"><span class="news-dot news-dot--award"></span>Award</span>
@@ -86,11 +68,11 @@ title: Jiwon Choi
           {% endfor %}
         </ul>
         {% endif %}
-      </div>
+      </section>
 
-      <div class="home-section is-latest">
-        <div class="home-section-header">
-          <h2 class="panel-title">Latest Research</h2>
+      <section class="hm-block">
+        <div class="hm-block-head">
+          <div><p class="hm-eyebrow">Research</p><h2>Latest research</h2></div>
           <button class="see-more" data-goto="research">See all <i class="fas fa-arrow-right"></i></button>
         </div>
         <div class="research-thumb-grid">
@@ -109,7 +91,7 @@ title: Jiwon Choi
               {% if venue_short == "RA-L" %}{% assign venue_full = "IEEE Robotics and Automation Letters" %}{% assign venue_url = "https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=7083369" %}{% endif %}
               {% if venue_short == "IROS" %}{% assign venue_full = "IEEE/RSJ International Conference on Intelligent Robots and Systems" %}{% endif %}
               {% if venue_short == "IJRR" %}{% assign venue_full = "International Journal of Robotics Research" %}{% assign venue_url = "https://journals.sagepub.com/home/IJR" %}{% endif %}{% if venue_short == "T-FR" %}{% assign venue_full = "IEEE Transactions on Field Robotics" %}{% assign venue_url = "https://www.ieee-ras.org/publications/t-fr" %}{% endif %}
-              {% if venue_short == "IROS Workshop" %}{% assign venue_full = "IROS Workshop on Beyond Exteroception" %}{% assign venue_url = pub.conference_link %}{% endif %}
+              {% if venue_short == "IROS Workshop" %}{% assign venue_full = "IROS Workshop on Beyond Exteroception" %}{% assign venue_url = pub.conference_link %}{% endif %}{% if venue_short == "ICRA Workshop" %}{% assign venue_full = "ICRA Workshop on Open Challenges in Robotics for Asset Inspection and Management" %}{% assign venue_url = pub.conference_link %}{% endif %}
 {% if venue_short contains "ICRA workshop" %}
                 {% assign venue_short = "ICRA Workshop" %}
                 {% assign venue_full = "ICRA Workshop on Field Robotics" %}
@@ -156,11 +138,16 @@ title: Jiwon Choi
             {% endif %}
           {% endfor %}
         </div>
-      </div>
+      </section>
     </section>
 
     <!-- News -->
     <section class="tab-panel" data-panel="news">
+      <header class="hm-panel-head">
+        <p class="hm-eyebrow">News</p>
+        <h2>News</h2>
+        <p>Papers, awards, and talks, newest first.</p>
+      </header>
       {% if site.data.news and site.data.news.size > 0 %}
       <div class="filter-bar">
         <div class="filter-row">
@@ -208,6 +195,11 @@ title: Jiwon Choi
 
     <!-- Publications (text list, grouped by year, paginated) -->
     <section class="tab-panel" data-panel="publications">
+      <header class="hm-panel-head">
+        <p class="hm-eyebrow">Publications</p>
+        <h2>Publications</h2>
+        <p>Conference and journal papers, grouped by year.</p>
+      </header>
       <div class="filter-bar">
         <div class="filter-row">
           <span class="filter-label">Region</span>
@@ -286,6 +278,11 @@ title: Jiwon Choi
 
     <!-- Research (filterable cards) -->
     <section class="tab-panel" data-panel="research">
+      <header class="hm-panel-head">
+        <p class="hm-eyebrow">Research</p>
+        <h2>Research</h2>
+        <p>Projects I led or contributed to.</p>
+      </header>
       <div class="filter-bar">
         <div class="filter-row">
           <span class="filter-label">Type</span>
@@ -323,7 +320,7 @@ title: Jiwon Choi
           {% if venue_short == "RA-L" %}{% assign venue_full = "IEEE Robotics and Automation Letters" %}{% assign venue_url = "https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=7083369" %}{% endif %}
           {% if venue_short == "IROS" %}{% assign venue_full = "IEEE/RSJ International Conference on Intelligent Robots and Systems" %}{% endif %}
           {% if venue_short == "IJRR" %}{% assign venue_full = "International Journal of Robotics Research" %}{% assign venue_url = "https://journals.sagepub.com/home/IJR" %}{% endif %}{% if venue_short == "T-FR" %}{% assign venue_full = "IEEE Transactions on Field Robotics" %}{% assign venue_url = "https://www.ieee-ras.org/publications/t-fr" %}{% endif %}
-          {% if venue_short == "IROS Workshop" %}{% assign venue_full = "IROS Workshop on Beyond Exteroception" %}{% assign venue_url = pub.conference_link %}{% endif %}
+          {% if venue_short == "IROS Workshop" %}{% assign venue_full = "IROS Workshop on Beyond Exteroception" %}{% assign venue_url = pub.conference_link %}{% endif %}{% if venue_short == "ICRA Workshop" %}{% assign venue_full = "ICRA Workshop on Open Challenges in Robotics for Asset Inspection and Management" %}{% assign venue_url = pub.conference_link %}{% endif %}
 {% if venue_short contains "ICRA workshop" %}
             {% assign venue_short = "ICRA Workshop" %}
             {% assign venue_full = "ICRA Workshop on Field Robotics" %}
@@ -339,6 +336,7 @@ title: Jiwon Choi
           {% assign first_author_name = first_author | strip %}
           {% assign first_author_url = "" %}
           {% if first_author_name == "Hogyun Kim" %}{% assign first_author_url = "https://hogyun2.github.io/" %}{% endif %}
+          {% if first_author_name == "Jungwoo Lee" %}{% assign first_author_url = "https://scholar.google.com/citations?hl=ko&user=H0rvKXYAAAAJ" %}{% endif %}
           <article class="research-thumb{% if role == 'first' %} is-mine{% endif %}"
              data-role="{{ role }}"
              data-type="{{ ptype }}">  
@@ -369,6 +367,7 @@ title: Jiwon Choi
                 {% endif %}
                 {% if pub.spotlight %}<span class="research-thumb-award research-thumb-award--inline"><i class="fas fa-award"></i> {{ pub.spotlight }}</span>{% endif %}
               </p>
+              {% if pub.award %}<p class="research-thumb-award"><i class="fas fa-award"></i> {{ pub.award }}</p>{% endif %}
               {% elsif pub.award %}
               <p class="research-thumb-award"><i class="fas fa-award"></i> {{ pub.award }}{% if pub.spotlight %}<span class="research-thumb-award--inline"><i class="fas fa-award"></i> {{ pub.spotlight }}</span>{% endif %}</p>
               {% elsif pub.spotlight %}
@@ -405,6 +404,11 @@ title: Jiwon Choi
 
     <!-- Posts -->
     <section class="tab-panel" data-panel="posts">
+      <header class="hm-panel-head">
+        <p class="hm-eyebrow">Posts</p>
+        <h2>Posts</h2>
+        <p>Interactive notes and small tools.</p>
+      </header>
       <div class="filter-bar">
         <div class="filter-row">
           <span class="filter-label">Category</span>
@@ -420,7 +424,9 @@ title: Jiwon Choi
         <a class="post-feature" data-category="project" href="{{ '/posts/paper-reviewer/' | relative_url }}">
           <div class="post-feature-visual post-feature-visual--pr" aria-hidden="true">
             <span class="post-pr-scene">
+              <span class="post-pr-sheet post-pr-sheet--back"></span>
               <span class="post-pr-sheet">
+                <span class="post-pr-tape"></span>
                 <span class="post-pr-line is-title"></span>
                 <span class="post-pr-line"></span>
                 <span class="post-pr-line is-short"></span>
@@ -436,7 +442,7 @@ title: Jiwon Choi
             </span>
           </div>
           <div class="post-feature-copy">
-            <div class="post-meta"><span>Project</span><span>Claude API</span><span>Tool</span></div>
+            <div class="post-meta"><span>Project</span><span>Claude Code</span><span>Tool</span></div>
             <h3>Paper Reviewer</h3>
             <p>Drop in a paper PDF: get grammar, spacing, and capitalization issues marked right on the page, plus a harsh or typical reviewer's accept/reject verdict for your target venue, in English and Korean.</p>
             <span class="post-open">Open tool <i class="fas fa-arrow-right"></i></span>
@@ -444,13 +450,16 @@ title: Jiwon Choi
         </a>
         <a class="post-feature" data-category="study" href="{{ '/posts/lidar-inertial-odometry/' | relative_url }}">
           <div class="post-feature-visual post-feature-visual--lio" aria-hidden="true">
-            <span class="post-lio-scene">
-              <span class="post-lio-ring post-lio-ring--a"></span>
-              <span class="post-lio-ring post-lio-ring--b"></span>
-              <span class="post-lio-wall"></span>
-              <span class="post-lio-edge"></span>
-              <span class="post-lio-sensor"></span>
-              <span class="post-lio-beam"></span>
+            <span class="post-sheet-scene">
+              <span class="post-sheet">
+                <span class="post-pr-tape"></span>
+                <svg viewBox="0 0 120 84" fill="none">
+                  <g fill="#cbd5e1"><circle cx="18" cy="18" r="2"/><circle cx="28" cy="18" r="2"/><circle cx="38" cy="18" r="2"/><circle cx="48" cy="18" r="2"/><circle cx="58" cy="18" r="2"/><circle cx="68" cy="18" r="2"/><circle cx="78" cy="18" r="2"/><circle cx="78" cy="28" r="2"/><circle cx="78" cy="38" r="2"/><circle cx="78" cy="48" r="2"/><circle cx="78" cy="58" r="2"/><circle cx="78" cy="68" r="2"/></g>
+                  <g fill="#4f46e5"><circle cx="30" cy="26" r="2"/><circle cx="40" cy="26" r="2"/><circle cx="50" cy="26" r="2"/><circle cx="60" cy="26" r="2"/><circle cx="70" cy="26" r="2"/><circle cx="80" cy="26" r="2"/><circle cx="90" cy="26" r="2"/><circle cx="90" cy="36" r="2"/><circle cx="90" cy="46" r="2"/><circle cx="90" cy="56" r="2"/><circle cx="90" cy="66" r="2"/><circle cx="90" cy="76" r="2"/></g>
+                  <path d="M24 60 L54 48" stroke="#4f46e5" stroke-width="1.6" stroke-linecap="round"/><path d="M48 46 L54 48 L50 53" stroke="#4f46e5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  <text x="22" y="74" fill="#64748b" font-family="Inter,sans-serif" font-size="9" font-weight="600">T</text>
+                </svg>
+              </span>
             </span>
           </div>
           <div class="post-feature-copy">
@@ -462,14 +471,18 @@ title: Jiwon Choi
         </a>
         <a class="post-feature" data-category="study" href="{{ '/posts/legged-kinematics/' | relative_url }}">
           <div class="post-feature-visual" aria-hidden="true">
-            <span class="post-bot-scene">
-              <span class="post-ground"></span>
-              <span class="post-bot-body"></span>
-              <span class="post-bot-leg post-bot-leg--left"><span class="post-bot-shank"></span></span>
-              <span class="post-bot-leg post-bot-leg--right"><span class="post-bot-shank"></span></span>
-              <span class="post-contact post-contact--left"></span>
-              <span class="post-contact post-contact--right"></span>
-              <span class="post-velocity"><i class="fas fa-arrow-right"></i></span>
+            <span class="post-sheet-scene">
+              <span class="post-sheet post-sheet--alt">
+                <span class="post-pr-tape"></span>
+                <svg viewBox="0 0 120 84" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="28" y="22" width="56" height="18" rx="5" stroke="#334155" stroke-width="2"/>
+                  <path d="M38 40 L32 54 L40 66 M74 40 L68 54 L76 66" stroke="#334155" stroke-width="2"/>
+                  <circle cx="40" cy="66" r="3" fill="#4f46e5"/><circle cx="76" cy="66" r="3" fill="#4f46e5"/>
+                  <path d="M16 70 H104" stroke="#cbd5e1" stroke-width="1.5"/>
+                  <path d="M90 31 H108 M103 26 L108 31 L103 36" stroke="#4f46e5" stroke-width="2"/>
+                  <text x="94" y="20" fill="#4f46e5" font-family="Inter,sans-serif" font-size="9" font-weight="700">v</text>
+                </svg>
+              </span>
             </span>
           </div>
           <div class="post-feature-copy">
@@ -489,11 +502,18 @@ title: Jiwon Choi
 
     <!-- ETC -->
     <section class="tab-panel" data-panel="etc">
+      {% assign talks = site.data.etc.presentation | where_exp: "i", "i.title != ''" %}
+      <header class="hm-panel-head">
+        <p class="hm-eyebrow">ETC</p>
+        <h2>Etc.</h2>
+        <p>{% if talks.size > 0 %}Talks and academic service.{% else %}Academic service.{% endif %}</p>
+      </header>
       <div class="etc-grid">
+        {% if talks.size > 0 %}
         <div class="etc-column">
           <h3 class="etc-subtitle"><i class="fas fa-chalkboard-teacher"></i> Presentation</h3>
           <ul class="etc-list">
-            {% for item in site.data.etc.presentation %}
+            {% for item in talks %}
             <li>
               <span class="etc-title">{{ item.title }}</span>
               <span class="etc-detail">{{ item.venue }}, {{ item.year }}</span>
@@ -501,6 +521,7 @@ title: Jiwon Choi
             {% endfor %}
           </ul>
         </div>
+        {% endif %}
         <div class="etc-column">
           <h3 class="etc-subtitle"><i class="fas fa-users"></i> Academic Service</h3>
           <ul class="etc-list">
@@ -517,8 +538,6 @@ title: Jiwon Choi
       </div>
     </section>
 
-  </main>
-  </div>
 </div>
 
 <script>
@@ -560,7 +579,7 @@ title: Jiwon Choi
     });
   })();
 
-  // Research filters + pagination (4 per page)
+  // Research filters + pagination (10 per page)
   (function () {
     const grid = document.querySelector('[data-research-grid]');
     if (!grid) return;
@@ -569,7 +588,7 @@ title: Jiwon Choi
     const info = document.querySelector('[data-page-info]');
     const prevBtn = document.querySelector('[data-page-prev]');
     const nextBtn = document.querySelector('[data-page-next]');
-    const PAGE_SIZE = 4;
+    const PAGE_SIZE = 10;
     const state = { type: 'all', role: 'all', page: 1 };
 
     function matchFilters(card) {
@@ -617,7 +636,7 @@ title: Jiwon Choi
     apply();
   })();
 
-  // Publications filter + pagination (up to 6 per page, years never split across pages)
+  // Publications filter + pagination (two years per page, at least 10 papers)
   (function () {
     const list = document.querySelector('[data-pub-list]');
     if (!list) return;
@@ -627,7 +646,8 @@ title: Jiwon Choi
     const prevBtn = document.querySelector('[data-pub-prev]');
     const nextBtn = document.querySelector('[data-pub-next]');
     const empty = document.querySelector('[data-pub-empty]');
-    const PAGE_SIZE = 6;
+    const YEARS_PER_PAGE = 2;
+    const MIN_PER_PAGE = 10;
     const items = Array.from(list.querySelectorAll('li'));
     const state = { region: 'all', type: 'all', page: 1 };
 
@@ -651,11 +671,16 @@ title: Jiwon Choi
         else groups.push({ year: li.dataset.year, items: [li] });
       });
       const pages = [];
-      groups.forEach(g => {
-        const cur = pages[pages.length - 1];
-        if (cur && cur.length + g.items.length <= PAGE_SIZE) cur.push(...g.items);
-        else pages.push(g.items.slice());
-      });
+      // Two years per page; if those hold fewer than MIN_PER_PAGE papers,
+      // keep pulling in the following years.
+      for (let i = 0; i < groups.length;) {
+        const page = [];
+        let years = 0;
+        while (i < groups.length && (years < YEARS_PER_PAGE || page.length < MIN_PER_PAGE)) {
+          page.push(...groups[i].items); i++; years++;
+        }
+        pages.push(page);
+      }
       const totalPages = Math.max(1, pages.length);
       if (state.page > totalPages) state.page = totalPages;
       const pageItems = pages[state.page - 1] || [];

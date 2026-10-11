@@ -1,24 +1,40 @@
-<nav class="topnav-v2">
-  <div class="topnav-v2-inner">
-    <a href="{{ '/' | relative_url }}" class="brand">
-      <span class="brand-title">Jiwon Choi</span>
-      <span class="brand-sub">Robust State Estimation · Proprioceptive Odometry</span>
-    </a>
-    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
-      <i class="fas fa-sun theme-icon theme-icon--sun"></i>
-      <i class="fas fa-moon theme-icon theme-icon--moon"></i>
-    </button>
-  </div>
-{% if page.url == '/' %}
-  <div class="tabs" role="tablist">
-    <div class="tabs-scroll">
-      <button class="tab is-active" data-tab="home" role="tab">Home</button>
-      <button class="tab" data-tab="publications" role="tab">Publications</button>
-      <button class="tab" data-tab="research" role="tab">Research</button>
-      <button class="tab" data-tab="posts" role="tab">Posts</button>
-      <button class="tab" data-tab="news" role="tab">News</button>
-      <button class="tab" data-tab="etc" role="tab">ETC</button>
+{%- assign is_home = false -%}{%- if page.url == '/' -%}{%- assign is_home = true -%}{%- endif -%}
+<nav class="topnav-v2{% unless is_home %} is-compact is-fixed-compact{% endunless %}">
+  <div class="hd-util">
+    <div class="hd-inner">
+      <a class="hd-home" href="{{ '/' | relative_url }}"><i class="fas fa-house"></i> Jiwon Choi</a>
+      <span class="hd-aff">SPARO Lab · Inha University</span>
+      <div class="hd-util-right">
+        <a class="hd-link" href="{{ site.author.scholar }}" target="_blank" rel="noopener"><i class="fa-brands fa-google-scholar"></i><span> Scholar</span></a>
+        <a class="hd-link" href="https://github.com/{{ site.author.github }}" target="_blank" rel="noopener"><i class="fab fa-github"></i><span> GitHub</span></a>
+        <a class="hd-link" href="https://www.linkedin.com/in/{{ site.author.linkedin }}" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i><span> LinkedIn</span></a>
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode" type="button">
+          <i class="fas fa-sun theme-icon theme-icon--sun"></i>
+          <i class="fas fa-moon theme-icon theme-icon--moon"></i>
+        </button>
+      </div>
     </div>
   </div>
-{% endif %}
+  <div class="hd-brand-wrap">
+    <a href="{{ '/' | relative_url }}" class="brand">
+      <span class="brand-text">
+        <span class="brand-title">Jiwon Choi</span>
+        <span class="brand-sub">Robust State Estimation · Proprioceptive Odometry</span>
+      </span>
+    </a>
+  </div>
+  <div class="tabs" role="tablist">
+    <div class="tabs-scroll">
+      {%- assign tab_names = "home,publications,research,posts,news,etc" | split: "," -%}
+      {%- assign tab_labels = "Home,Publications,Research,Posts,News,ETC" | split: "," -%}
+      {%- for name in tab_names -%}
+      {%- if is_home %}
+      <button class="tab{% if forloop.first %} is-active{% endif %}" data-tab="{{ name }}" role="tab" type="button">{{ tab_labels[forloop.index0] }}</button>
+      {%- else %}
+      <a class="tab{% if name == 'posts' and page.url contains '/posts/' %} is-active{% endif %}" href="{{ '/' | relative_url }}#{{ name }}">{{ tab_labels[forloop.index0] }}</a>
+      {%- endif -%}
+      {%- endfor %}
+      <a class="tab-cta" href="{{ '/assets/img/cv.pdf' | relative_url }}" target="_blank">CV</a>
+    </div>
+  </div>
 </nav>

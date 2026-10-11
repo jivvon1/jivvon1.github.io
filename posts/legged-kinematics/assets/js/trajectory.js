@@ -212,7 +212,7 @@
       dctx.strokeStyle = sub; dctx.lineWidth = 2; dctx.beginPath();
       rawPts.forEach((p, i) => { const [x, y] = toPx(p); i ? dctx.lineTo(x, y) : dctx.moveTo(x, y); }); dctx.stroke();
     } else {
-      dctx.fillStyle = sub; dctx.font = "500 13px 'JetBrains Mono'"; dctx.textAlign = 'center';
+      dctx.fillStyle = sub; dctx.font = '500 13px Inter, Pretendard, sans-serif'; dctx.textAlign = 'center';
       dctx.fillText('여기에 드래그해서 경로를 그리세요', w / 2, h / 2); dctx.textAlign = 'start';
     }
   }
@@ -250,7 +250,7 @@
       const truthC = '#8b949e', bd = cssv('--border', '#D3DCE3');
       c.cell.classList.toggle('is-worst', g === worst && maxDrift > 0.01);
       c.cell.classList.toggle('is-current', g === state.gait);
-      if (!all.length || path.length < 2) { ctx.fillStyle = cssv('--text-muted', '#6B7B88'); ctx.font = "500 10px 'JetBrains Mono'"; ctx.textAlign = 'center'; ctx.fillText('경로 없음', w / 2, h / 2); ctx.textAlign = 'start'; c.drift.textContent = '—'; return; }
+      if (!all.length || path.length < 2) { ctx.fillStyle = cssv('--text-muted', '#6B7B88'); ctx.font = '500 10px Inter, Pretendard, sans-serif'; ctx.textAlign = 'center'; ctx.fillText('경로 없음', w / 2, h / 2); ctx.textAlign = 'start'; c.drift.textContent = '—'; return; }
       let minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
       all.forEach((p) => { minX = Math.min(minX, p.x); maxX = Math.max(maxX, p.x); minY = Math.min(minY, p.y); maxY = Math.max(maxY, p.y); });
       const spanX = Math.max(0.3, maxX - minX), spanY = Math.max(0.3, maxY - minY);

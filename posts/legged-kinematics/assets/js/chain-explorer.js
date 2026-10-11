@@ -105,7 +105,7 @@
   const ln = (a, b, stroke, w, dash) =>
     `<line x1="${a[0].toFixed(2)}" y1="${a[1].toFixed(2)}" x2="${b[0].toFixed(2)}" y2="${b[1].toFixed(2)}" stroke="${stroke}" stroke-width="${w}"${dash ? ` stroke-dasharray="${dash}"` : ''} stroke-linecap="round"/>`;
   const tx = (x, y, size, fill, str, anchor) =>
-    `<text x="${x.toFixed(2)}" y="${y.toFixed(2)}" font-size="${size}" fill="${fill}"${anchor ? ` text-anchor="${anchor}"` : ''} font-family="'JetBrains Mono',monospace">${str}</text>`;
+    `<text x="${x.toFixed(2)}" y="${y.toFixed(2)}" font-size="${size}" fill="${fill}"${anchor ? ` text-anchor="${anchor}"` : ''} font-family="Inter, Pretendard, sans-serif">${str}</text>`;
   const dot = (p, r, fill, stroke, sw) =>
     `<circle cx="${p[0].toFixed(2)}" cy="${p[1].toFixed(2)}" r="${r}" fill="${fill}"${stroke ? ` stroke="${stroke}" stroke-width="${sw || 2}"` : ''}/>`;
   const foot = (p, r, fill, stroke, sw) =>   // foot pad: a rounded rectangle, distinct from joint circles

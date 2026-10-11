@@ -133,9 +133,9 @@
     });
     ctx.fillStyle=text; ctx.beginPath();ctx.roundRect(cx-47,bodyY-34+bodyBob,94,55,13);ctx.fill();
     ctx.fillStyle=accent;ctx.beginPath();ctx.roundRect(cx-31,bodyY-21+bodyBob,62,5,3);ctx.fill();
-    ctx.fillStyle=bg;ctx.font='600 10px Montserrat';ctx.textAlign='center';ctx.fillText('BASE',cx,bodyY+5+bodyBob);
+    ctx.fillStyle=bg;ctx.font='600 10px Inter, Pretendard, sans-serif';ctx.textAlign='center';ctx.fillText('BASE',cx,bodyY+5+bodyBob);
     arrow(cx,bodyY-48,state.velocity*55,accent);
-    ctx.fillStyle=muted;ctx.font='500 10px Montserrat';ctx.fillText('v BODY',cx,bodyY-59);
+    ctx.fillStyle=muted;ctx.font='500 10px Inter, Pretendard, sans-serif';ctx.fillText('v BODY',cx,bodyY-59);
 
     const stanceIndex = g.contacts[0] && !g.contacts[1] ? 0 : g.contacts[1] && !g.contacts[0] ? 1 : Math.abs(Math.sin(state.phase))>.1 ? (Math.sin(state.phase)>0?0:1) : 0;
     const a=angles[stanceIndex], prev=state.prevAngles[stanceIndex], rates=[(a[0]-prev[0])/Math.max(dt,.001),(a[1]-prev[1])/Math.max(dt,.001)];
@@ -416,7 +416,7 @@
     for(let x=Math.ceil(minX/step)*step;x<=maxX;x+=step){const sx=cx+x*scale;xyCtx.beginPath();xyCtx.moveTo(sx,0);xyCtx.lineTo(sx,h);xyCtx.stroke();}
     for(let y=Math.ceil(minY/step)*step;y<=maxY;y+=step){const sy=cy-y*scale;xyCtx.beginPath();xyCtx.moveTo(0,sy);xyCtx.lineTo(w,sy);xyCtx.stroke();}
     xyCtx.setLineDash([]);xyCtx.strokeStyle=css('--text-muted');xyCtx.lineWidth=1.4;xyCtx.beginPath();xyCtx.moveTo(cx,0);xyCtx.lineTo(cx,h);xyCtx.moveTo(0,cy);xyCtx.lineTo(w,cy);xyCtx.stroke();
-    xyCtx.fillStyle=css('--text-muted');xyCtx.font='500 9px Montserrat';if(cy>10&&cy<h-4)xyCtx.fillText(axisLabels[0]+' →',w-30,cy-6);if(cx>4&&cx<w-18)xyCtx.fillText(axisLabels[1]+' ↑',cx+6,13);xyCtx.fillText('grid '+step.toFixed(step<.1?2:1)+' m',10,15);
+    xyCtx.fillStyle=css('--text-muted');xyCtx.font='500 9px Inter, Pretendard, sans-serif';if(cy>10&&cy<h-4)xyCtx.fillText(axisLabels[0]+' →',w-30,cy-6);if(cx>4&&cx<w-18)xyCtx.fillText(axisLabels[1]+' ↑',cx+6,13);xyCtx.fillText('grid '+step.toFixed(step<.1?2:1)+' m',10,15);
     const palette={truth:'#8b949e',kin:'#54a7ff',imu:'#f08b54',ekf:'#55c79a'},colors={};
     Object.keys(palette).forEach(key=>{if(imu.visibleTraces[key])colors[key]=palette[key];});
     Object.keys(colors).forEach(key=>{xyCtx.beginPath();xyCtx.strokeStyle=colors[key];xyCtx.lineWidth=key==='ekf'?2.5:1.7;imu.xyHistory.forEach((sample,i)=>{const point=sample[key],x=cx+point[projection[0]]*scale,y=cy-point[projection[1]]*scale;if(i===0)xyCtx.moveTo(x,y);else xyCtx.lineTo(x,y);});xyCtx.stroke();});

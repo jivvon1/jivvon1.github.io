@@ -6,7 +6,7 @@ import {
 
 const root = document.querySelector('[data-loop-lab]');
 
-const COL = { gt: '#7b8894', odo: '#ff9256', fix: '#54a7ff', ok: '#55c79a', bad: '#e05555', node: '#f0c640' };
+const COL = { gt: '#7b8894', odo: '#ff9256', fix: '#54a7ff', ok: '#55c79a', bad: '#e05555', node: '#818cf8' };
 const MIN_GAP = 40;        // nodes that must separate a pair before it can be a revisit
 const DETECT_EVERY = 3;
 
@@ -214,7 +214,7 @@ function init(root) {
     g.restore();
 
     // legend — wraps onto a second row rather than running off the canvas
-    g.font = '500 13px "JetBrains Mono", monospace';
+    g.font = '500 13px Inter, Pretendard, sans-serif';
     const items = [
       { c: COL.gt, label: 'ground truth', dash: true },
       { c: COL.odo, label: 'odometry' },

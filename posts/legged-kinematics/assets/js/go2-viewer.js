@@ -34,7 +34,7 @@ if (app && host) {
   key.shadow.camera.near = 0.1;
   key.shadow.camera.far = 8;
   scene.add(key);
-  const rim = new THREE.DirectionalLight(0xf0c640, 1.8);
+  const rim = new THREE.DirectionalLight(0x818cf8, 1.8);
   rim.position.set(2, 1, -2);
   scene.add(rim);
 
@@ -56,7 +56,7 @@ if (app && host) {
   actor.add(robot);
   const trailPoints=[new THREE.Vector3(0,.007,0)];
   const trailGeometry=new THREE.BufferGeometry().setFromPoints(trailPoints);
-  const trail=new THREE.Line(trailGeometry,new THREE.LineBasicMaterial({color:0xf0c640,transparent:true,opacity:.5}));
+  const trail=new THREE.Line(trailGeometry,new THREE.LineBasicMaterial({color:0x818cf8,transparent:true,opacity:.5}));
   scene.add(trail);
   let lastTrailPoint=trailPoints[0].clone();
   const followTarget=new THREE.Vector3();
@@ -81,7 +81,7 @@ if (app && host) {
   [[2.2,-1.4],[-1.8,-2.2],[3.4,2.1],[-3.2,1.5],[.8,3.3]].forEach(([x,z],i)=>{
     const marker=new THREE.Mesh(new THREE.CylinderGeometry(.025,.055,.18,8),landmarkMaterial);
     marker.position.set(x,.09,z); marker.castShadow=true; scene.add(marker);
-    const cap=new THREE.Mesh(new THREE.SphereGeometry(.035,12,8),new THREE.MeshBasicMaterial({color:i%2?0x54a7ff:0xf0c640}));
+    const cap=new THREE.Mesh(new THREE.SphereGeometry(.035,12,8),new THREE.MeshBasicMaterial({color:i%2?0x54a7ff:0x818cf8}));
     cap.position.set(x,.2,z); scene.add(cap);
   });
 
@@ -121,7 +121,7 @@ if (app && host) {
       const knee = joint(); knee.name=s.name+'_calf_joint'; knee.position.set(0,0,-.213); hip.add(knee);
       knee.add(clonePart(s.mirror?calfMirror:calfMesh));
       const foot = clonePart(footMesh); foot.position.set(0,0,-.213); knee.add(foot);
-      const contact = new THREE.Mesh(new THREE.RingGeometry(.035,.052,32),new THREE.MeshBasicMaterial({color:0xf0c640,transparent:true,opacity:.75,side:THREE.DoubleSide}));
+      const contact = new THREE.Mesh(new THREE.RingGeometry(.035,.052,32),new THREE.MeshBasicMaterial({color:0x818cf8,transparent:true,opacity:.75,side:THREE.DoubleSide}));
       // Measured from the converted GLB: calf origin → lowest sole vertex = 0.2359 m.
       contact.position.set(0,0,-.236); knee.add(contact);
       legJoints.push({ ...s, abad, hip, knee, contact });

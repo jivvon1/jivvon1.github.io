@@ -207,7 +207,7 @@
 
   .hero-news-date {
     flex-shrink: 0;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: inherit;
     font-size: 0.8rem;
     color: var(--text-muted);
     min-width: 56px;
@@ -279,7 +279,7 @@
   flex-shrink: 0;
 
   &--publication { background: #2563eb; }
-  &--award { background: var(--accent); }
+  &--award { background: #f59e0b; }
   &--talk { background: #7c3aed; }
 }
 
@@ -340,7 +340,8 @@
 
   .news-date {
     flex-shrink: 0;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: inherit;
+    font-variant-numeric: tabular-nums;
     font-size: 0.85rem;
     color: var(--text-muted);
     min-width: 64px;
@@ -471,7 +472,7 @@
     .edu-date {
       color: var(--text-muted);
       font-size: 0.82rem;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: inherit;
     }
   }
 }
@@ -562,7 +563,7 @@
     .pub-year {
       font-size: 0.82rem;
       color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
+      font-family: inherit;
     }
 
     .pub-links {

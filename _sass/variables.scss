@@ -16,22 +16,22 @@ $transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
 :root {
   // Light mode (default)
-  --bg-primary: #fafafa;
-  --bg-secondary: #f0f0f0;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
   --bg-card: #ffffff;
-  --bg-card-hover: #f8f8f8;
-  --bg-nav: rgba(250, 250, 250, 0.85);
-  --bg-nav-mobile: rgba(250, 250, 250, 0.95);
-  --text-primary: #1a1a1a;
-  --text-secondary: #555555;
-  --text-muted: #999999;
-  --accent: #d4a017;
-  --accent-hover: #e6b422;
-  --accent-rgb: 212, 160, 23;
-  --border: #e0e0e0;
-  --border-hover: #cccccc;
-  --shadow-card: rgba(0, 0, 0, 0.08);
-  --shadow-heavy: rgba(0, 0, 0, 0.12);
+  --bg-card-hover: #f8fafc;
+  --bg-nav: rgba(255, 255, 255, 0.85);
+  --bg-nav-mobile: rgba(255, 255, 255, 0.95);
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-rgb: 79, 70, 229;
+  --border: #e2e8f0;
+  --border-hover: #cbd5e1;
+  --shadow-card: rgba(15, 23, 42, 0.06);
+  --shadow-heavy: rgba(15, 23, 42, 0.1);
   --nav-link-hover-bg: rgba(0, 0, 0, 0.04);
 }
 
@@ -39,18 +39,18 @@ $transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 @mixin dark-tokens {
   --bg-primary: #0a0a0a;
   --bg-secondary: #111111;
-  --bg-card: #212121;
-  --bg-card-hover: #2a2a2a;
+  --bg-card: #161616;
+  --bg-card-hover: #1d1d1d;
   --bg-nav: rgba(10, 10, 10, 0.85);
   --bg-nav-mobile: rgba(10, 10, 10, 0.95);
-  --text-primary: #f0f0f0;
-  --text-secondary: #a0a0a0;
-  --text-muted: #666666;
-  --accent: #f0c640;
-  --accent-hover: #f5d566;
-  --accent-rgb: 240, 198, 64;
-  --border: #2a2a2a;
-  --border-hover: #3a3a3a;
+  --text-primary: #f4f4f5;
+  --text-secondary: #d4d4d8;
+  --text-muted: #a1a1aa;
+  --accent: #818cf8;
+  --accent-hover: #a5b4fc;
+  --accent-rgb: 129, 140, 248;
+  --border: #27272a;
+  --border-hover: #3f3f46;
   --shadow-card: rgba(0, 0, 0, 0.4);
   --shadow-heavy: rgba(0, 0, 0, 0.5);
   --nav-link-hover-bg: rgba(255, 255, 255, 0.06);

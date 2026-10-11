@@ -17,7 +17,7 @@ import { Grid, buildProblem, gaussNewtonStep, cost, associate } from './lio-solv
 const root = document.querySelector('[data-lio-lab]');
 
 const C = {
-  map: 0x9db0c2, query: 0xff9256, edge: 0xf0c640, plane: 0x55c79a,
+  map: 0x9db0c2, query: 0xff9256, edge: 0x818cf8, plane: 0x55c79a,
   link: 0x54a7ff, truth: 0x65c98c, ghost: 0x3d4854
 };
 const deg = (r) => (r * 180 / Math.PI);
@@ -442,7 +442,7 @@ function start(root) {
     g.fillStyle = '#54a7ff';
     g.beginPath(); g.arc(X(hist.length - 1), Y(hist.at(-1)), 3, 0, 7); g.fill();
     g.fillStyle = css.getPropertyValue('--text-muted').trim() || '#888';
-    g.font = '500 12px JetBrains Mono, monospace';
+    g.font = '500 12px Inter, Pretendard, sans-serif';
     g.fillText(max.toFixed(2), 2, 14);
     g.fillText('0', 2, h - 21);
     g.fillText('iteration', w - 52, h - 6);
@@ -483,11 +483,11 @@ function start(root) {
   new ResizeObserver(resize).observe(host);
 
   const sensor = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, 0.2, 18),
-    new THREE.MeshStandardMaterial({ color: 0xf0c640, roughness: 0.4 }));
+    new THREE.MeshStandardMaterial({ color: 0x818cf8, roughness: 0.4 }));
   scene.add(sensor);
   const beam = new THREE.Line(
     new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3(1, 0, 0)]),
-    new THREE.LineBasicMaterial({ color: 0xf0c640, transparent: true, opacity: 0.55 }));
+    new THREE.LineBasicMaterial({ color: 0x818cf8, transparent: true, opacity: 0.55 }));
   scene.add(beam);
 
   rebuild();

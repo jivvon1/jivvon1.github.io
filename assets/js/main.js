@@ -25,14 +25,16 @@
   }
 })();
 
-// Keep --nav-h in sync with the fixed top bar's real height.
-// It is not constant: the brand subtitle wraps to two lines on narrow screens,
-// and everything anchored below the bar (sticky tab strip, sticky profile rail,
-// page top padding, scroll-padding) is positioned from this value.
+// Keep --nav-h in sync with the fixed header's real height (it changes with
+// the viewport width), and on the home page fold the brand row away once the
+// page is scrolled. --nav-h keeps the unfolded height there, so the content
+// doesn't jump when the header shrinks.
 (function () {
   var nav = document.querySelector('.topnav-v2');
   if (!nav) return;
+  var fixedCompact = nav.classList.contains('is-fixed-compact');
   function sync() {
+    if (!fixedCompact && nav.classList.contains('is-compact')) return;
     document.documentElement.style.setProperty(
       '--nav-h', Math.round(nav.getBoundingClientRect().height) + 'px');
   }
@@ -40,4 +42,18 @@
   if (window.ResizeObserver) new ResizeObserver(sync).observe(nav);
   else window.addEventListener('resize', sync);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
+
+  if (fixedCompact) return;
+  var ticking = false;
+  function onScroll() {
+    ticking = false;
+    var y = window.scrollY;
+    // hysteresis so the header doesn't flicker around the threshold
+    if (y > 80) nav.classList.add('is-compact');
+    else if (y < 20) nav.classList.remove('is-compact');
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  onScroll();
 })();

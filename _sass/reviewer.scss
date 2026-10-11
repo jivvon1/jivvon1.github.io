@@ -442,12 +442,15 @@ select.pr-input { cursor:pointer; }
 .pr-foot { margin:36px 0 0;text-align:center;color:var(--pr-muted);font-size:.78rem;line-height:1.7; }
 
 /* ── post card on the home page ── */
-.post-feature-visual--pr { background:linear-gradient(155deg,#2a2520,#3a332b); }
+// Home-page card thumbnail: two tilted sheets with tape, as in the post's
+// example figure, on the same flat stage as the other post cards.
 .post-pr-scene { position:absolute;inset:0;display:grid;place-items:center; }
-.post-pr-sheet { position:relative;width:104px;height:128px;padding:14px 12px;border-radius:5px;background:#f4f1ea;box-shadow:0 14px 34px rgba(0,0,0,.35);transform:rotate(-4deg);display:flex;flex-direction:column;gap:7px; }
-.post-pr-line { height:5px;border-radius:3px;background:#c9c4b8; &.is-short{width:62%} &.is-title{height:7px;width:80%;background:#8f897d;margin-bottom:3px} }
-.post-pr-mark { position:absolute;height:9px;border-radius:2px;mix-blend-mode:multiply; &--a{left:10px;top:43px;width:52px;background:rgba(229,72,77,.55)} &--b{left:40px;top:69px;width:46px;background:rgba(250,204,38,.75)} &--c{left:12px;top:95px;width:34px;background:rgba(79,143,247,.6)} }
-.post-pr-stamp { position:absolute;right:calc(50% - 92px);bottom:18px;padding:3px 9px;border:2px solid #ff6a55;border-radius:4px;color:#ff6a55;font:800 10px 'JetBrains Mono';letter-spacing:.12em;transform:rotate(-12deg); }
+.post-pr-sheet { position:relative;grid-area:1 / 1;width:104px;height:128px;padding:16px 12px 14px;border-radius:4px;background:#ffffff;box-shadow:0 1px 2px rgba(15,23,42,.06),0 16px 34px -12px rgba(30,27,75,.35);transform:rotate(-4deg);display:flex;flex-direction:column;gap:7px;
+  &--back{background:#eef1f7;transform:rotate(5deg) translate(8px,4px);box-shadow:0 10px 24px -12px rgba(30,27,75,.3)} }
+.post-pr-tape { position:absolute;top:-7px;left:50%;width:44px;height:13px;transform:translateX(-50%) rotate(-5deg);background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(226,232,240,.8));box-shadow:0 1px 2px rgba(15,23,42,.12),inset 0 0 0 1px rgba(148,163,184,.3); }
+.post-pr-line { height:5px;border-radius:3px;background:#e2e8f0; &.is-short{width:62%} &.is-title{height:7px;width:80%;background:#334155;margin-bottom:3px} }
+.post-pr-mark { position:absolute;height:9px;border-radius:2px;mix-blend-mode:multiply; &--a{left:10px;top:45px;width:52px;background:rgba(79,70,229,.32);box-shadow:inset 0 -2px #4f46e5} &--b{left:40px;top:71px;width:46px;background:rgba(124,58,237,.28);box-shadow:inset 0 -2px #7c3aed} &--c{left:12px;top:97px;width:34px;background:rgba(99,102,241,.22);box-shadow:inset 0 -2px #6366f1} }
+.post-pr-stamp { position:absolute;right:calc(50% - 96px);bottom:16px;padding:3px 9px;border:2px solid #7c3aed;border-radius:5px;background:rgba(255,255,255,.85);color:#6d28d9;font:800 10px 'Inter',sans-serif;letter-spacing:.12em;transform:rotate(-10deg); }
 
 /* ── responsive ── */
 @media (max-width:860px) {

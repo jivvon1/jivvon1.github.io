@@ -1,0 +1,38 @@
+@import 'variables';
+
+/* Paper Reviewer look for the two interactive posts (LIO, legged kinematics):
+   slate neutrals, indigo accent, Inter + Pretendard. The site tokens are
+   remapped on :root only while one of these posts is on the page, because
+   their canvases read the colours from the document root. */
+
+@mixin post-light {
+  --bg-primary:#ffffff; --bg-secondary:#f8fafc; --bg-card:#ffffff; --bg-card-hover:#f8fafc;
+  --text-primary:#0f172a; --text-secondary:#334155; --text-muted:#64748b;
+  --accent:#4f46e5; --accent-hover:#4338ca; --accent-rgb:79, 70, 229;
+  --border:#e2e8f0; --border-hover:#cbd5e1; --shadow-card:rgba(15,23,42,.08); --shadow-heavy:rgba(15,23,42,.14);
+}
+@mixin post-dark {
+  --bg-primary:#0a0a0a; --bg-secondary:#111111; --bg-card:#161616; --bg-card-hover:#1d1d1d;
+  --text-primary:#f4f4f5; --text-secondary:#d4d4d8; --text-muted:#a1a1aa;
+  --accent:#818cf8; --accent-hover:#a5b4fc; --accent-rgb:129, 140, 248;
+  --border:#27272a; --border-hover:#3f3f46; --shadow-card:rgba(0,0,0,.4); --shadow-heavy:rgba(0,0,0,.5);
+}
+:root:has(.kin-page), :root:has(.lio-page) { @include post-light; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]):has(.kin-page), :root:not([data-theme="light"]):has(.lio-page) { @include post-dark; } }
+:root[data-theme="dark"]:has(.kin-page), :root[data-theme="dark"]:has(.lio-page) { @include post-dark; }
+
+$post-sans: 'Inter', 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+.kin-page, .lio-page { font-family:$post-sans; font-variant-numeric:tabular-nums; -webkit-font-smoothing:antialiased;
+  h1, h2, h3, p, button, input, select, label { font-family:inherit; } }
+
+/* Hero, as on the Paper Reviewer page */
+:is(.kin-page, .lio-page) {
+  .kin-eyebrow { color:var(--accent);font:600 .74rem $post-sans;letter-spacing:.08em; }
+  .kin-hero h1 { font-family:$post-sans;font-size:clamp(2.1rem,4vw,3rem);font-weight:700;letter-spacing:-.025em;line-height:1.15; }
+  .kin-hero > p { color:var(--text-muted); }
+  .kin-hero-tags span { font-family:$post-sans;background:var(--bg-card);border-color:var(--border); }
+  .kin-block-n { font-family:$post-sans;color:#fff;border-radius:8px; }
+  .kin-section-index { font-family:$post-sans;letter-spacing:.14em;font-weight:700; }
+}
+:root[data-theme="dark"] :is(.kin-page, .lio-page) .kin-block-n { color:#0b0b1a; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) :is(.kin-page, .lio-page) .kin-block-n { color:#0b0b1a; } }

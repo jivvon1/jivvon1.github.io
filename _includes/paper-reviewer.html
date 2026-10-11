@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 
 {%- assign t = site.data.paper_reviewer[include.lang] -%}
 <article class="pr-page-wrap" data-reviewer-app data-ui-lang="{{ include.lang }}">
@@ -9,8 +7,8 @@
       <a class="pr-toplink" href="#pr-start">{{ t.nav_try }}</a>
       <a class="pr-toplink" href="#pr-how">{{ t.nav_how }}</a>
       <div class="pr-langtoggle" role="group" aria-label="Language">
-        <a href="{{ '/posts/paper-reviewer/en/' | relative_url }}" hreflang="en"{% if include.lang == 'en' %} class="is-active" aria-current="page"{% endif %}>ENG</a>
-        <a href="{{ '/posts/paper-reviewer/' | relative_url }}" hreflang="ko"{% if include.lang == 'ko' %} class="is-active" aria-current="page"{% endif %}>KOR</a>
+        <a href="{{ '/posts/paper-reviewer/' | relative_url }}" hreflang="en"{% if include.lang == 'en' %} class="is-active" aria-current="page"{% endif %}>ENG</a>
+        <a href="{{ '/posts/paper-reviewer/ko/' | relative_url }}" hreflang="ko"{% if include.lang == 'ko' %} class="is-active" aria-current="page"{% endif %}>KOR</a>
       </div>
     </div>
   </nav>
