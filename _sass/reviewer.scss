@@ -407,6 +407,17 @@ select.pr-input { cursor:pointer; }
   &--good h3 i{background:rgba(var(--pr-ok-rgb),.12);color:var(--pr-green)} &--bad h3 i{background:rgba(229,72,77,.14);color:#e5484d} }
 .pr-wsev { display:inline-block;margin-right:7px;padding:1px 8px;border-radius:99px;font:700 .6rem $pr-sans;text-transform:uppercase;vertical-align:1px; &--major{background:rgba(229,72,77,.14);color:#e5484d} &--minor{background:var(--pr-bg-2);color:var(--pr-muted)} }
 
+/* venue fit */
+.pr-fit { margin-top:14px;padding:20px 22px;border:1px solid var(--pr-line);border-left:4px solid var(--tone);border-radius:18px;background:var(--pr-card); }
+.pr-fit-head { display:flex;align-items:center;gap:10px;margin-bottom:8px; h3{margin:0;font-size:1rem; i{margin-right:6px;color:var(--pr-red)}} }
+.pr-fit-badge { padding:2px 10px;border-radius:99px;border:1px solid var(--tone);color:var(--tone);font-size:.72rem;font-weight:800; }
+.pr-fit-reason { margin:0;color:var(--pr-ink-2);font-size:.9rem;line-height:1.7; }
+.pr-fit-rec { margin:10px 0 0;padding:10px 12px;border-radius:10px;background:var(--pr-card-2);color:var(--pr-ink);font-size:.88rem;line-height:1.65; b{margin-right:6px;color:var(--tone)} }
+.pr-fit-alts { margin-top:14px; ol{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px} li{display:flex;gap:10px;padding:10px 12px;border:1px solid var(--pr-line);border-radius:12px} p{margin:4px 0 0;color:var(--pr-ink-2);font-size:.8rem;line-height:1.5} }
+.pr-fit-alts-title { color:var(--pr-muted);font-size:.74rem;font-weight:700; }
+.pr-fit-rank { flex:0 0 auto;display:grid;place-items:center;width:24px;height:24px;border-radius:7px;background:var(--pr-red);color:var(--pr-on-accent);font-size:.75rem;font-weight:800; }
+.pr-fit-alt-head { display:flex;flex-wrap:wrap;align-items:center;gap:6px; b{font-size:.88rem} em{padding:0 7px;border-radius:99px;background:var(--pr-card-2);color:var(--pr-muted);font-size:.66rem;font-style:normal;font-weight:700} em.fit-strong{color:var(--pr-red)} }
+
 /* review: equal-height section cards that scroll inside */
 .pr-review-grid .pr-rsec:not(.pr-rsec--wide) { height:320px;display:flex;flex-direction:column;
   h3{flex:0 0 auto} ul{flex:1;min-height:0;overflow-y:auto;padding-right:8px;overscroll-behavior:contain;

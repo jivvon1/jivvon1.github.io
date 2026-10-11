@@ -36,7 +36,7 @@ import { inflateRawSync } from 'node:zlib';
 import { tmpdir, platform } from 'node:os';
 import { join, resolve, dirname, basename, relative, isAbsolute, sep } from 'node:path';
 
-const VERSION = 4;
+const VERSION = 5;
 const PAGE = process.env.PR_PAGE || 'https://jivvon1.github.io/posts/paper-reviewer/';
 const ORIGINS = new Set(['https://jivvon1.github.io', new URL(PAGE).origin]);
 const CLAUDE = process.env.PR_CLAUDE || 'claude';
@@ -56,6 +56,14 @@ if (probe.status !== 0) {
   process.exit(1);
 }
 const CLAUDE_VERSION = probe.stdout.trim();
+// Login state of this machine's Claude Code (`claude auth status` prints JSON).
+function authStatus() {
+  const r = spawnSync(CLAUDE, ['auth', 'status'], { encoding: 'utf8', shell: platform() === 'win32', timeout: 20000 });
+  try { const j = JSON.parse(r.stdout); return { loggedIn: !!j.loggedIn, method: j.authMethod || null, plan: j.subscriptionType || null }; }
+  catch { return { loggedIn: null, method: null, plan: null }; }
+}
+let AUTH = authStatus();
+const AUTH_ERR = /OAuth|authenticat|not logged in|log ?in again|\/login|invalid api key|401/i;
 const has = (bin) => spawnSync(bin, ['--version'], { encoding: 'utf8', shell: platform() === 'win32' }).status === 0;
 const TEX = { latexmk: has('latexmk'), pdflatex: has('pdflatex') };
 
@@ -140,7 +148,8 @@ async function run(req, res) {
       } else if (ev.type === 'result') {
         done = true;
         let data = ev.structured_output ?? null;
-        emit({ type: 'result', ok: !ev.is_error && ev.subtype === 'success', subtype: ev.subtype, data, text: ev.result ?? '' });
+        const ok = !ev.is_error && ev.subtype === 'success';
+        emit({ type: 'result', ok, subtype: ev.subtype, data, text: ev.result ?? '', auth: !ok && AUTH_ERR.test(String(ev.result ?? '')) });
       }
     }
   });
@@ -150,7 +159,7 @@ async function run(req, res) {
   res.on('close', () => { if (!done) child.kill(); });
 
   child.on('close', async (code) => {
-    if (!done) emit({ type: 'error', message: stderr.trim() || `claude exited with code ${code}` });
+    if (!done) emit({ type: 'error', message: stderr.trim() || `claude exited with code ${code}`, auth: AUTH_ERR.test(stderr) });
     res.end();
     jobs--;
     await rm(dir, { recursive: true, force: true });
@@ -316,7 +325,7 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'OPTIONS') { res.writeHead(204); return res.end(); }
   if (!tokenOk(req)) return sendJson(res, 401, { error: 'token' });
   const url = new URL(req.url, 'http://x');
-  if (req.method === 'GET' && url.pathname === '/health') return sendJson(res, 200, { ok: true, version: VERSION, claude: CLAUDE_VERSION, busy: jobs, tex: TEX });
+  if (req.method === 'GET' && url.pathname === '/health') { if (!jobs) AUTH = authStatus(); return sendJson(res, 200, { ok: true, version: VERSION, claude: CLAUDE_VERSION, busy: jobs, tex: TEX, auth: AUTH }); }
   if (req.method === 'POST' && url.pathname === '/compile') return compile(req, res).catch((e) => sendJson(res, 500, { error: e.message }));
   if (req.method === 'POST' && url.pathname === '/compile-zip') return compileZip(req, res).catch((e) => sendJson(res, 500, { error: e.message }));
   if (req.method === 'POST' && url.pathname === '/run') return run(req, res).catch((e) => { try { sendJson(res, 500, { error: e.message }); } catch { /* already streaming */ } });
@@ -337,6 +346,8 @@ server.once('listening', () => {
   const { port } = server.address();
   const link = `${PAGE}#bridge=${TOKEN}&port=${port}`;
   console.log(`\n  ${c.bold('Paper Reviewer bridge')} ${c.dim(`· ${CLAUDE_VERSION}`)}`);
+  if (AUTH.loggedIn === false) console.log(c.red('  Claude Code is not signed in. Run `claude auth login` first, then retry from the page.'));
+  else if (AUTH.plan) console.log(c.dim(`  Signed in · ${AUTH.method || ''} ${AUTH.plan}`));
   console.log(`  Listening on ${c.bold(`127.0.0.1:${port}`)}, accepting requests from ${[...ORIGINS].join(', ')}\n`);
   console.log(`  Open this link to connect (it opens automatically if it can):\n  ${c.bold(link)}\n`);
   console.log(`  Or paste this pairing code into the page: ${c.bold(`${port}-${TOKEN}`)}\n`);

@@ -38,7 +38,8 @@ const UI = {
     'wrong-shape': '이 작업의 결과 형식이 아니에요. 교정과 리뷰 칸이 바뀌지 않았는지 확인하세요.',
     loadedProof: (n, f) => `이슈 ${n}개 중 ${f}개 위치 표시`, loadedReview: (d) => `불러옴: ${d}`,
     chars2: (n) => `프롬프트 ${n.toLocaleString()}자`,
-    bridgeOn: (v) => `연결됨 · ${v}`, bridgeOff: '연결 안 됨', bridgeTry: '연결 확인 중…',
+    bridgeOn: (v) => `연결됨 · ${v}`, bridgePlan: (p) => `${p[0].toUpperCase()}${p.slice(1)} 요금제`,
+    bridgeAuth: '이 컴퓨터의 Claude Code 로그인이 만료됐거나 로그인되어 있지 않아요. 터미널에서 `claude auth login`으로 다시 로그인한 뒤 다시 시도하세요 (브리지는 다시 실행하지 않아도 돼요).', bridgeOff: '연결 안 됨', bridgeTry: '연결 확인 중…',
     bridgeFail: '브리지에 연결하지 못했어요. 터미널에서 명령이 실행 중인지 확인하세요.', bridgeBadCode: '연결 코드 형식이 아니에요 (예: 43117-xxxx).',
     bridgeToken: '연결 코드가 맞지 않아요. 터미널에 출력된 링크나 코드를 다시 쓰세요.', bridgeBusy: '브리지가 다른 작업을 처리 중이에요. 잠시 후 다시 시도하세요.',
     bridgeLost: '작업 중에 브리지 연결이 끊겼어요.', bridgeNoData: 'Claude Code가 결과 JSON을 돌려주지 않았어요.',
@@ -55,6 +56,9 @@ const UI = {
     zipCompiled: (e) => `소스에서 컴파일함 (${e})`, zipCompileFail: (e) => `소스 컴파일 실패${e ? ` (${e})` : ''}. PDF를 직접 올려주세요.`, bReadingSrc: (f) => `소스 읽는 중 (${f})`,
     zpRead: 'zip 읽는 중', zpSend: '브리지로 보내는 중', zpUnzip: (n) => `압축 해제 · 파일 ${n}개`, zpMain: (m) => `메인 파일: ${m}`,
     zpTex: (r, n, p) => `${r} ${n}회차${p ? ` · ${p}쪽` : ''}`, zpOpen: 'PDF 여는 중', zpDone: (n) => `PDF 준비 완료 · ${n}쪽`, zpCompare: '비교하는 중',
+    fitTitle: '학회 적합성', fitRec: '추천', fitAlts: '다른 후보 (추천 순)',
+    fitVerdict: { good_fit: '잘 맞음', borderline_fit: '애매함', poor_fit: '맞지 않음' },
+    fitKind: { conference: '학회', journal: '저널', letter: '레터', workshop: '워크숍' }, fitFit: { strong: '매우 적합', good: '적합', possible: '가능' },
     revSummaryTitle: '검수 요약', revWas: '이전', rvAnother: '다른 리뷰어로', rvRun: '이 리뷰어로 받기', rvBusy: '리뷰 받는 중', rvStart: '리뷰 요청 중', rvDone: (l) => `${l} 리뷰 완료`, rvManual: '붙여넣기 모드에서는 쓸 수 없어요.', done: '고침', doneHint: '고쳤으면 체크하세요. PDF에서 표시가 사라지고, 수정본 검수 때 먼저 확인해요.', revMarked: '고침 체크', flowTitle: { ok: '전체 흐름 문제 없음', minor_problems: '전체 흐름: 사소한 문제', major_problems: '전체 흐름: 큰 문제' },
     histIssues: (n) => `이슈 ${n}개`, histOpen: '열려 있음', histDelete: '이 기록 삭제',
     resetConfirm: '저장된 기록과 지금 결과를 모두 지울까요? 되돌릴 수 없어요.',
@@ -82,7 +86,8 @@ const UI = {
     'wrong-shape': "This isn't the result for this task. Check you didn't swap the proofreading and review boxes.",
     loadedProof: (n, f) => `${f} of ${n} issues located`, loadedReview: (d) => `Loaded: ${d}`,
     chars2: (n) => `${n.toLocaleString()}-char prompt`,
-    bridgeOn: (v) => `Connected · ${v}`, bridgeOff: 'Not connected', bridgeTry: 'Checking connection…',
+    bridgeOn: (v) => `Connected · ${v}`, bridgePlan: (p) => `${p[0].toUpperCase()}${p.slice(1)} plan`,
+    bridgeAuth: "This computer's Claude Code sign-in has expired or isn't set up. Run `claude auth login` in a terminal, then try again (no need to restart the bridge).", bridgeOff: 'Not connected', bridgeTry: 'Checking connection…',
     bridgeFail: "Couldn't reach the bridge. Make sure the command is still running in your terminal.", bridgeBadCode: "That doesn't look like a pairing code (e.g. 43117-xxxx).",
     bridgeToken: "The pairing code doesn't match. Use the link or code printed in the terminal.", bridgeBusy: 'The bridge is busy with other jobs. Try again shortly.',
     bridgeLost: 'Lost the connection to the bridge mid-run.', bridgeNoData: 'Claude Code returned no JSON result.',
@@ -99,6 +104,9 @@ const UI = {
     zipCompiled: (e) => `Compiled from source (${e})`, zipCompileFail: (e) => `Source compile failed${e ? ` (${e})` : ''}. Please upload the PDF.`, bReadingSrc: (f) => `Reading source (${f})`,
     zpRead: 'Reading the zip', zpSend: 'Sending to the bridge', zpUnzip: (n) => `Unpacking · ${n} files`, zpMain: (m) => `Main file: ${m}`,
     zpTex: (r, n, p) => `${r} pass ${n}${p ? ` · page ${p}` : ''}`, zpOpen: 'Opening the PDF', zpDone: (n) => `PDF ready · ${n} pages`, zpCompare: 'Comparing',
+    fitTitle: 'Venue fit', fitRec: 'Recommendation', fitAlts: 'Other venues (ranked)',
+    fitVerdict: { good_fit: 'Good fit', borderline_fit: 'Borderline', poor_fit: 'Poor fit' },
+    fitKind: { conference: 'conference', journal: 'journal', letter: 'letter', workshop: 'workshop' }, fitFit: { strong: 'strong fit', good: 'good fit', possible: 'possible' },
     revSummaryTitle: 'Summary', revWas: 'Was', rvAnother: 'Another reviewer', rvRun: 'Get this review', rvBusy: 'Reviewing', rvStart: 'Requesting the review', rvDone: (l) => `${l} review ready`, rvManual: 'Not available in Paste mode.', done: 'Fixed', doneHint: 'Tick when fixed. It disappears from the PDF and is checked first when you verify a revision.', revMarked: 'Marked fixed', flowTitle: { ok: 'Overall flow: no problems', minor_problems: 'Overall flow: minor problems', major_problems: 'Overall flow: major problems' },
     histIssues: (n) => `${n} issues`, histOpen: 'Open now', histDelete: 'Delete this run',
     resetConfirm: 'Delete all saved runs and the current result? This cannot be undone.',
@@ -628,9 +636,10 @@ async function pingBridge() {
     if (r.status === 401) throw new Error(UI.bridgeToken);
     if (!r.ok) throw new Error(UI.bridgeFail);
     const h = await r.json();
-    bridge.connected = true; bridge.version = h.version || 1; bridge.tex = h.tex || null;
+    bridge.connected = true; bridge.version = h.version || 1; bridge.tex = h.tex || null; bridge.auth = h.auth || null;
     if (state.source && !state.doc) setTimeout(compileSource, 0);
-    setBridgeStatus('on', UI.bridgeOn(h.claude));
+    if (h.auth?.loggedIn === false) setBridgeStatus('err', UI.bridgeAuth);
+    else setBridgeStatus('on', UI.bridgeOn(h.claude) + (h.auth?.plan ? ` · ${UI.bridgePlan(h.auth.plan)}` : ''));
   } catch (err) {
     bridge.connected = false;
     setBridgeStatus('err', err.message && err.message !== 'Failed to fetch' ? err.message : UI.bridgeFail);
@@ -717,11 +726,11 @@ async function callBridge(kind, opts, set, custom) {
           tick();
         }
         else if (ev.type === 'result') result = ev;
-        else if (ev.type === 'error') throw new ReviewError(ev.message);
+        else if (ev.type === 'error') throw new ReviewError(ev.auth ? UI.bridgeAuth : ev.message);
       }
     }
     if (!result) throw new ReviewError(UI.bridgeLost);
-    if (!result.ok) throw new ReviewError(result.text || result.subtype);
+    if (!result.ok) throw new ReviewError(result.auth || /OAuth|authenticat/i.test(result.text || '') ? UI.bridgeAuth : (result.text || result.subtype));
     const raw = result.data ? JSON.stringify(result.data) : (result.text.match(/\{[\s\S]*\}/) || [''])[0];
     if (!raw) throw new ReviewError(UI.bridgeNoData);
     return custom?.parse ? custom.parse(JSON.parse(raw)) : parseManual(raw, kind);
@@ -1536,6 +1545,21 @@ async function runExtraReview() {
   }
 }
 
+// "Is this the right venue?" card plus ranked alternatives.
+function venueFitHtml(r, ko) {
+  const f = r.venue_fit;
+  if (!f) return '';
+  const tone = { good_fit: 'good', borderline_fit: 'mid', poor_fit: 'bad' }[f.verdict] || 'mid';
+  const alts = [...(f.alternatives || [])].sort((a, b) => a.rank - b.rank);
+  return `<section class="pr-fit pr-tone-${tone}">
+    <div class="pr-fit-head"><h3><i class="fas fa-compass"></i> ${UI.fitTitle}</h3><span class="pr-fit-badge">${UI.fitVerdict[f.verdict] ?? f.verdict}</span></div>
+    <p class="pr-fit-reason">${esc(f.reason)}</p>
+    <p class="pr-fit-rec"><b>${UI.fitRec}</b> ${esc(f.recommendation)}</p>
+    ${alts.length ? `<div class="pr-fit-alts"><span class="pr-fit-alts-title">${UI.fitAlts}</span><ol>${alts.map(a => `
+      <li><span class="pr-fit-rank">${a.rank}</span><div><div class="pr-fit-alt-head"><b>${esc(a.venue)}</b><em>${UI.fitKind[a.kind] ?? a.kind}</em><em class="fit-${a.fit}">${UI.fitFit[a.fit] ?? a.fit}</em></div><p>${esc(a.reason)}</p></div></li>`).join('')}</ol></div>` : ''}
+  </section>`;
+}
+
 function renderReview() {
   renderReviewBar();
   const el = $('[data-review]');
@@ -1554,6 +1578,7 @@ function renderReview() {
       </div>
       <dl class="pr-verdict-meta"><div><dt>${ko ? '평점' : 'Rating'}</dt><dd>${esc(r.rating)}</dd></div><div><dt>${ko ? '확신도' : 'Confidence'}</dt><dd>${esc(r.confidence)}</dd></div></dl>
     </div>
+    ${venueFitHtml(r, ko)}
     <div class="pr-review-grid">
       <section class="pr-rsec pr-rsec--wide"><h3>${ko ? '요약' : 'Summary'}</h3><p>${esc(r.summary)}</p></section>
       <section class="pr-rsec pr-rsec--good"><h3><i class="fas fa-plus"></i> ${ko ? '강점' : 'Strengths'}</h3>${list(r.strengths)}</section>
@@ -1593,6 +1618,13 @@ $('[data-export-pdf]').addEventListener('click', async (e) => {
   } finally { btn.disabled = false; }
 });
 
+function venueFitMarkdown(r) {
+  const f = r.venue_fit;
+  if (!f) return '';
+  const alts = [...(f.alternatives || [])].sort((a, b) => a.rank - b.rank).map(a => `${a.rank}. **${a.venue}** (${UI.fitKind[a.kind] ?? a.kind}, ${UI.fitFit[a.fit] ?? a.fit}): ${a.reason}`).join('\n');
+  return `\n### ${UI.fitTitle}: ${UI.fitVerdict[f.verdict] ?? f.verdict}\n${f.reason}\n\n**${UI.fitRec}** ${f.recommendation}\n${alts ? `\n${UI.fitAlts}\n${alts}\n` : ''}`;
+}
+
 function reviewMarkdown(r, ko) {
   if (!r) return '';
   const d = DECISIONS[r.decision];
@@ -1621,7 +1653,7 @@ ${bl(r.suggestions)}
 
 ### ${h[5]}
 ${r.decision_rationale}
-`;
+${venueFitMarkdown(r)}`;
 }
 
 $('[data-export-md]').addEventListener('click', () => {

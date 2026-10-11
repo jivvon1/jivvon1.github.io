@@ -167,11 +167,17 @@ Instructions:
 - \`rating\`: the overall rating on ${venue}'s own review-form scale if you know it, written as "<score> / <max> (<label>)"; otherwise use a 1–6 scale (1 strong reject … 6 strong accept).
 - \`confidence\`: your reviewer confidence, written the same way (e.g. "4 / 5").
 - \`decision\`: your final recommendation. \`decision_rationale\`: the two or three reasons that decide it.
-- \`verdict\`: one sentence a busy author can read first.`;
+- \`verdict\`: one sentence a busy author can read first.
+
+Venue fit (\`venue_fit\`), judged separately from the accept/reject decision:
+- Decide whether this paper suits ${venue}: its scope and audience, and its format and expectations. A full archival journal expects depth, completeness, and extensive experiments and comparisons; a conference expects a focused, timely contribution within the page limit; a letter expects a short, self-contained result; a workshop suits early or narrow work.
+- \`verdict\`: \`good_fit\`, \`borderline_fit\`, or \`poor_fit\`. \`reason\`: two or three sentences that point to concrete evidence in the paper.
+- \`recommendation\`: one or two sentences of advice. If ${venue} is a good fit, say so and what would make the submission strongest there. If it is not, name where to submit instead and say exactly why, including what the paper lacks for ${venue} or what makes the other venue a better match (for example: "a conference such as ICRA suits this better than a journal, because the evaluation covers only two datasets and lacks the ablations and comparisons a journal would expect").
+- \`alternatives\`: always give 3–5 other venues, ranked best first (\`rank\` 1 = best), even when ${venue} is a good fit. Do not include ${venue} itself. For each: \`venue\` (its usual short name), \`kind\` (\`conference\`, \`journal\`, \`letter\`, or \`workshop\`), \`fit\` (\`strong\`, \`good\`, or \`possible\`), and a one-sentence \`reason\`.`;
 }
 
 function translateTask(reviewJson) {
-  return `Translate every string value in the following paper review from English into natural, professional Korean, as a Korean expert reviewer would write it. Keep enum values (\`decision\`, \`severity\`) unchanged. Keep method names, dataset names, metrics, venue names, and well-established technical terms in English where Korean researchers normally do. Keep the rating and confidence numbers unchanged. Do not add, drop, merge, or reorder any item.
+  return `Translate every string value in the following paper review from English into natural, professional Korean, as a Korean expert reviewer would write it. Keep enum values (\`decision\`, \`severity\`, and \`verdict\`, \`kind\`, \`fit\` inside \`venue_fit\`) and \`rank\` numbers unchanged; keep venue names as they are. Keep method names, dataset names, metrics, venue names, and well-established technical terms in English where Korean researchers normally do. Keep the rating and confidence numbers unchanged. Do not add, drop, merge, or reorder any item.
 
 ${JSON.stringify(reviewJson, null, 2)}`;
 }
@@ -216,6 +222,18 @@ const REVIEW_SCHEMA = obj({
   questions: strArr,
   suggestions: strArr,
   decision_rationale: str,
+  venue_fit: obj({
+    verdict: { type: 'string', enum: ['good_fit', 'borderline_fit', 'poor_fit'] },
+    reason: str,
+    recommendation: str,
+    alternatives: { type: 'array', items: obj({
+      rank: { type: 'integer' },
+      venue: str,
+      kind: { type: 'string', enum: ['conference', 'journal', 'letter', 'workshop'] },
+      fit: { type: 'string', enum: ['strong', 'good', 'possible'] },
+      reason: str,
+    }) },
+  }),
 });
 
 // ── Calls ──────────────────────────────────────────────────────────────────
