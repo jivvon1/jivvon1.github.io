@@ -1,0 +1,329 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+{%- assign t = site.data.paper_reviewer[include.lang] -%}
+<article class="pr-page-wrap" data-reviewer-app data-ui-lang="{{ include.lang }}">
+  <nav class="pr-topbar" aria-label="Paper Reviewer">
+    <a class="pr-back" href="{{ '/#posts' | relative_url }}"><i class="fas fa-arrow-left"></i> Posts</a>
+    <div class="pr-topbar-right">
+      <a class="pr-toplink" href="#pr-start">{{ t.nav_try }}</a>
+      <a class="pr-toplink" href="#pr-how">{{ t.nav_how }}</a>
+      <div class="pr-langtoggle" role="group" aria-label="Language">
+        <a href="{{ '/posts/paper-reviewer/en/' | relative_url }}" hreflang="en"{% if include.lang == 'en' %} class="is-active" aria-current="page"{% endif %}>ENG</a>
+        <a href="{{ '/posts/paper-reviewer/' | relative_url }}" hreflang="ko"{% if include.lang == 'ko' %} class="is-active" aria-current="page"{% endif %}>KOR</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════ HERO ══════════════════════════ -->
+  <header class="pr-hero">
+    <div class="pr-hero-copy">
+      <span class="pr-badge">Claude · Proofreading &amp; Review</span>
+      <h1>Paper <em>Reviewer</em></h1>
+      <p class="pr-subtitle">Proofread it. Then face Reviewer&nbsp;2.</p>
+      <p class="pr-credit-line">{{ t.credit }} <a href="https://github.com/LimHyungTae" target="_blank" rel="noopener">Hyungtae Lim</a></p>
+      <p class="pr-tagline">{{ t.tagline }}</p>
+      <div class="pr-links">
+        <a class="pr-pill" href="#pr-start"><i class="fas fa-file-arrow-up"></i> {{ t.nav_try }}</a>
+        <a class="pr-pill pr-pill--ghost" href="https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading" target="_blank" rel="noopener"><i class="fab fa-github"></i> Prompt</a>
+        <a class="pr-pill pr-pill--ghost" href="{{ '/posts/paper-reviewer/bridge.mjs' | relative_url }}" target="_blank" rel="noopener"><i class="fas fa-terminal"></i> bridge.mjs</a>
+      </div>
+    </div>
+    <figure class="pr-teaser" aria-hidden="true">
+      <div class="pr-teaser-stack">
+          <div class="pr-sheet pr-sheet--back"></div>
+          <span class="pr-tape"></span>
+        <div class="pr-sheet">
+          <div class="pr-sheet-title">Tightly-Coupled Odometry for Legged Robots</div>
+          <div class="pr-sheet-sub">Anonymous CVPR submission</div>
+          <div class="pr-sheet-cols">
+            <p>In this paper we <span class="pr-ink pr-ink--red">presents</span> a novel odometry that runs at <span class="pr-ink pr-ink--amber">10Hz</span> on three <span class="pr-ink pr-ink--blue">Quadruped</span> platforms. Our method <span class="pr-ink pr-ink--red">significantly outperforms</span> all existing methods.</p>
+            <p>State estimation is a fundamental problem for legged robots. <span class="pr-ink pr-ink--amber">In order to</span> achieve robust performance, many approaches combine proprioceptive and exteroceptive sensors.</p>
+          </div>
+          <span class="pr-stamp">Weak Reject</span>
+        </div>
+      </div>
+      <figcaption>{{ t.teaser_caption }}</figcaption>
+    </figure>
+  </header>
+
+  <!-- ══════════════════════════ TRY IT ══════════════════════════ -->
+  <div class="pr-section-head" id="pr-start">
+    <p class="pr-eyebrow">Try it</p>
+    <h2>{{ t.try_title }}</h2>
+  </div>
+
+  <!-- ══════════════════════════ SETUP ══════════════════════════ -->
+  <section class="pr-card pr-setup" aria-label="Setup">
+    <div class="pr-step">
+      <div class="pr-step-head"><span class="pr-step-n">01</span><div class="pr-step-head-text"><div class="pr-step-title-row"><h3>{{ t.s1_title }}</h3>
+        <button type="button" class="pr-shrink-toggle" data-shrink-toggle aria-expanded="false" aria-controls="pr-shrink"><i class="fas fa-compress"></i> {{ t.shrink_title }}</button></div><p>{{ t.s1_sub }}</p></div></div>
+      <label class="pr-drop" data-drop data-empty-name="{{ t.drop }}" data-empty-meta="{{ t.drop_meta }}">
+        <input type="file" accept="application/pdf,.pdf,.zip,application/zip" multiple data-file hidden>
+        <span class="pr-drop-icon"><i class="fas fa-file-arrow-up"></i></span>
+        <strong data-file-name>{{ t.drop }}</strong>
+        <span data-file-meta>{{ t.drop_meta }}</span>
+        <div class="pr-mini-progress" data-drop-progress hidden><div class="pr-progress-track"><div class="pr-progress-fill"></div></div><div class="pr-mini-progress-row"><span data-p-text></span><b data-p-pct>0%</b></div></div>
+      </label>
+      <div class="pr-source-meta" data-source-meta hidden><i class="fas fa-file-zipper"></i><span></span><button type="button" aria-label="{{ t.src_remove }}" title="{{ t.src_remove }}"><i class="fas fa-xmark"></i></button></div>
+      <div class="pr-shrink" id="pr-shrink" data-shrink hidden>
+        <p>{{ t.shrink_desc }}</p>
+        <div class="pr-seg pr-seg--os" role="radiogroup" aria-label="OS" data-shrink-os>
+          <button type="button" role="radio" data-value="mac">macOS</button>
+          <button type="button" role="radio" data-value="linux">Linux</button>
+          <button type="button" role="radio" data-value="win">Windows</button>
+        </div>
+        <div class="pr-bridge-cmd">
+          <code data-shrink-cmd></code>
+          <button type="button" class="pr-icon-btn" data-shrink-copy aria-label="{{ t.bridge_copy }}" title="{{ t.bridge_copy }}"><i class="fas fa-copy"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pr-step">
+      <div class="pr-step-head"><span class="pr-step-n">02</span><div><h3>{{ t.s2_title }}</h3><p>{{ t.s2_sub }}</p></div></div>
+      <div class="pr-venues" data-venue role="group" aria-label="Target venue"></div>
+      <input type="text" class="pr-input" data-venue-custom placeholder="{{ t.venue_custom }}" hidden aria-label="Custom venue name">
+    </div>
+
+    <div class="pr-step">
+      <div class="pr-step-head"><span class="pr-step-n">03</span><div><h3>{{ t.s3_title }}</h3><p>{{ t.s3_sub }}</p></div></div>
+      <div class="pr-stances" role="radiogroup" aria-label="Reviewer stance" data-mode>
+        <button type="button" role="radio" aria-checked="true" data-value="harsh" class="is-active">
+          <span class="pr-stance-icon"><i class="fas fa-fire-flame-curved"></i></span>
+          <strong>Harsh</strong>
+          <small>{{ t.harsh_desc }}</small>
+        </button>
+        <button type="button" role="radio" aria-checked="false" data-value="typical">
+          <span class="pr-stance-icon"><i class="fas fa-scale-balanced"></i></span>
+          <strong>Typical</strong>
+          <small>{{ t.typical_desc }}</small>
+        </button>
+      </div>
+      <div class="pr-tasks">
+        <label class="pr-toggle"><input type="checkbox" data-do-proof checked><span><i class="fas fa-highlighter"></i> {{ t.task_proof }}</span></label>
+        <label class="pr-toggle"><input type="checkbox" data-do-review checked><span><i class="fas fa-gavel"></i> {{ t.task_review }}</span></label>
+      </div>
+    </div>
+
+    <div class="pr-runbar">
+      <div class="pr-runbar-mode">
+        <span class="pr-runbar-label">{{ t.s4_title }}</span>
+        <div class="pr-seg pr-seg--run" role="radiogroup" aria-label="{{ t.s4_title }}" data-run-mode>
+          <button type="button" role="radio" aria-checked="true" data-value="bridge" class="is-active"><i class="fas fa-terminal"></i> {{ t.mode_bridge }}</button>
+          <button type="button" role="radio" aria-checked="false" data-value="api"><i class="fas fa-key"></i> {{ t.mode_api }}</button>
+          <button type="button" role="radio" aria-checked="false" data-value="manual"><i class="fas fa-paste"></i> {{ t.mode_manual }}</button>
+        </div>
+      </div>
+
+      <div class="pr-runbar-pane">
+        <div class="pr-mode-pane" data-pane="bridge">
+          <p class="pr-pane-note">{{ t.bridge_desc }}</p>
+          <div class="pr-bridge-cmd">
+            <code data-bridge-cmd></code>
+            <button type="button" class="pr-icon-btn" data-bridge-copy aria-label="{{ t.bridge_copy }}" title="{{ t.bridge_copy }}"><i class="fas fa-copy"></i></button>
+          </div>
+          <div class="pr-bridge-line">
+            <label class="pr-model-pick"><span>{{ t.model_label }}</span>
+              <select class="pr-input" data-bridge-model aria-label="{{ t.model_label }}">
+                <option value="">{{ t.model_default }}</option>
+                <option value="claude-fable-5-1">Claude Fable 5.1</option>
+                <option value="claude-opus-5-5">Claude Opus 5.5</option>
+                <option value="claude-opus-5">Claude Opus 5</option>
+                <option value="claude-sonnet-5">Claude Sonnet 5</option>
+                <option value="claude-haiku-4-5">Claude Haiku 4.5</option>
+              </select>
+            </label>
+            <div class="pr-bridge-status" data-bridge-status><span class="pr-bridge-dot"></span><span data-bridge-text>{{ t.bridge_off }}</span></div>
+            <div class="pr-bridge-pair">
+              <input type="text" class="pr-input" data-bridge-code placeholder="{{ t.bridge_code }}" spellcheck="false" autocomplete="off" aria-label="{{ t.bridge_code }}">
+              <button type="button" class="pr-btn" data-bridge-connect>{{ t.bridge_connect }}</button>
+            </div>
+            <a class="pr-bridge-src" href="{{ '/posts/paper-reviewer/bridge.mjs' | relative_url }}" target="_blank" rel="noopener"><i class="fas fa-code"></i> {{ t.bridge_view }}</a>
+          </div>
+        </div>
+        <div class="pr-mode-pane" data-pane="api" hidden>
+          <div class="pr-key-row">
+            <div class="pr-key-field"><i class="fas fa-key"></i><input type="password" class="pr-input" data-key placeholder="sk-ant-..." autocomplete="off" spellcheck="false" aria-label="Anthropic API key"></div>
+            <select class="pr-input" data-model aria-label="Model">
+              <option value="claude-opus-5">Claude Opus 5</option>
+              <option value="claude-opus-5-5">Claude Opus 5.5</option>
+              <option value="claude-fable-5-1">Claude Fable 5.1</option>
+              <option value="claude-sonnet-5">Claude Sonnet 5 · {{ t.model_cheap }}</option>
+            </select>
+          </div>
+          <label class="pr-remember"><input type="checkbox" data-remember> {{ t.remember }}</label>
+          <p class="pr-privacy"><i class="fas fa-shield-halved"></i> {{ t.privacy }}</p>
+        </div>
+        <div class="pr-mode-pane" data-pane="manual" hidden>
+          <p class="pr-pane-note">{{ t.manual_desc }}</p>
+        </div>
+      </div>
+
+      <button type="button" class="pr-run" data-run disabled><span data-run-label data-label-api="{{ t.run_api }}" data-label-manual="{{ t.run_manual }}" data-label-bridge="{{ t.run_api }}">{{ t.run_api }}</span><i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <div class="pr-progress" data-progress hidden>
+      <div class="pr-progress-track"><div class="pr-progress-fill"></div></div>
+      <span class="pr-progress-pct" data-progress-pct>0%</span>
+    </div>
+    <ol class="pr-status" data-status hidden></ol>
+  </section>
+
+  <!-- ══════════════════════════ HISTORY ══════════════════════════ -->
+  <section class="pr-card pr-history" data-history hidden>
+    <div class="pr-history-head">
+      <h3><i class="fas fa-clock-rotate-left"></i> {{ t.history_title }}</h3>
+      <span class="pr-history-note">{{ t.history_note }}</span>
+      <button type="button" class="pr-btn" data-history-reset><i class="fas fa-rotate-left"></i> {{ t.history_reset }}</button>
+    </div>
+    <ol class="pr-history-list" data-history-list></ol>
+  </section>
+
+  <!-- ══════════════════════════ NO-API MODE ══════════════════════════ -->
+  <div class="pr-card pr-manual" data-manual hidden>
+    <div class="pr-manual-head">
+      <h2>{{ t.manual_title }}</h2>
+      <p>{{ t.manual_sub }}</p>
+      <ul class="pr-manual-where">
+        <li><i class="fas fa-globe"></i> <span>{{ t.manual_web }}</span></li>
+        <li><i class="fas fa-terminal"></i> <span>{{ t.manual_cc }}</span></li>
+      </ul>
+    </div>
+    <div class="pr-manual-grid">
+      {%- assign kinds = "proof,review" | split: "," -%}
+      {%- for kind in kinds -%}
+      {%- capture ttl -%}{% if kind == "proof" %}{{ t.manual_proof_title }}{% else %}{{ t.manual_review_title }}{% endif %}{%- endcapture -%}
+      <div class="pr-manual-task" data-manual-task="{{ kind }}">
+        <h3><i class="fas {% if kind == 'proof' %}fa-highlighter{% else %}fa-gavel{% endif %}"></i> {{ ttl }} <small data-manual-meta></small></h3>
+        <ol class="pr-manual-steps">
+          <li><span class="pr-manual-n">1</span>
+            <div class="pr-manual-actions">
+              <button type="button" class="pr-btn pr-btn--solid" data-copy><i class="fas fa-copy"></i> <span>{{ t.manual_copy }}</span></button>
+              <button type="button" class="pr-btn" data-save-prompt><i class="fas fa-download"></i> {{ t.manual_download }}</button>
+            </div></li>
+          <li><span class="pr-manual-n">2</span>
+            <div class="pr-manual-actions"><a class="pr-btn" href="https://claude.ai/new" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> {{ t.manual_open }}</a><code class="pr-cc">claude</code></div></li>
+          <li><span class="pr-manual-n">3</span>
+            <div class="pr-manual-paste">
+              <textarea class="pr-input" data-paste rows="4" placeholder="{{ t.manual_paste }}" spellcheck="false"></textarea>
+              <div class="pr-manual-actions">
+                <label class="pr-btn"><input type="file" accept=".json,application/json,text/plain" data-paste-file hidden><i class="fas fa-file-code"></i> {{ t.manual_upload }}</label>
+                <button type="button" class="pr-btn pr-btn--solid" data-load><i class="fas fa-check"></i> {{ t.manual_load }}</button>
+              </div>
+              <p class="pr-manual-msg" data-manual-msg></p>
+            </div></li>
+        </ol>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ RESULTS ══════════════════════════ -->
+  <div class="pr-card pr-results" data-results hidden>
+    <div class="pr-results-bar">
+      <div class="pr-tabs" role="tablist">
+        <button type="button" role="tab" data-tab="proof" class="is-active" aria-selected="true"><i class="fas fa-highlighter"></i> {{ t.tab_proof }}</button>
+        <button type="button" role="tab" data-tab="review" aria-selected="false"><i class="fas fa-gavel"></i> {{ t.tab_review }}</button>
+        <button type="button" role="tab" data-tab="revise" aria-selected="false"><i class="fas fa-code-compare"></i> {{ t.tab_revise }}</button>
+      </div>
+      <div class="pr-bar-right">
+        <div class="pr-seg" role="radiogroup" aria-label="Language" data-lang>
+          <button type="button" role="radio" aria-checked="false" data-value="en">EN</button>
+          <button type="button" role="radio" aria-checked="true" data-value="ko" class="is-active">한국어</button>
+        </div>
+        <button type="button" class="pr-btn" data-export-pdf disabled><i class="fas fa-download"></i> {{ t.export_pdf }}</button>
+        <button type="button" class="pr-btn" data-export-md disabled><i class="fas fa-file-lines"></i> {{ t.export_md }}</button>
+      </div>
+    </div>
+
+    <div class="pr-panel" data-panel="proof">
+      <div class="pr-proof-summary" data-proof-summary></div>
+      <div class="pr-proof-grid">
+        <div class="pr-viewer" data-viewer></div>
+        <aside class="pr-issues">
+          <div class="pr-filters" data-filters></div>
+          <ol class="pr-issue-list" data-issue-list></ol>
+        </aside>
+      </div>
+    </div>
+
+    <div class="pr-panel" data-panel="review" hidden>
+      <div class="pr-review-bar" data-review-bar></div>
+      <div class="pr-mini-progress pr-rv-progress" data-rv-progress hidden><div class="pr-progress-track"><div class="pr-progress-fill"></div></div><div class="pr-mini-progress-row"><span data-p-text></span><b data-p-pct>0%</b></div></div>
+      <div class="pr-review" data-review></div>
+    </div>
+
+    <div class="pr-panel" data-panel="revise" hidden>
+      <div class="pr-revise">
+        <p class="pr-muted pr-rev-need" data-rev-need>{{ t.rev_need }}</p>
+        <div class="pr-rev-source" data-rev-source>
+          <div class="pr-rev-col">
+            <h4><i class="fas fa-file-arrow-up"></i> {{ t.rev_upload_title }}</h4>
+            <p>{{ t.rev_upload_note }}</p>
+            <div class="pr-rev-btns">
+              <label class="pr-btn pr-btn--solid"><input type="file" accept="application/pdf" data-rev-file hidden><i class="fas fa-upload"></i> {{ t.rev_upload }}</label>
+              <label class="pr-btn"><input type="file" accept=".zip,application/zip" data-rev-zip hidden><i class="fas fa-file-zipper"></i> {{ t.rev_zip }}</label>
+            </div>
+            <div class="pr-mini-progress" data-rev-progress hidden><div class="pr-progress-track"><div class="pr-progress-fill"></div></div><div class="pr-mini-progress-row"><span data-p-text></span><b data-p-pct>0%</b></div></div>
+          </div>
+          <div class="pr-rev-col">
+            <h4><i class="fas fa-terminal"></i> {{ t.rev_latex_title }}</h4>
+            <p>{{ t.rev_latex_note }}</p>
+            <div class="pr-rev-latex">
+              <input type="text" class="pr-input" data-rev-dir placeholder="/home/me/papers/my-paper" spellcheck="false" aria-label="{{ t.rev_dir }}">
+              <input type="text" class="pr-input" data-rev-main value="main.tex" spellcheck="false" aria-label="{{ t.rev_main }}">
+              <button type="button" class="pr-btn" data-rev-compile><i class="fas fa-hammer"></i> {{ t.rev_compile }}</button>
+            </div>
+            <p class="pr-rev-msg" data-rev-msg></p>
+            <pre class="pr-rev-log" data-rev-log hidden></pre>
+          </div>
+        </div>
+        <div class="pr-rev-summary" data-rev-summary hidden></div>
+        <div class="pr-rev-grid is-inline" data-rev-grid hidden>
+          <div class="pr-rev-viewbar">
+            <div class="pr-rev-label pr-rev-label-inline"><span class="pr-rev-swatch is-add"></span><span class="pr-rev-swatch is-del"></span> {{ t.rev_inline_label }} <em data-rev-name></em></div>
+            <div class="pr-rev-label pr-rev-label-split"><span class="pr-rev-swatch is-del"></span> {{ t.rev_old }} · <span class="pr-rev-swatch is-add"></span> {{ t.rev_new }}</div>
+            <div class="pr-seg" role="radiogroup" aria-label="Diff view" data-rev-view>
+              <button type="button" role="radio" aria-checked="true" data-value="inline" class="is-active">{{ t.rev_view_inline }}</button>
+              <button type="button" role="radio" aria-checked="false" data-value="split">{{ t.rev_view_split }}</button>
+            </div>
+          </div>
+          <div class="pr-rev-panes">
+            <div class="pr-rev-view pr-rev-view--old"><div class="pr-viewer" data-rev-old></div></div>
+            <div class="pr-rev-view"><div class="pr-viewer" data-rev-new></div></div>
+          </div>
+        </div>
+        <ol class="pr-rev-list" data-rev-list></ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════ HOW ══════════════════════════ -->
+  <section class="pr-how" id="pr-how">
+    <div class="pr-section-head">
+      <p class="pr-eyebrow">How it works</p>
+      <h2>{{ t.how_title }}</h2>
+    </div>
+    <div class="pr-how-grid">
+      <div class="pr-how-card">
+        <span class="pr-how-n">01</span>
+        <h3>{{ t.how1_title }}</h3>
+        <p><a href="https://github.com/LimHyungTae" target="_blank" rel="noopener">Hyungtae Lim</a>{{ t.how1_body }}</p>
+      </div>
+      <div class="pr-how-card">
+        <span class="pr-how-n">02</span>
+        <h3>{{ t.how2_title }}</h3>
+        <p>{{ t.how2_body }}</p>
+      </div>
+      <div class="pr-how-card">
+        <span class="pr-how-n">03</span>
+        <h3>{{ t.how3_title }}</h3>
+        <p>{{ t.how3_body }}</p>
+      </div>
+    </div>
+        <p class="pr-foot">Proofreading rules © 2026 <a href="https://github.com/LimHyungTae" target="_blank" rel="noopener">Hyungtae Lim</a>, MIT License (<a href="{{ '/posts/paper-reviewer/assets/prompts/LICENSE' | relative_url }}">license</a>, snapshot <a href="https://github.com/LimHyungTae/awesome-claudecode-paper-proofreading/tree/bec513d09d5793f2f79af91fe8e222c595a7d40c" target="_blank" rel="noopener">bec513d</a>) · PDF rendering <a href="https://mozilla.github.io/pdf.js/" target="_blank" rel="noopener">pdf.js</a> · Annotation export <a href="https://pdf-lib.js.org/" target="_blank" rel="noopener">pdf-lib</a></p>
+  </section>
+</article>
+
+<script type="module" src="{{ '/posts/paper-reviewer/assets/js/app.js' | relative_url }}"></script>

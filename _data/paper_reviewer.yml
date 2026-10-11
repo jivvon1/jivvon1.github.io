@@ -1,0 +1,180 @@
+# UI copy for posts/paper-reviewer (ko) and posts/paper-reviewer/en (en).
+# Rendered by _includes/paper-reviewer.html. Values may contain inline HTML.
+
+ko:
+  title: Paper Reviewer · Jiwon Choi
+  h1: Proofread it.<br>Then face <em>Reviewer&nbsp;2.</em>
+  lead: 논문 PDF를 올리면 Claude가 문법, 철자, 띄어쓰기, 대소문자 문제를 <mark>PDF 위 해당 위치에 바로</mark> 표시해줘요. 그다음 원하는 학회의 <b>harsh</b> 또는 <b>typical</b> 리뷰어가 되어 채택할지 거절할지를 근거와 함께 정리하고, 리뷰는 영어와 한국어로 둘 다 줍니다.
+  credit: "교정 프롬프트 ·"
+  nav_try: 리뷰 받기
+  nav_how: 작동 방식
+  tagline: PDF 하나면 돼요. 틀린 곳은 원고 위에 바로 표시하고, <br>고른 학회 리뷰어의 판정을 영어와 한국어로 알려줘요.
+  teaser_caption: 문법, 띄어쓰기, 대소문자, 과장된 주장을 원고의 정확한 위치에 표시하고, 리뷰어가 채택·거절을 판정해요.
+  try_title: 논문 리뷰 받기
+  s1_title: 논문
+  s1_sub: PDF 또는 LaTeX 소스 zip (둘 다 가능)
+  drop: PDF 또는 LaTeX zip을 끌어다 놓으세요
+  choose_file: 파일 선택
+  shrink_title: PDF가 너무 큰가요?
+  shrink_desc: Ghostscript로 용량을 줄여서 다시 올려보세요. 아래 한 줄이 설치부터 압축까지 해줘요. 결과는 같은 폴더에 -small.pdf로 저장돼요.
+  drop_meta: "PDF 최대 24MB · Overleaf 소스 zip도 함께 올리면 Claude가 원본까지 읽어요"
+  src_remove: 소스 빼기
+  s2_title: 학회 / 저널
+  s2_sub: 리뷰 기준이 학회 성격에 맞춰져요
+  venue_custom: "학회 이름 (예: ISMAR, ACM MM)"
+  s3_title: 리뷰어
+  s3_sub: 얼마나 혹독하게 볼까요
+  harsh_desc: 약점부터 파고들고, 기준을 확실히 넘지 못하면 reject
+  typical_desc: 강점과 약점을 균형 있게, 고칠 수 있는 문제는 구분
+  task_proof: PDF 교정
+  task_review: 학회 리뷰 EN · KR
+  s4_title: 실행 방법
+  s4_sub: API 키로 자동 실행, 또는 내 Claude 계정으로
+  mode_api: API key
+  mode_bridge: 내 Claude Code
+  mode_manual: 붙여넣기
+  bridge_desc: "터미널에 아래 명령을 붙여넣으면 로그인된 <b>내 Claude Code</b>와 연결돼요. API 요금 대신 요금제 사용량을 써요. <span class=\"pr-dim\">Node 18+ · macOS/Linux (Windows는 WSL)</span>"
+  model_label: 모델
+  model_default: 기본값 (Claude Code 설정)
+  bridge_copy: 명령 복사
+  bridge_view: 스크립트 코드 보기
+  bridge_off: 연결 안 됨
+  bridge_code: "연결 코드 (예: 43117-xxxx)"
+  bridge_connect: 연결
+  model_cheap: 저렴
+  remember: 이 브라우저에 키 저장
+  run_api: 리뷰 시작
+  run_manual: 프롬프트 만들기
+  privacy: 키와 PDF는 브라우저에서 Anthropic API로 바로 가고, 이 블로그 서버를 거치지 않아요. 미공개 원고라면 소속 기관 정책을 먼저 확인하세요.
+  manual_desc: <b>claude.ai</b>나 <b>Claude Code</b>에 로그인된 내 계정으로 실행해요. 페이지가 프롬프트를 만들어주면 PDF와 함께 붙여넣고, 받은 JSON을 다시 여기에 붙여넣으면 결과가 똑같이 그려져요. API 요금 대신 요금제 사용량이 차감됩니다.
+  manual_title: 내 Claude 계정으로 실행하기
+  manual_sub: 작업마다 프롬프트 복사, Claude에 붙여넣기, 결과 붙여넣기 순서로 진행해요.
+  manual_web: <b>claude.ai</b>&nbsp;새 대화에 PDF를 첨부하고 프롬프트를 붙여넣어요.
+  manual_cc: <b>Claude Code</b>&nbsp;PDF가 있는 폴더에서 <code>claude</code>를 실행하고 <code>@paper.pdf</code> 뒤에 프롬프트를 붙여넣어요.
+  manual_open: claude.ai 열기
+  manual_copy: 프롬프트 복사
+  manual_download: .md로 저장
+  manual_paste: Claude가 준 JSON을 여기에 붙여넣기
+  manual_upload: JSON 파일
+  manual_load: 결과 불러오기
+  manual_proof_title: 교정
+  manual_review_title: 리뷰
+  history_title: 기록
+  history_note: 이 브라우저에만 저장돼요 · 최근 20개 · 초기화 전까지 유지
+  history_reset: 전체 초기화
+  tab_proof: 교정
+  tab_review: 리뷰
+  tab_revise: 수정본 확인
+  rev_need: 먼저 교정을 실행하거나 기록에서 교정 결과를 열어주세요. 그 이슈들이 수정본에서 고쳐졌는지 확인해요.
+  rev_upload_title: 수정본 올리기
+  rev_upload_note: 직접 컴파일한 PDF를 올리거나, Overleaf 소스 zip을 올리면 브리지가 컴파일하고 Claude 검수 때 원본까지 읽어요.
+  rev_zip: 소스 zip 선택
+  rev_upload: 수정본 PDF 선택
+  rev_latex_title: LaTeX 폴더 컴파일
+  rev_latex_note: 내 Claude Code 브리지가 내 컴퓨터에서 latexmk(또는 pdflatex)로 컴파일해요. 폴더의 절대 경로와 메인 파일을 적어주세요. 빌드 결과는 임시 폴더에 만들어지고 프로젝트 폴더는 건드리지 않아요.
+  rev_dir: LaTeX 프로젝트 폴더 (절대 경로)
+  rev_main: 메인 .tex 파일
+  rev_compile: 컴파일해서 비교
+  rev_view_inline: 한 화면
+  rev_view_split: 나란히
+  rev_inline_label: 수정본 · 추가는 하이라이트, 삭제는 취소선 메모
+  rev_old: 이전 버전 (삭제)
+  rev_new: 수정본 (추가)
+  export_pdf: 주석 PDF
+  export_md: 리뷰 .md
+  how_title: Quote, <em>don't guess</em> coordinates.
+  how1_title: 교정 프롬프트
+  how1_body: 의 <code>02_paper_proofreading.md</code>에서 페르소나, 심각도, 카테고리 A–I 규칙을 그대로 가져와요. 원본은 LaTeX 소스를 읽는다고 가정하므로, 소스에서만 확인할 수 있는 검사는 PDF에서 보이는 증상으로 바꾸고 출력은 JSON으로 받습니다.
+  how2_title: 위치 찾기
+  how2_body: 모델이 낸 좌표는 믿을 수 없어서, 이슈마다 <b>페이지 번호와 원문 인용</b>을 받아요. 페이지의 텍스트 레이어에서 그 인용문을 찾아 박스를 그리는데, 줄바꿈 하이픈과 공백 차이는 무시하고 비교해요. 끝내 못 찾은 이슈는 목록에 <i>위치 미확인</i>으로 남깁니다.
+  how3_title: 리뷰와 번역
+  how3_body: "\"I am a harsh CVPR reviewer…\" 프롬프트에 학회별 평가 기준을 붙여 영어 리뷰를 받은 뒤, 그 리뷰를 그대로 한국어로 번역해요. 따로 생성하면 두 언어의 판정이 달라질 수 있기 때문이에요. API 모드에서는 PDF를 프롬프트 캐시에 올려 교정과 리뷰가 함께 씁니다."
+
+en:
+  title: Paper Reviewer · Jiwon Choi
+  h1: Proofread it.<br>Then face <em>Reviewer&nbsp;2.</em>
+  lead: Upload a paper PDF and Claude marks grammar, spelling, spacing, and capitalization problems <mark>right where they are on the page</mark>. Then it becomes a <b>harsh</b> or <b>typical</b> reviewer for the venue you pick and tells you whether it would accept or reject the paper, with reasons, in English and Korean.
+  credit: Proofreading prompt by
+  nav_try: Review a paper
+  nav_how: How it works
+  tagline: All it takes is a PDF. Mistakes are marked right on the page, <br>and a reviewer from your venue gives a verdict in English and Korean.
+  teaser_caption: Grammar, spacing, capitalization, and overclaims are marked at their exact spot, and a reviewer decides accept or reject.
+  try_title: Review your paper
+  s1_title: Paper
+  s1_sub: PDF and/or LaTeX source zip
+  drop: Drop a PDF or LaTeX zip here
+  choose_file: Choose file
+  shrink_title: PDF too large?
+  shrink_desc: Shrink it with Ghostscript and upload the result. This one line installs it and compresses the file, saving -small.pdf next to the original.
+  drop_meta: "PDF up to 24 MB · add the Overleaf source zip and Claude reads the source too"
+  src_remove: Remove source
+  s2_title: Venue
+  s2_sub: Review criteria follow the venue
+  venue_custom: Venue name (e.g. ISMAR, ACM MM)
+  s3_title: Reviewer
+  s3_sub: How tough should it be?
+  harsh_desc: Goes for the weaknesses first; rejects unless clearly above the bar
+  typical_desc: Weighs strengths and weaknesses; separates fixable from fatal
+  task_proof: Proofread the PDF
+  task_review: Venue review EN · KR
+  s4_title: How to run
+  s4_sub: Your API key, or your own Claude account
+  mode_api: API key
+  mode_bridge: My Claude Code
+  mode_manual: Paste
+  bridge_desc: "Paste this into a terminal to connect <b>your own Claude Code</b>. It uses your plan's usage, not API billing. <span class=\"pr-dim\">Node 18+ · macOS/Linux (WSL on Windows)</span>"
+  model_label: Model
+  model_default: Default (your Claude Code setting)
+  bridge_copy: Copy command
+  bridge_view: Read the script
+  bridge_off: Not connected
+  bridge_code: "Pairing code (e.g. 43117-xxxx)"
+  bridge_connect: Connect
+  model_cheap: cheaper
+  remember: Remember the key in this browser
+  run_api: Start review
+  run_manual: Build prompts
+  privacy: Your key and PDF go straight from this browser to the Anthropic API and never touch this blog's server. For an unpublished manuscript, check your institution's policy first.
+  manual_desc: Runs on the account you're already signed in to in <b>claude.ai</b> or <b>Claude Code</b>. This page builds the prompt; you paste it next to the PDF, then paste Claude's JSON answer back here and get the same highlights and review. It uses your plan's usage instead of API billing.
+  manual_title: Run it with your Claude account
+  manual_sub: For each task, copy the prompt, paste it into Claude, then paste the answer back.
+  manual_web: <b>claude.ai</b>&nbsp;Start a new chat, attach the PDF, and paste the prompt.
+  manual_cc: <b>Claude Code</b>&nbsp;Run <code>claude</code> in the PDF's folder and paste the prompt after <code>@paper.pdf</code>.
+  manual_open: Open claude.ai
+  manual_copy: Copy prompt
+  manual_download: Save as .md
+  manual_paste: Paste Claude's JSON answer here
+  manual_upload: JSON file
+  manual_load: Load result
+  manual_proof_title: Proofreading
+  manual_review_title: Review
+  history_title: History
+  history_note: Saved in this browser only · last 20 runs · kept until you reset
+  history_reset: Reset all
+  tab_proof: Proofreading
+  tab_review: Review
+  tab_revise: Check revision
+  rev_need: Run a proofreading pass first, or open one from History. This tab checks whether those issues are fixed in your revision.
+  rev_upload_title: Upload the revision
+  rev_upload_note: Upload a PDF you compiled, or the Overleaf source zip; the bridge compiles it and the Claude check reads the source too.
+  rev_zip: Choose source zip
+  rev_upload: Choose revised PDF
+  rev_latex_title: Compile a LaTeX folder
+  rev_latex_note: The Claude Code bridge compiles it on your machine with latexmk (or pdflatex). Give the folder's absolute path and the main file. The build goes to a temp folder; your project folder is left untouched.
+  rev_dir: LaTeX project folder (absolute path)
+  rev_main: Main .tex file
+  rev_compile: Compile and compare
+  rev_view_inline: Inline
+  rev_view_split: Side by side
+  rev_inline_label: Revision · additions highlighted, deletions as struck-through notes
+  rev_old: Previous version (removed)
+  rev_new: Revision (added)
+  export_pdf: Annotated PDF
+  export_md: Review .md
+  how_title: Quote, <em>don't guess</em> coordinates.
+  how1_title: The proofreading prompt
+  how1_body: "'s <code>02_paper_proofreading.md</code> supplies the persona, severity levels, and category A–I rules verbatim. The original assumes it can read LaTeX source, so checks that only work on source are swapped for their visible symptoms in the PDF, and the output comes back as JSON."
+  how2_title: Finding the spot
+  how2_body: Coordinates from a model can't be trusted, so every issue comes with a <b>page number and a verbatim quote</b>. The page's text layer is searched for that quote and the match becomes the box, ignoring line-break hyphens and spacing differences. Issues that still can't be found stay in the list as <i>not located</i>.
+  how3_title: Review, then translate
+  how3_body: The "I am a harsh CVPR reviewer…" prompt plus venue-specific criteria produces an English review, which is then translated into Korean as is. Generating the two separately could give different verdicts. In API mode the PDF sits in the prompt cache, so proofreading and review share it.
