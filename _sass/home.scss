@@ -136,8 +136,8 @@ a.tab { color:var(--text-secondary); &:hover,&.is-active{color:var(--accent)} }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { @include hm-dark; } }
 :root[data-theme="dark"] { @include hm-dark; }
 
-// Research tab: two columns of wide cards, thumbnail on the left
-.research-thumb-grid[data-research-grid] { grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;
+// Research tab and Latest research: two columns of wide cards, thumbnail on the left
+.research-thumb-grid--rows { grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;
   .research-thumb { flex-direction:row;align-items:stretch; }
   .research-thumb-img { flex:0 0 44%;aspect-ratio:16 / 10;align-self:center;margin:12px 0 12px 12px;border-radius:10px;
     img { object-fit:contain; } }

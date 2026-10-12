@@ -1,0 +1,78 @@
+{%- comment -%} One research card. Used by the Research tab and by Latest research on Home. Expects `pub`. {%- endcomment -%}
+          {% assign first_author = pub.authors | split: "," | first %}
+          {% assign role = "co" %}
+          {% if first_author contains 'Jiwon Choi' %}{% assign role = "first" %}{% endif %}
+          {% assign ptype = "conference" %}
+          {% if pub.conference contains 'Journal' or pub.conference contains 'RA-L' or pub.conference contains 'IJRR' or pub.conference contains 'T-FR' %}{% assign ptype = "journal" %}{% endif %}{% if pub.type == "challenge" %}{% assign ptype = "challenge" %}{% endif %}
+          {% assign card_link = pub.project_link | default: pub.paper_link | default: pub.arxiv_link %}
+          {% assign pub_year = pub.year | slice: 0, 4 %}
+          {% assign venue_short = pub.conference | split: "," | first | strip %}
+          {% assign venue_full = venue_short %}
+          {% assign venue_url = "" %}
+          {% if venue_short == "ICRA" %}{% assign venue_full = "IEEE International Conference on Robotics and Automation" %}{% endif %}
+          {% if venue_short == "RA-L" %}{% assign venue_full = "IEEE Robotics and Automation Letters" %}{% assign venue_url = "https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=7083369" %}{% endif %}
+          {% if venue_short == "IROS" %}{% assign venue_full = "IEEE/RSJ International Conference on Intelligent Robots and Systems" %}{% endif %}
+          {% if venue_short == "IJRR" %}{% assign venue_full = "International Journal of Robotics Research" %}{% assign venue_url = "https://journals.sagepub.com/home/IJR" %}{% endif %}{% if venue_short == "T-FR" %}{% assign venue_full = "IEEE Transactions on Field Robotics" %}{% assign venue_url = "https://www.ieee-ras.org/publications/t-fr" %}{% endif %}
+          {% if venue_short == "IROS Workshop" %}{% assign venue_full = "IROS Workshop on Beyond Exteroception" %}{% assign venue_url = pub.conference_link %}{% endif %}{% if venue_short == "ICRA Workshop" %}{% assign venue_full = "ICRA Workshop on Open Challenges in Robotics for Asset Inspection and Management" %}{% assign venue_url = pub.conference_link %}{% endif %}
+{% if venue_short contains "ICRA workshop" %}
+            {% assign venue_short = "ICRA Workshop" %}
+            {% assign venue_full = "ICRA Workshop on Field Robotics" %}
+            {% assign venue_url = "https://2025.ieee-icra.org/event/workshop-on-field-robotics/" %}
+          {% endif %}
+          {% if venue_short == "ICRA" and pub_year == "2026" %}{% assign venue_url = "https://2026.ieee-icra.org/" %}{% endif %}
+          {% if venue_short == "ICRA" and pub_year == "2025" %}{% assign venue_url = "https://2025.ieee-icra.org/" %}{% endif %}
+          {% if venue_short == "IROS" and pub_year == "2026" %}{% assign venue_url = "https://2026.ieee-iros.org/" %}{% endif %}
+          {% assign role_label = "Co-author" %}
+          {% if role == "first" %}{% assign role_label = "1st Author" %}{% endif %}
+          {% assign type_label = "Conference" %}
+          {% if ptype == "journal" %}{% assign type_label = "Journal" %}{% endif %}{% if ptype == "challenge" %}{% assign type_label = "Challenge" %}{% endif %}
+          {% assign first_author_name = first_author | strip %}
+          {% assign first_author_url = "" %}
+          {% if first_author_name == "Hogyun Kim" %}{% assign first_author_url = "https://hogyun2.github.io/" %}{% endif %}
+          {% if first_author_name == "Jungwoo Lee" %}{% assign first_author_url = "https://scholar.google.com/citations?hl=ko&user=H0rvKXYAAAAJ" %}{% endif %}
+          <article class="research-thumb{% if role == 'first' %} is-mine{% endif %}"
+             data-role="{{ role }}"
+             data-type="{{ ptype }}">  
+            {% if card_link != "" %}
+            <a class="research-thumb-cover" href="{{ card_link }}" target="_blank" aria-label="{{ pub.title }}"></a>
+            {% endif %}
+            <div class="research-thumb-img">
+              {% if pub.thumbnail %}
+              <img src="{{ pub.thumbnail | relative_url }}" alt="{{ pub.title }}">
+              {% else %}
+              <div class="research-thumb-placeholder"><i class="fas fa-image"></i></div>
+              {% endif %}
+            </div>
+            <div class="research-thumb-body">
+              <div class="research-thumb-pills">
+                <span class="pill pill--year">{{ pub_year }}</span>
+                <span class="pill pill--role pill--role-{{ role }}">{{ role_label }}</span>
+                <span class="pill pill--type pill--type-{{ ptype }}">{{ type_label }}</span>
+              </div>
+              <h3 class="research-thumb-title">{{ pub.title }}</h3>
+              {% if role == "co" %}
+              <p class="research-thumb-author">
+                1st author —
+                {% if first_author_url != "" %}
+                <a href="{{ first_author_url }}" target="_blank" rel="noopener">{{ first_author_name }}</a>
+                {% else %}
+                <span>{{ first_author_name }}</span>
+                {% endif %}
+                {% if pub.spotlight %}<span class="research-thumb-award research-thumb-award--inline"><i class="fas fa-award"></i> {{ pub.spotlight }}</span>{% endif %}
+              </p>
+              {% if pub.award %}<p class="research-thumb-award"><i class="fas fa-award"></i> {{ pub.award }}</p>{% endif %}
+              {% elsif pub.award %}
+              <p class="research-thumb-award"><i class="fas fa-award"></i> {{ pub.award }}{% if pub.spotlight %}<span class="research-thumb-award--inline"><i class="fas fa-award"></i> {{ pub.spotlight }}</span>{% endif %}</p>
+              {% elsif pub.spotlight %}
+              <p class="research-thumb-award"><i class="fas fa-award"></i> {{ pub.spotlight }}</p>
+              {% endif %}
+              <span class="research-thumb-venue">
+                <span class="venue-full">{{ venue_full }}</span>
+                {% if venue_url != "" %}
+                <a href="{{ venue_url }}" target="_blank" rel="noopener" class="venue-short">({{ venue_short }} {{ pub_year }})</a>
+                {% else %}
+                <span class="venue-short">({{ venue_short }} {{ pub_year }})</span>
+                {% endif %}
+              </span>
+            </div>
+          </article>
