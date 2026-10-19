@@ -34,7 +34,7 @@
   arxiv_link: "https://arxiv.org/abs/2505.08230"
   project_link: "https://sparolab.github.io/research/skid_slam/"
   tldr: "Multi-Robot and Distributed LiDAR SLAM Framework"
-  thumbnail: "/assets/img/research/skid_slam.gif"
+  thumbnail: "/assets/img/research/skid_slam_demo.gif"
 
 - year: 2026/06
   title: "Commerge: Communication-Efficient, Robust and Fast LiDAR Map Merging Framework for Multi-robot Coordination in Resource-constrained Scenarios"
