@@ -1,6 +1,9 @@
 @import 'variables';
 
-.posts-list { display:flex; flex-direction:column; gap:16px; }
+.posts-list { display:flex; flex-direction:column; gap:36px; }
+.post-group[hidden] { display:none; }
+.post-group-cards { display:flex; flex-direction:column; gap:16px; }
+.post-group-title { display:flex; align-items:center; gap:12px; margin:0 0 14px; color:var(--text-muted); font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; &::after { content:""; flex:1; height:1px; background:var(--border); } }
 .post-feature[hidden] { display:none; }
 .post-feature { display:grid; grid-template-columns:minmax(210px,.78fr) 1.22fr; min-height:153px; overflow:hidden; color:var(--text-primary); background:var(--bg-card); border:1px solid var(--border); border-radius:18px; transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease; &:hover { color:var(--text-primary); transform:translateY(-3px); border-color:var(--accent); box-shadow:0 16px 44px var(--shadow-card); .post-open i{transform:translateX(4px)} } }
 // Card thumbnails: flat neutral stage with a small line drawing (no glow,

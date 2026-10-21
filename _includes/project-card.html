@@ -1,0 +1,50 @@
+{%- comment -%} One card on the Projects tab. Expects `pub`: a grant from _data/projects.yml or a challenge from _data/research.yml. {%- endcomment -%}
+{%- if pub.kind == "grant" -%}
+  {%- assign date_label = pub.period -%}
+  {%- assign team_role = pub.role -%}{%- assign team_cls = "pi" -%}
+  {%- assign tag_label = pub.funder_tag -%}{%- assign tag_cls = "grant" -%}
+  {%- assign event_icon = "fas fa-building-columns" -%}
+{%- else -%}
+  {%- assign date_label = pub.year | replace: "/", "." -%}
+  {%- assign lead = pub.authors | split: "," | first | strip -%}
+  {%- if lead contains 'Jiwon Choi' -%}{%- assign team_role = "Team Leader" -%}{%- assign team_cls = "lead" -%}{%- else -%}{%- assign team_role = "Team Member" -%}{%- assign team_cls = "member" -%}{%- endif -%}
+  {%- assign tag_label = "Challenge" -%}{%- assign tag_cls = "challenge" -%}
+  {%- assign event_icon = "fas fa-flag-checkered" -%}
+{%- endif -%}
+{%- assign card_link = pub.project_link | default: pub.conference_link -%}
+<article class="project-card">
+  {% if card_link %}<a class="project-card-img" href="{{ card_link }}" target="_blank" rel="noopener" aria-label="{{ pub.project_title }}">{% else %}<div class="project-card-img">{% endif %}
+    <img src="{{ pub.thumbnail | relative_url }}" alt="{{ pub.project_title }}" loading="lazy">
+  {% if card_link %}</a>{% else %}</div>{% endif %}
+  <div class="project-card-body">
+    <div class="project-card-pills">
+      <span class="pill pill--date">{{ date_label }}</span>
+      <span class="pill pill--team-{{ team_cls }}">{{ team_role }}</span>
+      <span class="pill pill--{{ tag_cls }}">{{ tag_label }}</span>
+    </div>
+    <h3 class="project-card-title">{{ pub.project_title }}</h3>
+    {% if pub.title_ko %}<p class="project-card-sub">{{ pub.title_ko }}</p>{% endif %}
+    <p class="project-card-event"><i class="{{ event_icon }}"></i> {{ pub.event }}</p>
+    {% if pub.result %}<p class="project-card-result"><i class="fas fa-trophy"></i> {{ pub.result }}</p>{% endif %}
+    {% if pub.kind == "grant" %}
+    <p class="project-card-summary">{{ pub.summary }}</p>
+    <ol class="project-card-years">
+      {% for y in pub.years %}<li><span>Year {{ forloop.index }}</span><p>{{ y }}</p></li>{% endfor %}
+    </ol>
+    {% else %}
+    <p class="project-card-summary"><em>{{ pub.title }}</em>{% if pub.summary %} — {{ pub.summary }}{% endif %}</p>
+    <p class="project-card-authors">
+      {%- assign names = pub.authors | split: "," -%}
+      {%- for n in names -%}
+        {%- assign name = n | strip -%}
+        {%- if name contains 'Jiwon Choi' %}<b>{{ name }}</b>{% else %}{{ name }}{% endif %}{% unless forloop.last %}, {% endunless -%}
+      {%- endfor -%}
+    </p>
+    {% endif %}
+    {% if pub.links %}
+    <p class="project-card-links">
+      {% for l in pub.links %}<a href="{{ l.url }}" target="_blank" rel="noopener"><i class="{{ l.icon }}"></i> {{ l.label }}</a>{% endfor %}
+    </p>
+    {% endif %}
+  </div>
+</article>

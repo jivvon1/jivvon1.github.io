@@ -61,7 +61,7 @@ title: Jiwon Choi
               {{ item.text }}
               {% endif %}
               {% if item.role %}
-              <span class="hero-news-role hero-news-role--{% if item.role contains '1st' %}first{% else %}co{% endif %}">{{ item.role }}</span>
+              <span class="pill pill--role-{% if item.role contains '1st' %}first{% else %}co{% endif %} news-role-pill">{{ item.role }}</span>
               {% endif %}
             </span>
           </li>
@@ -81,6 +81,7 @@ title: Jiwon Choi
             {% assign lead = pub.authors | split: "," | first %}
             {% unless lead contains 'Jiwon Choi' %}{% continue %}{% endunless %}
             {% if pub.conference contains 'ICROS' or pub.conference contains 'ITS' %}{% continue %}{% endif %}
+            {% if pub.type == "challenge" %}{% continue %}{% endif %}
             {% if shown >= 2 %}{% break %}{% endif %}
             {% assign shown = shown | plus: 1 %}
             {% include research-card.html %}
@@ -238,7 +239,6 @@ title: Jiwon Choi
             <button class="chip is-active" data-value="all">All</button>
             <button class="chip" data-value="conference">Conference</button>
             <button class="chip" data-value="journal">Journal</button>
-            <button class="chip" data-value="challenge">Challenge</button>
           </div>
         </div>
         <div class="filter-row">
@@ -254,6 +254,7 @@ title: Jiwon Choi
       <div class="research-thumb-grid research-thumb-grid--rows" data-research-grid>
         {% for pub in site.data.research %}
           {% if pub.conference contains 'ICROS' or pub.conference contains 'ITS' %}{% continue %}{% endif %}
+          {% if pub.type == "challenge" %}{% continue %}{% endif %}
           {% include research-card.html %}
         {% endfor %}
       </div>
@@ -272,6 +273,21 @@ title: Jiwon Choi
           <i class="fas fa-chevron-right"></i>
         </button>
       </nav>
+    </section>
+
+    <!-- Projects -->
+    <section class="tab-panel" data-panel="projects">
+      <header class="hm-panel-head">
+        <p class="hm-eyebrow">Projects</p>
+        <h2>Projects</h2>
+        <p>Research grants I lead and challenges I have competed in.</p>
+      </header>
+      <div class="projects-list">
+        {% for pub in site.data.projects %}{% include project-card.html %}{% endfor %}
+        {% for pub in site.data.research %}
+          {% if pub.type == "challenge" %}{% include project-card.html %}{% endif %}
+        {% endfor %}
+      </div>
     </section>
 
     <!-- Posts -->
@@ -293,77 +309,87 @@ title: Jiwon Choi
       </div>
 
       <div class="posts-list" data-posts-list>
-        <a class="post-feature" data-category="project" href="{{ '/posts/paper-reviewer/' | relative_url }}">
-          <div class="post-feature-visual post-feature-visual--pr" aria-hidden="true">
-            <span class="post-pr-scene">
-              <span class="post-pr-sheet post-pr-sheet--back"></span>
-              <span class="post-pr-sheet">
-                <span class="post-pr-tape"></span>
-                <span class="post-pr-line is-title"></span>
-                <span class="post-pr-line"></span>
-                <span class="post-pr-line is-short"></span>
-                <span class="post-pr-line"></span>
-                <span class="post-pr-line"></span>
-                <span class="post-pr-line is-short"></span>
-                <span class="post-pr-line"></span>
-                <span class="post-pr-mark post-pr-mark--a"></span>
-                <span class="post-pr-mark post-pr-mark--b"></span>
-                <span class="post-pr-mark post-pr-mark--c"></span>
-              </span>
-              <span class="post-pr-stamp">REJECT?</span>
-            </span>
+        <section class="post-group" data-post-group>
+          <h3 class="post-group-title">Tools</h3>
+          <div class="post-group-cards">
+            <a class="post-feature" data-category="project" href="{{ '/posts/paper-reviewer/' | relative_url }}">
+              <div class="post-feature-visual post-feature-visual--pr" aria-hidden="true">
+                <span class="post-pr-scene">
+                  <span class="post-pr-sheet post-pr-sheet--back"></span>
+                  <span class="post-pr-sheet">
+                    <span class="post-pr-tape"></span>
+                    <span class="post-pr-line is-title"></span>
+                    <span class="post-pr-line"></span>
+                    <span class="post-pr-line is-short"></span>
+                    <span class="post-pr-line"></span>
+                    <span class="post-pr-line"></span>
+                    <span class="post-pr-line is-short"></span>
+                    <span class="post-pr-line"></span>
+                    <span class="post-pr-mark post-pr-mark--a"></span>
+                    <span class="post-pr-mark post-pr-mark--b"></span>
+                    <span class="post-pr-mark post-pr-mark--c"></span>
+                  </span>
+                  <span class="post-pr-stamp">REJECT?</span>
+                </span>
+              </div>
+              <div class="post-feature-copy">
+                <div class="post-meta"><span>Project</span><span>Claude Code</span><span>Tool</span></div>
+                <h3>Paper Reviewer</h3>
+                <p>Drop in a paper PDF: get grammar, spacing, and capitalization issues marked right on the page, plus a harsh or typical reviewer's accept/reject verdict for your target venue, in English and Korean.</p>
+                <span class="post-open">Open tool <i class="fas fa-arrow-right"></i></span>
+              </div>
+            </a>
           </div>
-          <div class="post-feature-copy">
-            <div class="post-meta"><span>Project</span><span>Claude Code</span><span>Tool</span></div>
-            <h3>Paper Reviewer</h3>
-            <p>Drop in a paper PDF: get grammar, spacing, and capitalization issues marked right on the page, plus a harsh or typical reviewer's accept/reject verdict for your target venue, in English and Korean.</p>
-            <span class="post-open">Open tool <i class="fas fa-arrow-right"></i></span>
+        </section>
+        <section class="post-group" data-post-group>
+          <h3 class="post-group-title">State Estimation</h3>
+          <div class="post-group-cards">
+            <a class="post-feature" data-category="study" href="{{ '/posts/lidar-inertial-odometry/' | relative_url }}">
+              <div class="post-feature-visual post-feature-visual--lio" aria-hidden="true">
+                <span class="post-sheet-scene">
+                  <span class="post-sheet">
+                    <span class="post-pr-tape"></span>
+                    <svg viewBox="0 0 120 84" fill="none">
+                      <g fill="#cbd5e1"><circle cx="18" cy="18" r="2"/><circle cx="28" cy="18" r="2"/><circle cx="38" cy="18" r="2"/><circle cx="48" cy="18" r="2"/><circle cx="58" cy="18" r="2"/><circle cx="68" cy="18" r="2"/><circle cx="78" cy="18" r="2"/><circle cx="78" cy="28" r="2"/><circle cx="78" cy="38" r="2"/><circle cx="78" cy="48" r="2"/><circle cx="78" cy="58" r="2"/><circle cx="78" cy="68" r="2"/></g>
+                      <g fill="#4f46e5"><circle cx="30" cy="26" r="2"/><circle cx="40" cy="26" r="2"/><circle cx="50" cy="26" r="2"/><circle cx="60" cy="26" r="2"/><circle cx="70" cy="26" r="2"/><circle cx="80" cy="26" r="2"/><circle cx="90" cy="26" r="2"/><circle cx="90" cy="36" r="2"/><circle cx="90" cy="46" r="2"/><circle cx="90" cy="56" r="2"/><circle cx="90" cy="66" r="2"/><circle cx="90" cy="76" r="2"/></g>
+                      <path d="M24 60 L54 48" stroke="#4f46e5" stroke-width="1.6" stroke-linecap="round"/><path d="M48 46 L54 48 L50 53" stroke="#4f46e5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                      <text x="22" y="74" fill="#64748b" font-family="Inter,sans-serif" font-size="9" font-weight="600">T</text>
+                    </svg>
+                  </span>
+                </span>
+              </div>
+              <div class="post-feature-copy">
+                <div class="post-meta"><span>Study</span><span>LiDAR SLAM</span><span>Interactive</span><span>~12 min</span></div>
+                <h3>Two Sweeps, One Transform</h3>
+                <p>Ray-cast two real LiDAR sweeps, pick edge and planar features by curvature, and watch a Gauss-Newton solver recover the relative pose the way LOAM and LIO-SAM do.</p>
+                <span class="post-open">Open lab <i class="fas fa-arrow-right"></i></span>
+              </div>
+            </a>
+            <a class="post-feature" data-category="study" href="{{ '/posts/legged-kinematics/' | relative_url }}">
+              <div class="post-feature-visual" aria-hidden="true">
+                <span class="post-sheet-scene">
+                  <span class="post-sheet post-sheet--alt">
+                    <span class="post-pr-tape"></span>
+                    <svg viewBox="0 0 120 84" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="28" y="22" width="56" height="18" rx="5" stroke="#334155" stroke-width="2"/>
+                      <path d="M38 40 L32 54 L40 66 M74 40 L68 54 L76 66" stroke="#334155" stroke-width="2"/>
+                      <circle cx="40" cy="66" r="3" fill="#4f46e5"/><circle cx="76" cy="66" r="3" fill="#4f46e5"/>
+                      <path d="M16 70 H104" stroke="#cbd5e1" stroke-width="1.5"/>
+                      <path d="M90 31 H108 M103 26 L108 31 L103 36" stroke="#4f46e5" stroke-width="2"/>
+                      <text x="94" y="20" fill="#4f46e5" font-family="Inter,sans-serif" font-size="9" font-weight="700">v</text>
+                    </svg>
+                  </span>
+                </span>
+              </div>
+              <div class="post-feature-copy">
+                <div class="post-meta"><span class="is-wip">🚧 작성중</span><span>Study</span><span>Kinematics</span><span>Interactive</span><span>~10 min</span></div>
+                <h3>From Foot Contact to Body Velocity</h3>
+                <p>Drive a GO2 quadruped and watch stance-foot contact and leg kinematics fuse with an IMU into a body-velocity estimate.</p>
+                <span class="post-open">Open simulator <i class="fas fa-arrow-right"></i></span>
+              </div>
+            </a>
           </div>
-        </a>
-        <a class="post-feature" data-category="study" href="{{ '/posts/lidar-inertial-odometry/' | relative_url }}">
-          <div class="post-feature-visual post-feature-visual--lio" aria-hidden="true">
-            <span class="post-sheet-scene">
-              <span class="post-sheet">
-                <span class="post-pr-tape"></span>
-                <svg viewBox="0 0 120 84" fill="none">
-                  <g fill="#cbd5e1"><circle cx="18" cy="18" r="2"/><circle cx="28" cy="18" r="2"/><circle cx="38" cy="18" r="2"/><circle cx="48" cy="18" r="2"/><circle cx="58" cy="18" r="2"/><circle cx="68" cy="18" r="2"/><circle cx="78" cy="18" r="2"/><circle cx="78" cy="28" r="2"/><circle cx="78" cy="38" r="2"/><circle cx="78" cy="48" r="2"/><circle cx="78" cy="58" r="2"/><circle cx="78" cy="68" r="2"/></g>
-                  <g fill="#4f46e5"><circle cx="30" cy="26" r="2"/><circle cx="40" cy="26" r="2"/><circle cx="50" cy="26" r="2"/><circle cx="60" cy="26" r="2"/><circle cx="70" cy="26" r="2"/><circle cx="80" cy="26" r="2"/><circle cx="90" cy="26" r="2"/><circle cx="90" cy="36" r="2"/><circle cx="90" cy="46" r="2"/><circle cx="90" cy="56" r="2"/><circle cx="90" cy="66" r="2"/><circle cx="90" cy="76" r="2"/></g>
-                  <path d="M24 60 L54 48" stroke="#4f46e5" stroke-width="1.6" stroke-linecap="round"/><path d="M48 46 L54 48 L50 53" stroke="#4f46e5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                  <text x="22" y="74" fill="#64748b" font-family="Inter,sans-serif" font-size="9" font-weight="600">T</text>
-                </svg>
-              </span>
-            </span>
-          </div>
-          <div class="post-feature-copy">
-            <div class="post-meta"><span>Study</span><span>LiDAR SLAM</span><span>Interactive</span><span>~12 min</span></div>
-            <h3>Two Sweeps, One Transform</h3>
-            <p>Ray-cast two real LiDAR sweeps, pick edge and planar features by curvature, and watch a Gauss-Newton solver recover the relative pose the way LOAM and LIO-SAM do.</p>
-            <span class="post-open">Open lab <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-        <a class="post-feature" data-category="study" href="{{ '/posts/legged-kinematics/' | relative_url }}">
-          <div class="post-feature-visual" aria-hidden="true">
-            <span class="post-sheet-scene">
-              <span class="post-sheet post-sheet--alt">
-                <span class="post-pr-tape"></span>
-                <svg viewBox="0 0 120 84" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="28" y="22" width="56" height="18" rx="5" stroke="#334155" stroke-width="2"/>
-                  <path d="M38 40 L32 54 L40 66 M74 40 L68 54 L76 66" stroke="#334155" stroke-width="2"/>
-                  <circle cx="40" cy="66" r="3" fill="#4f46e5"/><circle cx="76" cy="66" r="3" fill="#4f46e5"/>
-                  <path d="M16 70 H104" stroke="#cbd5e1" stroke-width="1.5"/>
-                  <path d="M90 31 H108 M103 26 L108 31 L103 36" stroke="#4f46e5" stroke-width="2"/>
-                  <text x="94" y="20" fill="#4f46e5" font-family="Inter,sans-serif" font-size="9" font-weight="700">v</text>
-                </svg>
-              </span>
-            </span>
-          </div>
-          <div class="post-feature-copy">
-            <div class="post-meta"><span class="is-wip">🚧 작성중</span><span>Study</span><span>Kinematics</span><span>Interactive</span><span>~10 min</span></div>
-            <h3>From Foot Contact to Body Velocity</h3>
-            <p>Drive a GO2 quadruped and watch stance-foot contact and leg kinematics fuse with an IMU into a body-velocity estimate.</p>
-            <span class="post-open">Open simulator <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
+        </section>
       </div>
 
       <div class="empty-state" data-posts-empty hidden>
@@ -436,6 +462,7 @@ title: Jiwon Choi
     const empty = document.querySelector('[data-posts-empty]');
     if (!group || !list) return;
     const cards = Array.from(list.querySelectorAll('[data-category]'));
+    const groups = Array.from(list.querySelectorAll('[data-post-group]'));
     group.addEventListener('click', (e) => {
       const btn = e.target.closest('.chip');
       if (!btn) return;
@@ -447,6 +474,8 @@ title: Jiwon Choi
         card.hidden = !match;
         if (match) shown++;
       });
+      // Hide a subtitle when nothing under it matches
+      groups.forEach(g => { g.hidden = !Array.from(g.querySelectorAll('[data-category]')).some(c => !c.hidden); });
       if (empty) empty.hidden = shown > 0;
     });
   })();

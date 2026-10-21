@@ -11,6 +11,15 @@
   project_link: "https://sparolab.github.io/research/imu_challenge/"
   tldr: "Cross-Platform IMU Velocity Estimation"
   thumbnail: "/assets/img/research/imu_challenge.png"
+  # Projects tab card
+  project_title: "TartanIMU Challenge @IROS 2026"
+  event: "IMU Odometry Challenge · Beyond Exteroception Workshop, IROS 2026"
+  result: "2nd place out of 131 teams"
+  summary: "one network that estimates velocity from IMU alone across cars, quadrupeds, drones, and handheld devices."
+  links:
+    - { label: "project", icon: "fas fa-globe", url: "https://sparolab.github.io/research/imu_challenge/" }
+    - { label: "challenge", icon: "fas fa-flag-checkered", url: "https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026" }
+    - { label: "model", icon: "fas fa-cube", url: "https://huggingface.co/jivvon2/tartanimu-sparo" }
 
 - year: 2026/10
   title: "RadLoc: Radar-based 3-DoF Global Localization via Fast, Robust, and Lightweight Spatial Descriptor Across Diverse Environmental Scenarios"
@@ -74,6 +83,13 @@
   project_link: "https://sparolab.github.io/research/hilti_challenge/"
   tldr: "360-camera visual-inertial SLAM"
   thumbnail: "/assets/img/research/hilti_challenge.jpg"
+  # Projects tab card
+  project_title: "Hilti–Trimble SLAM Challenge @ICRA 2026"
+  event: "SLAM Category · Workshop on Open Challenges in Robotics for Asset Inspection and Management, ICRA 2026"
+  result: "2nd place out of 64 teams"
+  links:
+    - { label: "project", icon: "fas fa-globe", url: "https://sparolab.github.io/research/hilti_challenge/" }
+    - { label: "challenge", icon: "fas fa-flag-checkered", url: "https://hilti-trimble-challenge.com/" }
 
 - year: 2025/05
   title: "SKiD-SLAM: Robust, Lightweight, and Distributed Multi-Robot LiDAR SLAM in Resource-Constrained Field Environments"

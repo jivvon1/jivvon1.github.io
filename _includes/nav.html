@@ -25,8 +25,8 @@
   </div>
   <div class="tabs" role="tablist">
     <div class="tabs-scroll">
-      {%- assign tab_names = "home,publications,research,posts,news,etc" | split: "," -%}
-      {%- assign tab_labels = "Home,Publications,Research,Posts,News,ETC" | split: "," -%}
+      {%- assign tab_names = "home,research,projects,publications,posts,news,etc" | split: "," -%}
+      {%- assign tab_labels = "Home,Research,Projects,Publications,Posts,News,ETC" | split: "," -%}
       {%- for name in tab_names -%}
       {%- if is_home %}
       <button class="tab{% if forloop.first %} is-active{% endif %}" data-tab="{{ name }}" role="tab" type="button">{{ tab_labels[forloop.index0] }}</button>

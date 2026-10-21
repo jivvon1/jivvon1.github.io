@@ -1,0 +1,14 @@
+# Funded projects shown at the top of the Projects tab (challenges come from research.yml)
+- kind: grant
+  period: "2026.09 – Present"
+  role: "Principal Investigator"
+  funder_tag: "NRF Grant"
+  project_title: "Motion-Environment Disentangled Representation Learning for Adaptive IMU Odometry in Heterogeneous Robots"
+  title_ko: "모션·환경 분리 표현 학습을 통한 이기종 로봇의 적응형 IMU 자기위치 추정"
+  event: "National Research Foundation of Korea (NRF) · Ph.D. Candidate Research Fellowship"
+  summary: "Separates the robot's own motion from terrain and disturbance effects in IMU signals (M&E-IMU), so one IMU odometry framework adapts to new robots and environments without retraining."
+  thumbnail: "/assets/img/research/me_imu_pipeline.jpg"
+  years:
+    - "Motion–environment disentangled encoder (M&E-IMU)"
+    - "Heterogeneous pre-training, distilled into on-device student models"
+    - "Test-time adaptation, field validation, and open-source release"
