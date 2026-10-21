@@ -1,13 +1,13 @@
 {%- comment -%} One card on the Projects tab. Expects `pub`: a grant from _data/projects.yml or a challenge from _data/research.yml. {%- endcomment -%}
 {%- if pub.kind == "grant" -%}
   {%- assign date_label = pub.period -%}
-  {%- assign team_role = pub.role -%}{%- assign team_cls = "pi" -%}
+  {%- assign team_role = pub.role -%}{%- assign team_cls = "first" -%}
   {%- assign tag_label = pub.funder_tag -%}{%- assign tag_cls = "grant" -%}
   {%- assign event_icon = "fas fa-building-columns" -%}
 {%- else -%}
   {%- assign date_label = pub.year | replace: "/", "." -%}
   {%- assign lead = pub.authors | split: "," | first | strip -%}
-  {%- if lead contains 'Jiwon Choi' -%}{%- assign team_role = "Team Leader" -%}{%- assign team_cls = "lead" -%}{%- else -%}{%- assign team_role = "Team Member" -%}{%- assign team_cls = "member" -%}{%- endif -%}
+  {%- if lead contains 'Jiwon Choi' -%}{%- assign team_role = "Team Leader" -%}{%- assign team_cls = "first" -%}{%- else -%}{%- assign team_role = "Team Member" -%}{%- assign team_cls = "co" -%}{%- endif -%}
   {%- assign tag_label = "Challenge" -%}{%- assign tag_cls = "challenge" -%}
   {%- assign event_icon = "fas fa-flag-checkered" -%}
 {%- endif -%}
@@ -19,7 +19,7 @@
   <div class="project-card-body">
     <div class="project-card-pills">
       <span class="pill pill--date">{{ date_label }}</span>
-      <span class="pill pill--team-{{ team_cls }}">{{ team_role }}</span>
+      <span class="pill pill--role-{{ team_cls }}">{{ team_role }}</span>
       <span class="pill pill--{{ tag_cls }}">{{ tag_label }}</span>
     </div>
     <h3 class="project-card-title">{{ pub.project_title }}</h3>

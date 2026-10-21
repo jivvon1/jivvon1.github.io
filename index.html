@@ -61,7 +61,7 @@ title: Jiwon Choi
               {{ item.text }}
               {% endif %}
               {% if item.role %}
-              <span class="pill pill--role-{% if item.role contains '1st' %}first{% else %}co{% endif %} news-role-pill">{{ item.role }}</span>
+              <span class="pill pill--role-{% if item.role contains '1st' or item.role contains 'Principal' or item.role contains 'Leader' %}first{% else %}co{% endif %} news-role-pill">{{ item.role }}</span>
               {% endif %}
             </span>
           </li>
@@ -123,7 +123,7 @@ title: Jiwon Choi
             {{ item.text }}
             {% endif %}
             {% if item.role %}
-            <span class="hero-news-role hero-news-role--{% if item.role contains '1st' %}first{% else %}co{% endif %}">{{ item.role }}</span>
+            <span class="pill pill--role-{% if item.role contains '1st' or item.role contains 'Principal' or item.role contains 'Leader' %}first{% else %}co{% endif %} news-role-pill">{{ item.role }}</span>
             {% endif %}
           </span>
         </li>
