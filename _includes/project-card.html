@@ -12,10 +12,11 @@
   {%- assign event_icon = "fas fa-flag-checkered" -%}
 {%- endif -%}
 {%- assign card_link = pub.project_link | default: pub.conference_link -%}
-<article class="project-card">
-  {% if card_link %}<a class="project-card-img" href="{{ card_link }}" target="_blank" rel="noopener" aria-label="{{ pub.project_title }}">{% else %}<div class="project-card-img">{% endif %}
+<article class="project-card{% if team_cls == 'first' %} is-mine{% endif %}{% if card_link %} is-linked{% endif %}">
+  {% if card_link %}<a class="project-card-cover" href="{{ card_link }}" target="_blank" rel="noopener" aria-label="{{ pub.project_title }}"></a>{% endif %}
+  <div class="project-card-img">
     <img src="{{ pub.thumbnail | relative_url }}" alt="{{ pub.project_title }}" loading="lazy">
-  {% if card_link %}</a>{% else %}</div>{% endif %}
+  </div>
   <div class="project-card-body">
     <div class="project-card-pills">
       <span class="pill pill--date">{{ date_label }}</span>
