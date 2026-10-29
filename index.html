@@ -451,8 +451,20 @@ title: Jiwon Choi
     document.querySelectorAll('[data-goto]').forEach(b =>
       b.addEventListener('click', () => activate(b.dataset.goto))
     );
-    const hash = (location.hash || '').replace('#', '');
-    if (hash && document.querySelector('.tab[data-tab="' + hash + '"]')) activate(hash);
+    // "#tab" opens a tab; "#tab/card-id" also scrolls to that card and briefly highlights it
+    function openFromHash() {
+      const [name, target] = (location.hash || '').replace('#', '').split('/');
+      if (!name || !document.querySelector('.tab[data-tab="' + name + '"]')) return;
+      activate(name);
+      const card = target && document.getElementById(target);
+      if (!card) return;
+      requestAnimationFrame(() => {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.classList.remove('is-target'); void card.offsetWidth; card.classList.add('is-target');
+      });
+    }
+    window.addEventListener('hashchange', openFromHash);
+    openFromHash();
   })();
 
   // Posts category filter

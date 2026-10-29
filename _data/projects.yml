@@ -1,5 +1,6 @@
 # Funded projects shown at the top of the Projects tab (challenges come from research.yml)
 - kind: grant
+  id: "nrf-fellowship"   # news links here via /#projects/nrf-fellowship
   period: "2026.09 – Present"
   role: "Principal Investigator"
   funder_tag: "NRF Grant"

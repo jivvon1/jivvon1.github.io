@@ -1,12 +1,18 @@
 - date: "2026.10"
   category: "award"
+  text: "<strong><a href=\"https://sparolab.github.io/research/kiss_imu/\" target=\"_blank\" rel=\"noopener\">KISS-IMU</a></strong> selected as a finalist for the <strong><a href=\"https://www.qualcomm.com/research/university-relations/innovation-fellowship/2026-south-korea\" target=\"_blank\" rel=\"noopener\">Qualcomm Innovation Fellowship Korea (QIFK) 2026</a></strong>."
+  link: ""
+  role: "1st Author"
+
+- date: "2026.10"
+  category: "award"
   text: "Placed <strong>2nd</strong> among 131 teams in the <strong><a href=\"https://sparolab.github.io/research/imu_challenge/\" target=\"_blank\" rel=\"noopener\">IMU Odometry Challenge</a></strong>, Beyond Exteroception Workshop @IROS 2026."
   link: ""
   role: "Team Leader"
 
 - date: "2026.08"
   category: "award"
-  text: "Awarded the <strong>Ph.D. Candidate Research Fellowship</strong>, National Research Foundation of Korea (NRF)."
+  text: "Awarded the <strong><a href=\"/#projects/nrf-fellowship\">Ph.D. Candidate Research Fellowship</a></strong>, National Research Foundation of Korea (NRF)."
   role: "Principal Investigator"
   link: ""
 
