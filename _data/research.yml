@@ -86,7 +86,7 @@
   # Projects tab card
   project_title: "Hilti–Trimble SLAM Challenge @ICRA 2026"
   event: "SLAM Category · Workshop on Open Challenges in Robotics for Asset Inspection and Management, ICRA 2026"
-  result: "2nd place out of 64 teams"
+  result: "2nd place out of 62 teams"
   links:
     - { label: "project", icon: "fas fa-globe", url: "https://sparolab.github.io/research/hilti_challenge/" }
     - { label: "challenge", icon: "fas fa-flag-checkered", url: "https://hilti-trimble-challenge.com/" }
