@@ -124,7 +124,6 @@ a.tab { color:var(--text-secondary); &:hover,&.is-active{color:var(--accent)} }
 .research-thumb { border-radius:16px;box-shadow:none; &:hover{box-shadow:0 12px 32px -18px rgba(15,23,42,.25)}
   &.is-mine { border-color:var(--accent); &:hover{border-color:var(--accent);box-shadow:0 12px 32px -18px rgba(var(--accent-rgb),.55)} } }
 .post-feature { border-radius:16px; &:hover{transform:translateY(-2px);box-shadow:0 12px 32px -18px rgba(15,23,42,.25)} }
-.etc-list li { box-shadow:none;border:1px solid var(--border);border-radius:14px; }
 
 // dark: gradient name, softer photo shadow
 @mixin hm-dark {

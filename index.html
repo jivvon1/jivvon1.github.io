@@ -408,31 +408,23 @@ title: Jiwon Choi
       </header>
       <div class="etc-grid">
         {% if talks.size > 0 %}
-        <div class="etc-column">
-          <h3 class="etc-subtitle"><i class="fas fa-chalkboard-teacher"></i> Presentation</h3>
+        <section class="hm-block">
+          <div class="hm-block-head"><div><p class="hm-eyebrow">Talks</p><h2>Presentation</h2></div></div>
           <ul class="etc-list">
             {% for item in talks %}
-            <li>
-              <span class="etc-title">{{ item.title }}</span>
-              <span class="etc-detail">{{ item.venue }}, {{ item.year }}</span>
-            </li>
+            <li><span class="etc-year">{{ item.year }}</span>{% if item.url and item.url != "" %}<a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}, {{ item.venue }}</a>{% else %}{{ item.title }}, {{ item.venue }}{% endif %}</li>
             {% endfor %}
           </ul>
-        </div>
+        </section>
         {% endif %}
-        <div class="etc-column">
-          <h3 class="etc-subtitle"><i class="fas fa-users"></i> Academic Service</h3>
+        <section class="hm-block">
+          <div class="hm-block-head"><div><p class="hm-eyebrow">Service</p><h2>Academic Service</h2></div></div>
           <ul class="etc-list">
             {% for item in site.data.etc.service %}
-            <li>
-              <span class="etc-title">{{ item.role }}</span>
-              {% for sub in item.items %}
-              <span class="etc-detail">{{ sub.venue }}, {{ sub.year }}</span>
-              {% endfor %}
-            </li>
+            <li><span class="etc-year">{{ item.year }}</span>{% if item.url and item.url != "" %}<a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.role }}, {{ item.venue }}</a>{% else %}{{ item.role }}, {{ item.venue }}{% endif %}</li>
             {% endfor %}
           </ul>
-        </div>
+        </section>
       </div>
     </section>
 

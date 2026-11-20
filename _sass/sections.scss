@@ -600,47 +600,36 @@
 // ── ETC ──
 .etc-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
-}
-
-.etc-subtitle {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: var(--text-primary);
-
-  i {
-    color: var(--accent);
-    margin-right: 8px;
-  }
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  .hm-block, .hm-block:first-of-type { margin-top: 0; }
+  @media (max-width: 768px) { grid-template-columns: 1fr; }
 }
 
 .etc-list {
   list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  margin: 0;
+  padding: 0;
 
   li {
-    padding: 16px 20px;
-    background: var(--bg-card);
-    border-radius: 10px;
-    box-shadow: 0 2px 8px var(--shadow-card);
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: .85rem;
+    color: var(--text-secondary);
+    &:last-child { border-bottom: 0; }
   }
 
-  .etc-title {
-    display: block;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    margin-bottom: 4px;
+  a {
+    color: var(--text-secondary);
+    &:hover { color: var(--accent); }
   }
 
-  .etc-detail {
-    display: block;
-    font-size: 0.82rem;
+  .etc-year {
+    float: right;
+    margin-left: 12px;
     color: var(--text-muted);
+    font-size: .76rem;
+    font-variant-numeric: tabular-nums;
   }
 }
 
