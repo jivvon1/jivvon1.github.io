@@ -66,6 +66,7 @@
               {% elsif pub.spotlight %}
               <p class="research-thumb-award"><i class="fas fa-award"></i> {{ pub.spotlight }}</p>
               {% endif %}
+              {% for a in pub.extra_awards %}<p class="research-thumb-award"><i class="fas fa-award"></i> {{ a }}</p>{% endfor %}
               <span class="research-thumb-venue">
                 <span class="venue-full">{{ venue_full }}</span>
                 {% if venue_url != "" %}

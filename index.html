@@ -188,7 +188,7 @@ title: Jiwon Choi
               <em>{{ pub.conference }}</em>
               {% endif %}
               , {{ pub.year }}
-              {% if pub.award %} · <span class="pub-textlist-award">{{ pub.award }}</span>{% endif %}
+              {% if pub.award %} · <span class="pub-textlist-award">{{ pub.award }}</span>{% endif %}{% for a in pub.extra_awards %} · <span class="pub-textlist-award">{{ a }}</span>{% endfor %}
               {% if pub.spotlight %} · <span class="pub-textlist-award">{{ pub.spotlight }}</span>{% endif %}
             </div>
             <div class="pub-textlist-links">

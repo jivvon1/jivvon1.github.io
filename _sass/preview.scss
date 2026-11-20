@@ -584,6 +584,9 @@
   i { font-size: 0.78rem; }
 }
 
+// stacked awards sit closer together than other card rows
+.research-thumb-award + .research-thumb-award { margin-top: -10px; }
+
 .research-thumb-award--inline {
   margin-left: 10px;
 }

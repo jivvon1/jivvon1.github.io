@@ -67,7 +67,10 @@
   arxiv_link: "https://arxiv.org/abs/2603.06205"
   project_link: "https://sparolab.github.io/research/kiss_imu/"
   tldr: "Self-Supervised Inertial Odometry (IO)"
-  award: "Best Paper on Robot Perception Finalist"
+  award: "Finalist, Best Paper on Robot Perception"
+  extra_awards:
+    - "Winner, WiRA Student Paper Award"
+    - "Finalist, QIFK 2026"
   thumbnail: "/assets/img/research/kiss_imu.gif"
 
 - year: 2026/06
