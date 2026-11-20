@@ -24,7 +24,7 @@
           {% if venue_short == "IROS" and pub_year == "2026" %}{% assign venue_url = "https://2026.ieee-iros.org/" %}{% endif %}
           {% assign role_label = "Co-author" %}
           {% if role == "first" %}{% assign role_label = "1st Author" %}{% endif %}
-          {% assign type_label = "Conference" %}
+          {% assign type_label = "Conf." %}
           {% if ptype == "journal" %}{% assign type_label = "Journal" %}{% endif %}{% if ptype == "challenge" %}{% assign type_label = "Challenge" %}{% endif %}
           {% assign first_author_name = first_author | strip %}
           {% assign first_author_url = "" %}
@@ -48,6 +48,11 @@
                 <span class="pill pill--year">{{ pub_year }}</span>
                 <span class="pill pill--role pill--role-{{ role }}">{{ role_label }}</span>
                 <span class="pill pill--type pill--type-{{ ptype }}">{{ type_label }}</span>
+                {% if pub.github contains "github.com/" %}{% assign gh_slug = pub.github | split: "github.com/" | last | split: "?" | first | split: "#" | first %}
+                <a class="pill pill--gh" href="{{ pub.github }}" target="_blank" rel="noopener" data-gh-repo="{{ gh_slug | remove: '.git' }}" aria-label="GitHub repository">
+                  <i class="fab fa-github"></i><i class="fas fa-star"></i><span class="gh-stars">–</span>
+                </a>
+                {% endif %}
               </div>
               <h3 class="research-thumb-title">{{ pub.title }}</h3>
               {% if role == "co" %}

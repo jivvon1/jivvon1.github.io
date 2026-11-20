@@ -693,6 +693,20 @@
     background: var(--bg-secondary);
     border: 1px dashed var(--border-hover);
   }
+  &--gh {
+    position: relative;
+    z-index: 2;
+    gap: 5px;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    font-variant-numeric: tabular-nums;
+    transition: color .15s, border-color .15s;
+    .fa-github { font-size: 1.05em; }
+    .fa-star { font-size: .85em; color: #e3b341; }
+    &:hover { color: var(--text-primary); border-color: var(--text-secondary); }
+  }
   &--type-challenge {
     color: var(--accent);
     background: var(--bg-secondary);

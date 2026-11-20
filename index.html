@@ -93,8 +93,7 @@ title: Jiwon Choi
     <!-- News -->
     <section class="tab-panel" data-panel="news">
       <header class="hm-panel-head">
-        <p class="hm-eyebrow">News</p>
-        <h2>News</h2>
+        <h2 class="hm-eyebrow">News</h2>
         <p>Papers, awards, and talks, newest first.</p>
       </header>
       {% if site.data.news and site.data.news.size > 0 %}
@@ -145,8 +144,7 @@ title: Jiwon Choi
     <!-- Publications (text list, grouped by year, paginated) -->
     <section class="tab-panel" data-panel="publications">
       <header class="hm-panel-head">
-        <p class="hm-eyebrow">Publications</p>
-        <h2>Publications</h2>
+        <h2 class="hm-eyebrow">Publications</h2>
         <p>Conference and journal papers, grouped by year.</p>
       </header>
       <div class="filter-bar">
@@ -228,8 +226,7 @@ title: Jiwon Choi
     <!-- Research (filterable cards) -->
     <section class="tab-panel" data-panel="research">
       <header class="hm-panel-head">
-        <p class="hm-eyebrow">Research</p>
-        <h2>Research</h2>
+        <h2 class="hm-eyebrow">Research</h2>
         <p>Projects I led or contributed to.</p>
       </header>
       <div class="filter-bar">
@@ -278,8 +275,7 @@ title: Jiwon Choi
     <!-- Projects -->
     <section class="tab-panel" data-panel="projects">
       <header class="hm-panel-head">
-        <p class="hm-eyebrow">Projects</p>
-        <h2>Projects</h2>
+        <h2 class="hm-eyebrow">Projects</h2>
         <p>Research grants I lead and challenges I have competed in.</p>
       </header>
       <div class="projects-list">
@@ -293,8 +289,7 @@ title: Jiwon Choi
     <!-- Posts -->
     <section class="tab-panel" data-panel="posts">
       <header class="hm-panel-head">
-        <p class="hm-eyebrow">Posts</p>
-        <h2>Posts</h2>
+        <h2 class="hm-eyebrow">Posts</h2>
         <p>Interactive notes and small tools.</p>
       </header>
       <div class="filter-bar">
@@ -402,8 +397,7 @@ title: Jiwon Choi
     <section class="tab-panel" data-panel="etc">
       {% assign talks = site.data.etc.presentation | where_exp: "i", "i.title != ''" %}
       <header class="hm-panel-head">
-        <p class="hm-eyebrow">ETC</p>
-        <h2>Etc.</h2>
+        <h2 class="hm-eyebrow">ETC</h2>
         <p>{% if talks.size > 0 %}Talks and academic service.{% else %}Academic service.{% endif %}</p>
       </header>
       <div class="etc-grid">
@@ -457,6 +451,32 @@ title: Jiwon Choi
     }
     window.addEventListener('hashchange', openFromHash);
     openFromHash();
+  })();
+
+  // GitHub star counts on research cards (one request per repo, cached for the session)
+  (function () {
+    const badges = document.querySelectorAll('[data-gh-repo]');
+    const repos = [...new Set([...badges].map(b => b.dataset.ghRepo.replace(/\/$/, '')))];
+    const fmt = n => n >= 1000 ? (n / 1000).toFixed(n >= 10000 ? 0 : 1) + 'k' : String(n);
+    function paint(repo, n) {
+      badges.forEach(b => {
+        if (b.dataset.ghRepo.replace(/\/$/, '') === repo) b.querySelector('.gh-stars').textContent = fmt(n);
+      });
+    }
+    repos.forEach(repo => {
+      const key = 'gh-stars:' + repo;
+      let cached = null;
+      try { cached = sessionStorage.getItem(key); } catch (e) {}
+      if (cached !== null) { paint(repo, +cached); return; }
+      fetch('https://api.github.com/repos/' + repo)
+        .then(r => r.ok ? r.json() : null)
+        .then(d => {
+          if (!d || typeof d.stargazers_count !== 'number') return;
+          paint(repo, d.stargazers_count);
+          try { sessionStorage.setItem(key, d.stargazers_count); } catch (e) {}
+        })
+        .catch(() => {});
+    });
   })();
 
   // Posts category filter
